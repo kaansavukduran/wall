@@ -22,6 +22,8 @@ async function main() {
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
       await page.click('#source');
       await page.locator('#reader[open]').waitFor();
+      await page.click('#catalogue summary');
+      await page.locator('#catalogue li').first().waitFor();
       await page.keyboard.press('Escape');
       assert.equal(await page.locator('#source').evaluate(el => el === document.activeElement), true);
       await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
@@ -52,6 +54,12 @@ async function main() {
           assert.equal(await page.locator('#chapter').textContent(), '6');
           await page.selectOption('#lang', locale);
         }
+        if (episode.id === 11) {
+          await page.click('[data-sequence="0"]');
+          assert.equal(await page.locator('#sequence li').count(), 0);
+          for (const id of [1,0,2]) await page.click('[data-sequence="' + id + '"]');
+          assert.equal(await page.locator('#sequence li').count(), 3);
+        }
         if (episode.id === 16) {
           await page.click('[data-study="0"]');
           await page.click('[data-study="1"]');
@@ -65,10 +73,12 @@ async function main() {
         await page.click('[data-choice="' + episode.correct + '"]');
         if (episode.id !== 24) await page.click('#next');
       }
+      await page.selectOption('#tour-stops select >> nth=0', 'photo');
       await page.fill('#journal-text', 'WALL');
       await page.reload();
       await page.locator('#app').waitFor();
       assert.equal(await page.locator('#journal-text').inputValue(), 'WALL');
+      assert.equal(await page.locator('#tour-stops select').first().inputValue(), 'photo');
       await page.click('#library-button');
       await page.locator('#library[open]').waitFor();
       assert.ok(await page.locator('#library details').count() >= 8);

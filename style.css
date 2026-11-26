@@ -73,3 +73,16 @@ dialog a{overflow-wrap:anywhere}
 #photo figure{margin:1rem 0}
 #photo img{display:block;max-inline-size:100%;block-size:auto;max-block-size:55vh;object-fit:contain;margin-inline:auto}
 #photo figcaption{margin-block-start:.6rem}
+
+#sequence{display:grid;gap:.45rem;padding:.65rem;background:#1b242c}
+#sequence p,#sequence ol{margin:0}
+#sequence div{display:flex;flex-wrap:wrap;gap:.4rem}
+#sequence output{color:var(--accent)}
+#sequence-reset{justify-self:start}
+#catalogue{margin-block-start:1rem}
+#catalogue summary{cursor:pointer}
+#catalogue li{margin-block:.45rem}
+
+#tour-stops{display:grid;gap:.6rem;margin-block-end:.8rem}
+#tour-stops label{display:grid;gap:.15rem}
+#tour-stops select{inline-size:100%;min-inline-size:0}

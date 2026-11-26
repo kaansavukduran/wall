@@ -1,6 +1,8 @@
 import { chapters, languages, plaza, ui } from './content.js';
 import { library, libraryLabels } from './library.js';
-import { alphabetNotes, models, photo, studyNames, worldNote, worlds } from './scenes.js';
+import { alphabetNotes, models, photo, studyNames, tour, tourPrompt, worldNote, worlds } from './scenes.js';
+import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
+import { sequenceLabels, sequences } from './sequences.js';
 import { makeWorld } from './world.js';
 
 const episodes = [plaza, ...chapters];
@@ -42,6 +44,8 @@ export async function start(initialLanguage) {
   note.value = read('wall.journal') ?? '';
   note.addEventListener('input', () => store('wall.journal', note.value));
   const selector = find('lang');
+  const cataloguePanel = find('catalogue');
+  const sequenceSurface = find('sequence');
   const progress = readProgress();
   let language = initialLanguage;
   let active = 0;
@@ -49,6 +53,9 @@ export async function start(initialLanguage) {
   let direction = 0;
   let selectedLayer = '';
   let studyOption = null;
+  const sequenceSteps = [];
+  let attempt = '';
+  let sourceToken = 0;
   const letters = new Set();
 
   const episodeId = index => String(episodes[index].id ?? 'plaza');
@@ -90,7 +97,8 @@ export async function start(initialLanguage) {
     find('episodes-button').textContent = labels[0];
     find('library-button').textContent = libraryLabels[language][0];
     journal.querySelector('label').textContent = libraryLabels[language][3];
-    journal.querySelector('p').textContent = libraryLabels[language][4];
+    journal.querySelector('p:last-child').textContent = libraryLabels[language][4];
+    if (active === episodes.length - 1) renderTour();
     journal.hidden = !completed || active !== episodes.length - 1;
     find('inspect').textContent = labels[1];
     controls.querySelector('[data-move="-1"]').setAttribute('aria-label', labels[6]);
@@ -116,6 +124,7 @@ export async function start(initialLanguage) {
     next.hidden = !completed;
     renderModel();
     renderStudy();
+    renderSequence();
     if (focus) find('title').focus();
   }
 
@@ -125,6 +134,8 @@ export async function start(initialLanguage) {
     stop();
     selectedLayer = '';
     studyOption = null;
+    sequenceSteps.length = 0;
+    attempt = '';
     letters.clear();
     if (updateHash) history.replaceState(null, '', index === 0 ? '#game' : '#chapter-' + episodeId(index));
     save();
@@ -215,8 +226,118 @@ export async function start(initialLanguage) {
     note.textContent = worldNote[index];
   }
 
+  function renderSequence() {
+    const sample = sequences.find(item => item.id === episodes[active].id);
+    sequenceSurface.hidden = !sample;
+    if (!sample) return;
+    const index = locale();
+    const labels = sequenceLabels[language];
+    const list = sequenceSurface.querySelector('ol');
+    const buttons = sequenceSurface.querySelector('div');
+    sequenceSurface.querySelector('p').textContent = sample.name[index];
+    sequenceSurface.querySelector('small').textContent = labels[0];
+    const reset = find('sequence-reset');
+    reset.textContent = labels[3];
+    reset.disabled = sequenceSteps.length === 0 && attempt === '';
+    const status = sequenceSurface.querySelector('output');
+    status.textContent = attempt === 'correct' ? labels[1] : attempt === 'wrong' ? labels[2] : '';
+    list.replaceChildren(...sequenceSteps.map(id => {
+      const entry = document.createElement('li');
+      entry.textContent = sample.steps[id][index];
+      return entry;
+    }));
+    buttons.replaceChildren(...sample.steps.map((names, id) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = names[index];
+      button.dataset.sequence = String(id);
+      button.disabled = sequenceSteps.includes(id);
+      button.addEventListener('click', () => {
+        if (sample.order[sequenceSteps.length] === id) {
+          sequenceSteps.push(id);
+          attempt = sequenceSteps.length === sample.order.length ? 'correct' : '';
+        } else {
+          attempt = 'wrong';
+        }
+        renderSequence();
+        (buttons.querySelector('button:enabled') ?? reset).focus();
+      });
+      return button;
+    }));
+  }
+
+  find('sequence-reset').addEventListener('click', () => {
+    sequenceSteps.length = 0;
+    attempt = '';
+    renderSequence();
+    sequenceSurface.querySelector('div button').focus();
+  });
+
+  cataloguePanel.addEventListener('toggle', async () => {
+    if (!cataloguePanel.open) return;
+    const id = episodes[active].id ?? 0;
+    const ticket = ++sourceToken;
+    const labels = catalogueLabels[language];
+    const status = cataloguePanel.querySelector('p');
+    const list = cataloguePanel.querySelector('ul');
+    status.textContent = labels[1];
+    list.replaceChildren();
+    try {
+      const matches = (await catalogue()).filter(entry => belongsTo(entry, id));
+      if (ticket !== sourceToken) return;
+      status.textContent = matches.length ? '' : labels[3];
+      list.replaceChildren(...matches.map(entry => {
+        const item = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = entry.url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        const label = document.createElement('bdi');
+        label.lang = 'tr';
+        label.textContent = entry.id + ' · ' + entry.title;
+        link.append(label);
+        item.append(link);
+        return item;
+      }));
+    } catch {
+      if (ticket === sourceToken) status.textContent = labels[2];
+    }
+  });
+
+  function renderTour() {
+    const index = locale();
+    find('tour-prompt').textContent = tourPrompt[index];
+    find('tour-stops').replaceChildren(...tour.map((stop, stopIndex) => {
+      const section = document.createElement('div');
+      const label = document.createElement('label');
+      const select = document.createElement('select');
+      const storageKey = 'wall.tour.' + stopIndex;
+      for (const [id, names] of stop.options) select.add(new Option(names[index], id));
+      const saved = read(storageKey);
+      if (stop.options.some(option => option[0] === saved)) select.value = saved;
+      label.append(stop.label[index], select);
+      const link = document.createElement('a');
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = ui[language][5];
+      function updateLink() {
+        link.href = stop.options.find(option => option[0] === select.value)[2];
+      }
+      updateLink();
+      select.addEventListener('change', () => {
+        store(storageKey, select.value);
+        updateLink();
+      });
+      section.append(label, link);
+      return section;
+    }));
+  }
+
   function openSource() {
     stop();
+    sourceToken++;
+    cataloguePanel.open = false;
+    cataloguePanel.querySelector('summary').textContent = catalogueLabels[language][0];
     const episode = episodes[active];
     const labels = ui[language];
     reader.querySelector('h2').textContent = labels[14];

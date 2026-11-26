@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Observed base: ff729fe08285295ffbe2336fd48956ac3257eec9
-Current: v0.2.0 preview, 24 chronological chapters plus plaza, four locales.
-Validation: Chromium played all 25 checkpoints at 320–1100 CSS px per locale, opened the original LOC photo, checked 200% text at entry, changed locale midgame, loaded saved progress, tried source and study dialogs, used gematria and ABYA, and retried a failed asset load. The static package was served under /wall/.
-Pages: BLOCKED. Enablement API returns 403 for the integration; Actions build succeeds but deploy returns 404 until Pages is enabled. The owner can select GitHub Actions in repository Settings → Pages.
-Next: Enable Pages, rerun the workflow and execute tests/browser.cjs against the real URL. Then build fuller historical scenes and extend source/translation reviews. The preview is not a finished 1.0 campaign.
+Observed base: faadf485f598a99d6c075e271969729bdd603ebd (v0.2.0).
+Current: v0.3.0 preview with 24 chronological chapters plus plaza, four locales, 88 catalogue entries, ordering exercises and a locally saved three-stop tour.
+Validation: Chromium played the packaged /wall/ route in all four languages. Local opening benchmark, 5 samples per version: 0.2 median 194 ms, 0.3 median 208 ms, with wide run-to-run variation. A meaningful speed change was not established. Source and photo are accessible without keeping the rendering loop active; catalogue fetch is deferred until opened.
+Pages: BLOCKED. Site enablement returns HTTP 403 for the integration. Actions can build the static package, but deploy-pages returns HTTP 404 before enablement. The owner can select GitHub Actions in repository Settings → Pages.
+Next: Verify the first live Pages build and extend the preview with full reenactments, expanded study, additional sources, four-language editorial review and target-device coverage. This preview is not 1.0.

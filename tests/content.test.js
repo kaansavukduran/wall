@@ -53,3 +53,15 @@ test('rendered version follows VERSION and scene options localize', () => {
     }
   }
 });
+
+
+test('catalogue maps ranges and the prologue without conflating them', async () => {
+  const { parseCatalogue, belongsTo } = await import('../catalogue.js');
+  const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
+  assert.equal(entries.length, 88);
+  assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
+  assert.ok(entries.some(entry => belongsTo(entry, 0)));
+  assert.ok(Array.from({length:24}, (_, index) => index + 1).every(id => entries.some(entry => belongsTo(entry, id))));
+  assert.ok(belongsTo({chapters:'1–4,6'}, 3));
+  assert.equal(belongsTo({chapters:'Prolog,1'}, 10), false);
+});
