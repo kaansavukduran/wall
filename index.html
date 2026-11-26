@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="tr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#121a22">
+<title>WALL</title>
+<link rel="stylesheet" href="./style.css">
+<body>
+<section id="boot" aria-label="Fragaria Interactive">
+  <img src="./assets/fragaria-strawberry.png" alt="" width="116" height="130">
+  <h1>Fragaria Interactive</h1>
+  <p id="boot-status" role="status">Yükleniyor…</p>
+  <div class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <button id="retry" hidden>Yeniden dene</button>
+  <small dir="ltr">v0.1.0</small>
+</section>
+<div id="app" hidden>
+  <header class="top">
+    <a class="mark" href="#game">WALL</a>
+    <button id="episodes-button" type="button"></button>
+    <select id="lang" aria-label="Language">
+      <option value="tr" lang="tr">Türkçe</option><option value="en" lang="en">English</option>
+      <option value="he" lang="he" dir="rtl">עברית</option><option value="az" lang="az">Azərbaycanca</option>
+    </select>
+  </header>
+  <main id="game" tabindex="-1">
+    <section class="stage">
+      <canvas id="world" width="480" height="240" aria-hidden="true"></canvas>
+      <span id="era" class="era" dir="auto"></span>
+      <div class="controls" id="controls" dir="ltr">
+        <button type="button" data-move="-1">←</button>
+        <button type="button" id="inspect"></button>
+        <button type="button" data-move="1">→</button>
+      </div>
+    </section>
+    <section class="story">
+      <div><p id="chapter" class="chapter"></p><h1 id="title" tabindex="-1">WALL</h1><p id="intro"></p></div>
+      <div class="actions">
+        <div id="choices"></div>
+        <p id="result" role="status" aria-live="polite"></p>
+        <button id="source" type="button"></button>
+        <button id="next" class="primary" type="button" hidden></button>
+      </div>
+    </section>
+  </main>
+  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.1.0</span></footer>
+</div>
+<dialog id="reader"><h2></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><form method="dialog"><button></button></form></dialog>
+<dialog id="chapters"><h2></h2><ol></ol><form method="dialog"><button></button></form></dialog>
+<script type="module" src="./start.js"></script>
+</body>
+</html>
