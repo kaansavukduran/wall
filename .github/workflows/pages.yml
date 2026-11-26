@@ -17,12 +17,7 @@ jobs:
         with:
           node-version: '22'
       - run: node --test tests/content.test.js
-      - run: |
-          mkdir site
-          cp index.html style.css start.js game.js world.js content.js site/
-          cp -r assets site/
-          printf '{"commit":"%s","version":"%s"}\n' "$GITHUB_SHA" "$(sed -n 's/^v//p' VERSION)" > site/build.json
-          touch site/.nojekyll
+      - run: node scripts/build.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

@@ -1,3 +1,6 @@
+import { early } from './chapters-early.js';
+import { modern } from './chapters-modern.js';
+
 export const languages = ['tr', 'en', 'he', 'az'];
 
 export const ui = {
@@ -22,7 +25,7 @@ export const plaza = {
   ],
 };
 
-export const chapters = [
+const architectural = [
   {
     id:6, era:['Hirodes dönemi','Herodian period','תקופת הורדוס','Hirod dövrü'], source:passage, answers:['temple','wall','platform'], correct:2,
     text:[
@@ -42,3 +45,5 @@ export const chapters = [
     ],
   },
 ];
+
+export const chapters = [...early, ...architectural, ...modern].sort((first, second) => first.id - second.id);

@@ -24,6 +24,7 @@ try {
   console.error(error);
 }
 if (failed) {
+  document.querySelector('#boot').dataset.failed = '';
   status.textContent = phrases[language][1];
   retry.hidden = false;
   retry.focus();
