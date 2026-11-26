@@ -1,0 +1,36 @@
+name: WALL release package
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing WALL release tag
+        required: true
+        type: string
+permissions:
+  contents: write
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    env:
+      WALL_TAG: ${{ github.event.release.tag_name || inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ env.WALL_TAG }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: |
+          set -euo pipefail
+          test "$WALL_TAG" = "$(cat VERSION)"
+          node --test tests/content.test.js
+          GITHUB_SHA="$(git rev-parse HEAD)" node scripts/build.mjs
+          cp README.md site/README.md
+          (cd site && zip -qr "../wall-${WALL_TAG}-web.zip" .)
+          unzip -t "wall-${WALL_TAG}-web.zip"
+      - name: Attach the verified ZIP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$WALL_TAG" "wall-${WALL_TAG}-web.zip" --repo "$GITHUB_REPOSITORY"
