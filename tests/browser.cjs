@@ -89,6 +89,38 @@ async function main() {
       await page.close();
       console.log(locale, width, '25 checkpoints, sources, movement, save, library: PASS');
     }
+    const padPage = await browser.newPage({ locale:'he' });
+    await padPage.addInitScript(() => {
+      const pad = {
+        connected:true, axes:[0], buttons:Array.from({length:16}, () => ({pressed:false})),
+      };
+      Object.defineProperty(navigator, 'getGamepads', {value:() => [pad]});
+      window.fixtureController = pad;
+    });
+    await padPage.goto(target);
+    await padPage.locator('#app').waitFor();
+    async function press(button, condition, argument) {
+      await padPage.evaluate(id => { window.fixtureController.buttons[id].pressed = true; }, button);
+      await padPage.waitForFunction(condition, argument);
+      await padPage.evaluate(id => { window.fixtureController.buttons[id].pressed = false; }, button);
+      await padPage.evaluate(() => new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done))));
+    }
+    await press(2, () => document.activeElement === document.querySelector('#choices button'));
+    await press(13, () => document.activeElement.dataset.choice === '1');
+    await press(0, () => !document.getElementById('next').hidden);
+    const oldFrame = await padPage.locator('#world').evaluate(canvas => canvas.toDataURL());
+    await padPage.evaluate(() => { window.fixtureController.axes[0] = 1; });
+    await padPage.waitForFunction(before => document.querySelector('#world').toDataURL() !== before, oldFrame);
+    await padPage.evaluate(() => { window.fixtureController.axes[0] = 0; });
+    await press(3, () => document.getElementById('chapters').open);
+    await press(1, () => !document.getElementById('chapters').open);
+    await padPage.evaluate(() => window.dispatchEvent(new CustomEvent('wall-controller', {
+      detail:{action:'library',pressed:true},
+    })));
+    await padPage.locator('#library[open]').waitFor();
+    await padPage.close();
+    console.log('Gamepad browser mapping and native event path (simulated): PASS');
+
     const recovery = await browser.newPage();
     await recovery.route('**/visitor.png', route => route.abort());
     await recovery.goto(target);

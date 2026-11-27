@@ -1,0 +1,55 @@
+{
+  "name": "wall-desktop",
+  "version": "0.4.0",
+  "private": true,
+  "description": "Desktop packaging for the WALL static learning game",
+  "scripts": {
+    "prepare:app": "node prepare.mjs",
+    "dist:linux": "npm run prepare:app && electron-builder --linux AppImage --x64",
+    "dist:windows": "npm run prepare:app && electron-builder --win nsis portable --x64",
+    "dist:all": "npm run prepare:app && electron-builder --linux AppImage --win nsis portable --x64"
+  },
+  "devDependencies": {
+    "electron": "45.5.0",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "org.fragaria.wall",
+    "productName": "WALL",
+    "directories": {
+      "app": ".build/app",
+      "output": "dist"
+    },
+    "files": [
+      "main.cjs",
+      "site/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Education",
+      "executableName": "wall",
+      "artifactName": "WALL-${version}-linux-${arch}.AppImage"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "artifactName": "WALL-${version}-windows-${arch}-Setup.exe"
+    },
+    "portable": {
+      "artifactName": "WALL-${version}-windows-${arch}-Portable.exe"
+    }
+  }
+}

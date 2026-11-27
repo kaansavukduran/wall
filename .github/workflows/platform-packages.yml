@@ -1,0 +1,119 @@
+name: WALL platform packages
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing WALL release tag
+        type: string
+        required: true
+permissions:
+  contents: read
+jobs:
+  desktop:
+    name: Desktop (${{ matrix.platform }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux
+            runner: ubuntu-24.04
+          - platform: windows
+            runner: windows-latest
+    runs-on: ${{ matrix.runner }}
+    permissions:
+      contents: write
+    env:
+      WALL_TAG: ${{ inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ env.WALL_TAG }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - run: node --test tests/content.test.js
+      - working-directory: desktop
+        run: npm ci --no-audit --no-fund
+      - working-directory: desktop
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+        run: npm run dist:${{ matrix.platform }}
+      - name: Check Linux AppImage
+        if: runner.os == 'Linux'
+        run: |
+          set -euo pipefail
+          image=(desktop/dist/*.AppImage)
+          test -s "${image[0]}"
+          chmod +x "${image[0]}"
+          "${image[0]}" --appimage-extract > /dev/null
+          test -s squashfs-root/resources/app.asar
+      - name: Attach Linux AppImage
+        if: runner.os == 'Linux'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$WALL_TAG" desktop/dist/*.AppImage --repo "$GITHUB_REPOSITORY"
+      - name: Verify and attach Windows packages
+        if: runner.os == 'Windows'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $files = @(Get-ChildItem desktop/dist -Filter *.exe)
+          if ($files.Count -ne 2 -or @($files | Where-Object Length -lt 1000000).Count) {
+            throw "Expected one Setup.exe and one portable executable"
+          }
+          gh release upload $env:WALL_TAG $files[0].FullName $files[1].FullName --repo $env:GITHUB_REPOSITORY
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+  android:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    env:
+      WALL_TAG: ${{ inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ env.WALL_TAG }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+      - name: Stage the bundled web game
+        run: |
+          node --test tests/content.test.js
+          GITHUB_SHA="$(git rev-parse HEAD)" node scripts/build.mjs
+      - name: Build signed APK
+        env:
+          WALL_ANDROID_KEYSTORE_BASE64: ${{ secrets.WALL_ANDROID_KEYSTORE_BASE64 }}
+          WALL_ANDROID_STORE_PASSWORD: ${{ secrets.WALL_ANDROID_STORE_PASSWORD }}
+          WALL_ANDROID_KEY_ALIAS: ${{ secrets.WALL_ANDROID_KEY_ALIAS }}
+          WALL_ANDROID_KEY_PASSWORD: ${{ secrets.WALL_ANDROID_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+          if [[ -n "$WALL_ANDROID_KEYSTORE_BASE64" ]]; then
+            export WALL_ANDROID_KEYSTORE="$RUNNER_TEMP/wall-android.p12"
+            umask 077
+            printf '%s' "$WALL_ANDROID_KEYSTORE_BASE64" | base64 --decode > "$WALL_ANDROID_KEYSTORE"
+            gradle -p android :app:assembleRelease
+            cp android/app/build/outputs/apk/release/app-release.apk "WALL-${WALL_TAG#v}-android.apk"
+            rm -f "$WALL_ANDROID_KEYSTORE"
+          else
+            gradle -p android :app:assembleDebug
+            cp android/app/build/outputs/apk/debug/app-debug.apk "WALL-${WALL_TAG#v}-android-preview.apk"
+          fi
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose WALL-*.apk
+          unzip -t WALL-*.apk >/dev/null
+      - name: Attach APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$WALL_TAG" WALL-*.apk --repo "$GITHUB_REPOSITORY"

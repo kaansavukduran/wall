@@ -1,0 +1,43 @@
+plugins {
+    id 'com.android.application' version '8.7.3'
+}
+
+def wallVersion = file('../../VERSION').text.trim().replaceFirst('^v', '')
+def parts = wallVersion.tokenize('.').collect { it.toInteger() }
+
+android {
+    namespace 'com.fragariainteractive.wall'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.fragariainteractive.wall'
+        minSdk 24
+        targetSdk 35
+        versionCode parts[0] * 1000000 + parts[1] * 1000 + parts[2]
+        versionName wallVersion
+    }
+
+    sourceSets.main.assets.srcDir file('../../site')
+
+    def signingPath = System.getenv('WALL_ANDROID_KEYSTORE')
+    if (signingPath) {
+        signingConfigs {
+            production {
+                storeFile file(signingPath)
+                storePassword System.getenv('WALL_ANDROID_STORE_PASSWORD')
+                keyAlias System.getenv('WALL_ANDROID_KEY_ALIAS')
+                keyPassword System.getenv('WALL_ANDROID_KEY_PASSWORD')
+            }
+        }
+        buildTypes.release.signingConfig signingConfigs.production
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.12.1'
+}

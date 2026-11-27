@@ -2,10 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Observed base: faadf485f598a99d6c075e271969729bdd603ebd (v0.2.0).
-Preview revision: 1c121a18cf92428eb887f431ccfe10139493fc5e.
-Current: v0.3.0 preview with 24 chronological chapters plus plaza, four locales, 88 catalogue entries, ordering exercises and a locally saved three-stop tour.
-Validation: Chromium played the packaged /wall/ route in all four languages. Local opening benchmark, 5 samples per version: 0.2 median 194 ms, 0.3 median 208 ms, with wide run-to-run variation. A meaningful speed change was not established. Source and photo are accessible without keeping the rendering loop active; catalogue fetch is deferred until opened.
-Pages: BLOCKED. Site enablement returns HTTP 403 for the integration. Actions can build the static package, but deploy-pages returns HTTP 404 before enablement. The owner can select GitHub Actions in repository Settings → Pages.
-Distribution: v0.3.0 pre-release published. GitHub Actions run 45897357533 attached the ZIP. Download, archive integrity, runtime byte comparison and build.json commit match verified. Latest Pages run 45897354105 built successfully and failed at deploy.
-Next: Verify the first live Pages build and extend the preview with full reenactments, expanded study, additional sources, four-language editorial review and target-device coverage. This preview is not 1.0.
+Base: v0.3.0 runtime 1c121a18cf92428eb887f431ccfe10139493fc5e.
+Current: v0.4.0 preview adds Windows Setup and portable, Linux AppImage, and Android APK workflows. Desktop and Android package the same static game and store progress locally.
+Validation: Chromium covered all 25 checkpoints in each language and simulated standard browser and native Android controller event paths. Native runner builds and physical-device checks are tracked separately.
+Pages: BLOCKED. Integration returned HTTP 403; GitHub repository reports has_pages=false. Cloud browser is at GitHub sign-in for the owner account.
+Next: Verify release attachments and, once the owner session is available, enable GitHub Actions in Pages, deploy and test the live URL. Then expand the historical reenactments and study modules beyond the playable preview.

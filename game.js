@@ -1,3 +1,4 @@
+import { controllerHelp, mountController } from './controller.js';
 import { chapters, languages, plaza, ui } from './content.js';
 import { library, libraryLabels } from './library.js';
 import { alphabetNotes, models, photo, studyNames, tour, tourPrompt, worldNote, worlds } from './scenes.js';
@@ -108,6 +109,7 @@ export async function start(initialLanguage) {
     find('chapter').textContent = active === 0 ? labels[9] : String(episode.id);
     find('title').textContent = text[0];
     find('intro').textContent = text[1];
+    find('controller-hint').textContent = controllerHelp[language];
     const rotation = (episode.id ?? 0) % 3;
     const order = [rotation, (rotation + 1) % 3, (rotation + 2) % 3];
     options.replaceChildren(...order.map(selected => {
@@ -490,4 +492,8 @@ export async function start(initialLanguage) {
   const saved = episodes.findIndex((_, index) => episodeId(index) === progress.active);
   const startAt = requested >= 0 && unlocked(requested) ? requested : saved >= 0 && unlocked(saved) ? saved : 0;
   go(startAt, false);
+  mountController({
+    walk, stop, inspect, timeline:openChapters, library:openLibrary,
+    showHint() { find('controller-hint').hidden = false; },
+  });
 }

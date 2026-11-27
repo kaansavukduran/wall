@@ -5,7 +5,7 @@ const output = resolve(process.argv[2] ?? 'site');
 await mkdir(output);
 const files = [
   'index.html', 'style.css', 'start.js', 'game.js', 'world.js', 'content.js',
-  'chapters-early.js', 'chapters-modern.js', 'library.js', 'scenes.js', 'catalogue.js', 'sequences.js', 'assets',
+  'chapters-early.js', 'chapters-modern.js', 'library.js', 'scenes.js', 'catalogue.js', 'sequences.js', 'controller.js', 'assets',
 ];
 for (const file of files) await cp(file, resolve(output, file), { recursive:true });
 await mkdir(resolve(output, 'docs'));
