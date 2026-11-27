@@ -34,3 +34,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release upload "$WALL_TAG" "wall-${WALL_TAG}-web.zip" --repo "$GITHUB_REPOSITORY"
+
+      - name: Attach standalone browser edition when supported by the tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [[ -f scripts/standalone.mjs ]]; then
+            node scripts/standalone.mjs site "WALL-${WALL_TAG}-Offline.html"
+            gh release upload "$WALL_TAG" "WALL-${WALL_TAG}-Offline.html" --repo "$GITHUB_REPOSITORY"
+          fi
