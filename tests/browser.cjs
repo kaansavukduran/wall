@@ -45,6 +45,17 @@ async function main() {
       for (const episode of chapters) {
         await page.waitForURL('**/#chapter-' + episode.id);
         assert.equal(await page.locator('#chapter').textContent(), String(episode.id));
+        if (episode.id === 1) {
+          for (const card of [2,0,1]) await page.click('[data-sequence="' + card + '"]');
+          assert.equal(await page.locator('#sequence li').count(), 3);
+        }
+        if (episode.id === 5) {
+          await page.click('[data-night="3"]');
+          const counts = await page.locator('.lamp-row').allTextContents();
+          assert.equal(counts.length, 2);
+          assert.match(counts[0], / · 3 /);
+          assert.match(counts[1], / · 6 /);
+        }
         if (episode.id === 6) {
           await page.click('[data-layer="temple"]');
           await page.reload();
@@ -107,6 +118,7 @@ async function main() {
     }
     await press(2, () => document.activeElement === document.querySelector('#choices button'));
     await press(13, () => document.activeElement.dataset.choice === '1');
+    assert.equal(await padPage.evaluate(() => getComputedStyle(document.activeElement).outlineWidth), '3px');
     await press(0, () => !document.getElementById('next').hidden);
     const oldFrame = await padPage.locator('#world').evaluate(canvas => canvas.toDataURL());
     await padPage.evaluate(() => { window.fixtureController.axes[0] = 1; });

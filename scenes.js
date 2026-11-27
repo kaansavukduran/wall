@@ -95,3 +95,19 @@ export const tourPrompt = [
   'הדריכו מבקר בשלוש התחנות. מה מראה כל מקור? איזו שאלה נשארת פתוחה?',
   'Ziyarətçini bu üç dayanacağa apar. Hər mənbə nəyi göstərir? Hansı sual açıq qalır?',
 ];
+
+
+export const lights = {
+  title:['Hanuka’da kandiller','Hanukkah lights','נרות חנוכה','Xanuka işıqları'],
+  day:['Gece','Night','לילה','Gecə'],
+  note:[
+    'Şabat 21b iki görüş kaydeder. Hillel okulu her gece kandil sayısını artırır. Şamay okulu azaltır. Yaygın uygulama Hillel okulunu izler. Hizmet mumu sayıya dahil değil.',
+    'Shabbat 21b records two views. The school of Hillel adds a light each night. The school of Shammai counts down. Common practice follows Hillel. The helper candle is not counted here.',
+    'שבת כא ע״ב מתעד שתי דעות. בית הלל מוסיפים נר בכל לילה ובית שמאי מפחיתים. המנהג הרווח הוא כבית הלל. השמש אינו נספר כאן.',
+    'Şabbat 21b iki fikri qeyd edir. Hillel məktəbi hər gecə çıraq sayını artırır, Şammay məktəbi azaldır. Yayğın adət Hilleli izləyir. Köməkçi şam sayılmır.',
+  ],
+  schools:[
+    ['Hillel okulu','School of Hillel','בית הלל','Hillel məktəbi'],
+    ['Şamay okulu','School of Shammai','בית שמאי','Şammay məktəbi'],
+  ],
+};

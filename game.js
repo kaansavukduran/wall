@@ -1,7 +1,7 @@
 import { controllerHelp, mountController } from './controller.js';
 import { chapters, languages, plaza, ui } from './content.js';
 import { library, libraryLabels } from './library.js';
-import { alphabetNotes, models, photo, studyNames, tour, tourPrompt, worldNote, worlds } from './scenes.js';
+import { alphabetNotes, lights, models, photo, studyNames, tour, tourPrompt, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
 import { makeWorld } from './world.js';
@@ -176,11 +176,15 @@ export async function start(initialLanguage) {
   function renderStudy() {
     const id = episodes[active].id;
     const surface = find('workbench');
-    surface.hidden = id !== 16 && id !== 18;
+    surface.hidden = id !== 5 && id !== 16 && id !== 18;
     if (surface.hidden) return;
     const index = locale();
     const output = surface.querySelector('output');
     const note = surface.querySelector('small');
+    if (id === 5) {
+      renderLights(surface, output, note);
+      return;
+    }
     surface.querySelector('p').textContent = (id === 16 ? studyNames.gematria : studyNames.worlds)[index];
     const controls = surface.querySelector('div');
     const rows = id === 16
@@ -226,6 +230,44 @@ export async function start(initialLanguage) {
       output.append(original, ' · ' + row.meaning);
     }
     note.textContent = worldNote[index];
+  }
+
+  function renderLights(surface, output, note) {
+    const index = locale();
+    const day = studyOption ?? 1;
+    const choices = surface.querySelector('div');
+    surface.querySelector('p').textContent = lights.title[index];
+    choices.replaceChildren(...Array.from({length:8}, (_, offset) => {
+      const value = offset + 1;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = String(value);
+      button.dataset.night = String(value);
+      button.setAttribute('aria-label', lights.day[index] + ' ' + value);
+      button.setAttribute('aria-pressed', String(day === value));
+      button.addEventListener('click', () => {
+        studyOption = value;
+        renderStudy();
+        choices.querySelector('[data-night="' + value + '"]').focus();
+      });
+      return button;
+    }));
+    output.dir = 'auto';
+    output.replaceChildren(...[day,9 - day].map((count, school) => {
+      const row = document.createElement('span');
+      row.className = 'lamp-row';
+      row.textContent = lights.schools[school][index] + ' · ' + count + ' ';
+      const symbols = document.createElement('span');
+      symbols.className = 'lamps';
+      symbols.setAttribute('aria-hidden', 'true');
+      for (let index = 0; index < count; index++) {
+        const lamp = document.createElement('i');
+        symbols.append(lamp);
+      }
+      row.append(symbols);
+      return row;
+    }));
+    note.textContent = lights.note[index];
   }
 
   function renderSequence() {

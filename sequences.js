@@ -2,6 +2,11 @@ const make = (id, name, order, steps) => ({id,name,order,steps});
 
 // The options are displayed in the listed order. Every step contains tr/en/he/az.
 export const sequences = [
+  make(1, ['Seder sofrasında bir soru','A question at the seder','שאלה בשולחן הסדר','Seder süfrəsində bir sual'], [2,0,1], [
+    ['Çocuk sofradaki farklılığı sorar','A child asks what makes this night different','ילד שואל מה השתנה הלילה','Uşaq bu gecənin fərqini soruşur'],
+    ['Öykü anlatılır ve Çıkış hatırlanır','The story is told and the Exodus is remembered','מספרים את הסיפור וזוכרים את יציאת מצרים','Hekayə danışılır və Çıxış xatırlanır'],
+    ['Aile Pesah sofrasına oturur','A household gathers at the Passover table','המשפחה מתכנסת לשולחן הפסח','Ailə Pesax süfrəsinə toplaşır'],
+  ]),
   make(3, ['Babil ve dönüş','Babylon and return','בבל והשיבה','Babil və dönüş'], [1,2,0], [
     ['Pers dönemi başlar','The Persian period begins','ראשית התקופה הפרסית','Fars dövrü başlayır'],
     ['MÖ 597 ele geçirme ve sürgün','Capture and deportation, 597 BCE','כיבוש והגליה, 597 לפנה״ס','E.ə. 597, şəhərin alınması və sürgün'],

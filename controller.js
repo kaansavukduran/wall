@@ -12,15 +12,18 @@ function available(root) {
 
 export function mountController(game) {
   let frame = 0;
-  let previous = new Set();
+  let previous = 0;
   let analog = 0;
   let nativeDirection = 0;
-  let usingController = false;
+  let showedHint = false;
+  let nativeHost = false;
 
   function updateMode() {
-    if (usingController) return;
-    usingController = true;
-    game.showHint();
+    document.documentElement.dataset.controllerInput = '';
+    if (!showedHint) {
+      showedHint = true;
+      game.showHint();
+    }
   }
 
   function focus(action) {
@@ -73,12 +76,15 @@ export function mountController(game) {
 
   function check() {
     frame = 0;
-    if (document.hidden) return;
-    const pad = Array.from(navigator.getGamepads?.() ?? []).find(item => item?.connected);
+    if (document.hidden || nativeHost) return;
+    const pad = navigator.getGamepads?.().find(item => item?.connected);
     if (pad) {
-      const held = new Set(buttons.filter(([button]) => pad.buttons[button]?.pressed).map(([, action]) => action));
-      for (const action of held) {
-        if (previous.has(action)) continue;
+      let held = 0;
+      for (const [button, action] of buttons) {
+        if (!pad.buttons[button]?.pressed) continue;
+        const bit = 1 << button;
+        held |= bit;
+        if (previous & bit) continue;
         updateMode();
         run(action);
       }
@@ -93,19 +99,22 @@ export function mountController(game) {
     } else {
       if (analog) move(0);
       analog = 0;
-      previous.clear();
+      previous = 0;
     }
   }
 
   function start() {
-    if (!frame && !document.hidden && navigator.getGamepads) frame = requestAnimationFrame(check);
+    if (!frame && !document.hidden && !nativeHost && navigator.getGamepads) frame = requestAnimationFrame(check);
   }
   window.addEventListener('gamepadconnected', start);
+  function otherInput() { delete document.documentElement.dataset.controllerInput; }
+  document.addEventListener('pointerdown', otherInput);
+  document.addEventListener('keydown', otherInput);
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       cancelAnimationFrame(frame);
       frame = 0;
-      previous.clear();
+      previous = 0;
       nativeDirection = analog = 0;
       game.stop();
     } else {
@@ -117,6 +126,13 @@ export function mountController(game) {
   window.addEventListener('wall-controller', event => {
     const { action, pressed = true } = event.detail ?? {};
     if (!actions.has(action)) return;
+    if (!nativeHost) {
+      nativeHost = true;
+      cancelAnimationFrame(frame);
+      frame = 0;
+      analog = 0;
+      game.stop();
+    }
     if (action === 'move-left' || action === 'move-right') {
       const value = action === 'move-left' ? -1 : 1;
       if (!pressed && nativeDirection !== value) return;

@@ -86,3 +86,9 @@ dialog a{overflow-wrap:anywhere}
 #tour-stops{display:grid;gap:.6rem;margin-block-end:.8rem}
 #tour-stops label{display:grid;gap:.15rem}
 #tour-stops select{inline-size:100%;min-inline-size:0}
+
+.lamp-row{display:block;margin-block:.25rem}
+.lamps{display:inline-flex;gap:.35rem;max-inline-size:100%;flex-wrap:wrap;vertical-align:middle}
+.lamps i{inline-size:.35rem;block-size:.7rem;background:#d6b98e;box-shadow:0 -.25rem #ef9a4a}
+
+html[data-controller-input] :is(button,select,summary,a):focus{outline:3px solid var(--accent);outline-offset:3px}
