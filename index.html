@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="tr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#121a22">
+<title>WALL</title>
+<link rel="stylesheet" href="./style.css">
+<body>
+<section id="boot" aria-label="Fragaria Interactive">
+  <div class="boot-shell">
+    <div class="boot-brand">
+      <img src="./assets/fragaria-strawberry.png" alt="" width="116" height="130">
+      <h1>Fragaria<br>Interactive</h1>
+    </div>
+    <div class="boot-load">
+      <p id="boot-status" role="status">Yükleniyor…</p>
+      <span aria-hidden="true">…</span>
+      <div class="segments" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <button id="retry" hidden>Yeniden dene</button>
+    </div>
+  </div>
+  <small dir="ltr">v0.4.1</small>
+</section>
+<div id="app" hidden>
+  <header class="top">
+    <a class="mark" href="#game">WALL</a>
+    <button id="episodes-button" type="button"></button>
+    <button id="library-button" type="button"></button>
+    <select id="lang" aria-label="Language">
+      <option value="tr" lang="tr">Türkçe</option><option value="en" lang="en">English</option>
+      <option value="he" lang="he" dir="rtl">עברית</option><option value="az" lang="az">Azərbaycanca</option>
+    </select>
+  </header>
+  <main id="game" tabindex="-1">
+    <section class="stage">
+      <canvas id="world" width="480" height="240" aria-hidden="true"></canvas>
+      <span id="era" class="era" dir="auto"></span>
+      <div class="controls" id="controls" dir="ltr">
+        <button type="button" data-move="-1">←</button>
+        <button type="button" id="inspect"></button>
+        <button type="button" data-move="1">→</button>
+      </div>
+      <div id="sequence" hidden><p></p><small></small><div></div><ol></ol><output aria-live="polite"></output><button id="sequence-reset" type="button"></button></div>
+      <div id="workbench" hidden><p></p><div></div><output aria-live="polite"></output><small></small></div>
+      <div id="models" hidden><p></p><div></div><output></output><button id="photo-button" type="button" hidden></button></div>
+    </section>
+    <section class="story">
+      <div><p id="chapter" class="chapter"></p><h1 id="title" tabindex="-1">WALL</h1><p id="intro"></p><p id="controller-hint" class="chapter" hidden></p></div>
+      <div class="actions">
+        <div id="choices"></div>
+        <p id="result" role="status" aria-live="polite"></p>
+        <button id="source" type="button"></button>
+        <button id="next" class="primary" type="button" hidden></button>
+        <div id="journal" hidden><p id="tour-prompt"></p><div id="tour-stops"></div><label for="journal-text"></label><textarea id="journal-text" dir="auto" rows="3" maxlength="2000"></textarea><p></p></div>
+      </div>
+    </section>
+  </main>
+  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.4.1</span></footer>
+</div>
+<dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
+<dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
+<dialog id="photo" aria-labelledby="photo-title"><h2 id="photo-title"></h2><figure><img loading="lazy" src="./assets/matpc-14762.jpg" width="433" height="640" alt=""><figcaption></figcaption></figure><a target="_blank" rel="noopener noreferrer"></a><form method="dialog"><button></button></form></dialog>
+<dialog id="library" aria-labelledby="library-title"><h2 id="library-title"></h2><div></div><form method="dialog"><button></button></form></dialog>
+<script type="module" src="./start.js"></script>
+</body>
+</html>
