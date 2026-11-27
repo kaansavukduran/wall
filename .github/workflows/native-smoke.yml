@@ -1,0 +1,72 @@
+name: WALL installed binary smoke tests
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing WALL release tag
+        type: string
+        required: true
+permissions:
+  contents: read
+jobs:
+  android:
+    runs-on: ubuntu-24.04
+    env:
+      WALL_TAG: ${{ inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download release APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release download "$WALL_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*android*.apk'
+      - name: Enable emulator acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Install and open the APK
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          target: google_apis
+          disable-animations: true
+          script: bash tests/android-smoke.sh
+  windows:
+    runs-on: windows-latest
+    env:
+      WALL_TAG: ${{ inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download and launch installer and portable
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          gh release download $env:WALL_TAG --repo $env:GITHUB_REPOSITORY --pattern '*windows*x64*.exe'
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          $setup = (Get-ChildItem -Filter '*-Setup.exe').FullName
+          $portable = (Get-ChildItem -Filter '*-Portable.exe').FullName
+          $install = Join-Path $env:RUNNER_TEMP 'wall-smoke-install'
+          $installed = Start-Process -FilePath $setup -ArgumentList "/S /D=$install" -Wait -PassThru
+          if ($installed.ExitCode -ne 0) { throw "Installer returned $($installed.ExitCode)" }
+          $exe = (Get-ChildItem -Path $install -Filter 'WALL.exe' -Recurse | Select-Object -First 1).FullName
+          if (!$exe) { throw 'WALL.exe did not install' }
+          $first = Start-Process -FilePath $exe -ArgumentList '--remote-debugging-port=9248' -PassThru
+          try {
+            node tests/desktop-smoke.mjs 9248
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          } finally {
+            Stop-Process -Id $first.Id -Force -ErrorAction SilentlyContinue
+          }
+          $second = Start-Process -FilePath $portable -ArgumentList '--remote-debugging-port=9249' -PassThru
+          try {
+            node tests/desktop-smoke.mjs 9249
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          } finally {
+            Stop-Process -Id $second.Id -Force -ErrorAction SilentlyContinue
+          }
