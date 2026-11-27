@@ -1,0 +1,31 @@
+name: WALL standalone browser edition
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing WALL release with a web ZIP
+        required: true
+        type: string
+permissions:
+  contents: write
+jobs:
+  standalone:
+    runs-on: ubuntu-24.04
+    env:
+      WALL_TAG: ${{ inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download and bundle the public web package
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release download "$WALL_TAG" --repo "$GITHUB_REPOSITORY" --pattern "wall-${WALL_TAG}-web.zip"
+          unzip -q "wall-${WALL_TAG}-web.zip" -d site
+          test "v$(node -p 'require("./site/build.json").version')" = "$WALL_TAG"
+          node scripts/standalone.mjs site "WALL-${WALL_TAG}-Offline.html"
+          test -s "WALL-${WALL_TAG}-Offline.html"
+          gh release upload "$WALL_TAG" "WALL-${WALL_TAG}-Offline.html" --repo "$GITHUB_REPOSITORY"
