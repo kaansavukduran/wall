@@ -6,10 +6,15 @@ on:
         description: Existing WALL release tag
         type: string
         required: true
+      android_only:
+        description: Build only Android
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
   desktop:
+    if: inputs.android_only != true
     name: Desktop (${{ matrix.platform }})
     strategy:
       fail-fast: false
@@ -99,7 +104,18 @@ jobs:
           WALL_ANDROID_KEY_PASSWORD: ${{ secrets.WALL_ANDROID_KEY_PASSWORD }}
         run: |
           set -euo pipefail
-          sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+          sdk="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          export ANDROID_HOME="$sdk"
+          test -d "$sdk"
+          if [[ ! -f "$sdk/platforms/android-35/android.jar" || ! -x "$sdk/build-tools/35.0.0/apksigner" ]]; then
+            manager="$(find "$sdk/cmdline-tools" -type f -name sdkmanager -print | sort | tail -n1)"
+            if [[ -z "$manager" ]]; then
+              echo "::error::Android SDK command-line tools are missing at $sdk"
+              exit 1
+            fi
+            "$manager" --sdk_root="$sdk" 'platforms;android-35' 'build-tools;35.0.0'
+          fi
+          echo "::notice::Building with Android SDK 35 and $(command -v gradle)"
           if [[ -n "$WALL_ANDROID_KEYSTORE_BASE64" ]]; then
             export WALL_ANDROID_KEYSTORE="$RUNNER_TEMP/wall-android.p12"
             umask 077
@@ -111,7 +127,7 @@ jobs:
             gradle -p android :app:assembleDebug
             cp android/app/build/outputs/apk/debug/app-debug.apk "WALL-${WALL_TAG#v}-android-preview.apk"
           fi
-          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose WALL-*.apk
+          "$sdk/build-tools/35.0.0/apksigner" verify --verbose WALL-*.apk
           unzip -t WALL-*.apk >/dev/null
       - name: Attach APK
         env:
