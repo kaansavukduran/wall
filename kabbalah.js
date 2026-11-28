@@ -132,10 +132,14 @@ export function mountKabbalah(panel, language, locale, memory, view) {
       reading.textContent = commentary.study[locale];
       card.append(speaker, date, reading, sourceLink(commentary.reference, commentary.url));
       card.open = view.commentariesOpen.has(commentary.url);
-      card.addEventListener('toggle', () => {
-        if (!card.isConnected) return;
-        if (card.open) view.commentariesOpen.add(commentary.url);
+      const remember = open => {
+        if (open) view.commentariesOpen.add(commentary.url);
         else view.commentariesOpen.delete(commentary.url);
+      };
+      // Record the activation before a lesson change can remove the card.
+      speaker.addEventListener('click', () => remember(!card.open));
+      card.addEventListener('toggle', () => {
+        if (card.isConnected) remember(card.open);
       });
       return card;
     }));

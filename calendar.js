@@ -73,6 +73,7 @@ function prepareShabbat(panel, locale, view) {
   introduction.textContent = shabbatStudy.introduction[locale];
   introduction.append(' ', sourceLink(shabbatStudy.text));
   panel.open = view.open;
+  title.addEventListener('click', () => { view.open = !panel.open; });
   panel.addEventListener('toggle', () => {
     if (panel.isConnected) view.open = panel.open;
   });
@@ -84,10 +85,13 @@ function prepareShabbat(panel, locale, view) {
     practice.textContent = place.practice[locale];
     card.append(summary, practice, sourceLink(place.source));
     card.open = view.cards.has(place.id);
-    card.addEventListener('toggle', () => {
-      if (!card.isConnected) return;
-      if (card.open) view.cards.add(place.id);
+    const remember = open => {
+      if (open) view.cards.add(place.id);
       else view.cards.delete(place.id);
+    };
+    summary.addEventListener('click', () => remember(!card.open));
+    card.addEventListener('toggle', () => {
+      if (card.isConnected) remember(card.open);
     });
     cards.append(card);
 
