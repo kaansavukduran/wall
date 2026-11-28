@@ -86,6 +86,12 @@ async function main() {
       assert.equal(await page.locator('#settings-button').evaluate(el => el === document.activeElement),true);
       await enterCampaign(page, width === 320 ? 'tap' : 'keyboard');
       assert.equal(await page.locator('#title').evaluate(title => title === document.activeElement),true);
+      const photoTask = page.locator('#intro + #photo-button');
+      assert.ok(await photoTask.evaluate(button => {
+        const viewport = button.getBoundingClientRect();
+        return button.classList.contains('primary') && viewport.top >= 0 && viewport.bottom <= innerHeight;
+      }));
+      assert.match(await page.locator('#intro').textContent(), /[?？]$/);
       assert.equal(await page.locator('#arrival').isHidden(),true);
       await page.click('#source');
       await page.locator('#reader[open]').waitFor();
@@ -165,6 +171,7 @@ async function main() {
       await page.click('[data-choice="0"]');
       assert.equal(await page.locator('#next').isHidden(), true);
       await page.click('[data-choice="' + plaza.correct + '"]');
+      assert.equal(await photoTask.evaluate(button => button.classList.contains('primary')),false);
       await page.click('#next');
       for (const episode of chapters) {
         await page.waitForURL('**/#chapter-' + episode.id);
@@ -178,7 +185,12 @@ async function main() {
           await panel.locator('summary').press('Enter');
           const wrongIndex = (evidence.correct + 1) % evidence.cards.length;
           const wrongChoice = page.locator('[data-evidence="' + wrongIndex + '"]');
-          await wrongChoice.press('Enter');
+          try {
+            await wrongChoice.press('Enter');
+          } catch (error) {
+            const status = await panel.locator('#evidence-question').textContent();
+            throw new Error('Chapter ' + episode.id + ' (' + locale + ') evidence: ' + status, {cause:error});
+          }
           const firstLink = await page.locator('#evidence-source').getAttribute('href');
           const correctChoice = page.locator('[data-evidence="' + evidence.correct + '"]');
           await correctChoice.click();

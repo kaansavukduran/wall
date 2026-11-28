@@ -326,6 +326,7 @@ export const worldNote = [
 ];
 
 export const photo = {
+  task:['Eski fotoğrafı aç','Open the old photo','פתחו את התצלום הישן','Köhnə fotonu aç'],
   title:['Fotoğraf ve meydan','Photo and plaza','התצלום והרחבה','Foto və meydan'],
   note:[
     'Negatif yaklaşık 1900–1920. Duvarın dibindeki insanlara ve dar geçide bak.',

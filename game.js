@@ -174,6 +174,7 @@ export async function start(initialLanguage) {
   const studyRoom = find('library');
   const settings = find('settings');
   const photoPanel = find('photo');
+  const photoButton = find('photo-button');
   const comparison = find('compare-view');
   const journal = find('journal');
   const selector = find('lang');
@@ -409,6 +410,7 @@ export async function start(initialLanguage) {
     next.hidden = false;
     next.textContent = ui[language][upcomingIndex() === 0 ? 13 : 3];
     offerTransfer(true);
+    if (active === 0) photoButton.classList.remove('primary');
     renderTour();
     save();
   }
@@ -464,6 +466,9 @@ export async function start(initialLanguage) {
     find('chapter').textContent = active === 0 ? labels[9] : String(episode.id);
     find('title').textContent = text[0];
     find('intro').textContent = text[1];
+    photoButton.hidden = active !== 0 && episode.id !== 23;
+    photoButton.textContent = (active === 0 ? photo.task : photo.title)[index];
+    photoButton.classList.toggle('primary', active === 0 && !finished);
     const restoreNotice = find('restore-notice');
     restoreNotice.hidden = !restored;
     if (restored) restoreNotice.textContent = settingsLabels[language].restored;
@@ -511,7 +516,10 @@ export async function start(initialLanguage) {
     if (!baku.hidden) refreshBaku();
     renderEvidence();
     renderLanguageLabs();
-    if (focus) find('title').focus();
+    if (focus) {
+      find('title').focus();
+      if (active === 0 && !finished) photoButton.scrollIntoView({block:'nearest',inline:'nearest'});
+    }
   }
 
   function go(index, updateHash = true) {
@@ -649,9 +657,6 @@ export async function start(initialLanguage) {
     const output = surface.querySelector('output');
     const reference = find('model-reference');
     surface.querySelector('p').textContent = model.name[index];
-    const photoButton = find('photo-button');
-    photoButton.hidden = id !== 0 && id !== 23;
-    photoButton.textContent = photo.title[index];
 
     function updateModel() {
       const activeOption = model.options.find(option => option[0] === selectedLayer);
@@ -1027,7 +1032,7 @@ export async function start(initialLanguage) {
   }
 
   comparison.addEventListener('input', comparePhoto);
-  find('photo-button').addEventListener('click', () => {
+  photoButton.addEventListener('click', () => {
     stop();
     const index = locale();
     const modernHistory = episodes[active].id === 23;
