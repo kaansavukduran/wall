@@ -168,9 +168,14 @@ test('study-room readings point to chapters and have four complete translations'
   for (const language of languages) assert.equal(libraryLabels[language].length, 5);
 });
 
-test('rendered version follows VERSION and scene options localize', () => {
+test('browser and desktop versions follow VERSION and scene options localize', () => {
   const version = readFileSync(new URL('../VERSION', import.meta.url), 'utf8').trim();
   assert.match(readFileSync(new URL('../index.html', import.meta.url), 'utf8'), new RegExp('>' + version.replaceAll('.', '\\.') + '<'));
+  const desktopPackage = JSON.parse(readFileSync(new URL('../desktop/package.json', import.meta.url), 'utf8'));
+  const desktopLock = JSON.parse(readFileSync(new URL('../desktop/package-lock.json', import.meta.url), 'utf8'));
+  assert.equal('v' + desktopPackage.version, version);
+  assert.equal(desktopLock.version, desktopPackage.version);
+  assert.equal(desktopLock.packages[''].version, desktopPackage.version);
   for (const model of models) {
     assert.ok(model.id === 0 || chapters.some(episode => episode.id === model.id));
     assert.equal(model.name.length, languages.length);
