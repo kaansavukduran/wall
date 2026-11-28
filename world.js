@@ -17,6 +17,7 @@ export async function makeWorld(canvas, reducedMotion) {
   let position = 80;
   let facing = 1;
   let lastDraw = '';
+  let lastScene = '';
   let walked = 0;
   let inspecting = false;
   function rect(ctx, color, x, y, width, height) {
@@ -24,9 +25,13 @@ export async function makeWorld(canvas, reducedMotion) {
     ctx.fillRect(x, y, width, height);
   }
   function scene(index, layer = '') {
+    const key = index + ':' + layer;
+    if (key !== lastScene) {
+      drawScenery(background, index, layer);
+      lastScene = key;
+      lastDraw = '';
+    }
     inspecting = false;
-    drawScenery(background, index, layer);
-    lastDraw = '';
     draw(0);
   }
 
@@ -41,7 +46,7 @@ export async function makeWorld(canvas, reducedMotion) {
     }
     const cutaway = index === 6 || index === 8;
     const cityWall = index === 19 && layer === 'city-walls';
-    const site = index === 0 || [13, 14, 23, 24].includes(index) || (index === 19 && !cityWall);
+    const site = index === 0 || [13, 23, 24].includes(index) || (index === 19 && !cityWall);
     const wallStart = 166;
     if (cutaway) {
       drawPlatformSection(background, index === 6 || layer === 'before', layer);
@@ -385,6 +390,37 @@ export async function makeWorld(canvas, reducedMotion) {
       }
       return;
     }
+    if (index === 14) {
+      rect(background, '#5b4b48', 125, 76, 355, 123);
+      rect(background, '#a9977c', 131, 82, 349, 114);
+      for (const [x, y, w] of [[151,105,64],[210,125,76],[156,151,101]]) {
+        rect(background, '#7b6555', x, y, w, 35);
+        rect(background, '#cfaf83', x + 3, y + 3, w - 6, 29);
+        rect(background, '#61514a', x + w - 18, y + 15, 9, 17);
+      }
+      rect(background, '#cdb38d', 294, 82, 57, 112);
+      rect(background, '#8c6e58', 353, 82, 19, 112);
+      rect(background, '#d6b288', 354, 82, 4, 112);
+      if (layer === 'quarter-endowment') {
+        for (const [x, y] of [[168,99],[180,98],[192,103],[204,101]]) {
+          rect(background, '#667051', x, y, 4, 5);
+        }
+        for (const [x, y] of [[195,109],[205,119],[216,129],[226,139],[236,149],[246,159]]) {
+          rect(background, '#f1cb79', x, y, 5, 3);
+        }
+        rect(background, '#f1cb79', 248, 157, 11, 6);
+      } else if (layer === 'quarter-home') {
+        rect(background, '#657456', 269, 148, 22, 30);
+        rect(background, '#9f8d5e', 272, 153, 16, 5);
+        rect(background, '#9f8d5e', 272, 163, 16, 5);
+        rect(background, '#f1cb79', 212, 125, 70, 2);
+        rect(background, '#f1cb79', 212, 156, 52, 2);
+      } else if (layer === 'quarter-passage') {
+        for (let y = 175; y > 96; y -= 10) rect(background, '#6d5c52', 324, y, 5, 4);
+        rect(background, '#ebc27c', 349, 94, 9, 7);
+      }
+      return;
+    }
     if (index === 15) {
       rect(background, '#4b382e', 105, 60, 375, 138);
       rect(background, '#7d5849', 110, 65, 370, 130);
@@ -532,6 +568,35 @@ export async function makeWorld(canvas, reducedMotion) {
       rect(background, '#443a38', 263, 140, 43, 12);
       rect(background, '#443a38', 273, 132, 23, 9);
       rect(background, '#d2b584', 272, 117, 23, 7);
+      return;
+    }
+    if (index === 20) {
+      rect(background, '#69564b', 122, 62, 345, 130);
+      rect(background, '#637d81', 127, 67, 335, 120);
+      for (const [x,y,w,h] of [[130,69,321,27],[144,95,100,21],[209,104,21,17],[277,95,60,32],
+        [392,94,65,37],[137,149,320,37],[288,139,169,18]]) {
+        rect(background, '#ac9a72', x, y, w, h);
+      }
+      const cairo = [362,164];
+      const edirne = [324,115];
+      const hamburg = [204,76];
+      const livorno = [218,107];
+      const cities = [cairo, edirne, hamburg, livorno];
+      for (const [x,y] of cities) rect(background, '#5b5152', x - 2, y - 2, 5, 5);
+      if (layer === 'news-cairo') {
+        rect(background, '#f6d48b', cairo[0] - 3, cairo[1] - 3, 7, 7);
+        rect(background, '#e7c18a', 370, 151, 21, 12);
+        rect(background, '#806651', 372, 155, 16, 1);
+      } else if (layer === 'news-edirne') {
+        rect(background, '#f6d48b', edirne[0] - 3, edirne[1] - 3, 7, 7);
+        rect(background, '#d9ad79', 333, 102, 19, 12);
+        rect(background, '#b28663', 331, 101, 23, 3);
+      } else if (layer === 'news-hamburg') {
+        for (const [x,y] of [[217,106],[214,100],[211,94],[208,88],[205,82]]) {
+          rect(background, '#f2d083', x, y, 4, 3);
+        }
+        for (const [x,y] of [hamburg,livorno]) rect(background, '#f6d48b', x - 3, y - 3, 7, 7);
+      }
       return;
     }
     if (index === 21) {

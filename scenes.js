@@ -124,6 +124,26 @@ export const models = [
     ['western-wall',['Batı Duvarı','Western Wall','הכותל המערבי','Qərb Divarı'],
       ['Platformun batı kenarındaki istinat yapısının görünen bölümüdür. Meydana bakan alt seviyededir.','This visible section of the platform’s western retaining wall faces the plaza at a lower level.','חלק זה של קיר התמך המערבי פונה לרחבה במפלס נמוך יותר.','Platformanın qərb istinad divarının görünən bu hissəsi aşağı səviyyədə meydanla üzbəüzdür.']],
   ]),
+  scene(14, ['Mağribi Mahallesi’nde üç kayıt','Three records of the Maghrebi Quarter','שלוש רשומות על השכונה המוגרבית','Məğribi məhəlləsi haqqında üç sənəd'], [
+    ['quarter-endowment',['1320 · Vakıf','1320 · Endowment','1320 · הקדש','1320 · Vəqf'], [
+      'Ebu Medyen Vakfı’nın 1320 tarihli kaydı, Ayn Kerim arazisinin gelirinin Kudüs’teki zaviye ve Mağribilere ayrıldığını bildirir. Bir vakıf, gelir veya mülkü belirli bir amaç için ayırır. Çizimde iki ayrı yer arasındaki gelir ilişkisini izle.',
+      'The 1320 Abu Madyan record assigns revenue from ‘Ayn Karim land to a hospice and to Maghrebis in Jerusalem. A waqf dedicates property or revenue to a stated purpose. Follow the relationship between two separate places.',
+      'רשומת וקף אבו מדין מ־1320 מקצה הכנסות מאדמות עין כרם לזאוויה ולמוגרבים בירושלים. וקף מקדיש רכוש או הכנסות למטרה מוגדרת. עקבו בתרשים אחר הקשר בין שני המקומות.',
+      'Əbu Mədyən vəqfinin 1320-ci il qeydi Ayn Kərim torpağının gəlirini Qüdsdəki zaviyəyə və məğribilərə ayırır. Vəqf əmlakı və ya gəliri müəyyən məqsədə həsr edir. Sxemdə iki yer arasındakı əlaqəni izlə.',
+    ],'https://archives.openjerusalem.org/index.php/turkish-translation-of-the-arabic-waqfiyya-of-the-ebu-medyen-suayb-al-maghribi-2-november-1320-gregorian-calendar-29-ramazan-n-720-ottoman-calendar'],
+    ['quarter-home',['1613 · Bahçeli ev','1613 · House and garden','1613 · בית וגינה','1613 · Bağçalı ev'], [
+      'Bir Kudüs mahkeme kaydı, 1613’te Ebu Medyen Vakfı’na komşu bir bahçeli evi kaydeder. Bugünkü adresi eldeki metinden çıkaramıyoruz. Çizim, bir evin ve komşu vakıf mülkünün ayrı ayrı tarif edilebildiğini gösterir.',
+      'A Jerusalem court record from 1613 lists a house with a garden beside the Abu Madyan endowment. The record leaves its modern address uncertain. The drawing distinguishes a home from the neighboring endowment property.',
+      'רשומת בית משפט בירושלים מ־1613 מציינת בית עם גינה ליד וקף אבו מדין. כתובתו כיום אינה ידועה מן הרשומה. האיור מפריד בין הבית לנכס ההקדש השכן.',
+      'Qüds məhkəməsinin 1613-cü il qeydi Əbu Mədyən vəqfinin yanında bağçalı ev göstərir. Sənəd bu günkü ünvanı dəqiq müəyyənləşdirmir. Şəkil evi qonşu vəqf mülkündən ayırır.',
+    ],'https://tile.loc.gov/storage-services/master/gdc/gdcebookspublic/20/18/01/99/32/2018019932/2018019932.pdf'],
+    ['quarter-passage',['1930 · Döşeli geçit','1930 · Paved passage','1930 · המעבר המרוצף','1930 · Döşənmiş keçid'], [
+      'Yüzyıllar sonraki Duvar Komisyonu, mabet yükseltisini tutan duvarın önündeki geçidi tarif eder. Rapor geçidin mülkiyetiyle dua için erişimi ayrı değerlendirir. Şema yalnızca bu ilişkiyi gösterir.',
+      'Centuries later, the Wall Commission describes the passage along the retaining wall. It considers ownership of the passage and devotional access separately. The sketch shows that relationship.',
+      'מאות שנים אחר כך ועדת הכותל מתארת את המעבר שליד קיר התמך. הדוח דן בנפרד בבעלות על המעבר ובגישה לתפילה. התרשים מציג את הקשר ביניהן.',
+      'Əsrlər sonra Divar Komissiyası istinad divarının önündəki keçidi təsvir edir. Hesabat keçidin mülkiyyətini və dua üçün girişi ayrı araşdırır. Sxem bu əlaqəni göstərir.',
+    ],'https://unispal.un.org/pdfs/59A92104ED00DC468525625B00527FEA.pdf'],
+  ]),
   scene(16, ['Zohar’ın yolculuğu','The Zohar across time','הזוהר לאורך הדורות','Zoharın zamanla yolçuluğu'], [
     ['zohar-voice',['Anlatıdaki ses','The voice in the story','הקול בסיפור','Rəvayətdəki səs'], [
       'Zohar, Tevrat’ı yorumlayan ve mistik sahneler anlatan metinlerden oluşur. Şimon bar Yohai metnin öne çıkan öğretmenidir ve geleneksel yazarlık atfının merkezindedir.',
@@ -177,6 +197,26 @@ export const models = [
       ['Kanûnî devrindeki kitabe, Eski Şehir çevre surunun inşasını belgeler. Bu duvar şehri çevreler.','The inscription from Süleyman’s reign documents construction of the city wall that surrounds the Old City.','הכתובת מימי סולימאן מתעדת בנייה של חומת העיר המקיפה את העיר העתיקה.','Süleyman dövrünün kitabəsi İçərişəhəri əhatə edən şəhər divarının tikintisini sənədləşdirir.']],
     ['kotel-courses',['Batı Duvarı taş sıraları','Western Wall stone courses','נדבכי האבנים בכותל','Qərb Divarının daş sıraları'],
       ['İri alt taşları ve küçük üst taşları karşılaştır. Kazılar daha eski istinat yapısını gösterir. Üstte farklı dönemlerde eklenen ve onarılan sıralar var.','Compare the large lower blocks and smaller upper ones. Excavations document the older retaining structure. The upper courses include work from later periods.','השוו בין האבנים הגדולות למטה לקטנות למעלה. החפירות מתעדות את קיר התמך הקדום. הנדבכים העליונים כוללים עבודות מתקופות מאוחרות.','Aşağıdakı iri daşları yuxarıdakı kiçik daşlarla müqayisə et. Qazıntılar daha qədim istinad quruluşunu göstərir. Yuxarı sıralarda sonrakı dövrlərin işləri var.']],
+  ]),
+  scene(20, ['Sabatay Sevi haberinin üç durağı','Three stops in the Sabbatai Sevi news','שלוש תחנות בחדשות על שבתאי צבי','Sabatay Sevi xəbərinin üç dayanacağı'], [
+    ['news-cairo',['1665/1666 · Kahire’ye mektup','1665/1666 · Letter to Cairo','1665/1666 · מכתב לקהיר','1665/1666 · Qahirəyə məktub'], [
+      'Gazzeli Natan, Sabatay Sevi’yi destekleyen bir mektubu Kahire cemaatinin önderlerinden Rafael Yusif’e yazdı. Jonatan Meir’in edisyonu mektubu 1665’e, Posen Library kaydı 1666’ya tarihler. Çizim muhatabın yerini gösterir.',
+      'Nathan of Gaza wrote in support of Sabbatai Sevi to Raphael Joseph, a leader of Cairo’s Jewish community. Jonatan Meir’s edition dates the letter to 1665 and the Posen Library records it as 1666. The illustration marks the recipient’s city.',
+      'נתן העזתי כתב בזכות שבתאי צבי לרפאל יוסף, ממנהיגי הקהילה היהודית בקהיר. מהדורת יונתן מאיר מתארכת את המכתב ל־1665, ובספריית פוזן הוא מתוארך ל־1666. האיור מסמן את עיר הנמען.',
+      'Qəzzalı Natan Sabatay Sevini dəstəkləyən məktubu Qahirə yəhudi icmasının rəhbərlərindən Rafael Yusifə yazdı. Yonatan Meirin nəşri məktubu 1665-ci ilə, Posen Kitabxanası isə 1666-cı ilə aid edir. Şəkil məktubu alanın şəhərini göstərir.',
+    ],'https://old-digitalcollections.nypl.org/collections/collection-of-texts-on-shabbethai-tzevi-and-the-sabbatean-movement'],
+    ['news-edirne',['1666 · Edirne','1666 · Edirne','1666 · אדירנה','1666 · Ədirnə'], [
+      'Sabatay Sevi 1666’da Osmanlı saray kenti Edirne’de İslam’a geçti. Kimi takipçiler bunu yeniden yorumladı, kimileri beklentilerinden vazgeçti. Sonraki tarihçiler farklı çevrelerin kayıtlarını karşılaştırır.',
+      'Sabbatai Sevi converted to Islam in the Ottoman court city of Edirne in 1666. Some followers reinterpreted the change and others gave up their hopes. Later historians compare accounts from different circles.',
+      'שבתאי צבי התאסלם ב־1666 בעיר החצר העות׳מאנית אדירנה. חלק ממאמיניו פירשו מחדש את ההמרה ואחרים ויתרו על ציפיותיהם. היסטוריונים משווים רישומים מחוגים שונים.',
+      'Sabatay Sevi 1666-cı ildə Osmanlı saray şəhəri Ədirnədə İslamı qəbul etdi. Bəzi ardıcılları dəyişikliyi yenidən şərh etdilər, başqaları ümidlərindən əl çəkdilər. Tarixçilər müxtəlif çevrələrin qeydlərini müqayisə edirlər.',
+    ],'https://cmes.fas.harvard.edu/publications/jewish-messiah-ottoman-court-sabbatai-sevi-and-emergence-judeo-islamic-community'],
+    ['news-hamburg',['Kasım 1666 · Hamburg’a haber','November 1666 · News to Hamburg','נובמבר 1666 · דיווח להמבורג','Noyabr 1666 · Hamburqa xəbər'], [
+      'Livorno’dan Rav Yusif Halevi, Hamburg’daki Rav Yaakov Sasportas’a din değiştirme haberini yazdı. Sasportas harekete karşı çıkan bir hahamdı. Harita mektubun iki ucunu gösterir. Haber önceki beklentinin kanıtından farklı bir soruya yanıt verir.',
+      'Rabbi Joseph Halevi in Livorno sent news of the conversion to Rabbi Jacob Sasportas in Hamburg. Sasportas opposed the movement. The map marks the two ends of their correspondence. This report answers a different question from the earlier letter of support.',
+      'ר׳ יוסף הלוי בליבורנו כתב לר׳ יעקב ששפורטש בהמבורג על ההמרה. ששפורטש התנגד לתנועה. המפה מסמנת את שני קצות ההתכתבות. הדיווח עונה על שאלה אחרת ממכתב התמיכה הקודם.',
+      'Livornodakı ravvin Yusif Halevi din dəyişməsi xəbərini Hamburqdakı ravvin Yaakov Sasportasa yazdı. Sasportas hərəkata qarşı idi. Xəritə yazışmanın iki ucunu göstərir. Bu məlumat əvvəlki dəstək məktubundan fərqli suala cavab verir.',
+    ],'https://www.sabbateanstudies.org/primasy-sources'],
   ]),
   scene(21, ['Manda döneminde dar geçit','The narrow passage under the Mandate','המעבר הצר בימי המנדט','Mandat dövründə dar keçid'], [
     ['mandate-screen',['1928 · Paravan olayı','1928 · The screen incident','1928 · תקרית המחיצה','1928 · Arakəsmə hadisəsi'], [

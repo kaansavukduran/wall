@@ -2,7 +2,7 @@ export const messianicLessons = {
   cards: [
     {
       id: "messianic-nathan-letter",
-      date: ["1665 sonbaharı", "Autumn 1665", "סתיו 1665", "1665-ci ilin payızı"],
+      date: ["1665 sonbaharı (Meir) veya 1666 (Posen)","Autumn 1665 (Meir) or 1666 (Posen)","סתיו 1665 לפי מאיר או 1666 לפי פוזן","1665-ci ilin payızı (Meir) və ya 1666 (Posen)"],
       sourceClass: [
         "Dönemin bir destekçisinin mektubu",
       "Contemporary letter by a supporter",

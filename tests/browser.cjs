@@ -167,7 +167,7 @@ async function main() {
           await page.click('[data-layer="sanctuary"]');
           assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), before);
         }
-        if ([1,3,4,7,12,16,18,21].includes(episode.id)) {
+        if ([1,3,4,7,12,14,16,18,20,21].includes(episode.id)) {
           const model = models.find(entry => entry.id === episode.id);
           let previous = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
           for (const [layer, , readings, source] of model.options) {
