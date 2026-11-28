@@ -62,9 +62,9 @@ dialog li{margin-block:.4rem}
 dialog a{overflow-wrap:anywhere}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 
-#library{scroll-padding-block-start:6rem}
-.library-heading{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;position:sticky;inset-block-start:-1rem;z-index:1;background:var(--paper);padding-block:.65rem .55rem}
-.library-heading :is(h2,form){margin:0}
+:is(#library,#tour-presentation){scroll-padding-block-start:6rem}
+.dialog-heading{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;position:sticky;inset-block-start:-1rem;z-index:1;background:var(--paper);padding-block:.65rem .55rem}
+.dialog-heading :is(h2,form){margin:0}
 #library details{border-block-start:1px solid var(--edge);padding-block:.55rem}
 #library summary{cursor:pointer;min-block-size:var(--hit);align-content:center;font-weight:650}
 #library summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
@@ -86,6 +86,19 @@ dialog a{overflow-wrap:anywhere}
 .atlas-map img{display:block;inline-size:100%;block-size:auto;image-rendering:pixelated}
 .atlas-marker{position:absolute;left:var(--map-x);top:var(--map-y);width:8px;height:8px;transform:translate(-50%,-50%);background:var(--accent);border:1px solid #141d23;box-shadow:0 0 0 2px #141d2399}
 #journal{margin-block-start:1rem}
+#journal h2{margin:.4rem 0}
+#tour-stops details{border-block-start:1px solid var(--edge);padding:.45rem 0}
+#tour-stops summary{cursor:pointer;min-block-size:var(--hit);align-content:center;font-weight:650}
+#tour-stops summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#journal select{display:block;inline-size:100%;min-inline-size:0;margin-block:.3rem .55rem}
+.tour-claims{display:grid;gap:.35rem}
+.tour-claims button{text-align:start;overflow-wrap:anywhere}
+.tour-claims button[aria-pressed=true]{background:#47351e;border-color:var(--accent)}
+.tour-feedback,#tour-progress{color:var(--accent)}
+.tour-feedback:empty{display:none}
+#tour-note-help,#tour-question-preview{color:var(--muted)}
+#tour-presentation ol{padding-inline-start:1.4rem}
+.tour-personal-note{white-space:pre-wrap}
 #journal textarea,.kabbalah-transfer textarea{display:block;font:inherit;color:inherit;background:#171d24;border:1px solid var(--edge);border-radius:.35rem;padding:.55rem;inline-size:100%;resize:vertical}
 .kabbalah-reading{padding:.65rem;background:#1b242c}
 .kabbalah-reading :is(h3,p){margin-block:0 .5rem}

@@ -9,14 +9,14 @@ S07	Yaklaşık MS 200 derlemesi	1,11	Mişna Pesahim 10	Birincil metin	Seder ve a
 S08	Geç Antik Çağ	5,11	Bavli Şabat 21b	Birincil metin	Hanuka ve kandil anlatısı	https://www.sefaria.org/Shabbat.21b	İçerik eşleşti; edisyon seçilecek
 S09	Geç Antik Çağ	8,11	Bavli Gittin 55b–56b	Birincil metin	Yıkımı hatırlayan rabbanî anlatılar	https://www.sefaria.org/Gittin.55b-56b	Pasaj eşleşti; oyunda özgün özet
 S10	Geç Antik Çağ	10,11	Yeruşalmi Taanit 4	Birincil metin	Yas, Betar ve felaket hafızası	https://www.sefaria.org/Jerusalem_Talmud_Taanit.4.1-58	Referans; bölüm numarası sürümde eşleştirilecek
-S11	Geç Antik Çağ	12	Bavli Şabat 33b	Birincil metin	Şimon ve Elazar mağara anlatısı	https://www.sefaria.org/Shabbat.33b	İçerik eşleşti; edisyon seçilecek
+S11	Geç Antik Çağ	12,24	Bavli Şabat 33b	Birincil metin	Şimon ve Elazar mağara anlatısı	https://www.sefaria.org/Shabbat.33b	İçerik eşleşti; edisyon seçilecek
 S12	Geç Antik Çağ	Prolog,11	Bavli Berakhot 2a	Birincil metin	Şema ve okuma zamanı	https://www.sefaria.org/Berakhot.2a	Referans; edisyon seçilecek
 S13	Geç Antik Çağ	11	Pirke Avot 1:6	Birincil metin	Öğretmen ve arkadaş edinme	https://www.sefaria.org/Pirkei_Avot.1.6	Referans; edisyon seçilecek
 S14	Tarihleme tartışmalı	16	Sefer Yetsira 1	Birincil metin	On sefirot ve yirmi iki harf	https://www.sefaria.org/Sefer_Yetzirah.1	İçerik eşleşti; nüsha farkları incelenecek
 S15	Orta Çağ dolaşımı	16	Bahir – Posen Library metin kaydı	Birincil metin ve bağlam	Erken Kabala, atıf ve Provence dolaşımı	https://www.posenlibrary.com/entry/sefer-ha-bahir-book-brilliance	Katalog ve bağlam eşleşti; oyunda özgün özet
 S16	12. yüzyıl	15	Mişne Tora	Birincil metin	Maimonides ve hukuk derlemesi	https://www.sefaria.org/Mishneh_Torah	Referans; pasaj seçilecek
 S17	13. yüzyıl sonu	16	Zohar	Birincil metin	Kastilya dolaşımı ve Celile anlatı ortamı	https://www.sefaria.org/Zohar	Referans; edisyon seçilecek
-S18	Modern akademik edisyon	16	Pritzker Zohar girişi	Araştırma	Kastilya, Moşe de Leon ve külliyat kronolojisi	https://www.sup.org/books/pages/4810/Front_Matter.pdf	Açık giriş eşleşti
+S18	Modern akademik edisyon	16,24	Pritzker Zohar girişi	Araştırma	Kastilya, Moşe de Leon ve külliyat kronolojisi	https://www.sup.org/books/pages/4810/Front_Matter.pdf	Açık giriş eşleşti
 S19	16. yüzyıl	18	Pardes Rimmonim – Moşe Kordovero	Mistik eser kaydı	Safed’de sefirot öğretisinin sistemleştirilmesi	https://cja.huji.ac.il/browser.php?id=39128&many=5&mode=set&sort=DESC&start=5	Eser ve koleksiyon kaydı eşleşti
 S20	18. yüzyıl sonu	20	Tanya	Birincil metin	Hasidik düşünce ve manevî çalışma	https://www.sefaria.org/Tanya	Referans; pasaj seçilecek
 S21	Katmanlı litürji	Prolog,11,24	Sefaria Litürji	Katalog	Sidur, mahzor, farklı rite örnekleri	https://www.sefaria.org/texts/Liturgy	Çatı kaynak; tarih ve rite ayrı doğrulanacak
@@ -34,7 +34,7 @@ H04	1537–1541	19	Kudüs surları ve kapıları	Miras kaynağı	Kanûnî’nin 
 H05	Geç Osmanlı	19	Cemal Paşa ve meydan girişimi	Araştırma	Tasarı ve mahalleye muhtemel etkisi	https://doi.org/10.1080/00263206.2021.1895118	Makale özeti eşleşti
 H06	1930	21,Prolog,24	Duvar Komisyonu raporu	Birincil belge	Mülkiyet, erişim ve ibadet koşulları	https://www.palquest.org/en/node/21938	Rapor eşleşti
 H07	1933–1945	22	USHMM Holokost Ansiklopedisi	Kurumsal tarih	Holokost tarih çerçevesi	https://encyclopedia.ushmm.org/content/en/article/introduction-to-the-holocaust	Kaynak eşleşti
-H08	Orta Çağ–1967	14,19,23	Open Jerusalem Mağribi Mahallesi	Arşiv	Mahalle planı ve fotoğraf adayları	https://archives.openjerusalem.org/index.php/mughrabi-quarter	Arşiv eşleşti; eser hakları bekliyor
+H08	Orta Çağ–1967	14,19,23,24	Open Jerusalem Mağribi Mahallesi	Arşiv	Mahalle planı ve fotoğraf adayları	https://archives.openjerusalem.org/index.php/mughrabi-quarter	Arşiv eşleşti; eser hakları bekliyor
 H09	20. yüzyıl	21–24	BM Filistin meselesi tarihi	Kurumsal tarih	Manda, 1948, 1967	https://www.un.org/unispal/history/	Önceki tarama; bölüm pasajı seçilecek
 H10	1967 ve 2007	23	UNESCO Kudüs Eski Şehir teknik heyet raporu	Kurumsal rapor	Mağribi Mahallesi’nin yıkımı ve duvar meydanı	https://whc.unesco.org/document/8721	Raporun tarihsel arka plan bölümü eşleşti
 T01	Güncel	Arşiv	Sefaria Versions API	Teknik belge	Edisyon, çeviri, kaynak ve lisans alanları	https://developers.sefaria.org/reference/get-versions	Belge eşleşti
@@ -80,14 +80,14 @@ D05	MÖ 2. yüzyıl	5	Israel Museum – Heliodorus Stele	Müze kaydı	Helenistik
 D06	İkinci Tapınak–Roma	7,10	IAA – Dead Sea Scrolls Discovery Sites	Arkeolojik katalog	Mağaralar, metin grupları ve Nahal Hever mektupları	https://www.deadseascrolls.org.il/learn-about-the-scrolls/discovery-sites?locale=en_US	Nahal Hever saha kaydı eşleşti; oyunda özgün özet
 D07	MS 115–117	9	Cambridge – Uprisings in the Jewish Diaspora	Akademik bölüm	Traianus döneminde diaspora ayaklanmaları	https://www.cambridge.org/core/books/abs/cambridge-history-of-judaism/uprisings-in-the-jewish-diaspora-116117/D60462905D529F30607BAFD7C22745FA	Özet eşleşti; birincil pasaj seçilecek
 D08	Orta Çağ	15	Cambridge – Taylor-Schechter Genizah	Arşiv kataloğu	Mektup ve hane bilgisi	https://www.lib.cam.ac.uk/collections/departments/taylor-schechter-genizah-research-unit	Koleksiyon eşleşti; raf numarası ve haklar açık
-D09	Orta Çağ	15	Princeton Geniza Project – T-S 12.203	Belge adayı	Mektup üzerinden gündelik hayat	https://geniza.princeton.edu/en/documents/19917/	Belge başlığı eşleşti; seçili satır, tarih ve çeviri incelenecek
+D09	Orta Çağ	15,24	Princeton Geniza Project – T-S 12.203	Belge adayı	Mektup üzerinden gündelik hayat	https://geniza.princeton.edu/en/documents/19917/	Katalog ve tarih aralığı eşleşti; imza ve alıcı belirsizliği sergide açıklanıyor
 D10	2 Kasım 1917	21	BM arşivi – Balfour Declaration	Birincil belge kopyası	Yahudi ulusal yurdu ve mevcut Yahudi olmayan cemaatlerin medeni ve dinî hakları	https://www.un.org/unispal/document/auto-insert-199521/	Mektup tarihi ve koşullar eşleşti
 D11	1947	22	UNSCOP Partition Recommendation – haritalar ve ekler	Birincil kurumsal belge	Taksim önerisi ve Kudüs haritası	https://www.un.org/unispal/document/auto-insert-186346/	Ekler eşleşti; harita hakları ve BM 181 ile ilişki kontrol edilecek
 D12	MS 1. yüzyıl	8	Josephus – Yahudi Savaşı 6.4–5	Birincil metin	Roma yıkımı anlatısı	https://www.sefaria.org/The_War_of_the_Jews.6.4-5	Pasaj eşleşti; çeviri lisansı kontrol edilecek
 D13	Safed ve sonraki aktarım	18	Sefer Ets Hayim 1:1	Mistik metin	Luria/Vital, başlangıç pasajı	https://www.sefaria.org/Sefer_Etz_Chaim.1.1	Pasaj bağlantısı eşleşti; metin sürümü ve öğretim alıntısı seçilecek
 D14	16. yüzyıl	18	Şulhan Aruh, Orah Hayim 472	Hukuk metni	Pesah gecesi düzeni	https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.472	Bölüm eşleşti; pasaj ve edisyon seçilecek
 D15	Antik metin ve sonraki alımlama	16	Hezekiel 1	Tanah metni	Vizyon ve Merkava alımlamasını ayırma	https://www.sefaria.org/Ezekiel.1	Referans; Heikhalot ve sonraki yorum eşleştirmesi açık
-D16	Negatif yaklaşık 1900–1920	Prolog,19,23	LOC – LC-DIG-matpc-14762	Arşiv fotoğrafı	Kotel önündeki dar alan ve kişiler	https://www.loc.gov/pictures/item/2019704965/	Katalog ve orta boy görsel eşleşti; yayın için bilinen kısıtlama yok
+D16	Negatif yaklaşık 1900–1920	Prolog,19,23,24	LOC – LC-DIG-matpc-14762	Arşiv fotoğrafı	Kotel önündeki dar alan ve kişiler	https://www.loc.gov/pictures/item/2019704965/	Katalog ve orta boy görsel eşleşti; yayın için bilinen kısıtlama yok
 D17	MÖ 1208 dolayları	1	UCL Digital Egypt – Merneptah Steli	Birincil yazıt	Yazıtta Kenan bağlamında İsrail adı	https://www.ucl.ac.uk/museums-static/digitalegypt/thebes/merenptah/stela.html	Yazıt kaydı ve çeviri eşleşti; oyunda özgün özet
 D18	MÖ 9. yüzyıl	2	Tel Dan Steli	Birincil yazıt	Bazalt parçalar, Aramice yazıt ve Davut hanedanı okuması	https://www.atiqot.org.il/en/objects/tel-dan-stele/	Nesne kimliği 371407-0 ve arşiv eşleşti
 D19	MÖ 7. yüzyıl başı	2	Taylor Prizması	Birincil belge	Sanherib yıllıklarında Yahuda seferi ve Hizkiya	https://www.britishmuseum.org/collection/object/W_1855-1003-1	Envanter ve 701 seferi bağlamı eşleşti

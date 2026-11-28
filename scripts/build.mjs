@@ -17,7 +17,7 @@ const files = [
   'early-modern-lessons.js', 'modern-lessons.js', 'messianic-timeline.js', 'messianic-lessons.js',
   'library.js', 'calendar.js', 'calendar-lessons.js', 'atlas.js', 'atlas-lessons.js',
   'kabbalah.js', 'kabbalah-lessons.js', 'kotel.js', 'kotel-lessons.js',
-  'scenes.js', 'catalogue.js', 'sequences.js', 'hebrew-labs.js', 'controller.js', 'assets',
+  'scenes.js', 'catalogue.js', 'sequences.js', 'hebrew-labs.js', 'controller.js', 'tour.js', 'tour-evidence.js', 'assets',
 ];
 for (const file of files) await cp(file, resolve(runtimeRoot, file), { recursive:true });
 await mkdir(resolve(runtimeRoot, 'docs'));

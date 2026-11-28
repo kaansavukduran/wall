@@ -20,6 +20,8 @@ import { modernLessons } from '../modern-lessons.js';
 import { romanLessons } from '../roman-lessons.js';
 import { models, photo } from '../scenes.js';
 import { secondTempleLessons } from '../second-temple-lessons.js';
+import { tour } from '../tour.js';
+import { tourEvidence } from '../tour-evidence.js';
 
 test('every checkpoint has four equivalent locales and a valid source', () => {
   let previousId = 0;
@@ -182,6 +184,24 @@ test('the chapter 20 timeline orders five distinct sources with four equivalent 
     }
   }
   assert.equal(activity.correctOrder.at(-1), 'messianic-frank-lwow');
+});
+
+test('all six exhibition sources have a supported claim and open question in the right locale', () => {
+  assert.equal(tour.length, 3);
+  const options = tour.flatMap(stop => stop.options);
+  assert.deepEqual(new Set(options.map(([id]) => id)), new Set(Object.keys(tourEvidence)));
+  for (const [id, , url] of options) {
+    assert.ok(entries.some(entry => entry.url === url));
+    const evidence = tourEvidence[id];
+    assert.ok(evidence.sourceTitle);
+    assert.equal(evidence.alternatives.length, 2);
+    for (const values of [evidence.claim,evidence.feedback,evidence.unanswered,...evidence.alternatives]) {
+      assert.equal(values.length, languages.length);
+      assert.ok(values.every(value => value.trim()));
+      assert.match(values[2], /\p{Script=Hebrew}/u);
+      for (const slot of [0,1,3]) assert.doesNotMatch(values[slot], /\p{Script=Hebrew}/u);
+    }
+  }
 });
 
 test('all 24 source exercises contain four versions of each card and matched catalogue entries', () => {

@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified release: v0.5.3, 8db4975c278320355014df97baa4a154d843aa5f.
-Pages: run 46113495911. Opened the Kotel workshop from the live prologue and checked the prayer-posture reading.
-Packages: v0.5.3 platform and web runs 46113499467 and 46113499515 attached six files. Android and Linux passed installed checks (46113772009). Windows initially saw no assets at download; failed job rerun requested after both executables became available. v0.5.2 passed all installed checks with the Rabash workshop exercised in desktop packages (46113398831). Actions secrets API returns HTTP 403 for this integration. The Android preview currently uses per-run debug signing.
-Candidate v0.5.4: chapter 20 has five source-backed dates in a supplementary chronology from Nathan of Gaza to Frank and early Hasidic circles. All four Chromium routes passed, including incorrect order, reading the linked evidence, completing the sequence, and resetting it. Local Firefox launch timed out with a read-only uid_map; the repository compatibility job gives Firefox and WebKit a hosted test. The catalogue has 228 entries.
-Next: verify chronology on Pages and in the compatibility workflow. Turn the final three-stop tour into an evidence-based explanation with a saved open question. Continue source review and platform verification.
+Verified release: v0.5.4, e19a734f0f3abb0e71cf54725ce0e282f3b00b68.
+Pages: run 46114153709. Completed the five-source chapter 20 chronology in the live game.
+Packages: six assets from runs 46114156279 and 46114156349. Linux AppImage, Windows Setup/Portable and Android API 35 installed checks passed (46114455717). v0.5.3's failed Windows download was recovered (46113772009). Chromium, Firefox and WebKit each passed the four-locale route on GitHub runners (46114158315). Physical devices/controllers are open. The integration receives HTTP 403 from Actions secrets; APK uses preview signing.
+Candidate v0.5.5: three-stop evidence exhibition ending, six choices, saved source matches, and a saved open question. Legacy stop and draft values still load. Four-locale campaign and exhibition, standalone Hebrew at 320px with offline legacy save, and simulated controller passed. Deferred the exhibition; five clean-cache runs each transferred 163,163 bytes of initial JS on v0.5.4 and 161,077 bytes on the candidate under the same uncompressed local server.
+Next: verify v0.5.5 live and installed, then deepen Hebrew and Aramaic reading and early scenes. Continue source review and production platform checks.

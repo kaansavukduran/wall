@@ -300,11 +300,38 @@ async function main() {
         if (episode.id !== 24) await page.click('#next');
       }
       await page.selectOption('#tour-stops select >> nth=0', 'photo');
+      assert.equal(await page.locator('#tour-present').isDisabled(), true);
+      const tourStops = page.locator('#tour-stops details');
+      await tourStops.first().locator('[data-tour-claim="overclaim"]').first().click();
+      assert.equal(await page.locator('#tour-question').isDisabled(), true);
+      await tourStops.first().locator('[data-tour-claim="supported"]').click();
+      for (const index of [1,2]) {
+        await tourStops.nth(index).locator('summary').click();
+        await tourStops.nth(index).locator('[data-tour-claim="supported"]').click();
+      }
+      assert.equal(await page.locator('#tour-question option').count(), 4);
+      assert.equal(await page.locator('#tour-present').isDisabled(), true);
+      await page.selectOption('#tour-question', 'photo');
+      assert.ok((await page.locator('#tour-question-preview').innerText()).trim());
       await page.fill('#journal-text', 'WALL');
+      await page.click('#tour-present');
+      await page.locator('#tour-presentation[open]').waitFor();
+      assert.equal(await page.locator('#tour-presentation li').count(), 3);
+      assert.equal(await page.locator('.tour-open-question').innerText(), await page.locator('#tour-question-preview').innerText());
+      assert.equal(await page.locator('.tour-personal-note').innerText(), 'WALL');
+      await page.locator('.tour-personal-note').scrollIntoViewIfNeeded();
+      assert.ok(await page.locator('#tour-presentation button').evaluate(button => {
+        const rect = button.getBoundingClientRect();
+        return rect.top >= 0 && rect.bottom <= window.innerHeight;
+      }));
+      await page.keyboard.press('Escape');
+      assert.ok(await page.locator('#tour-present').evaluate(button => document.activeElement === button));
       await page.reload();
-      await page.locator('#app').waitFor();
+      await page.locator('#tour-builder').waitFor();
       assert.equal(await page.locator('#journal-text').inputValue(), 'WALL');
       assert.equal(await page.locator('#tour-stops select').first().inputValue(), 'photo');
+      assert.equal(await page.locator('#tour-question').inputValue(), 'photo');
+      assert.equal(await page.locator('#tour-present').isEnabled(), true);
       await page.click('#library-button');
       await page.locator('#library[open]').waitFor();
       assert.ok(await page.locator('#library details').count() >= 8);
@@ -393,7 +420,7 @@ async function main() {
       await page.waitForURL('**/#game');
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(locale, width, '25 checkpoints, sources, movement, save, calendar, atlas and Kabbalah workshop: PASS');
+      console.log(locale, width, '25 checkpoints, workshops and saved evidence exhibition: PASS');
     }
     const padPage = await browser.newPage({ locale:'he' });
     await padPage.addInitScript(() => {

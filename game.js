@@ -1,7 +1,7 @@
 import { controllerHelp, mountController } from './controller.js';
 import { chapters, languages, plaza, ui } from './content.js';
 import { atlasLabels, calendarLabels, kabbalahLabels, library, libraryLabels, visitLabels } from './library.js';
-import { alphabetNotes, lights, models, photo, studyNames, tour, tourPrompt, worldNote, worlds } from './scenes.js';
+import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
 import { makeWorld } from './world.js';
@@ -20,6 +20,12 @@ const timelineLabels = {
   en:['Put the 1665–1759 sources in order','Loading the documents…','The documents could not open. Reload the page and try again.'],
   he:['סדרו את המקורות מ־1665 עד 1759','המסמכים נטענים…','המסמכים לא נפתחו. רעננו את הדף ונסו שוב.'],
   az:['1665–1759-cu illərin mənbələrini sırala','Sənədlər yüklənir…','Sənədlər açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
+};
+const tourLoadLabels = {
+  tr:['Ziyaretçiye sergini anlat','Sergi yükleniyor…','Sergi açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en:['Tell a visitor your story','Loading your exhibition…','The exhibition could not open. Reload the page and try again.'],
+  he:['ספרו למבקר את סיפור התערוכה','התערוכה נטענת…','התערוכה לא נפתחה. רעננו את הדף ונסו שוב.'],
+  az:['Ziyarətçiyə sərgini anlat','Sərgi yüklənir…','Sərgi açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
 const lessonDecks = [
   () => import('./ancient-lessons.js').then(module => module.ancientLessons),
@@ -62,9 +68,6 @@ export async function start(initialLanguage) {
   const photoPanel = find('photo');
   const comparison = find('compare-view');
   const journal = find('journal');
-  const note = find('journal-text');
-  note.value = read('wall.journal') ?? '';
-  note.addEventListener('input', () => store('wall.journal', note.value));
   const selector = find('lang');
   const cataloguePanel = find('catalogue');
   const sequenceSurface = find('sequence');
@@ -87,6 +90,7 @@ export async function start(initialLanguage) {
   let sourceToken = 0;
   let evidenceToken = 0;
   let labToken = 0;
+  let tourLanguage;
   const letters = new Set();
 
   const episodeId = index => String(episodes[index].id ?? 'plaza');
@@ -149,7 +153,7 @@ export async function start(initialLanguage) {
     result.textContent = text[5];
     next.hidden = false;
     next.textContent = firstIncomplete() < 0 ? ui[language][13] : ui[language][3];
-    journal.hidden = active !== episodes.length - 1;
+    renderTour();
     save();
   }
 
@@ -168,10 +172,7 @@ export async function start(initialLanguage) {
     const visit = find('visit-button');
     visit.textContent = visitLabels[language][0];
     visit.hidden = active !== 0 && active !== episodes.length - 1;
-    journal.querySelector('label').textContent = libraryLabels[language][3];
-    journal.querySelector('p:last-child').textContent = libraryLabels[language][4];
-    if (active === episodes.length - 1) renderTour();
-    journal.hidden = !completed || active !== episodes.length - 1;
+    renderTour();
     find('inspect').textContent = labels[1];
     controls.querySelector('[data-move="-1"]').setAttribute('aria-label', labels[6]);
     controls.querySelector('[data-move="1"]').setAttribute('aria-label', labels[7]);
@@ -522,33 +523,29 @@ export async function start(initialLanguage) {
     }
   });
 
-  function renderTour() {
-    const index = locale();
-    find('tour-prompt').textContent = tourPrompt[index];
-    find('tour-stops').replaceChildren(...tour.map((stop, stopIndex) => {
-      const section = document.createElement('div');
-      const label = document.createElement('label');
-      const select = document.createElement('select');
-      const storageKey = 'wall.tour.' + stopIndex;
-      for (const [id, names] of stop.options) select.add(new Option(names[index], id));
-      const saved = read(storageKey);
-      if (stop.options.some(option => option[0] === saved)) select.value = saved;
-      label.append(stop.label[index], select);
-      const link = document.createElement('a');
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.textContent = ui[language][5];
-      function updateLink() {
-        link.href = stop.options.find(option => option[0] === select.value)[2];
-      }
-      updateLink();
-      select.addEventListener('change', () => {
-        store(storageKey, select.value);
-        updateLink();
-      });
-      section.append(label, link);
-      return section;
-    }));
+  async function renderTour() {
+    journal.hidden = active !== episodes.length - 1 || !progress.completed.has(episodeId(active));
+    if (journal.hidden || tourLanguage === language) return;
+    const current = language;
+    const labels = tourLoadLabels[current];
+    const status = find('tour-load');
+    const builder = find('tour-builder');
+    tourLanguage = current;
+    find('tour-title').textContent = labels[0];
+    builder.hidden = true;
+    status.hidden = false;
+    status.textContent = labels[1];
+    try {
+      const { mountTour } = await import('./tour.js');
+      if (tourLanguage !== current) return;
+      mountTour(journal, find('tour-presentation'), current, languages.indexOf(current), {read,store});
+      status.hidden = true;
+      builder.hidden = false;
+    } catch {
+      if (tourLanguage !== current) return;
+      tourLanguage = undefined;
+      status.textContent = labels[2];
+    }
   }
 
   function openSource() {

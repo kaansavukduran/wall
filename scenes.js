@@ -155,38 +155,6 @@ export const photo = {
   historyUrl:'https://whc.unesco.org/document/8721',
 };
 
-export const tour = [
-  {
-    label:['Taş ve mekân','Stone and place','אבן ומקום','Daş və məkan'],
-    options:[
-      ['wall',['Wilson Kemeri kazısı','Wilson’s Arch excavation','חפירת קשת וילסון','Uilson tağı qazıntısı'],'https://hadashot.iaa.org.il/Report_Detail_Eng.aspx?id=25662'],
-      ['photo',['Eski meydan fotoğrafı','A historic photograph','תצלום היסטורי','Tarixi foto'],'https://www.loc.gov/pictures/item/2019704965/'],
-    ],
-  },
-  {
-    label:['Bir metin','A text','טקסט','Bir mətn'],
-    options:[
-      ['talmud',['Şimon’un mağara anlatısı','Shimon’s cave narrative','סיפור המערה של שמעון','Şimonun mağara rəvayəti'],'https://www.sefaria.org/Shabbat.33b'],
-      ['zohar',['Zohar’ın tarihsel dolaşımı','The Zohar’s historical circulation','תפוצתו ההיסטורית של הזוהר','Zoharın tarixi yayılması'],'https://www.sup.org/books/pages/4810/Front_Matter.pdf'],
-    ],
-  },
-  {
-    label:['Bir kayıt veya tanıklık','A record or testimony','תיעוד או עדות','Qeyd və ya şahidlik'],
-    options:[
-      ['geniza',['Geniza mektubu','Geniza letter','מכתב מן הגניזה','Geniza məktubu'],'https://geniza.princeton.edu/en/documents/19917/'],
-      ['quarter',['Mağribi Mahallesi arşivi','Maghrebi Quarter archive','ארכיון שכונת המוגרבים','Məğrib məhəlləsinin arxivi'],'https://archives.openjerusalem.org/index.php/mughrabi-quarter'],
-    ],
-  },
-];
-
-export const tourPrompt = [
-  'Bu üç durağı bir ziyaretçiye anlat. Her kaynak neyi gösteriyor? Hangi soru açık kalıyor?',
-  'Take a visitor to these three stops. What does each source show? What question remains open?',
-  'הדריכו מבקר בשלוש התחנות. מה מראה כל מקור? איזו שאלה נשארת פתוחה?',
-  'Ziyarətçini bu üç dayanacağa apar. Hər mənbə nəyi göstərir? Hansı sual açıq qalır?',
-];
-
-
 export const lights = {
   title:['Hanuka’da kandiller','Hanukkah lights','נרות חנוכה','Xanuka işıqları'],
   day:['Gece','Night','לילה','Gecə'],

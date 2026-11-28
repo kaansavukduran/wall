@@ -1,6 +1,6 @@
 # WALL
 
-A four-language 2D pixel-art learning game about the Western Wall, Jewish history and Jewish thought. The preview has a playable route and source exercises across all 24 chapters. Explore Wall visits and prayer in the prologue, then open the study room for the Hebrew calendar, the community atlas, and the Kabbalah workshop.
+A four-language 2D pixel-art learning game about the Western Wall, Jewish history and Jewish thought. Explore Wall visits and prayer in the prologue, follow the 24-chapter route, and build your own three-source exhibition at the end. The study room includes the Hebrew calendar, community atlas, and Kabbalah workshop.
 
 ## Play locally
 
