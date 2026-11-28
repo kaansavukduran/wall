@@ -165,6 +165,49 @@ export async function makeWorld(canvas, reducedMotion) {
       }
     }
   }
+
+  function drawPilgrimage(context, stage, stone, mortar) {
+    if (stage === 'pilgrim-gathering') {
+      for (const [x, y, width] of [[122,113,62],[188,99,80],[362,110,71]]) {
+        rect(context, mortar, x, y - 5, width + 4, 7);
+        rect(context, stone, x + 2, y + 2, width, 196 - y);
+        rect(context, '#644b42', x + 19, y + 35, 13, 161 - y);
+      }
+    } else if (stage === 'pilgrim-arrival') {
+      rect(context, mortar, 125, 92, 317, 106);
+      for (let row = 0; row < 5; row++) {
+        for (let x = 128 + row % 2 * 16; x < 429; x += 31) {
+          rect(context, stone, x, 96 + row * 20, Math.min(27,439 - x), 16);
+        }
+      }
+      rect(context, '#624d45', 348, 138, 51, 60);
+      rect(context, '#624d45', 355, 128, 37, 12);
+      rect(context, '#9c7354', 160, 160, 91, 6);
+      rect(context, '#65483f', 169, 166, 5, 26);
+      rect(context, '#65483f', 233, 166, 5, 26);
+    } else {
+      rect(context, mortar, 191, 108, 252, 90);
+      rect(context, stone, 185, 106, 264, 9);
+      for (const x of [205,233,385,413]) rect(context, '#e0c594', x, 116, 9, 72);
+      rect(context, '#645049', 286, 124, 61, 57);
+      for (let step = 0; step < 3; step++) {
+        rect(context, stone, 275 - step * 10, 181 + step * 6, 84 + step * 20, 5);
+      }
+    }
+    const x = stage === 'pilgrim-court' ? 257 : 300;
+    rect(context, '#665046', x + 8, 136, 17, 7);
+    rect(context, '#c49c78', x + 11, 143, 12, 9);
+    rect(context, '#627077', x + 6, 152, 21, 30);
+    rect(context, '#50473e', x + 7, 182, 6, 15);
+    rect(context, '#50473e', x + 20, 182, 6, 15);
+    rect(context, '#c49c78', x + 23, 157, 10, 5);
+    rect(context, '#b88558', x + 27, 155, 23, 13);
+    rect(context, '#e2ba7d', x + 28, 152, 21, 5);
+    rect(context, '#8c654b', x + 30, 159, 19, 2);
+    rect(context, '#80556a', x + 31, 148, 6, 5);
+    rect(context, '#857d4c', x + 39, 148, 6, 5);
+  }
+
   function drawSetting(background, index, stone, mortar, layer) {
     if (index === 1) {
       rect(background, '#493840', 124, 69, 356, 132);
@@ -312,6 +355,10 @@ export async function makeWorld(canvas, reducedMotion) {
       return;
     }
     if (index === 7) {
+      if (layer.startsWith('pilgrim-')) {
+        drawPilgrimage(background, layer, stone, mortar);
+        return;
+      }
       rect(background, '#50404a', 118, 65, 362, 134);
       rect(background, '#88715d', 123, 70, 357, 124);
       rect(background, '#5c4b45', 165, 154, 287, 29);
