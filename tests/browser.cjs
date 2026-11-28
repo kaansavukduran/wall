@@ -918,7 +918,7 @@ async function main() {
       assert.equal(await visitorExercise.locator('#tour-companion a').getAttribute('href'),'https://www.palquest.org/en/node/21938');
       assert.ok(await visitorExercise.locator('#tour-companion-title').evaluate(el=>el===document.activeElement));
       await page.locator('.tour-personal-note').scrollIntoViewIfNeeded();
-      assert.ok(await page.locator('#tour-presentation button').evaluate(button => {
+      assert.ok(await page.locator('#tour-presentation .dialog-heading button').evaluate(button => {
         const rect = button.getBoundingClientRect();
         return rect.top >= 0 && rect.bottom <= window.innerHeight;
       }));
