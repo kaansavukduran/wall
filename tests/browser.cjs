@@ -251,7 +251,20 @@ async function main() {
             });
             assert.equal(separation.position,'static');
             assert.ok(separation.gap >= -1, 'The era label overlaps the scenery by ' + -separation.gap + 'px');
-            assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+            const overflow = await page.evaluate(() => {
+              const {scrollWidth,clientWidth} = document.documentElement;
+              if (scrollWidth <= window.innerWidth) return null;
+              const elements = [...document.querySelectorAll('#game *')].map(element => {
+                const box = element.getBoundingClientRect();
+                return {
+                  name:element.id || element.getAttribute('class') || element.tagName,
+                  width:Math.round(box.width), edge:Math.round(box.right + window.scrollX),
+                  inner:element.clientWidth, scroll:element.scrollWidth,
+                };
+              }).filter(item => item.width && (item.edge > clientWidth || item.scroll > item.inner + 2));
+              return {viewport:window.innerWidth,clientWidth,scrollWidth,elements:elements.slice(0,18)};
+            });
+            assert.equal(overflow,null,JSON.stringify(overflow));
             await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
           }
         }
