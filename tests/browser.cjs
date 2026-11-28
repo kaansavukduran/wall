@@ -17,6 +17,7 @@ async function main() {
   const { modernLessons } = await import('../modern-lessons.js');
   const { feynmanCases } = await import('../kabbalah-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
+  const { languageLessons } = await import('../language-lessons.js');
   const { messianicLessons } = await import('../messianic-lessons.js');
   const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
   const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js', 'modern-lessons.js'];
@@ -405,6 +406,30 @@ async function main() {
       assert.match(await page.locator('.kabbalah-sources a').last().getAttribute('href'), /cris.bgu.ac.il/);
       await page.selectOption('#kabbalah-lesson', 'rabash-purpose-of-society');
       assert.equal(await page.locator('#kabbalah-draft').inputValue(), 'WALL rabash-group-application');
+      assert.equal(loadedLessons.has('language-lessons.js'), false);
+      const languageRequest = page.waitForResponse(response => response.url().endsWith('/language-lessons.js'));
+      await page.click('#language-study summary');
+      assert.ok((await languageRequest).ok());
+      await page.selectOption('#language-card', 'lang-malka');
+      const aramaic = page.locator('.language-word bdi[dir="rtl"]');
+      assert.equal(await aramaic.getAttribute('lang'), 'arc');
+      assert.equal(await aramaic.innerText(), 'מַלְכָּא');
+      await page.click('.language-pointing');
+      assert.equal(await aramaic.innerText(), 'מלכא');
+      await page.click('.language-pointing');
+      assert.equal(await aramaic.innerText(), 'מַלְכָּא');
+      await page.click('.language-sources summary');
+      assert.match(await page.locator('.language-sources a').first().getAttribute('href'), /Daniel\.2\.4/);
+      await page.click('.language-exercise summary');
+      for (const sample of languageLessons.exercises) {
+        await page.selectOption('#language-example', sample.id);
+        await page.click('[data-language-choice="' + (sample.correct + 1) % sample.options.length + '"]');
+        const message = page.locator('.language-exercise [role="status"]');
+        const text = sample.feedback[['tr','en','he','az'].indexOf(locale)];
+        assert.notEqual(await message.innerText(), text);
+        await page.click('[data-language-choice="' + sample.correct + '"]');
+        assert.equal(await message.innerText(), text);
+      }
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
       await page.keyboard.press('Escape');

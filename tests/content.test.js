@@ -13,6 +13,7 @@ import { earlyModernLessons } from '../early-modern-lessons.js';
 import { gematriaValues, sefirot } from '../hebrew-labs.js';
 import { feynmanCases, kabbalahLessons } from '../kabbalah-lessons.js';
 import { kotelLessons, kotelScenarios } from '../kotel-lessons.js';
+import { languageLessons } from '../language-lessons.js';
 import { library, libraryLabels } from '../library.js';
 import { medievalLessons } from '../medieval-lessons.js';
 import { messianicLessons } from '../messianic-lessons.js';
@@ -76,7 +77,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 228);
+  assert.equal(entries.length, 242);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -201,6 +202,31 @@ test('all six exhibition sources have a supported claim and open question in the
       assert.match(values[2], /\p{Script=Hebrew}/u);
       for (const slot of [0,1,3]) assert.doesNotMatch(values[slot], /\p{Script=Hebrew}/u);
     }
+  }
+});
+
+test('language workshop indexes original spellings and all four localized explanations', () => {
+  const {cards,exercises} = languageLessons;
+  assert.equal(cards.length, 13);
+  assert.equal(exercises.length, 3);
+  assert.equal(new Set(cards.map(card => card.id)).size, cards.length);
+  const urls = new Set(entries.map(entry => entry.url));
+  function scriptRatio(text) {
+    const letters = text.match(/\p{L}/gu) ?? [];
+    return letters.filter(letter => /\p{Script=Hebrew}/u.test(letter)).length / Math.max(1, letters.length);
+  }
+  for (const lesson of [...cards,...exercises]) {
+    for (const source of [lesson.source,lesson.relatedSource].filter(Boolean)) assert.ok(urls.has(source.url));
+    const fields = lesson.term ? [lesson.label,lesson.language,lesson.evidence,lesson.note]
+      : [lesson.prompt,lesson.feedback,...lesson.options];
+    for (const values of fields) {
+      assert.equal(values.length, languages.length);
+      assert.ok(values.every(value => value.trim()));
+      assert.ok(scriptRatio(values[2]) > .6, values[2]);
+      for (const slot of [0,1,3]) assert.ok(scriptRatio(values[slot]) < .4, values[slot]);
+    }
+    if (lesson.term) assert.match(lesson.term, /\p{Script=Hebrew}/u);
+    else assert.ok(lesson.options[lesson.correct]);
   }
 });
 

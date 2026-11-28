@@ -85,3 +85,10 @@ export const visitLabels = {
   he: ['תפילה וביקור בכותל המערבי', 'סדנת הביקור נטענת…', 'הסדנה לא נפתחה. רעננו את הדף ונסו שוב.'],
   az: ['Qərb Divarında dua və ziyarət', 'Ziyarət emalatxanası yüklənir…', 'Emalatxana açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
+
+export const languageStudyLabels = {
+  tr: ['İbranice ve Aramice okuma', 'Dil atölyesi yükleniyor…', 'Atölye açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en: ['Read Hebrew and Aramaic', 'Loading the language workshop…', 'The workshop could not open. Reload the page and try again.'],
+  he: ['קריאה בעברית ובארמית', 'סדנת השפה נטענת…', 'הסדנה לא נפתחה. רעננו את הדף ונסו שוב.'],
+  az: ['İvrit və arami dilində oxu', 'Dil emalatxanası yüklənir…', 'Emalatxana açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
+};

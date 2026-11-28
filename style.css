@@ -99,6 +99,19 @@ dialog a{overflow-wrap:anywhere}
 #tour-note-help,#tour-question-preview{color:var(--muted)}
 #tour-presentation ol{padding-inline-start:1.4rem}
 .tour-personal-note{white-space:pre-wrap}
+.language-reading{padding:.65rem;background:#1b242c}
+.language-reading h3,.language-reading p{margin-block:0 .55rem}
+.language-word{margin-block-end:.65rem;padding:.55rem;background:#263741}
+.language-word bdi{display:block}
+.language-word bdi[dir=rtl]{font-size:1.25em;color:var(--accent)}
+.language-word small{color:var(--muted)}
+.language-pointing{margin-block-end:.65rem}
+.language-pointing[aria-pressed=true]{background:#47351e;border-color:var(--accent)}
+.language-sources ul,.language-exercise-sources{padding-inline-start:1.4rem}
+.language-choices{display:grid;gap:.35rem}
+.language-choices button{text-align:start;overflow-wrap:anywhere}
+.language-choices button[aria-pressed=true]{background:#47351e;border-color:var(--accent)}
+.language-exercise [role=status]{color:var(--accent)}
 #journal textarea,.kabbalah-transfer textarea{display:block;font:inherit;color:inherit;background:#171d24;border:1px solid var(--edge);border-radius:.35rem;padding:.55rem;inline-size:100%;resize:vertical}
 .kabbalah-reading{padding:.65rem;background:#1b242c}
 .kabbalah-reading :is(h3,p){margin-block:0 .5rem}

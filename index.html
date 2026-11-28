@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.5.5</small>
+  <small dir="ltr">v0.5.6</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -110,7 +110,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.5</span></footer>
+  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.6</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -146,6 +146,7 @@
   <details id="atlas" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <details id="kabbalah" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <details id="visit" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
+  <details id="language-study" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <div id="library-readings" role="group"></div>
 </dialog>
 <template id="calendar-template">
@@ -169,6 +170,24 @@
     <select id="calendar-answer" aria-describedby="calendar-clue"></select>
     <button type="button"></button>
     <p role="status"></p>
+  </details>
+</template>
+<template id="language-study-template">
+  <p class="language-study-intro"></p>
+  <label for="language-card"></label><select id="language-card"></select>
+  <article class="language-reading">
+    <h3></h3>
+    <div class="language-word"><small></small><bdi dir="rtl"></bdi><bdi dir="ltr"></bdi></div>
+    <button class="language-pointing" type="button" aria-pressed="true" hidden></button>
+    <p></p><p></p>
+    <details class="language-sources"><summary></summary><ul></ul></details>
+  </article>
+  <details class="language-exercise">
+    <summary></summary>
+    <label for="language-example"></label><select id="language-example"></select>
+    <p id="language-question"></p>
+    <div class="language-choices" role="group" aria-labelledby="language-question"></div>
+    <p role="status"></p><ul class="language-exercise-sources" hidden></ul>
   </details>
 </template>
 <template id="messianic-template">
