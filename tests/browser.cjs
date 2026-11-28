@@ -876,7 +876,7 @@ async function main() {
       const calendarRequest = page.waitForResponse(response => response.url().endsWith('/calendar-lessons.js'));
       if (width === 320) await page.tap('#calendar summary');
       else await page.click('#calendar summary');
-      assert.ok((await calendarRequest).ok());
+      assert.ok([200,304].includes((await calendarRequest).status()));
       await page.locator('[data-event="simchat-torah"]').waitFor();
       await page.click('[data-event="simchat-torah"]');
       assert.match(await page.locator('[data-event="simchat-torah"]').innerText(), /^22/);
@@ -1041,7 +1041,7 @@ async function main() {
       assert.equal(loadedLessons.has('kabbalah-advanced-lessons.js'), false);
       const workshopRequest = page.waitForResponse(response => response.url().endsWith('/kabbalah-lessons.js'));
       await page.click('#kabbalah summary');
-      assert.ok((await workshopRequest).ok());
+      assert.ok([200,304].includes((await workshopRequest).status()));
       await page.locator('#kabbalah-lesson').waitFor();
       assert.equal(await page.locator('#kabbalah-lesson option').count(), 21);
       assert.equal(await page.locator('#kabbalah-lesson optgroup').count(), 2);
