@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified web release: v0.7.5, 3134e3bad2e1e6ce59193e8eb0fbe84b59ec5bbf.
-Pages: 46126258841, exact public build and a live browser visit to Ashlag’s screen and returning light. The exact Chromium, Firefox and WebKit matrix passed 46126017725. 337 catalogue records.
-Packages: v0.7.5 is available; installed package run 46126261984 follows. v0.7.4 six files and installed checks passed 46125836359. Actions secrets still return HTTP 403, so Android uses preview signing. Physical device/controller testing and independent editorial review remain open.
-Candidate v0.7.6: the atlas has 25 entries and retains search, category and selection across language changes. Ancient readings cover Pharisees, Sadducees, the Qumran–Essenes question and the distinct Samaritan tradition. Two additional readings connect Mitnagdim and Lithuanian yeshivas, and Salanter’s Musar practice, to primary texts. 347 catalogue records.
-Next: verify and publish v0.7.6, then build the Kabbalah reading layers for soul, intention, and reception.
+Verified web release: v0.7.6, 13aa7db6300ef71f014030591a2095372bacd28c.
+Pages: 46127008418 and exact public build manifest. The exact Chromium, Firefox and WebKit matrix passed 46126751200. The atlas has 25 entries, including ancient groups, the distinct Samaritan tradition, Mitnagdim and Musar. Atlas filters and selected reading survive a language change. 347 catalogue records.
+Packages: v0.7.6 run 46127010912 is in progress. v0.7.5 six files and all installed checks passed 46126261984. Actions secrets return HTTP 403, so Android uses preview signing. Physical device/controller testing and independent editorial review remain open.
+Candidate v0.7.7: the Kabbalah workshop has 20 readings, adding five comparisons with their own application exercise and saved explanation. New readings cover prayer intention and devekut, the five soul names, the gilgul disagreement, Pico and Hermetic correspondences. 361 catalogue records. All 28 content/build tests, the single-file build and the four full local Chromium routes passed.
+Next: finish the exact hosted matrix and publish v0.7.7, then deepen the Azerbaijani Jewish archive and verify expanded Android controls in a released APK.

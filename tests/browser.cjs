@@ -695,7 +695,7 @@ async function main() {
       await page.click('#kabbalah summary');
       assert.ok((await workshopRequest).ok());
       await page.locator('#kabbalah-lesson').waitFor();
-      assert.equal(await page.locator('#kabbalah-lesson option').count(), 15);
+      assert.equal(await page.locator('#kabbalah-lesson option').count(), 20);
       assert.equal(await page.locator('#kabbalah-lesson optgroup').count(), 2);
       assert.ok(loadedLessons.has('kabbalah-advanced-lessons.js'));
       await page.click('.kabbalah-exercise summary');
@@ -712,6 +712,12 @@ async function main() {
       await page.click('.kabbalah-sources summary');
       assert.equal(await page.locator('.kabbalah-sources li').count(), 2);
       assert.match(await page.locator('.kabbalah-sources a').last().getAttribute('href'), /cris.bgu.ac.il/);
+      await page.selectOption('#kabbalah-lesson', 'prayer-intention-cleaving');
+      assert.equal(await page.locator('.kabbalah-sources li').count(), 5);
+      assert.match(await page.locator('.kabbalah-sources a').nth(1).getAttribute('href'), /Mishnah_Berakhot\.5\.1/);
+      await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+      assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
+      await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
       await page.selectOption('#kabbalah-lesson', 'rabash-purpose-of-society');
       assert.equal(await page.locator('#kabbalah-draft').inputValue(), 'WALL rabash-group-application');
       await page.selectOption('#kabbalah-lesson', 'nefesh-hachaim-gate3');
