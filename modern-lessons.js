@@ -206,7 +206,7 @@ export const modernLessons = {
           "Eski Şehir 1948 savaşı sonrasında Ürdün yönetimindeydi. VIII. madde, kutsal yerlere serbest erişimi kurulacak komitenin çözümleyeceği konulara dahil etti. Yahudi ibadetçilerin Kotel’e erişimi 1967’ye dek sağlanmadı.",
           "The Old City came under Jordanian control after the 1948 war. Article VIII tasked a committee with arrangements for free access to holy places. Jewish worshippers lacked access to the Kotel until 1967.",
           "העיר העתיקה נשארה בשליטה ירדנית אחרי מלחמת 1948. סעיף 8 כלל גישה חופשית למקומות קדושים בין העניינים שהוועדה נדרשה להסדיר. מתפללים יהודים לא יכלו לגשת לכותל עד 1967.",
-          "İçərişəhər 1948-ci il müharibəsindən sonra İordaniyanın idarəsində qaldı. VIII maddə müqəddəs yerlərə sərbəst girişi komitənin həll edəcəyi məsələlərə daxil etdi. Yəhudi ibadətçilərin Kotelə girişi 1967-ci ilə qədər təmin edilmədi."
+          "Qüdsün Köhnə Şəhəri 1948-ci il müharibəsindən sonra İordaniyanın idarəsində qaldı. VIII maddə müqəddəs yerlərə sərbəst girişi komitənin həll edəcəyi məsələlərə daxil etdi. Yəhudi ibadətçilərin Kotelə girişi 1967-ci ilə qədər təmin edilmədi."
         ],
         "url": "https://www.un.org/unispal/document/auto-insert-189953/"
       },
