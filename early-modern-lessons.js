@@ -233,6 +233,27 @@ export const earlyModernLessons = {
       },
       {
         "title": [
+          "Montefiore’un tente girişimi",
+          "Montefiore’s awning proposal",
+          "ניסיון הקמת הסוכך של מונטיפיורי",
+          "Montefiorenin talvar təşəbbüsü"
+        ],
+        "date": [
+          "1866’daki girişim, 1875’te anlatıldı",
+          "1866 proposal, recounted in 1875",
+          "יוזמה מ־1866 שתוארה ב־1875",
+          "1866-cı il təşəbbüsü, 1875-ci ildə qələmə alınıb"
+        ],
+        "description": [
+          "Moses Montefiore, 1875 tarihli gezi anlatısında 1866’da Batı Duvarı önüne bir tente kurdurmak istediğini yazar. İşin yapılması için anlaşmıştı. Bir engel çıkınca girişim durdu. Anlattığı iş, dua edenlerin durduğu alana bir örtü kurmaktı.",
+          "In his 1875 travel account, Moses Montefiore recalls trying to install an awning in front of the Western Wall in 1866. He had arranged for the work, but an obstacle halted it. The project he describes was a cover over the space used by worshippers.",
+          "בתיאור מסעו מ־1875 מספר משה מונטיפיורי שב־1866 ניסה להציב סוכך לפני הכותל המערבי. הוא כבר סיכם על ביצוע העבודה, אך מכשול עצר אותה. היוזמה שמתוארת שם הייתה להציב כיסוי מעל המקום שבו עמדו המתפללים.",
+          "Moses Montefiore 1875-ci il səfər yazısında 1866-cı ildə Qərb divarının önündə talvar qurmaq istədiyini bildirir. İşin görülməsi barədə razılığa gəlmişdi. Bir maneə yarananda təşəbbüs dayandı. Yazıda dua edənlərin dayandığı yerə örtük qurmaqdan söhbət gedir."
+        ],
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/94/An_open_letter_addressed_to_Sir_Moses_Montefiore,_bart._on_the_day_of_his_arrival_in_the_holy_city_of_Jerusalem._Sunday,_22_Tamooz,_5635,_A.M.-July_25,_1875_(IA_openletteraddres00auer).pdf#page=138"
+      },
+      {
+        "title": [
           "1920’deki üst sıra onarımı",
           "Upper-course repairs in 1920",
           "תיקון הנדבכים העליונים ב־1920",

@@ -431,7 +431,12 @@ async function main() {
           assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), initial);
           if (episode.id === 19) {
             await page.click('[data-layer="kotel-courses"]');
-            await page.click('[data-evidence="3"]');
+            const awning = page.locator('[data-evidence="3"]');
+            if (width === 320) await awning.tap();
+            else await awning.press('Enter');
+            assert.match(await page.locator('#evidence-date').textContent(), /1866.*1875/);
+            assert.match(await page.locator('#evidence-source').getAttribute('href'), /openletteraddres00auer\)\.pdf#page=138$/);
+            await page.click('[data-evidence="4"]');
             assert.match(await page.locator('#evidence-date').textContent(), /1920/);
           }
         }
