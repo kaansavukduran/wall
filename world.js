@@ -41,7 +41,7 @@ export async function makeWorld(canvas, reducedMotion) {
     }
     const cutaway = index === 6 || index === 8;
     const cityWall = index === 19 && layer === 'city-walls';
-    const site = index === 0 || [13, 14, 21, 23, 24].includes(index) || (index === 19 && !cityWall);
+    const site = index === 0 || [13, 14, 23, 24].includes(index) || (index === 19 && !cityWall);
     const wallStart = 166;
     if (cutaway) {
       drawPlatformSection(background, index === 6 || layer === 'before', layer);
@@ -297,6 +297,44 @@ export async function makeWorld(canvas, reducedMotion) {
       }
       return;
     }
+    if (index === 7) {
+      rect(background, '#50404a', 118, 65, 362, 134);
+      rect(background, '#88715d', 123, 70, 357, 124);
+      rect(background, '#5c4b45', 165, 154, 287, 29);
+      rect(background, '#a88262', 160, 148, 296, 18);
+      rect(background, '#68514a', 169, 181, 12, 17);
+      rect(background, '#68514a', 428, 181, 12, 17);
+      rect(background, '#554649', 158, 88, 67, 52);
+      rect(background, '#a48b68', 165, 94, 53, 40);
+      rect(background, '#6c5648', 165, 122, 53, 3);
+      rect(background, '#cdab81', 232, 126, 45, 24);
+
+      let columns = 0;
+      if (layer === 'scroll-isaiah') columns = 5;
+      else if (layer === 'scroll-rule') columns = 3;
+      else if (layer === 'scroll-pesher') columns = 2;
+      if (columns === 0) {
+        rect(background, '#ddba8a', 281, 141, 90, 13);
+        rect(background, '#84604d', 286, 144, 73, 2);
+        return;
+      }
+
+      const right = 429;
+      const left = right - columns * 39 - 9;
+      rect(background, '#745745', left, 98, right - left, 55);
+      rect(background, '#ecd19a', left + 4, 96, right - left - 8, 56);
+      for (let column = 0; column < columns; column++) {
+        for (let row = 0; row < 10; row++) {
+          const x = left + 9 + column * 39 + row % 3 * 2;
+          const y = 102 + row * 4;
+          const quotation = layer === 'scroll-pesher' && row < 4;
+          const ink = quotation ? '#924136' : '#68604b';
+          rect(background, ink, x, y, 28 - (row * 3 + column * 5) % 8, 1);
+          if (layer === 'scroll-rule' && row % 3 === 0) rect(background, '#935849', x + 27, y, 3, 2);
+        }
+      }
+      return;
+    }
     if (index === 12) {
       if (layer === 'meron-visit') {
         for (const [x,y,w] of [[132,108,110],[221,86,135],[336,122,144]]) {
@@ -496,6 +534,44 @@ export async function makeWorld(canvas, reducedMotion) {
       rect(background, '#d2b584', 272, 117, 23, 7);
       return;
     }
+    if (index === 21) {
+      rect(background, '#62504a', 134, 71, 346, 128);
+      rect(background, '#938774', 138, 75, 342, 118);
+      for (let row = 0; row < 5; row++) {
+        const y = 81 + row * 22;
+        rect(background, '#b19b81', 151 + row % 2 * 12, y, 90 - row % 2 * 8, 17);
+        rect(background, '#d9ba8f', 154 + row % 2 * 12, y + 2, 80 - row % 2 * 8, 2);
+      }
+      rect(background, '#c5ae8b', 245, 75, 59, 118);
+      for (let y = 80; y < 195; y += 11) rect(background, '#a58b6f', 246, y, 57, 1);
+      rect(background, '#9b7e61', 305, 75, 19, 118);
+      rect(background, '#d7b387', 306, 75, 4, 118);
+      rect(background, '#877f65', 325, 76, 153, 117);
+      rect(background, '#ae9779', 328, 82, 146, 4);
+      rect(background, '#67534b', 291, 184, 19, 9);
+      if (layer === 'commission-property') {
+        rect(background, '#f5cb7e', 142, 77, 333, 3);
+        rect(background, '#f5cb7e', 142, 190, 333, 3);
+        rect(background, '#f5cb7e', 142, 77, 3, 116);
+        rect(background, '#f5cb7e', 472, 77, 3, 116);
+        rect(background, '#f5cb7e', 307, 77, 5, 116);
+      } else if (layer === 'commission-access') {
+        for (let y = 180; y >= 99; y -= 9) rect(background, '#615044', 280, y, 5, 5);
+        rect(background, '#615044', 282, 97, 23, 5);
+        rect(background, '#ffe1ac', 300, 96, 10, 8);
+      } else if (layer === 'commission-conditions') {
+        rect(background, '#51443c', 275, 129, 21, 16);
+        rect(background, '#f3d5a3', 277, 130, 8, 13);
+        rect(background, '#f3d5a3', 287, 130, 7, 13);
+        for (const y of [88,104,151,168]) rect(background, '#6e584c', 253, y, 6, 6);
+      } else if (layer === 'mandate-screen') {
+        rect(background, '#724e4a', 264, 133, 40, 7);
+        rect(background, '#ad765c', 268, 130, 31, 8);
+        rect(background, '#6f4744', 269, 128, 4, 17);
+        rect(background, '#6f4744', 296, 128, 4, 17);
+      }
+      return;
+    }
     if (index === 22) {
       rect(background, '#35404a', 116, 82, 364, 117);
       rect(background, '#24353c', 127, 92, 342, 102);
@@ -522,13 +598,7 @@ export async function makeWorld(canvas, reducedMotion) {
     rect(background, '#59453f', 272, 184, 5, 15);
     rect(background, '#59453f', 370, 184, 5, 15);
     rect(background, '#eed8a6', 301, 169, 32, 5);
-    if (index === 7) {
-      for (const [x, width] of [[270,21],[307,25],[348,28]]) {
-        rect(background, '#e9c594', x, 165, width, 9);
-        rect(background, '#724b3f', x + 3, 168, width - 7, 1);
-        rect(background, '#724b3f', x + 5, 170, width - 9, 1);
-      }
-    }
+
   }
 
   function draw(frame) {

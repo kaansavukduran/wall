@@ -52,10 +52,12 @@ export const sequences = [
     ['Sabatay Sevi İslam’a geçti','Sabbatai Zevi converted to Islam','שבתי צבי התאסלם','Sabatay Sevi İslamı qəbul etdi'],
     ['Mesih beklentisi ve haber ağı','Messianic expectation and reports','ציפייה משיחית וידיעות','Məsih gözləntisi və xəbərlər'],
   ]),
-  make(21, ['Manda öncesi ve sırasında üç tarih','Three dates before and during the Mandate','שלושה תאריכים לפני המנדט ובמהלכו','Mandatdan əvvəl və mandat dövründə üç tarix'], [1,2,0], [
+  make(21, ['Mandaya giden yol ve Duvar','The Mandate and the Wall','המנדט והכותל','Mandata gedən yol və Divar'], [1,3,2,0,4], [
     ['Batı Duvarı Komisyonu raporu · 1930','Western Wall Commission report · 1930','דוח ועדת הכותל · 1930','Qərb Divarı Komissiyasının hesabatı · 1930'],
     ['Balfour Deklarasyonu · 1917','Balfour Declaration · 1917','הצהרת בלפור · 1917','Balfur Bəyannaməsi · 1917'],
     ['Kudüs, Hebron ve başka yerlerde şiddet · 1929','Violence in Jerusalem, Hebron and elsewhere · 1929','אלימות בירושלים, בחברון ובמקומות נוספים · 1929','Yerusəlimdə, Xevronda və başqa yerlərdə zorakılıq · 1929'],
+    ['Manda polisi paravanı kaldırdı · 1928','Mandate police removed the screen · 1928','משטרת המנדט הסירה את המחיצה · 1928','Mandat polisi arakəsməni götürdü · 1928'],
+    ['Manda yönetiminin yeni düzenlemesi · 1931','The Mandate administration’s new order · 1931','הצו החדש של שלטון המנדט · 1931','Mandat idarəsinin yeni qaydası · 1931'],
   ]),
 ];
 

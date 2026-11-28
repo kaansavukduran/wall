@@ -56,6 +56,26 @@ export const models = [
     ['temple',['Tapınak','Temple','בית המקדש','Məbəd'],
       ['Kutsal bina bu alanın üzerinde bulunuyordu.','The sacred building stood on this raised area.','המבנה הקדוש עמד על המשטח הזה.','Müqəddəs bina bu yüksəldilmiş sahədə yerləşirdi.']],
   ]),
+  scene(7, ['Kumran’da kâtip masası','A scribe’s desk at Qumran','שולחן כתיבה בקומראן','Qumranda katib masası'], [
+    ['scroll-isaiah',['Yeşaya nüshası · 1QIsaᵃ','Isaiah copy · 1QIsaᵃ','עותק ישעיהו · 1QIsaᵃ','Yeşaya nüsxəsi · 1QIsaᵃ'], [
+      'Uzun tomarın sütunlarını aç. Büyük Yeşaya Tomarı, Yeşaya kitabının neredeyse tamamını korur. Bu bir kutsal metin nüshasıdır. Çizim tomarın biçimini temsil eder.',
+      'Unroll the long scroll. The Great Isaiah Scroll preserves nearly the whole book of Isaiah. It is a copy of scripture. The drawing illustrates the format.',
+      'פרשו את המגילה הארוכה. מגילת ישעיהו הגדולה משמרת כמעט את כל ספר ישעיהו. זהו עותק של טקסט מקראי. האיור ממחיש את צורת המגילה.',
+      'Uzun tumarı aç. Böyük Yeşaya tumarı Yeşaya kitabının demək olar hamısını qoruyur. Bu, müqəddəs mətnin nüsxəsidir. Şəkil tumarın formasını təsvir edir.',
+    ],'https://dss.collections.imj.org.il/isaiah'],
+    ['scroll-rule',['Topluluk Kuralı · 1QS','Community Rule · 1QS','סרך היחד · 1QS','İcma qaydası · 1QS'], [
+      'Topluluğa kabul ve birlikte yaşama kurallarını gösteren tomarı aç. Metin, Yahad denen grubun nasıl düzenlenmesi gerektiğini anlatır. Yahad ile Essenilerin ilişkisi araştırma konusudur.',
+      'Open the scroll containing rules about joining and living together. It lays out how a group called the Yahad should be organized. The relationship between the Yahad and the Essenes remains a research question.',
+      'פתחו את המגילה ובה כללים לקבלה לקהילה ולחיים במשותף. היא מתארת איך קבוצה המכונה „יחד” אמורה להתנהל. הקשר בין היחד לאיסיים עודנו שאלה מחקרית.',
+      'İcmaya qoşulma və birgə yaşayış qaydalarını göstərən tumarı aç. Bu mətn Yahad adlı qrupun idarə qaydalarını təsvir edir. Yahad ilə essenilər arasındakı əlaqə araşdırma mövzusudur.',
+    ],'https://dss.collections.imj.org.il/community'],
+    ['scroll-pesher',['Habakkuk Yorumu · 1QpHab','Habakkuk Commentary · 1QpHab','פשר חבקוק · 1QpHab','Habakkuk şərhi · 1QpHab'], [
+      'İki renge bak. Önce Habakkuk’tan bir bölüm alıntılanır, ardından pesher denen yorum gelir. Yorum, eski sözleri yorumcunun yaşadığı çağa bağlar. Renkler okuma sırasını göstermek için eklendi.',
+      'Look at the two colors. A passage from Habakkuk comes first, then its interpretation, called pesher. The interpretation connects the older words to the interpreter’s own time. The colors mark the reading sequence in this illustration.',
+      'שימו לב לשני הצבעים. תחילה מובא קטע מחבקוק ואחריו פירוש הנקרא פשר. הפשר מחיל מילים קדומות על זמנו של המפרש. הצבעים מסמנים באיור את סדר הקריאה.',
+      'İki rəngə bax. Əvvəl Habakkukdan bir parça gətirilir, sonra pesher adlı şərh gəlir. Şərh qədim sözləri şərhçinin öz dövrü ilə əlaqələndirir. Rənglər şəkildə oxu ardıcıllığını göstərir.',
+    ],'https://dss.collections.imj.org.il/habakkuk'],
+  ]),
   scene(8, ['Yıkımdan önce ve sonra','Before and after the destruction','לפני החורבן ואחריו','Dağıntıdan əvvəl və sonra'], [
     ['before',['Yıkımdan önce','Before the destruction','לפני החורבן','Dağıntıdan əvvəl'],
       ['Basitleştirilmiş kesitte üst yapıyı ve platformu ayır.','Distinguish the building from the platform in the simplified view.','הבחינו בין המבנה למתחם בחתך המפושט.','Sadələşdirilmiş kəsikdə bina ilə platformanı ayır.']],
@@ -157,6 +177,32 @@ export const models = [
       ['Kanûnî devrindeki kitabe, Eski Şehir çevre surunun inşasını belgeler. Bu duvar şehri çevreler.','The inscription from Süleyman’s reign documents construction of the city wall that surrounds the Old City.','הכתובת מימי סולימאן מתעדת בנייה של חומת העיר המקיפה את העיר העתיקה.','Süleyman dövrünün kitabəsi İçərişəhəri əhatə edən şəhər divarının tikintisini sənədləşdirir.']],
     ['kotel-courses',['Batı Duvarı taş sıraları','Western Wall stone courses','נדבכי האבנים בכותל','Qərb Divarının daş sıraları'],
       ['İri alt taşları ve küçük üst taşları karşılaştır. Kazılar daha eski istinat yapısını gösterir. Üstte farklı dönemlerde eklenen ve onarılan sıralar var.','Compare the large lower blocks and smaller upper ones. Excavations document the older retaining structure. The upper courses include work from later periods.','השוו בין האבנים הגדולות למטה לקטנות למעלה. החפירות מתעדות את קיר התמך הקדום. הנדבכים העליונים כוללים עבודות מתקופות מאוחרות.','Aşağıdakı iri daşları yuxarıdakı kiçik daşlarla müqayisə et. Qazıntılar daha qədim istinad quruluşunu göstərir. Yuxarı sıralarda sonrakı dövrlərin işləri var.']],
+  ]),
+  scene(21, ['Manda döneminde dar geçit','The narrow passage under the Mandate','המעבר הצר בימי המנדט','Mandat dövründə dar keçid'], [
+    ['mandate-screen',['1928 · Paravan olayı','1928 · The screen incident','1928 · תקרית המחיצה','1928 · Arakəsmə hadisəsi'], [
+      'Yom Kipur arifesinde dua alanına bir paravan kondu. Vakıf yöneticisi şikâyet etti. Britanya Manda polisi paravanı 24 Eylül’de kaldırdı. Bu belge 1928 olayını kaydeder. Ağustos 1929 şiddetini Shaw Komisyonu ayrıca inceledi.',
+      'A screen was put up at the place of prayer on the eve of Yom Kippur. The waqf administrator complained and Mandate police removed the screen on 24 September. This is the 1928 incident. The Shaw Commission separately investigated the violence of August 1929.',
+      'בערב יום הכיפורים הוצבה מחיצה במקום התפילה. מנהל הווקף התלונן, ומשטרת המנדט הסירה את המחיצה ב־24 בספטמבר. זהו האירוע של 1928. ועדת שו חקרה בנפרד את האלימות באוגוסט 1929.',
+      'Yom Kipur ərəfəsində dua yerində arakəsmə qoyuldu. Vəqf idarəçisi şikayət etdi və mandat polisi arakəsməni sentyabrın 24-də götürdü. Bu, 1928-ci il hadisəsidir. Şou Komissiyası 1929-cu ilin avqust zorakılığını ayrıca araşdırdı.',
+    ],'https://www.un.org/unispal/document/auto-insert-193243/'],
+    ['commission-property',['1930 · Mülkiyet','1930 · Ownership','1930 · בעלות','1930 · Mülkiyyət'], [
+      '1930 Komisyonu, Batı Duvarı’nı vakıf statüsündeki Harem-i Şerif’in parçası saydı. Duvar, önündeki döşeli yol ve karşıdaki Mağribi Mahallesi üzerindeki mülkiyet haklarını Müslümanlara atfetti. Şema, dönemin mülkiyet kararını gösterir.',
+      'The 1930 Commission treated the Western Wall as part of the Haram al-Sharif waqf. It attributed ownership of the Wall, the paved passage and the adjoining Maghrebi Quarter to Muslims. The drawing shows the scope of that historical finding.',
+      'ועדת 1930 ראתה בכותל המערבי חלק מווקף אל־חרם א־שריף. היא ייחסה למוסלמים את הבעלות על הכותל, המעבר המרוצף והשכונה המוגרבית הסמוכה. התרשים מראה את תחולת ההכרעה ההיסטורית.',
+      '1930-cu il Komissiyası Qərb Divarını vəqf statuslu Hərəm əş-Şərifin bir hissəsi saydı. Divar, döşənmiş keçid və yaxın Məğribi məhəlləsi üzərində mülkiyyəti müsəlmanlara aid etdi. Sxem həmin tarixi qərarın əhatəsini göstərir.',
+    ],'https://unispal.un.org/pdfs/59A92104ED00DC468525625B00527FEA.pdf'],
+    ['commission-access',['1930 · Dua için erişim','1930 · Access for prayer','1930 · גישה לתפילה','1930 · Dua üçün giriş'], [
+      'Geçitteki işaretleri izle. Komisyon, Yahudilerin duvara ibadet için ulaşma hakkını tanıdı ve bitişik yapı işlerinin bu erişimi engellememesi gerektiğini belirtti. Çizgi, geçidi gösteren bir şemadır.',
+      'Follow the marks on the passage. The commission recognized Jewish access to the Wall for devotion and required adjacent construction to preserve that access. The line shows the passage schematically.',
+      'עקבו אחר הסימונים במעבר. הוועדה הכירה בזכות היהודים להגיע לכותל לתפילה וקבעה שעבודות בנייה סמוכות ישמרו על הגישה. הקו מציג את המעבר באופן סכמטי.',
+      'Keçiddəki işarələri izlə. Komissiya yəhudilərin dua üçün Divara giriş hüququnu tanıdı və bitişik tikinti işlərinin bu girişi qorumalı olduğunu bildirdi. Xətt keçidi şərti şəkildə göstərir.',
+    ],'https://unispal.un.org/pdfs/59A92104ED00DC468525625B00527FEA.pdf'],
+    ['commission-conditions',['1930 · Geçit kuralları','1930 · Rules for the passage','1930 · כללי השימוש במעבר','1930 · Keçid qaydaları'], [
+      'Rapor, Müslümanların geçitten olağan biçimde geçmesini korudu. İbadet eşyaları ve zamanları için koşullar koydu. Örneğin kişisel dua kitaplarına izin verirken paravanlara sınırlama getirdi. Bunlar Manda döneminin hükümleridir.',
+      'The report protected ordinary passage for Muslims and set conditions on worship objects and times. For example, it allowed personal prayer books and restricted screens. These were rules from the Mandate period.',
+      'הדוח הגן על זכות המעבר הרגילה של מוסלמים וקבע תנאים לחפצי תפילה ולמועדים. לדוגמה, הוא התיר סידורים אישיים והגביל הצבת מחיצות. אלה כללים מתקופת המנדט.',
+      'Hesabat müsəlmanların keçiddən adi qaydada istifadəsini qorudu, ibadət əşyaları və vaxtları üçün şərtlər qoydu. Məsələn, şəxsi dua kitablarına icazə verdi, arakəsmələri isə məhdudlaşdırdı. Bunlar mandat dövrünün qaydalarıdır.',
+    ],'https://unispal.un.org/pdfs/59A92104ED00DC468525625B00527FEA.pdf'],
   ]),
   scene(22, ['İki ayrı tarihsel arşiv','Two historical archives','שני ארכיונים היסטוריים','İki ayrı tarixi arxiv'], [
     ['holocaust',['Holokost kayıtları','Holocaust records','תיעוד השואה','Holokost qeydləri'],

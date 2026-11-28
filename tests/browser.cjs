@@ -167,7 +167,7 @@ async function main() {
           await page.click('[data-layer="sanctuary"]');
           assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), before);
         }
-        if ([1,3,4,12,16,18].includes(episode.id)) {
+        if ([1,3,4,7,12,16,18,21].includes(episode.id)) {
           const model = models.find(entry => entry.id === episode.id);
           let previous = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
           for (const [layer, , readings, source] of model.options) {
@@ -432,9 +432,14 @@ async function main() {
           await page.click('#messianic-timeline summary');
         }
         if (episode.id === 21) {
-          for (const card of [1,2,0]) await page.click('[data-sequence="' + card + '"]');
+          for (const card of [1,3,2,0,4]) await page.click('[data-sequence="' + card + '"]');
           const dates = await page.locator('#sequence li').allTextContents();
-          assert.deepEqual(dates.map(item => item.match(/\d+/)[0]), ['1917','1929','1930']);
+          assert.deepEqual(dates.map(item => item.match(/\d+/)[0]), ['1917','1928','1929','1930','1931']);
+          if (width === 320) {
+            await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+            assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+            await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+          }
         }
         if (episode.id === 22) {
           await page.click('[data-layer="holocaust"]');
