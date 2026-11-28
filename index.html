@@ -303,12 +303,17 @@
     <p></p><p></p><p></p><ul></ul>
   </div>
   <div class="talmud-sheet">
-    <div class="folio-paper" dir="ltr" aria-hidden="true"><i></i><i></i><i></i></div>
-    <p></p><p></p><button id="talmud-flip" type="button"></button>
+    <div class="folio-paper" dir="ltr" role="group" aria-labelledby="talmud-bind-side">
+      <button type="button" data-page-region="0"></button>
+      <button type="button" data-page-region="1"></button>
+      <button type="button" data-page-region="2"></button>
+    </div>
+    <p id="talmud-bind-side"></p><p></p><button id="talmud-flip" type="button"></button>
   </div>
   <fieldset id="talmud-exercise">
     <legend></legend>
-    <div id="talmud-fields" dir="ltr"></div>
+    <p id="talmud-active-region"></p>
+    <div id="talmud-fields" role="group" aria-labelledby="talmud-active-region"></div>
     <button id="talmud-check" type="button"></button>
     <p id="talmud-feedback" role="status"></p>
   </fieldset>

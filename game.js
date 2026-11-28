@@ -106,7 +106,7 @@ export async function start(initialLanguage) {
   const labState = {word:[], sefirah:0, daat:false};
   const kabbalahView = {lesson:null,sourcesOpen:false,exerciseOpen:false,solved:new Set()};
   const cultureView = {record:null};
-  const talmudView = {reading:null,side:0,answers:[['','',''],['','','']]};
+  const talmudView = {reading:null,side:0,position:0,answers:[['','',''],['','','']]};
   const progress = readProgress();
   let language = initialLanguage;
   let active = 0;

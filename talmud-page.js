@@ -3,26 +3,26 @@ import { talmudCards, pageNote, pageFeedback } from './talmud-lessons.js';
 const copy = {
   tr:{
     reading:'Metin katmanı', flip:'Sayfayı çevir', binding:['Cilt sağda','Cilt solda'],
-    areas:['Sol kenar','Merkez','Sağ kenar'], prompt:'Üç metni sayfadaki yerleriyle eşleştir.',
-    answers:['Mişna ve Gemara','Rashi','Tosafot'], choose:'Metni seç', check:'Eşleşmeleri kontrol et',
+    areas:['Sol kenar','Merkez','Sağ kenar'], prompt:'Sayfada bir bölgeye dokun, sonra metni seç.',
+    answers:['Mişna ve Gemara','Rashi','Tosafot'], check:'Eşleşmeleri kontrol et',
     retry:'Cildin hangi tarafta olduğuna bak ve eşleşmeleri yeniden dene.',
   },
   en:{
     reading:'Text layer', flip:'Turn the page', binding:['Binding on the right','Binding on the left'],
-    areas:['Left margin','Center','Right margin'], prompt:'Match the three texts to their positions on the page.',
-    answers:['Mishnah and Gemara','Rashi','Tosafot'], choose:'Choose a text', check:'Check the positions',
+    areas:['Left margin','Center','Right margin'], prompt:'Select a region on the page, then choose its text.',
+    answers:['Mishnah and Gemara','Rashi','Tosafot'], check:'Check the positions',
     retry:'Look at the binding side and try matching the positions again.',
   },
   he:{
     reading:'שכבת טקסט', flip:'הפכו את הדף', binding:['הכריכה מימין','הכריכה משמאל'],
-    areas:['שוליים שמאליים','מרכז','שוליים ימניים'], prompt:'התאימו את שלושת הטקסטים למקומם בדף.',
-    answers:['משנה וגמרא','רש״י','תוספות'], choose:'בחרו טקסט', check:'בדקו את ההתאמות',
+    areas:['שוליים שמאליים','מרכז','שוליים ימניים'], prompt:'בחרו אזור בדף ואז בחרו את הטקסט שלו.',
+    answers:['משנה וגמרא','רש״י','תוספות'], check:'בדקו את ההתאמות',
     retry:'בדקו באיזה צד נמצאת הכריכה ונסו להתאים שוב.',
   },
   az:{
     reading:'Mətn qatı', flip:'Səhifəni çevir', binding:['Cild sağdadır','Cild soldadır'],
-    areas:['Sol kənar','Mərkəz','Sağ kənar'], prompt:'Üç mətni səhifədəki yerlərinə uyğunlaşdır.',
-    answers:['Mişna və Gemara','Raşi','Tosafot'], choose:'Mətni seç', check:'Uyğunluğu yoxla',
+    areas:['Sol kənar','Mərkəz','Sağ kənar'], prompt:'Səhifədə bir sahəni, sonra həmin sahənin mətnini seç.',
+    answers:['Mişna və Gemara','Raşi','Tosafot'], check:'Uyğunluğu yoxla',
     retry:'Cildin hansı tərəfdə olduğuna bax və yenidən sına.',
   },
 };
@@ -32,7 +32,7 @@ export function mountTalmudPage(panel, language, locale, view) {
   const [label, select, reading, sheet, exercise] = fragment.children;
   const [layer, meaning, limit, sources] = reading.children;
   const [graphic, binding, note, flip] = sheet.children;
-  const [legend, fields, check, feedback] = exercise.children;
+  const [legend, position, fields, check, feedback] = exercise.children;
   const labels = copy[language];
 
   function readCard() {
@@ -57,9 +57,13 @@ export function mountTalmudPage(panel, language, locale, view) {
   function refreshPage() {
     graphic.dataset.binding = view.side === 0 ? 'right' : 'left';
     binding.textContent = labels.binding[view.side];
-    for (const [index, field] of [...fields.children].entries()) {
-      field.querySelector('select').value = view.answers[view.side][index];
+    position.textContent = labels.areas[view.position];
+    const answers = view.answers[view.side];
+    for (const [index, region] of [...graphic.children].entries()) {
+      region.setAttribute('aria-pressed',String(view.position === index));
+      region.classList.toggle('has-answer',answers[index] !== '');
     }
+    for (const button of fields.children) button.setAttribute('aria-pressed',String(answers[view.position] === button.dataset.pageText));
     feedback.textContent = '';
   }
 
@@ -75,23 +79,23 @@ export function mountTalmudPage(panel, language, locale, view) {
   });
   note.textContent = pageNote[locale];
   legend.textContent = labels.prompt;
-  fields.replaceChildren(...labels.areas.map((position,index) => {
-    const item = document.createElement('div');
-    item.dir = 'auto';
-    const name = document.createElement('label');
-    const field = document.createElement('select');
-    field.id = 'talmud-position-' + index;
-    name.htmlFor = field.id;
-    name.textContent = position;
-    field.append(new Option(labels.choose,''), ...labels.answers.map((answer,number) => new Option(answer,String(number))));
-    field.addEventListener('change', () => {
-      view.answers[view.side][index] = field.value;
-      feedback.textContent = '';
+  for (const [index, region] of [...graphic.children].entries()) {
+    region.setAttribute('aria-label',labels.areas[index]);
+    region.addEventListener('click', () => {
+      view.position = index;
+      refreshPage();
     });
-    field.addEventListener('focus', () => graphic.dataset.highlight = String(index));
-    field.addEventListener('blur', () => delete graphic.dataset.highlight);
-    item.append(name,field);
-    return item;
+  }
+  fields.replaceChildren(...labels.answers.map((answer,index) => {
+    const choice = document.createElement('button');
+    choice.type = 'button';
+    choice.dataset.pageText = String(index);
+    choice.textContent = answer;
+    choice.addEventListener('click', () => {
+      view.answers[view.side][view.position] = choice.dataset.pageText;
+      refreshPage();
+    });
+    return choice;
   }));
   check.textContent = labels.check;
   check.addEventListener('click', () => {

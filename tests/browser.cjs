@@ -233,13 +233,17 @@ async function main() {
           assert.notEqual(await talmudFeedback.textContent(),answer);
           for (const [binding, entries] of [['right',['2','0','1']],['left',['1','0','2']]]) {
             assert.equal(await page.locator('.folio-paper').getAttribute('data-binding'),binding);
-            for (const [index, value] of entries.entries()) await page.selectOption('#talmud-position-' + index,value);
+            for (const [index, value] of entries.entries()) {
+              await page.click('[data-page-region="' + index + '"]');
+              await page.click('[data-page-text="' + value + '"]');
+            }
             if (width === 320) await page.tap('#talmud-check');
             else await page.locator('#talmud-check').press('Enter');
             assert.equal(await talmudFeedback.textContent(),answer);
             await page.click('#talmud-flip');
           }
-          assert.equal(await page.locator('#talmud-position-0').inputValue(),'2');
+          await page.click('[data-page-region="0"]');
+          assert.equal(await page.locator('[data-page-text="2"]').getAttribute('aria-pressed'),'true');
           assert.ok(loadedLessons.has('talmud-lessons.js'));
           if (width === 320) {
             await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });

@@ -167,7 +167,7 @@ dialog a{overflow-wrap:anywhere}
 #talmud-page{padding:.65rem;background:#1b242c}
 #talmud-page summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
 #talmud-page summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-#talmud-reading,#talmud-fields select{display:block;inline-size:100%;min-inline-size:0;max-inline-size:100%;margin-block:.2rem .55rem;overflow:hidden;text-overflow:ellipsis}
+#talmud-reading{display:block;inline-size:100%;min-inline-size:0;max-inline-size:100%;margin-block:.2rem .55rem;overflow:hidden;text-overflow:ellipsis}
 .talmud-reading{padding:.65rem;background:#293944}
 .talmud-reading p,.talmud-reading ul{margin-block:.3rem .55rem}
 .talmud-reading p:first-child{font-weight:650}
@@ -180,13 +180,17 @@ dialog a{overflow-wrap:anywhere}
 .folio-paper{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr) minmax(0,1fr);gap:clamp(.2rem,1vw,.55rem);padding:.55rem;inline-size:min(100%,20rem);background:#e5c78e;border:.25rem solid #99734b;image-rendering:pixelated}
 .folio-paper[data-binding=left]{border-left:.6rem solid #4c3531}
 .folio-paper[data-binding=right]{border-right:.6rem solid #4c3531}
-.folio-paper i{display:block;min-block-size:3rem;background:repeating-linear-gradient(to bottom,#786048 0 2px,transparent 2px 7px)}
-.folio-paper i:nth-child(2){background:repeating-linear-gradient(to bottom,#4f3e34 0 2px,transparent 2px 7px)}
-.folio-paper[data-highlight="0"] i:nth-child(1),.folio-paper[data-highlight="1"] i:nth-child(2),.folio-paper[data-highlight="2"] i:nth-child(3){outline:3px solid #332820;outline-offset:2px}
+.folio-paper button{min-inline-size:0;min-block-size:max(44px,3rem);padding:0;border:1px solid #99734b;background:repeating-linear-gradient(to bottom,#786048 0 2px,transparent 2px 7px)}
+.folio-paper button:nth-child(2){background:repeating-linear-gradient(to bottom,#4f3e34 0 2px,transparent 2px 7px)}
+.folio-paper button[aria-pressed=true]{outline:2px solid #332820;outline-offset:1px}
+.folio-paper button:focus-visible{outline:3px solid #332820;outline-offset:3px}
+.folio-paper button.has-answer{border-block-end:5px solid #373426}
 #talmud-exercise{min-inline-size:0;margin:.7rem 0 0;padding:.55rem;border:1px solid var(--edge)}
 #talmud-exercise legend{max-inline-size:100%;overflow-wrap:anywhere}
-#talmud-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,8em),1fr));gap:.4rem}
-#talmud-fields>*{min-inline-size:0;overflow-wrap:anywhere}
+#talmud-active-region{margin-block:.25rem .5rem;font-weight:650}
+#talmud-fields{display:flex;flex-wrap:wrap;gap:.4rem;margin-block-end:.55rem}
+#talmud-fields button{text-align:start;max-inline-size:100%;overflow-wrap:anywhere}
+#talmud-fields button[aria-pressed=true]{background:#47351e;border-color:var(--accent)}
 #talmud-feedback{color:var(--accent)}
 #talmud-feedback:empty{margin:0}
 #messianic-timeline summary{cursor:pointer;min-block-size:var(--hit);align-content:center;font-weight:650}
