@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -14,7 +15,7 @@ import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
 import { cultureCases, cultureRecords } from '../culture-lessons.js';
 import { pageFeedback, pageNote, talmudCards } from '../talmud-lessons.js';
-import { exportSave, mergeSave, parseSave, progressKey, saveSummary } from '../save-data.js';
+import { exportSave, mergeSave, parseSave, progressKey, saveSchemaVersion, saveSummary } from '../save-data.js';
 import { appearanceKey, parseAppearance } from '../appearance.js';
 import { dailyCards } from '../daily-lessons.js';
 import { archiveCopy as displacementCopy, displacementRecords } from '../displacement-lessons.js';
@@ -638,6 +639,14 @@ test('each exported HTML document references its own release files', () => {
       const html = readFileSync(join(output, 'index.html'), 'utf8');
       const manifest = JSON.parse(readFileSync(join(output, 'build.json'), 'utf8'));
       assert.equal(manifest.commit, commit);
+      assert.deepEqual(manifest.languages,languages);
+      assert.equal(manifest.saveSchema,saveSchemaVersion);
+      assert.match(manifest.contentRevision,/^[0-9a-f]{64}$/);
+      assert.equal(manifest.engine.name,'WALL Canvas 2D');
+      assert.match(manifest.engine.revision,/^[0-9a-f]{64}$/);
+      assert.equal(manifest.planRevision,createHash('sha256').update(readFileSync('docs/PLAN.md')).digest('hex'));
+      assert.equal(manifest.sourceCatalogueRevision,
+        createHash('sha256').update(readFileSync('docs/SOURCES.tsv')).digest('hex'));
       const runtime = manifest.runtime;
       runtimes.push(runtime);
       for (const file of ['start.js','style.css','assets/fragaria-strawberry.png','assets/matpc-14762.jpg']) {

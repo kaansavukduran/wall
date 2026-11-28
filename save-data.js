@@ -2,6 +2,7 @@ import { chapters, languages } from './content.js';
 import { appearanceKey, parseAppearance } from './appearance.js';
 
 export const progressKey = 'wall.progress.v1';
+export const saveSchemaVersion = 1;
 export const maxSaveLength = 500_000;
 const format = 'WALL save';
 const episodeIds = ['plaza',...chapters.map(chapter => String(chapter.id))];
@@ -51,7 +52,7 @@ function snapshot(storage) {
 
 export function exportSave(storage) {
   const values = snapshot(storage);
-  const encoded = JSON.stringify({format,version:1,values});
+  const encoded = JSON.stringify({format,version:saveSchemaVersion,values});
   if (encoded.length > maxSaveLength || Object.keys(values).length > 100) throw new Error('Save size');
   return encoded;
 }
@@ -59,7 +60,7 @@ export function exportSave(storage) {
 export function parseSave(text) {
   if (text.length > maxSaveLength) throw new Error('Save size');
   const data = JSON.parse(text);
-  if (data?.format !== format || data.version !== 1 || !data.values
+  if (data?.format !== format || data.version !== saveSchemaVersion || !data.values
     || typeof data.values !== 'object' || Array.isArray(data.values)) throw new Error('Save version');
   const entries = Object.entries(data.values);
   if (!entries.length || entries.length > 100 || entries.some(([key,value]) => !validValue(key,value))) {

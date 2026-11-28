@@ -5,7 +5,8 @@ import { resolve } from 'node:path';
 
 const site = resolve(process.argv[2] ?? 'site');
 const output = resolve(process.argv[3] ?? 'WALL-Offline.html');
-const {runtime} = JSON.parse(await readFile(resolve(site, 'build.json'), 'utf8'));
+const manifest = JSON.parse(await readFile(resolve(site, 'build.json'), 'utf8'));
+const {runtime} = manifest;
 if (runtime && !/^runtime-\d+\.\d+\.\d+(?:-[0-9a-f]{12})?$/.test(runtime)) {
   throw new Error('Invalid WALL runtime directory');
 }
@@ -48,6 +49,8 @@ try {
   html = await embed(html, 'assets/matpc-14762.jpg', 'image/jpeg', htmlPrefix);
   html = html.replace('<link rel="stylesheet" href="' + htmlPrefix + 'style.css">', () => '<style>' + css + '</style>');
   html = html.replace('<script type="module" src="' + htmlPrefix + 'start.js"></script>', () => '<script type="module">' + bundle + '</script>');
+  const buildInfo = JSON.stringify(manifest).replaceAll('<','\\u003c');
+  html = html.replace('</body>', () => '<script type="application/json" id="wall-build">' + buildInfo + '</script>\n</body>');
   const notices = await Promise.all(['assets/PROVENANCE.md','assets/PIXELIFY-OFL.txt']
     .map(name => readFile(resolve(runtimeRoot, name), 'utf8')));
   html += '\n<!--\n' + notices.join('\n\n').replaceAll('-->', '-- >') + '\n-->\n';

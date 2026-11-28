@@ -14,7 +14,19 @@ if (packageInfo.version !== version) {
 
 await rm(app, { recursive:true, force:true });
 await mkdir(app, { recursive:true });
-execFileSync(process.execPath, ['scripts/build.mjs', resolve(app, 'site')], { cwd:project, stdio:'inherit' });
+const buildEnvironment = {...process.env};
+if (!buildEnvironment.WALL_BUILD_COMMIT) {
+  try {
+    buildEnvironment.WALL_BUILD_COMMIT = execFileSync('git', ['rev-parse','--verify','HEAD'], {
+      cwd:project,encoding:'utf8',stdio:['ignore','pipe','ignore'],
+    }).trim();
+  } catch {
+    delete buildEnvironment.GITHUB_SHA;
+  }
+}
+execFileSync(process.execPath, ['scripts/build.mjs', resolve(app, 'site')], {
+  cwd:project,stdio:'inherit',env:buildEnvironment,
+});
 await cp(resolve(desktop, 'main.cjs'), resolve(app, 'main.cjs'));
 await writeFile(resolve(app, 'package.json'), JSON.stringify({
   name:'wall-desktop-app',

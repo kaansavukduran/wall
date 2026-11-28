@@ -33,4 +33,4 @@ In versions that include **Settings → Transfer a save**, create save text and 
 
 **Settings → Appearance and motion** offers dark, light, system and high-contrast palettes, an 80–200% scale and reduced animation. Each preference is saved separately and can travel in a save from this version.
 
-[Play WALL on GitHub Pages](https://kaansavukduran.github.io/wall/). This repository publishes from `gh-pages`. To publish a tested release, push it to `main` and run `bash scripts/publish-pages.sh` from that clean checkout. Verify the live version in `build.json` and play the changed scene from the published site.
+This repository publishes Pages from `gh-pages`. To publish a tested release, push it to `main` and run `bash scripts/publish-pages.sh` from that clean checkout. Check the published `build.json` for the version, commit, four locales, save schema and plan, content, catalogue and engine fingerprints. The single-file HTML includes the same build record.
