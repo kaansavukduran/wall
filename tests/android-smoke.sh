@@ -9,6 +9,39 @@ read_screen() {
     adb shell cat /sdcard/wall-window.xml > "$screen_file"
 }
 
+inspect_webview() {
+  local pid port
+  pid=$(adb shell pidof -s "$package" | tr -d '\r') || return 0
+  if [[ ! "$pid" =~ ^[0-9]+$ ]]; then return 0; fi
+  port=$(adb forward tcp:0 "localabstract:webview_devtools_remote_$pid") || return 0
+  if [[ ! "$port" =~ ^[0-9]+$ ]]; then return 0; fi
+  node --experimental-websocket --input-type=module - "$port" <<'JS' || true
+const endpoint = 'http://127.0.0.1:' + process.argv[2];
+const tabs = await fetch(endpoint + '/json/list', {signal:AbortSignal.timeout(5000)}).then(r=>r.json());
+const tab = tabs.find(item => item.url.startsWith('https://appassets.androidplatform.net/assets/'));
+if (!tab) process.exit(0);
+const connection = new WebSocket(tab.webSocketDebuggerUrl);
+const timer = setTimeout(() => connection.close(),5000);
+connection.addEventListener('open', () => connection.send(JSON.stringify({
+  id:1, method:'Runtime.evaluate', params:{returnByValue:true,expression:`(() => {
+    const next = document.getElementById('next');
+    const {top,bottom,width,height} = next.getBoundingClientRect();
+    return {chapter:document.getElementById('chapter').textContent,
+      next:{label:next.textContent,hidden:next.hidden,display:getComputedStyle(next).display,top,bottom,width,height},
+      focus:document.activeElement?.id, screen:{scrollY,innerHeight,innerWidth}};
+  })()`},
+})));
+connection.addEventListener('message', event => {
+  const message = JSON.parse(event.data);
+  if (message.id !== 1) return;
+  console.log('WALL WebView state:', JSON.stringify(message.result?.result?.value));
+  clearTimeout(timer);
+  connection.close();
+});
+JS
+  adb forward --remove "tcp:$port" || true
+}
+
 wait_for_screen() {
   local labels="$1"
   for attempt in {1..12}; do
@@ -109,6 +142,7 @@ PY
       return
     fi
   done
+  inspect_webview
   echo "Gamepad focus did not reach: $label" >&2
   return 1
 }
@@ -152,6 +186,7 @@ adb shell input gamepad keyevent KEYCODE_BUTTON_B
 wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
 echo 'Play chapter 1 in landscape'
 tap_label 'An early record of the name Israel in Canaan|Kenan’da İsrail adının erken bir kaydı|אזכור קדום של השם ישראל בכנען|Kənanda İsrail adının erkən qeydi' 'The inscription records a name|Yazıt bir topluluk|הכתובת מתעדת שם|Kitabə bir adı'
+inspect_webview
 activate_with_gamepad 'Continue|Devam et|המשך|Davam et' 'Solomon’s description|Süleyman’ın tasviri|תיאור מקדש שלמה|Süleyman məbədinin təsviri'
 wait_for_screen 'Solomon’s description|Süleyman’ın tasviri|תיאור מקדש שלמה|Süleyman məbədinin təsviri'
 adb shell cmd window user-rotation lock 0
