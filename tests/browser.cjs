@@ -448,7 +448,11 @@ async function main() {
             assert.match(await page.locator('#evidence-date').textContent(), /1866.*1875/);
             assert.match(await page.locator('#evidence-source').getAttribute('href'), /openletteraddres00auer\)\.pdf#page=138$/);
             await page.click('[data-evidence="4"]');
-            assert.match(await page.locator('#evidence-date').textContent(), /1920/);
+            assert.match(await page.locator('#evidence-date').textContent(), /1884/);
+            assert.match(await page.locator('#evidence-source').getAttribute('href'), /PEFSurveyOfWesternPalestineJerusalem1884English[.]pdf#page=203$/);
+            await page.click('[data-evidence="5"]');
+            assert.match(await page.locator('#evidence-date').textContent(), /1920.*1929/);
+            assert.match(await page.locator('#evidence-source').getAttribute('href'), /CustReport1929English[.]pdf#page=54$/);
           }
         }
         if (episode.id === 23) {

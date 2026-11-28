@@ -254,24 +254,45 @@ export const earlyModernLessons = {
       },
       {
         "title": [
+          "Osmanlı dönemindeki taş gözlemleri",
+          "Masonry observations from Ottoman-era Jerusalem",
+          "תצפיות על האבנים בירושלים העות׳מאנית",
+          "Osmanlı dövründə daş sıraları barədə müşahidələr"
+        ],
+        "date": [
+          "Osmanlı dönemi araştırması, 1884 yayını",
+          "Ottoman-era survey, published in 1884",
+          "סקר מן התקופה העות׳מאנית, פורסם ב־1884",
+          "Osmanlı dövründə tədqiqat, nəşr 1884"
+        ],
+        "description": [
+          "Warren ve Conder, dua alanının döşemesi üzerinde görünen altı sıra ve hızla ufalanan bazı yumuşak taşları tarif etti. Ayrıca kenarları yontulmuş taşların üzerinde düz yüzlü dört iri taş sırası kaydetti. Bu betimleme o dönemde neyin görülebildiğini gösterir. Taşları kimin onardığı için başka belge gerekir.",
+          "Warren and Conder reported six courses visible above the prayer area’s paving and said some softer blocks were disintegrating rapidly. They also recorded four courses of large, flat-faced stones above the margin-drafted blocks. These observations describe what was visible at the time. Identifying who repaired the stones requires other evidence.",
+          "וורן וקונדר תיארו שישה נדבכים שנראו מעל ריצוף מקום התפילה וציינו שכמה מן האבנים הרכות התפוררו במהירות. הם רשמו גם ארבעה נדבכים של אבנים גדולות בעלות חזית חלקה מעל האבנים ששוליהן סותתו. התצפית מתארת מה היה גלוי אז. כדי לזהות מי תיקן את האבנים נדרש תיעוד נוסף.",
+          "Uorren və Konder dua yerinin döşəməsi üstündə görünən altı sıranı və sürətlə ovulan bəzi yumşaq daşları təsvir etdilər. Kənarları yonulmuş daşların üstündə hamar üzlü dörd iri daş sırasını da qeydə aldılar. Bu müşahidələr həmin vaxt nəyin göründüyünü göstərir. Daşları kimin təmir etdiyini müəyyənləşdirmək üçün başqa sənəd lazımdır."
+        ],
+        "url": "https://content.ecf.org.il/files/M00868_PEFSurveyOfWesternPalestineJerusalem1884English.pdf#page=203"
+      },
+      {
+        "title": [
           "1920’deki üst sıra onarımı",
           "Upper-course repairs in 1920",
           "תיקון הנדבכים העליונים ב־1920",
           "1920-ci ildə yuxarı sıraların təmiri"
         ],
         "date": [
-          "1920, erken Britanya idaresi",
-          "1920, early British administration",
-          "1920, ראשית השלטון הבריטי",
-          "1920, Britaniya idarəsinin ilk illəri"
+          "Olay 1920, rapor 1929",
+          "Event in 1920, reported in 1929",
+          "אירוע מ־1920, דו״ח מ־1929",
+          "Hadisə 1920-ci ildə, hesabat 1929-cu ildə"
         ],
         "description": [
-          "Arkeolog Katharina Galor, 1920’de Müslüman makamların üst sıralarda küçük onarımlar başlattığını kaydeder. Onarımın kim tarafından denetleneceği tartışıldı. Tarih, Osmanlı yönetiminin sona ermesinden sonradır.",
-          "Archaeologist Katharina Galor records that Muslim authorities began minor repairs to the upper courses in 1920. The repair’s supervision was disputed. The date follows the end of Ottoman rule.",
-          "הארכאולוגית קתרינה גלור מתעדת כי ב־1920 החלו הרשויות המוסלמיות בתיקונים קטנים בנדבכים העליונים. זהות הגורם המפקח עמדה במחלוקת. הדבר קרה אחרי סיום השלטון העות׳מאני.",
-          "Arxeoloq Katarina Qalor qeyd edir ki, 1920-ci ildə müsəlman idarələri yuxarı sıralarda kiçik təmirə başladı. Təmirə kimin nəzarət edəcəyi müzakirə olundu. Hadisə Osmanlı hakimiyyəti bitdikdən sonra baş verdi."
+          "L. G. A. Cust’un 1929 raporuna göre Vakıf Dairesi, Britanya askerî yönetiminin son haftalarında Batı Duvarı’nın üst sıralarını onarmaya başladı. İtirazların ardından üst sıraları Eski Eserler Dairesi gözetiminde Vakıf’ın, orta ve alt sıraları gerektiğinde hükümetin onarması kararlaştırıldı.",
+          "L. G. A. Cust’s 1929 report says the Waqf Department began repairing the upper courses in the last weeks of British military administration. After objections, the ruling assigned upper-course repairs to the Waqf under the Department of Antiquities, and any necessary work on the middle and lower courses to the government.",
+          "לפי הדו״ח של ל״ג״א קאסט מ־1929, מחלקת הווקף החלה לתקן את הנדבכים העליונים בשבועות האחרונים של הממשל הצבאי הבריטי. בעקבות התנגדויות נקבע שהווקף יתקן את הנדבכים העליונים בפיקוח מחלקת העתיקות, והממשלה תתקן לפי הצורך את הנדבכים האמצעיים והתחתונים.",
+          "L. G. A. Kastın 1929-cu il hesabatına görə Vəqf İdarəsi Britaniya hərbi idarəçiliyinin son həftələrində Qərb divarının yuxarı sıralarını təmir etməyə başladı. Etirazlardan sonra yuxarı sıraların Əntiq Əsərlər İdarəsinin nəzarəti altında Vəqf tərəfindən, orta və aşağı sıraların isə lazım gəldikdə hökumət tərəfindən təmir edilməsi qərara alındı."
         ],
-        "url": "https://webfiles.ucpress.edu/oa/9780520968073_WEB.pdf"
+        "url": "https://content.ecf.org.il/files/M00109_CustReport1929English.pdf#page=54"
       }
     ],
     "feedback": [
