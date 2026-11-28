@@ -116,7 +116,11 @@ async function restoreNewSave(record) {
       {theme:'contrast',motion:'system',size:125});
     ui.close();
     ui=null;
-    adb('shell','am','force-stop',pkg);
+    adb('shell','input','keyevent','KEYCODE_BACK');
+    await until('The game activity did not close',()=>{
+      const activities=adb('shell','dumpsys','activity','activities');
+      return !activities.split('\n').some(line=>/topResumedActivity|mResumedActivity/.test(line)&&line.includes(pkg));
+    });
     ui=await open(process.env.WALL_TAG);
     await ui.click('#start-campaign');
     assert.equal(await ui.text('#chapter'),'2');
