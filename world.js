@@ -344,7 +344,34 @@ export async function makeWorld(canvas, reducedMotion) {
       return;
     }
     if (index === 12) {
-      if (layer === 'meron-visit') {
+      if (layer === 'cave-first-exit' || layer === 'cave-second-exit') {
+        const dusk = layer === 'cave-second-exit';
+        if (dusk) rect(background, '#af786d', 0, 0, 480, 102);
+        rect(background, dusk ? '#766044' : '#7b7754', 105, 119, 375, 79);
+        for (let row = 0; row < 6; row++) {
+          rect(background, dusk ? '#98734e' : '#a59561', 122 - row * 3, 128 + row * 12, 358 + row * 3, 2);
+        }
+        rect(background, '#6d594f', 299, 132, 20, 31);
+        rect(background, '#d9bc9b', 303, 123, 12, 9);
+        rect(background, '#514742', 301, 120, 16, 5);
+        rect(background, '#50463e', 301, 163, 5, 17);
+        rect(background, '#50463e', 313, 163, 5, 17);
+        if (dusk) {
+          rect(background, '#efd097', 370, 72, 39, 22);
+          for (const x of [279,326]) {
+            rect(background, '#66734f', x, 138, 15, 14);
+            rect(background, '#a6ad71', x + 2, 137, 11, 4);
+            rect(background, '#d3a777', x + 2, 149, 11, 2);
+          }
+        } else {
+          for (const [x,y] of [[200,158],[230,171],[255,158],[377,171],[419,185]]) {
+            rect(background, '#4f5b3d', x, y, 3, 9);
+            rect(background, '#758255', x-3, y, 9, 3);
+          }
+          rect(background, '#58453e', 320, 155, 35, 3);
+          rect(background, '#58453e', 349, 156, 4, 13);
+        }
+      } else if (layer === 'meron-visit') {
         for (const [x,y,w] of [[132,108,110],[221,86,135],[336,122,144]]) {
           rect(background, '#888681', x, y, w, 198 - y);
           rect(background, '#a29b87', x, y, w, 5);
