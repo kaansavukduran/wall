@@ -21,9 +21,10 @@ wait_for_screen() {
 }
 
 tap_label() {
-  local label="$1" point x y height width portrait_width
+  local label="$1" after="${2:-}" point x y height width portrait_width
   for attempt in {1..5}; do
     if read_screen; then
+      if [[ -n "$after" ]] && grep -Eq "$after" "$screen_file"; then return 0; fi
       point=$(python3 - "$screen_file" "$label" <<'PY'
 import re
 import sys
@@ -40,8 +41,10 @@ PY
 )
       if [[ -n "$point" ]]; then
         read -r x y <<< "$point"
+        echo "Tap $label at $x,$y"
         adb shell input tap "$x" "$y"
-        return 0
+        if [[ -z "$after" ]]; then return 0; fi
+        continue
       fi
     fi
     # Scroll the document above the navigation bar to reveal the next control.
@@ -53,7 +56,16 @@ PY
     fi
     adb shell input swipe "$((width / 2))" "$((height * 4 / 5))" "$((width / 2))" "$((height / 3))" 400
   done
-  echo "No tappable control with label: $label" >&2
+  if read_screen; then
+    python3 - "$screen_file" <<'PYDIAG'
+import sys
+from xml.etree import ElementTree
+root = ElementTree.parse(sys.argv[1]).getroot()
+print("Rotation:", root.get("rotation"))
+print("Visible labels:", [node.get("text") for node in root.iter("node") if node.get("text")])
+PYDIAG
+  fi
+  echo "Tap could not reach the expected state: $label -> $after" >&2
   return 1
 }
 
@@ -65,8 +77,9 @@ if [[ -n "${WALL_TAG:-}" ]]; then
   version=$(adb shell dumpsys package "$package" | awk '!found && /versionName=/{sub(/.*versionName=/, ""); print; found=1}')
   [[ "$version" == "${WALL_TAG#v}" ]]
 fi
-tap_label 'Western retaining wall|Batı istinat duvarı|הקיר התומך המערבי|Qərb istinad divarı'
-tap_label 'Continue|Devam et|המשך|Davam et'
+echo 'Play the plaza in portrait'
+tap_label 'Western retaining wall|Batı istinat duvarı|הקיר התומך המערבי|Qərb istinad divarı' 'Correct. The Kotel|Doğru. Kotel|נכון. הכותל|Doğrudur. Kotel'
+tap_label 'Continue|Devam et|המשך|Davam et' 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
 wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
 
 adb shell cmd window user-rotation lock 1
@@ -90,8 +103,9 @@ adb shell input gamepad keyevent KEYCODE_BUTTON_Y
 wait_for_screen 'Unlocked chapters|Açık bölümler|פרקים פתוחים|Açıq bölmələr'
 adb shell input gamepad keyevent KEYCODE_BUTTON_B
 wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
-tap_label 'An early record of the name Israel in Canaan|Kenan’da İsrail adının erken bir kaydı|אזכור קדום של השם ישראל בכנען|Kənanda İsrail adının erkən qeydi'
-tap_label 'Continue|Devam et|המשך|Davam et'
+echo 'Play chapter 1 in landscape'
+tap_label 'An early record of the name Israel in Canaan|Kenan’da İsrail adının erken bir kaydı|אזכור קדום של השם ישראל בכנען|Kənanda İsrail adının erkən qeydi' 'The inscription records a name|Yazıt bir topluluk|הכתובת מתעדת שם|Kitabə bir adı'
+tap_label 'Continue|Devam et|המשך|Davam et' 'Solomon’s description|Süleyman’ın tasviri|תיאור מקדש שלמה|Süleyman məbədinin təsviri'
 wait_for_screen 'Solomon’s description|Süleyman’ın tasviri|תיאור מקדש שלמה|Süleyman məbədinin təsviri'
 adb shell cmd window user-rotation lock 0
 wait_for_screen 'rotation="0"'

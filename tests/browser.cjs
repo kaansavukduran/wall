@@ -524,6 +524,7 @@ async function main() {
           assert.ok((await archiveRequest).ok());
           assert.equal(await press.getAttribute('open'),null);
           const recordSelect = archive.locator('#displacement-record');
+          await recordSelect.waitFor();
           const details = archive.locator('.relocation-sources');
           const note = details.locator('[role=status]');
           const answer = choice => archive.locator('[data-displacement-answer="' + choice + '"]');
