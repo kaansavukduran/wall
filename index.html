@@ -4,12 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#121a22">
 <title>WALL</title>
-<link rel="stylesheet" href="./runtime-0.8.6-3a94a7519a22/style.css">
+<link rel="stylesheet" href="./runtime-0.8.7-8211f19a5ef8/style.css">
 <body>
 <section id="boot" aria-label="Fragaria Interactive">
   <div class="boot-shell">
     <div class="boot-brand">
-      <img src="./runtime-0.8.6-3a94a7519a22/assets/fragaria-strawberry.png" alt="" width="116" height="130">
+      <img src="./runtime-0.8.7-8211f19a5ef8/assets/fragaria-strawberry.png" alt="" width="116" height="130">
       <h1>Fragaria<br>Interactive</h1>
     </div>
     <div class="boot-load">
@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.8.6</small>
+  <small dir="ltr">v0.8.7</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -32,6 +32,7 @@
     </select>
     <button id="settings-button" type="button"></button>
   </header>
+  <p id="storage-notice" class="storage-warning" role="status"></p>
   <main id="game" tabindex="-1">
     <section class="stage">
       <span id="era" class="era" dir="auto"></span>
@@ -122,12 +123,14 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.6</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.7</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
 <dialog id="settings" aria-labelledby="settings-title">
-  <div class="dialog-heading"><h2 id="settings-title"></h2><form method="dialog"><button></button></form></div>
+  <div class="dialog-heading"><h2 id="settings-title"></h2><form method="dialog"><button id="settings-close"></button></form></div>
+  <p id="settings-storage" class="storage-warning" role="status"></p>
+  <button id="retry-storage" type="button" hidden></button>
   <fieldset id="appearance">
     <legend></legend>
     <label for="theme"></label><select id="theme"></select>
@@ -148,7 +151,7 @@
   <h2 id="photo-title" tabindex="-1" autofocus></h2>
   <div class="photo-layout">
     <figure>
-      <img loading="lazy" src="./runtime-0.8.6-3a94a7519a22/assets/matpc-14762.jpg" width="433" height="640" alt="">
+      <img loading="lazy" src="./runtime-0.8.7-8211f19a5ef8/assets/matpc-14762.jpg" width="433" height="640" alt="">
       <figcaption></figcaption>
       <a id="photo-source" target="_blank" rel="noopener noreferrer"></a>
     </figure>
@@ -166,6 +169,7 @@
 </dialog>
 <dialog id="library" aria-labelledby="library-title">
   <div class="dialog-heading"><h2 id="library-title"></h2><form method="dialog"><button></button></form></div>
+  <p id="library-storage" class="storage-warning" role="status"></p>
   <details id="calendar" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <details id="atlas" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <details id="kabbalah" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
@@ -496,6 +500,6 @@
     </section>
   </article>
 </template>
-<script type="module" src="./runtime-0.8.6-3a94a7519a22/start.js"></script>
+<script type="module" src="./runtime-0.8.7-8211f19a5ef8/start.js"></script>
 </body>
 </html>
