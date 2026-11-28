@@ -104,7 +104,7 @@ Epizot numaraları kaynak kataloğuyla bağlantı kurar. Her epizot, tarihlenmi�
 | 4 | MÖ 539–332. Pers dönemi, dönüş, yaklaşık MÖ 516/515'te İkinci Tapınak. Ezra ile Babil ve Mısır kayıtlarının bağlamını karşılaştır. | S04 |
 | 5 | MÖ 332–63. Helenistik Akdeniz, Makabiler, Haşmonaylar. Tapınak'ın yeniden adanması ve Hanuka'yı iki metinle izle. | S05, S08 |
 | 6 | MÖ 63–MS 6. Pompeius ve Hirodes. Arazi, dolgu, istinat duvarı ve Tapınak'ı 2B kesitte ayır. | S06, H03 |
-| 7 | MS 6–66. Hac, Tapınak ibadeti, pazar, sinagog ve Ölü Deniz Yazmaları. Mişna’nın hatırladığı ilk ürünler yolculuğunu, Theodotos kitabesindeki sinagogu ve Kumran yakınında bulunan metinleri incele. | S06, S06A, D20–D22, D42, D42A |
+| 7 | MS 6–66. Mişna’nın hatırladığı ilk ürünler yolculuğunu izle. Taş masada bir sıvının hacmini ölç, Theodotos kitabesini ve Kumran yakınında bulunan metinleri incele. | S06, S06A, D20–D22, D42–D43A |
 | 8 | MS 66–73/74. Titus, MS 70 yıkımı ve Masada. Arkeoloji, Josephus, Titus Takı ve sonraki rabbanî hafızayı karşılaştır. | S09, H03 |
 | 9 | MS 115–117. Traianus döneminde diaspora ayaklanmaları. Mısır, Kuzey Afrika ve Kıbrıs'ı ayrı harita duraklarında aç. | Cambridge diaspora bölümü ve D24–D26 |
 | 10 | MS 130–135/136 civarı. Aelia Capitolina, Hadrianus ve Bar Kohba. Sikke, mektup ve sonraki Betar hafızasını incele. | S10, H02 |

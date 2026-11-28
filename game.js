@@ -676,7 +676,8 @@ export async function start(initialLanguage) {
       reference.hidden = !activeOption?.[3];
       if (activeOption?.[3]) reference.href = activeOption[3];
       for (const button of controls.children) button.setAttribute('aria-pressed', String(button.dataset.layer === selectedLayer));
-      world.scene(id, selectedLayer);
+      const view = selectedLayer === 'market-measure' ? 'market-measure-' + sequenceSteps.length : selectedLayer;
+      world.scene(id, view);
     }
 
     reference.textContent = ui[language][5];
@@ -834,6 +835,10 @@ export async function start(initialLanguage) {
         } else {
           attempt = 'wrong';
         }
+        if (sample.id === 7) {
+          selectedLayer = 'market-measure';
+          renderModel();
+        }
         renderSequence();
         (buttons.querySelector('button:enabled') ?? reset).focus();
       });
@@ -844,6 +849,7 @@ export async function start(initialLanguage) {
   find('sequence-reset').addEventListener('click', () => {
     sequenceSteps.length = 0;
     attempt = '';
+    if (selectedLayer === 'market-measure') renderModel();
     renderSequence();
     sequenceSurface.querySelector('div button').focus();
   });

@@ -81,6 +81,12 @@ export const models = [
       'כתובת תאודוטוס ביוונית נמצאה בירושלים ומקובל לתארך אותה לסוף המאה הראשונה לפנה״ס או לתחילת המאה הראשונה לספירה. היא מציינת קריאה בתורה, לימוד המצוות, מקום לינה ומתקני מים לאורחים מחוץ לארץ. כדי לברר על תפילה דרוש מקור נוסף. האיור ממחיש את השימושים האלה.',
       'Yerusəlimdə tapılmış yunanca Teodotos kitabəsi adətən e.ə. I əsrin sonuna və ya eramızın I əsrinin əvvəlinə aid edilir. Kitabədə Tövratın oxunması, əmrlərin öyrədilməsi, uzaqdan gələnlər üçün qalacaq yer və su qurğuları qeyd olunur. Dua haqqında məlumat üçün başqa mənbə lazımdır. Şəkil bu işləri göstərir.',
     ],'https://image-database.nes.lsa.umich.edu/items/show/196'],
+    ['market-measure',['Pazarda hacim ölçüsü','Market volume measure','מידת נפח בשוק','Bazarda həcm ölçüsü'], [
+      'Kudüs’ün basamaklı caddesinde, yıkıntılar arasında sıvı ölçmeye yarayan taş bir masa bulundu. Araştırmacılar yakındaki taş ağırlıkları pazar denetimiyle ilişkilendiriyor. Ölçünün nasıl çalıştığını görmek için üç adımı sırala. Düzeneğin kesiti temsilidir.',
+      'Excavators found a stone table for measuring liquids in debris over Jerusalem’s stepped street. Researchers connect nearby stone weights with market supervision. Put the three steps in order to see how the measure works. The drawing is a schematic section.',
+      'בחפירות הרחוב המדורג בירושלים נמצא בין ההריסות שולחן אבן למדידת נפח של נוזלים. חוקרים קושרים משקולות אבן שנמצאו בקרבתו לפיקוח על השוק. סדרו שלושה שלבים כדי לראות כיצד המידה פועלת. החתך באיור סכמטי.',
+      'Yerusəlimin pilləli küçəsində dağıntılar arasında mayenin həcmini ölçmək üçün daş masa tapılıb. Tədqiqatçılar yaxınlıqda tapılmış daş çəkiləri bazar nəzarəti ilə əlaqələndirirlər. Ölçünün necə işlədiyini görmək üçün üç addımı sırala. Şəkildə şərti kəsik göstərilir.',
+    ],'https://www.friendsofiaa.org/news/2020/1/6/stone-measuring-table-discovered-in-jerusalem-market'],
     ['scroll-isaiah',['Yeşaya nüshası · 1QIsaᵃ','Isaiah copy · 1QIsaᵃ','עותק ישעיהו · 1QIsaᵃ','Yeşaya nüsxəsi · 1QIsaᵃ'], [
       'Uzun tomarın sütunlarını aç. Kumran yakınında bulunan Büyük Yeşaya Tomarı MÖ 2. yüzyıla tarihlenir ve kitabın 66 bölümünü içerir. Masa, bir metnin nasıl kopyalanabileceğini gösteren temsili çizimdir. Nüshanın nerede kopyalandığı kesin bilinmiyor.',
       'Unroll the long scroll. Found near Qumran, the Great Isaiah Scroll dates to the second century BCE and contains all 66 chapters. The desk illustrates how a text could be copied. The place where this copy was made is uncertain.',

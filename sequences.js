@@ -17,6 +17,11 @@ export const sequences = [
     ['Elephantine dilekçesi yazıldı · MÖ 407','The Elephantine petition was written · 407 BCE','נכתבה הבקשה מיב · 407 לפנה״ס','Elefantin müraciəti yazıldı · e.ə. 407'],
     ['Kyros Babil’i aldı · MÖ 539','Cyrus took Babylon · 539 BCE','כורש כבש את בבל · 539 לפנה״ס','Kir Babili aldı · e.ə. 539'],
   ]),
+  make(7, ['Taş ölçü masasında sıvı ölç','Measure liquid at the stone table','מדדו נוזל בשולחן האבן','Daş masada mayenin həcmini ölç'], [1,2,0], [
+    ['Deliği aç ve sıvıyı alttaki kaba akıt','Open the outlet and let the liquid drain into the vessel','פתחו את פתח הניקוז ותנו לנוזל לזרום לכלי','Dəliyi aç və mayeni altdakı qaba axıt'],
+    ['Yuvanın altındaki deliği kapat','Block the outlet at the bottom of the bowl','חסמו את הפתח שבתחתית השקע','Oyuğun altındakı dəliyi bağla'],
+    ['Taştaki yuvayı sıvıyla doldur','Fill the hollow in the stone with liquid','מלאו את שקע האבן בנוזל','Daşdakı oyuğu maye ilə doldur'],
+  ]),
   make(8, ['Olay, zafer alayı ve anıt','The event, triumph and monument','האירוע, התהלוכה והאנדרטה','Hadisə, zəfər yürüşü və abidə'], [1,2,0], [
     ['Titus Takı dikildi · MS 81’den sonra','The Arch of Titus was built · after 81 CE','שער טיטוס הוקם · אחרי 81 לספירה','Titus tağı tikildi · 81-ci ildən sonra'],
     ['Roma ordusu Tapınağı yıktı · MS 70','The Roman army destroyed the Temple · 70 CE','הצבא הרומי החריב את בית המקדש · 70 לספירה','Roma ordusu Məbədi dağıtdı · 70-ci il'],

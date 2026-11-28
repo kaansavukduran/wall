@@ -359,6 +359,31 @@ export async function makeWorld(canvas, reducedMotion) {
         drawPilgrimage(background, layer, stone, mortar);
         return;
       }
+      if (layer.startsWith('market-measure-')) {
+        const step = Number(layer.at(-1));
+        rect(background, '#685b50', 124, 112, 322, 88);
+        rect(background, '#8b7b68', 129, 117, 312, 79);
+        rect(background, '#dbc6a4', 163, 111, 254, 32);
+        rect(background, '#b49973', 169, 133, 241, 10);
+        rect(background, '#8b755d', 262, 111, 73, 10);
+        rect(background, '#8b755d', 271, 121, 55, 7);
+        rect(background, '#8b755d', 293, 127, 10, 16);
+        rect(background, '#745e51', 252, 153, 92, 7);
+        rect(background, '#5f5651', 258, 160, 80, 21);
+        rect(background, '#b68c65', 260, 167, 76, 18);
+        rect(background, '#b68c65', 266, 185, 64, 9);
+        rect(background, '#d4ad7a', 261, 168, 74, 3);
+        if (step === 1 || step === 2) rect(background, '#ad7159', 290, 141, 17, 6);
+        if (step === 2) {
+          rect(background, '#6d9ca1', 267, 114, 63, 5);
+          rect(background, '#739da4', 273, 119, 51, 7);
+        }
+        if (step === 3) {
+          rect(background, '#90b5b2', 295, 134, 6, 43);
+          rect(background, '#79a1a5', 265, 176, 66, 10);
+        }
+        return;
+      }
       if (layer === 'theodotos-inscription') {
         rect(background, '#594d4c', 116, 73, 327, 125);
         rect(background, '#ac9278', 121, 78, 317, 120);
