@@ -1,6 +1,6 @@
 import { controllerHelp, mountController } from './controller.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { calendarLabels, library, libraryLabels } from './library.js';
+import { atlasLabels, calendarLabels, library, libraryLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, tour, tourPrompt, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -53,7 +53,6 @@ export async function start(initialLanguage) {
   const reader = find('reader');
   const chooser = find('chapters');
   const studyRoom = find('library');
-  const calendar = find('calendar');
   const photoPanel = find('photo');
   const comparison = find('compare-view');
   const journal = find('journal');
@@ -81,7 +80,6 @@ export async function start(initialLanguage) {
   let sourceToken = 0;
   let evidenceToken = 0;
   let labToken = 0;
-  let calendarLanguage = null;
   const letters = new Set();
 
   const episodeId = index => String(episodes[index].id ?? 'plaza');
@@ -89,6 +87,37 @@ export async function start(initialLanguage) {
   const unlocked = index => index >= 0 && (index === 0 || index === firstIncomplete() || progress.completed.has(episodeId(index)));
   const save = () => store(key, JSON.stringify({active:episodeId(active),completed:[...progress.completed]}));
   const locale = () => languages.indexOf(language);
+  const workshops = [
+    ['calendar', calendarLabels, () => import('./calendar.js').then(module => module.mountCalendar)],
+    ['atlas', atlasLabels, () => import('./atlas.js').then(module => module.mountAtlas)],
+  ].map(([id, translations, load]) => {
+    const [summary, status, panel] = find(id).children;
+    let loadedLanguage;
+    async function refresh() {
+      const current = language;
+      const labels = translations[current];
+      summary.textContent = labels[0];
+      if (!summary.parentElement.open || loadedLanguage === current) return;
+      loadedLanguage = current;
+      panel.replaceChildren();
+      status.hidden = false;
+      status.textContent = labels[1];
+      try {
+        const mount = await load();
+        if (loadedLanguage === current) {
+          mount(panel, current, languages.indexOf(current));
+          status.hidden = true;
+        }
+      } catch {
+        if (loadedLanguage === current) {
+          loadedLanguage = undefined;
+          status.textContent = labels[2];
+        }
+      }
+    }
+    summary.parentElement.addEventListener('toggle', refresh);
+    return refresh;
+  });
 
   function choose(selected) {
     const episode = episodes[active];
@@ -539,8 +568,7 @@ export async function start(initialLanguage) {
     stop();
     const index = locale();
     studyRoom.querySelector('h2').textContent = libraryLabels[language][0];
-    calendar.querySelector('summary').textContent = calendarLabels[language][0];
-    if (calendar.open) loadCalendar();
+    for (const refresh of workshops) refresh();
     studyRoom.querySelector('button').textContent = ui[language][4];
     const available = library.filter(item => {
       const chapter = episodes.findIndex(episode => episode.id === item.chapter);
@@ -569,31 +597,6 @@ export async function start(initialLanguage) {
     }));
     studyRoom.showModal();
   }
-
-  async function loadCalendar() {
-    if (!calendar.open || calendarLanguage === language) return;
-    const current = language;
-    const panel = calendar.querySelector('div');
-    const status = calendar.querySelector('.calendar-status');
-    const labels = calendarLabels[current];
-    calendarLanguage = current;
-    panel.replaceChildren();
-    status.hidden = false;
-    status.textContent = labels[1];
-    try {
-      const { mountCalendar } = await import('./calendar.js');
-      if (calendarLanguage === current) {
-        mountCalendar(panel, current, languages.indexOf(current));
-        status.hidden = true;
-      }
-    } catch {
-      if (calendarLanguage === current) {
-        calendarLanguage = null;
-        status.textContent = labels[2];
-      }
-    }
-  }
-  calendar.addEventListener('toggle', loadCalendar);
 
   function stop() {
     cancelAnimationFrame(movement);

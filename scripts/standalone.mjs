@@ -19,15 +19,17 @@ async function embed(text, path, mime, prefix = './') {
 }
 
 try {
-  for (const entry of await readdir(runtimeRoot, {withFileTypes:true})) {
-    if (entry.isFile() && entry.name.endsWith('.js')) {
-      await cp(resolve(runtimeRoot, entry.name), resolve(temporary, entry.name));
-    }
+  const files = (await readdir(runtimeRoot, {withFileTypes:true})).filter(entry => entry.isFile())
+    .map(entry => entry.name).filter(name => name.endsWith('.js'));
+  for (const name of files) {
+    await cp(resolve(runtimeRoot, name), resolve(temporary, name));
   }
   for (const [entry, path, mime] of [
     ['world.js','assets/visitor.png','image/png'],
+    ['atlas.js','assets/atlas-land.png','image/png'],
     ['catalogue.js','docs/SOURCES.tsv','text/tab-separated-values;charset=utf-8'],
   ]) {
+    if (!files.includes(entry)) continue;
     const source = resolve(temporary, entry);
     await writeFile(source, await embed(await readFile(source, 'utf8'), path, mime));
   }

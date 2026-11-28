@@ -64,3 +64,10 @@ export const calendarLabels = {
   he: ['לוח חגים', 'הלוח נטען…', 'הלוח לא נפתח. רעננו את הדף ונסו שוב.'],
   az: ['Bayram təqvimi', 'Təqvim yüklənir…', 'Təqvim açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
+
+export const atlasLabels = {
+  tr: ['Cemaat atlası', 'Atlas yükleniyor…', 'Atlas açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en: ['Community atlas', 'Loading the atlas…', 'The atlas could not open. Reload the page and try again.'],
+  he: ['אטלס קהילות', 'האטלס נטען…', 'האטלס לא נפתח. רעננו את הדף ונסו שוב.'],
+  az: ['İcmalar atlası', 'Atlas yüklənir…', 'Atlas açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
+};

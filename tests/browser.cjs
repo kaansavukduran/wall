@@ -285,6 +285,25 @@ async function main() {
       assert.match(await page.locator('.calendar-practice [role="status"]').innerText(), /15/);
       await page.click('.calendar-practice button');
       assert.equal(await page.locator('#calendar-answer').inputValue(), '');
+      assert.equal(loadedLessons.has('atlas-lessons.js'), false);
+      const atlasRequest = page.waitForResponse(response => response.url().endsWith('/atlas-lessons.js'));
+      await page.click('#atlas summary');
+      assert.ok((await atlasRequest).ok());
+      await page.locator('#atlas-search').waitFor();
+      await page.fill('#atlas-search', locale === 'he' ? 'קִירְמִיזִי' : 'Qirmizi Qesebe');
+      assert.equal(await page.locator('#atlas-entry').inputValue(), 'mountain-jews-juhuri');
+      assert.equal(await page.locator('.atlas-marker').count(), 2);
+      assert.match(await page.locator('.atlas-reading a').getAttribute('href'), /jewishlanguages.org/);
+      await page.waitForFunction(() => document.querySelector('.atlas-map img').naturalWidth === 384);
+      await page.selectOption('#atlas-category', 'movements');
+      assert.equal(await page.locator('#atlas-entry').isDisabled(), true);
+      await page.fill('#atlas-search', '');
+      assert.equal(await page.locator('#atlas-entry option').count(), 10);
+      await page.selectOption('#atlas-entry', 'reconstructionist');
+      assert.match(await page.locator('.atlas-reading a').getAttribute('href'), /reconstructingjudaism.org/);
+      await page.selectOption('#atlas-category', 'communities');
+      await page.selectOption('#atlas-entry', 'mizrahim');
+      assert.equal(await page.locator('.atlas-figure').isVisible(), false);
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
       await page.keyboard.press('Escape');
@@ -293,7 +312,7 @@ async function main() {
       await page.waitForURL('**/#game');
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(locale, width, '25 checkpoints, sources, movement, save, study room, festival calendar: PASS');
+      console.log(locale, width, '25 checkpoints, sources, movement, save, study room, festival calendar and atlas: PASS');
     }
     const padPage = await browser.newPage({ locale:'he' });
     await padPage.addInitScript(() => {

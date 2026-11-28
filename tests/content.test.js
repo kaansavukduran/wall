@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ancientLessons } from '../ancient-lessons.js';
+import { atlasEntries } from '../atlas-lessons.js';
 import { calendarEvents } from '../calendar-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
@@ -70,7 +71,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 162);
+  assert.equal(entries.length, 187);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -96,6 +97,21 @@ test('festival calendar dates and four localized readings use indexed sources', 
   assert.equal(find('purim').leapMonth, 13);
   assert.equal(find('simchat-torah').diasporaDay, 23);
   assert.equal(find('sigd').day, 29);
+});
+
+test('community atlas has separate categories with four-language indexed readings', () => {
+  const urls = new Set(parseCatalogue(readFileSync('docs/SOURCES.tsv', 'utf8')).map(item => item.url));
+  assert.equal(atlasEntries.length, 19);
+  assert.equal(new Set(atlasEntries.map(entry => entry.id)).size, atlasEntries.length);
+  assert.equal(atlasEntries.filter(entry => entry.category === 'communities').length, 9);
+  assert.equal(atlasEntries.filter(entry => entry.category === 'movements').length, 10);
+  for (const entry of atlasEntries) {
+    assert.ok(urls.has(entry.source.url), entry.source.url);
+    for (const language of languages) {
+      for (const field of ['name','history','detail']) assert.ok(entry[field][language].trim());
+    }
+  }
+  assert.equal(atlasEntries.find(entry => entry.id === 'mizrahim').regions, undefined);
 });
 
 test('all 24 source exercises contain four versions of each card and matched catalogue entries', () => {
