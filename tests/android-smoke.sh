@@ -21,7 +21,7 @@ wait_for_screen() {
 }
 
 tap_label() {
-  local label="$1" point x y height width
+  local label="$1" point x y height width portrait_width
   for attempt in {1..5}; do
     if read_screen; then
       point=$(python3 - "$screen_file" "$label" <<'PY'
@@ -46,6 +46,11 @@ PY
     fi
     # Scroll the document above the navigation bar to reveal the next control.
     read -r width height < <(adb shell wm size | tail -1 | sed -E 's/.* ([0-9]+)x([0-9]+)/\1 \2/')
+    if grep -Eq 'rotation="[13]"' "$screen_file"; then
+      portrait_width="$width"
+      width="$height"
+      height="$portrait_width"
+    fi
     adb shell input swipe "$((width / 2))" "$((height * 4 / 5))" "$((width / 2))" "$((height / 3))" 400
   done
   echo "No tappable control with label: $label" >&2
@@ -67,14 +72,31 @@ wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Se
 adb shell cmd window user-rotation lock 1
 wait_for_screen 'rotation="1"'
 wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
+python3 - "$screen_file" <<'PYLANDSCAPE'
+import re
+import sys
+from xml.etree import ElementTree
+
+webviews = [node for node in ElementTree.parse(sys.argv[1]).iter("node")
+            if node.get("class") == "android.webkit.WebView"]
+for node in webviews:
+    x1, y1, x2, y2 = map(int, re.findall(r"[0-9]+", node.get("bounds", "")))
+    if x2 - x1 > y2 - y1 > 0:
+        break
+else:
+    sys.exit("WALL WebView did not expose a landscape viewport")
+PYLANDSCAPE
 adb shell input gamepad keyevent KEYCODE_BUTTON_Y
 wait_for_screen 'Unlocked chapters|Açık bölümler|פרקים פתוחים|Açıq bölmələr'
 adb shell input gamepad keyevent KEYCODE_BUTTON_B
 wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
+tap_label 'An early record of the name Israel in Canaan|Kenan’da İsrail adının erken bir kaydı|אזכור קדום של השם ישראל בכנען|Kənanda İsrail adının erkən qeydi'
+tap_label 'Continue|Devam et|המשך|Davam et'
+wait_for_screen 'Solomon’s description|Süleyman’ın tasviri|תיאור מקדש שלמה|Süleyman məbədinin təsviri'
 adb shell cmd window user-rotation lock 0
 wait_for_screen 'rotation="0"'
 
 adb shell am force-stop "$package"
 adb shell am start -W -n "$package/.WallActivity"
-wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
-echo 'The released Android package accepted touch, preserved chapter 1 through rotation, handled emulator gamepad buttons and restored chapter 1 after relaunch'
+wait_for_screen 'Solomon’s description|Süleyman’ın tasviri|תיאור מקדש שלמה|Süleyman məbədinin təsviri'
+echo 'The Android APK completed checkpoints in both orientations, handled emulator gamepad buttons and restored chapter 2 after relaunch'

@@ -38,6 +38,7 @@ async function main() {
   const { models } = await import('../scenes.js');
   const { messianicLessons } = await import('../messianic-lessons.js');
   const { pressLessons } = await import('../press-lessons.js');
+  const { displacementRecords } = await import('../displacement-lessons.js');
   const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
   const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js', 'modern-lessons.js'];
   const browser = await playwright[engine].launch(browserOptions);
@@ -516,7 +517,44 @@ async function main() {
           await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
           await press.locator('.timeline-reset').press('Enter');
           assert.equal(await order.count(),0);
-          await press.locator('summary').press('Enter');
+          assert.equal(loadedLessons.has('displacement-lessons.js'),false);
+          const archiveRequest = page.waitForResponse(response => response.url().endsWith('/displacement-lessons.js'));
+          const archive = page.locator('#displacement');
+          await archive.locator(':scope > summary').press('Enter');
+          assert.ok((await archiveRequest).ok());
+          assert.equal(await press.getAttribute('open'),null);
+          const recordSelect = archive.locator('#displacement-record');
+          const details = archive.locator('.relocation-sources');
+          const note = details.locator('[role=status]');
+          const answer = choice => archive.locator('[data-displacement-answer="' + choice + '"]');
+          assert.equal(await recordSelect.locator('option').count(),5);
+          assert.equal(await details.getAttribute('open'),null);
+          assert.equal(await answer(0).isVisible(),false);
+          await details.locator('summary').press('Enter');
+          for (const record of displacementRecords) {
+            await recordSelect.selectOption(record.id);
+            assert.equal(await archive.locator('article > p').textContent(),record.summary[localIndex]);
+            assert.equal(await details.locator('ol li').count(),record.steps.length);
+            assert.deepEqual(await details.locator('a').evaluateAll(links => links.map(link => link.href)),
+              record.sources.map(source => source.url));
+            const alternative = 1-record.correct;
+            await answer(alternative).press('Enter');
+            assert.equal(await note.textContent(),record.feedback[alternative][localIndex]);
+            if (width === 320) await answer(record.correct).tap();
+            else await answer(record.correct).press('Enter');
+            assert.equal(await note.textContent(),record.feedback[record.correct][localIndex]);
+          }
+          await page.selectOption('#lang',locale === 'he' ? 'az' : 'he');
+          await note.waitFor();
+          assert.equal(await recordSelect.inputValue(),'iraq-sawdai-departure');
+          assert.equal(await answer(0).getAttribute('aria-pressed'),'true');
+          await page.selectOption('#lang',locale);
+          await note.waitFor();
+          assert.equal(await note.textContent(),displacementRecords.at(-1).feedback[0][localIndex]);
+          await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+          await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+          await archive.locator(':scope > summary').press('Enter');
         }
         if (episode.id === 24) {
           assert.equal(loadedLessons.has('ashlag-lessons.js'),false);
@@ -1055,6 +1093,13 @@ async function main() {
     await reading.goto(target);
     await reading.locator('#app').waitFor();
     await reading.tap('#settings-button');
+    const behindSettings = await reading.locator('#world').evaluate(canvas => canvas.toDataURL());
+    await reading.keyboard.down('ArrowRight');
+    await reading.evaluate(() => new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done))));
+    await reading.keyboard.up('ArrowRight');
+    await reading.keyboard.press('e');
+    assert.equal(await reading.locator('#world').evaluate(canvas => canvas.toDataURL()),behindSettings);
+    assert.ok(await reading.locator('#settings').evaluate(dialog => dialog.contains(document.activeElement)));
     await reading.selectOption('#theme','light');
     assert.equal(await reading.locator('html').getAttribute('data-theme'),'light');
     assert.equal(await reading.evaluate(() => getComputedStyle(document.documentElement).colorScheme),'light');

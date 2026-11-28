@@ -17,6 +17,7 @@ import { pageFeedback, pageNote, talmudCards } from '../talmud-lessons.js';
 import { exportSave, mergeSave, parseSave, progressKey, saveSummary } from '../save-data.js';
 import { appearanceKey, parseAppearance } from '../appearance.js';
 import { dailyCards } from '../daily-lessons.js';
+import { archiveCopy as displacementCopy, displacementRecords } from '../displacement-lessons.js';
 import { dailyCases } from '../daily-life.js';
 import { archiveCases } from '../diaspora-archive.js';
 import { diasporaRecords } from '../diaspora-lessons.js';
@@ -147,7 +148,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 383);
+  assert.equal(entries.length, 392);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -466,6 +467,26 @@ test('press timeline dates proposals, congress decisions and the Bund’s progra
   for (const field of ['instruction','feedback']) {
     assert.equal(activity[field].length,languages.length);
     assert.ok(activity[field].every(text => text.trim()));
+  }
+});
+
+test('chapter 22 displacement records keep distinct causes, places and documentary pathways', () => {
+  assert.deepEqual(displacementRecords.map(record => record.id),[
+    'holocaust-1933-1945','partition-recommendation','haifa-flight-return','lydda-ramle-expulsion','iraq-sawdai-departure',
+  ]);
+  for (const record of displacementRecords) {
+    assert.ok(record.steps.length >= 2);
+    assert.ok(record.sources.length >= 2);
+    for (const source of record.sources) {
+      assert.ok(entries.some(item => item.url === source.url && belongsTo(item,22)),source.url);
+    }
+    assert.ok(record.options[record.correct]);
+    assert.equal(record.options.length,record.feedback.length);
+    const values = [...displacementCopy,record.title,record.summary,record.prompt,...record.steps,...record.options,...record.feedback];
+    for (const copy of values) {
+      assert.equal(copy.length,languages.length);
+      assert.ok(copy.every(text => text.trim()));
+    }
   }
 });
 

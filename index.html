@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.8.0</small>
+  <small dir="ltr">v0.8.1</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -50,7 +50,8 @@
       <details id="baku-archive" name="chapter-24-workshop" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="geniza-desk" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="messianic-timeline" hidden><summary></summary><p role="status" hidden></p><div></div></details>
-      <details id="press-timeline" hidden><summary></summary><p role="status" hidden></p><div></div></details>
+      <details id="press-timeline" name="chapter-22-workshop" hidden><summary></summary><p role="status" hidden></p><div></div></details>
+      <details id="displacement" name="chapter-22-workshop" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <p id="language-lab-message" role="status" hidden></p>
       <div id="language-labs" hidden>
         <details id="aleph-lab" name="hebrew-workbench">
@@ -121,7 +122,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.0</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.1</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -353,6 +354,22 @@
     <p role="status"></p><ul class="language-exercise-sources" hidden></ul>
   </details>
 </template>
+<template id="displacement-template">
+  <p></p>
+  <label for="displacement-record"></label><select id="displacement-record"></select>
+  <article class="visit-reading relocation-reading">
+    <h3></h3><p></p>
+    <details class="relocation-sources">
+      <summary></summary>
+      <ol></ol>
+      <ul></ul>
+      <p id="displacement-question"></p>
+      <div class="visit-choices" role="group" aria-labelledby="displacement-question"></div>
+      <p role="status"></p>
+    </details>
+  </article>
+</template>
+
 <template id="source-timeline-template">
   <p></p>
   <div class="timeline-choices" role="group"></div>

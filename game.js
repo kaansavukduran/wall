@@ -28,6 +28,12 @@ const pressLabels = {
   he:['השכלה, ציונות והבונד','המסמכים נטענים…','המסמכים לא נפתחו. סגרו את החלונית ופתחו שוב.'],
   az:['Maarifçilik, sionizm və Bund','Sənədlər yüklənir…','Sənədlər açılmadı. Bölməni bağlayıb yenidən aç.'],
 };
+const displacementLabels = {
+  tr:['Holokost ve yerinden edilme arşivi','Arşiv yükleniyor…','Arşiv açılamadı. Kapatıp yeniden aç.'],
+  en:['Holocaust and displacement archive','Loading the archive…','The archive could not open. Close and reopen the panel.'],
+  he:['ארכיון השואה והעקירה','הארכיון נטען…','הארכיון לא נפתח. סגרו את החלונית ופתחו שוב.'],
+  az:['Holokost və didərginlik arxivi','Arxiv yüklənir…','Arxiv açılmadı. Bölməni bağlayıb yenidən aç.'],
+};
 const tourLoadLabels = {
   tr:['Ziyaretçiye sergini anlat','Sergi yükleniyor…','Sergi açılamadı. Sayfayı yenileyip tekrar dene.'],
   en:['Tell a visitor your story','Loading your exhibition…','The exhibition could not open. Reload the page and try again.'],
@@ -106,6 +112,7 @@ export async function start(initialLanguage) {
   const evidence = find('evidence');
   const timeline = find('messianic-timeline');
   const press = find('press-timeline');
+  const displacement = find('displacement');
   const talmud = find('talmud-page');
   const geniza = find('geniza-desk');
   const circle = find('study-circle');
@@ -123,6 +130,7 @@ export async function start(initialLanguage) {
   const genizaView = {};
   const messianicView = {};
   const pressView = {};
+  const displacementView = {};
   const circleView = {};
   const wordMethodView = {};
   const ashlagView = {};
@@ -217,6 +225,9 @@ export async function start(initialLanguage) {
     ]);
     return (panel, current, index) => mountSourceTimeline(panel,current,index,pressLessons,pressView);
   });
+  const refreshDisplacement = connectDisclosure('displacement', displacementLabels, () =>
+    import('./displacement.js').then(({mountDisplacement}) =>
+      (panel, current, index) => mountDisplacement(panel,index,displacementView)));
   const refreshTalmud = connectDisclosure('talmud-page', talmudLabels, () =>
     import('./talmud-page.js').then(({mountTalmudPage}) =>
       (panel, current, index) => mountTalmudPage(panel,current,index,talmudView)));
@@ -327,6 +338,8 @@ export async function start(initialLanguage) {
     if (!timeline.hidden) refreshTimeline();
     press.hidden = episode.id !== 22;
     if (!press.hidden) refreshPress();
+    displacement.hidden = episode.id !== 22;
+    if (!displacement.hidden) refreshDisplacement();
     talmud.hidden = episode.id !== 11;
     if (!talmud.hidden) refreshTalmud();
     geniza.hidden = episode.id !== 15;
@@ -352,6 +365,7 @@ export async function start(initialLanguage) {
     evidence.open = false;
     timeline.open = false;
     press.open = false;
+    displacement.open = false;
     talmud.open = false;
     transfer.open = false;
     labState.word.length = 0;
@@ -804,7 +818,7 @@ export async function start(initialLanguage) {
     });
   }
   document.addEventListener('keydown', event => {
-    if (reader.open || chooser.open || photoPanel.open || studyRoom.open || event.metaKey || event.ctrlKey
+    if (document.querySelector('dialog[open]') || event.metaKey || event.ctrlKey
       || event.target.closest('select, input, textarea, [contenteditable]')) return;
     const value = event.key === 'ArrowLeft' ? -1 : event.key === 'ArrowRight' ? 1 : 0;
     if (value) {

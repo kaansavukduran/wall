@@ -200,7 +200,7 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .visit-choices button[aria-pressed=true]{background:var(--selected-bg);border-color:var(--accent)}
 .visit-exercise [role=status],.daily-exercise [role=status]{color:var(--accent)}
 @media(max-width:25rem){.visit-object{flex-direction:column}.visit-object canvas{inline-size:6rem;max-inline-size:100%}}
-#messianic-timeline,#press-timeline{padding:.65rem;background:var(--panel-bg)}
+#messianic-timeline,#press-timeline,#displacement{padding:.65rem;background:var(--panel-bg)}
 #talmud-page,#geniza-desk,#study-circle,#ashlag-workbench,#baku-archive{padding:.65rem;background:var(--panel-bg)}
 #talmud-page summary,#geniza-desk summary,#study-circle summary,#ashlag-workbench summary,#baku-archive summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
 #talmud-page summary:focus-visible,#geniza-desk summary:focus-visible,#study-circle summary:focus-visible,#ashlag-workbench summary:focus-visible,#baku-archive summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
@@ -230,8 +230,8 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 #talmud-fields button[aria-pressed=true]{background:var(--selected-bg);border-color:var(--accent)}
 #talmud-feedback{color:var(--accent)}
 #talmud-feedback:empty{margin:0}
-#messianic-timeline summary,#press-timeline summary{cursor:pointer;min-block-size:var(--hit);align-content:center;font-weight:650}
-#messianic-timeline summary:focus-visible,#press-timeline summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#messianic-timeline summary,#press-timeline summary,#displacement summary{cursor:pointer;min-block-size:var(--hit);align-content:center;font-weight:650}
+#messianic-timeline summary:focus-visible,#press-timeline summary:focus-visible,#displacement summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .timeline-choices{display:grid;gap:.35rem}
 .timeline-choices button{text-align:start;overflow-wrap:anywhere}
 .timeline-choices button small{display:block;color:var(--muted)}
@@ -345,3 +345,10 @@ html[data-controller-input] :is(button,select,summary,a,input[type="range"]):foc
 .baku-reading ul{padding-inline-start:1.25em}
 .baku-word{display:block;font-size:1.2em;margin-block:.3em}
 .baku-exercise [role=status]{color:var(--accent)}
+
+#displacement{min-inline-size:0;overflow-wrap:anywhere}
+#displacement-record{display:block;inline-size:100%;min-inline-size:0;margin-block:.35rem .65rem}
+.relocation-reading ol,.relocation-reading ul{padding-inline-start:1.25em}
+.relocation-reading li+li{margin-block-start:.45rem}
+.relocation-reading [role=status]{color:var(--accent);margin-block:.45rem 0}
+.relocation-reading [role=status]:empty{margin:0}
