@@ -33,6 +33,7 @@ import { library, libraryLabels } from '../library.js';
 import { medievalLessons } from '../medieval-lessons.js';
 import { messianicLessons } from '../messianic-lessons.js';
 import { pressLessons } from '../press-lessons.js';
+import { mandateLessons } from '../mandate-lessons.js';
 import { modernLessons } from '../modern-lessons.js';
 import { romanLessons } from '../roman-lessons.js';
 import { models, photo } from '../scenes.js';
@@ -180,7 +181,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 435);
+  assert.equal(entries.length, 439);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -188,6 +189,21 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
   assert.ok(Array.from({length:24}, (_, index) => index + 1).every(id => entries.some(entry => belongsTo(entry, id))));
   assert.ok(belongsTo({chapters:'1–4,6'}, 3));
   assert.equal(belongsTo({chapters:'Prolog,1'}, 10), false);
+});
+
+test('the late Mandate exercise orders the strike, commission and policy with chapter sources', () => {
+  const {cards,displayOrder,activity} = mandateLessons;
+  assert.deepEqual(activity.correctOrder,cards.map(card => card.id));
+  assert.deepEqual([...displayOrder].sort((a,b) => a-b),[0,1,2]);
+  for (const card of cards) {
+    for (const field of ['title','date','sourceClass','placeActor','explanation']) {
+      assert.equal(card[field].length,languages.length);
+      assert.ok(card[field].every(value => value.trim()));
+    }
+    for (const source of [card.source,card.relatedSource].filter(Boolean)) {
+      assert.ok(entries.some(record => record.url === source.url && belongsTo(record,21)),source.url);
+    }
+  }
 });
 
 test('Ashlag workbench separates the root, four phases and four screen states with sources', () => {

@@ -118,7 +118,7 @@ Epizot numaraları kaynak kataloğuyla bağlantı kurar. Her epizot, tarihlenmi�
 | 18 | 16. yüzyıl. Safed'de Karo, Cordovero, Luria ve Vital. Hukuk, kozmoloji ve gündelik uygulama atölyeleri. | S19 |
 | 19 | 1530'lar–1917. Kanûnî'nin surları ve sebilleri, Kotel katmanları, Mağribi Mahallesi ve geç Osmanlı meydan girişimi. Üç yapıyı kesitte ayır. | H03–H05, H08 |
 | 20 | 17. yüzyıl–20. yüzyıl başı. Sabatay Sevi, Hasidizm ve karşıtları, Haskala, pogromlar, dinî akımlar ve Siyonizm. Matbaa ve tartışma sahneleri. | S20, S21 |
-| 21 | 1917–1939. Balfour, Manda, 1928 perde olayı, 1929 şiddeti, 1930 komisyonu, 1936–1939 Filistin Arap Ayaklanması. Hükümleri haritaya işle. | H06, H09 |
+| 21 | 1917–1939. Balfour, Manda, 1928 perde olayı, 1929 şiddeti, 1930 komisyonu ve 1936–1939 Filistin Arap Ayaklanması. Duvar hükümlerini haritaya işle. Grev çağrısını, taksim önerisini ve 1939 göç politikasını ayrı belgelerde incele. | H06, H09, D44–D47 |
 | 22 | 1933–1967. Holokost, sığınma, taksim, 1948 savaşı ve Nakba, Eski Şehir'den Yahudi sakinlerin çıkarılması ve Ürdün dönemi. Tarihsel bağlamları ayrı sahnelerde izle. | H07, H09 |
 | 23 | 1967 ve sonrası. Duvara yeniden Yahudi erişimi, Mağribi Mahallesi'nin yıkımı, yerinden edilme ve yeni meydan. Aynı kamerada önce ve sonra. | H08, H09 |
 | 24 | 20. yüzyıldan günümüze. İbadet, diaspora, cemaat çeşitliliği, Kudüs'ün statüsü, Aşlag–Rabaş–Laitman. Bir taş, ibadet veya metnin tarihini kanıtlarla anlat. | S21, B01–B07, H09 |

@@ -53,6 +53,7 @@ async function main() {
   const { models } = await import('../scenes.js');
   const { messianicLessons } = await import('../messianic-lessons.js');
   const { pressLessons } = await import('../press-lessons.js');
+  const { mandateLessons } = await import('../mandate-lessons.js');
   const { displacementRecords } = await import('../displacement-lessons.js');
   const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
   const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js', 'modern-lessons.js'];
@@ -638,11 +639,24 @@ async function main() {
           for (const card of [1,3,2,0,4]) await page.click('[data-sequence="' + card + '"]');
           const dates = await page.locator('#sequence li').allTextContents();
           assert.deepEqual(dates.map(item => item.match(/\d+/)[0]), ['1917','1928','1929','1930','1931']);
+          if (width === 320) await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+          const timeline = page.locator('#mandate-timeline');
+          await timeline.locator('summary').press('Enter');
+          const policy = timeline.locator('[data-timeline-card="mandate-white-paper"]');
+          await policy.press('Enter');
+          assert.equal(await timeline.locator('ol li').count(),0);
+          assert.equal(await timeline.locator('.timeline-reading a').first().getAttribute('href'),mandateLessons.cards[2].source.url);
+          for (const id of mandateLessons.activity.correctOrder) {
+            await timeline.locator('[data-timeline-card="' + id + '"]').press('Enter');
+          }
+          assert.equal(await timeline.locator('ol li').count(),3);
+          assert.equal(await timeline.locator('.timeline-status').textContent(),mandateLessons.activity.feedback[['tr','en','he','az'].indexOf(locale)]);
           if (width === 320) {
-            await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
             assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
             await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
           }
+          await timeline.locator('summary').press('Enter');
+          assert.equal(await timeline.getAttribute('open'),null);
         }
         if (episode.id === 22) {
           await page.click('[data-layer="holocaust"]');
