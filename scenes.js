@@ -103,18 +103,30 @@ export const models = [
       'בסיפור רבי שמעון בר יוחאי ובנו אלעזר מסתתרים במערה. עץ חרוב ומעיין מקיימים אותם. אחרי היציאה הראשונה הם חוזרים למערה. בתלמוד אין כתובת למערה. האיור ממחיש את הסיפור.',
       'Rəvayətdə Şimon bar Yohay və oğlu Elazar mağaraya sığınırlar. Keçibuynuzu ağacı və bulaq onların yaşamasına kömək edir. İlk çıxışdan sonra geri qayıdırlar. Talmud mağaranın ünvanını göstərmir. Şəkil rəvayəti canlandırır.',
     ],'https://www.sefaria.org/Shabbat.33b'],
-    ['peqi-in-survey',['Peqi’in mağara araştırması','Peqi’in cave survey','מחקר המערה בפקיעין','Peqiin mağara araşdırması'], [
-      'Peqi’in’de yerel gelenek bir mağarayı Şimon’la ilişkilendirir. 2025 araştırması bazı çanak çömlek parçalarının antik dönemden kalmış olabileceğini bildirir. Bu buluntular mağaranın belirli bir kişi tarafından kullanıldığını göstermiyor. Kesit temsilidir.',
-      'A local tradition associates a cave at Peqi’in with Shimon. A 2025 survey reports potsherds that may date to antiquity. Those finds cannot identify an individual who used the cave. The section is schematic.',
-      'מסורת מקומית קושרת מערה בפקיעין לרבי שמעון. מחקר מ־2025 מדווח על חרסים שייתכן שהם מן העת העתיקה. הממצאים אינם מזהים אדם מסוים שהשתמש במערה. החתך סכמטי.',
-      'Peqiində yerli ənənə bir mağaranı Şimonla bağlayır. 2025-ci il araşdırması bəzi saxsı qırıqlarının qədim dövrə aid ola biləcəyini bildirir. Tapıntılar mağaradan istifadə etmiş konkret şəxsi müəyyənləşdirmir. Kəsik şərtidir.',
-    ],'https://doi.org/10.26351/IHD/14-1/4'],
+    ['cave-first-exit',['İlk çıkış · Tarla','First exit · The field','היציאה הראשונה · השדה','İlk çıxış · Tarla'], [
+      'Şabat 33b anlatısında Şimon ve Elazar, on iki yıl sonra mağaradan çıkar. Tarlayı süren ve eken insanları görürler. Şimon geçim için çalışmayı Tora öğrenimiyle karşılaştırıp eleştirir. Anlatıda bir ses ikisini mağaraya geri çağırır.',
+      'In the story in Shabbat 33b, Shimon and Elazar leave the cave after twelve years. They see people plowing and sowing. Shimon criticizes working for a living in comparison with studying Torah. A voice calls them back to the cave.',
+      'בסיפור בשבת לג ע״ב יוצאים שמעון ואלעזר מן המערה אחרי שתים־עשרה שנים. הם רואים אנשים חורשים וזורעים. שמעון מבקר את העיסוק בפרנסה בהשוואה ללימוד תורה. בת קול קוראת לשניהם לשוב למערה.',
+      'Şabbat 33b rəvayətində Şimon və Elazar on iki ildən sonra mağaradan çıxırlar. Torpağı şumlayan və toxum səpən insanları görürlər. Şimon dolanışıq üçün çalışmağı Tövrat öyrənməklə müqayisə edib tənqid edir. Rəvayətdə bir səs hər ikisini mağaraya geri çağırır.',
+    ],'https://www.sefaria.org/Shabbat.33b.5-8'],
+    ['cave-second-exit',['İkinci çıkış · Şabat arifesi','Second exit · Shabbat eve','היציאה השנייה · ערב שבת','İkinci çıxış · Şabbat ərəfəsi'], [
+      'Anlatıda on iki ay daha geçer. İkinci çıkışta Elazar zarar verirken Şimon onarır. Şabat arifesinde yaşlı bir adamın iki mersin demeti taşıdığını görürler. Adam demetleri Çıkış 20:8’deki “hatırla” ve Tesniye 5:12’deki “gözet” sözleriyle açıklar. Bu hazırlığı görünce ikisi de yatışır.',
+      'Twelve more months pass in the story. On the second exit, Shimon heals what Elazar harms. On Shabbat eve they meet an older man carrying two myrtle bundles. He links them to “remember” in Exodus 20:8 and “observe” in Deuteronomy 5:12. Seeing his preparations puts them both at ease.',
+      'בסיפור עוברים עוד שנים־עשר חודשים. ביציאה השנייה שמעון מרפא את מה שאלעזר פוגע בו. בערב שבת הם פוגשים זקן שנושא שני אגדי הדסים. הוא קושר אותם ל״זכור״ בשמות כ׳, ח׳ ול״שמור״ בדברים ה׳, י״ב. כשהם רואים את הכנותיו, דעתם נרגעת.',
+      'Rəvayətdə daha on iki ay keçir. İkinci çıxışda Şimon Elazarın zərər vurduğunu sağaldır. Şabbat ərəfəsində iki mərsin dəstəsi daşıyan yaşlı bir adamla rastlaşırlar. Adam bir dəstəni Çıxış 20:8-dəki “xatırla”, o birini Qanunun Təkrarı 5:12-dəki “riayət et” sözü ilə bağlayır. Hazırlığı görmək hər ikisini sakitləşdirir.',
+    ],'https://www.sefaria.org/Shabbat.33b.5-8'],
     ['meron-visit',['Meron’da Lag BaOmer','Lag BaOmer at Meron','ל״ג בעומר במירון','Meronda Laq BaOmer'], [
       'Meron, Peqi’in’den ayrı bir yerdir. Ziyaretçiler burada Şimon bar Yohai’ye atfedilen mezarı Lag BaOmer’de ziyaret eder. Bu anmanın yazılı tanıklıkları arasında 16. yüzyıl Safed çevresi yer alır.',
       'Meron is a separate site from Peqi’in. Pilgrims visit the tomb traditionally associated with Shimon bar Yohai on Lag BaOmer. Written evidence for the observance includes records from the sixteenth-century Safed circle.',
       'מירון הוא אתר נפרד מפקיעין. בל״ג בעומר עולים לקבר המיוחס במסורת לרבי שמעון בר יוחאי. בין העדויות הכתובות למנהג יש תיעוד מחוגי צפת במאה השש־עשרה.',
       'Meron Peqiindən ayrı yerdir. Laq BaOmerdə zəvvarlar ənənədə Şimon bar Yohaya aid edilən qəbri ziyarət edirlər. Ayin haqqında yazılı qeydlər arasında XVI əsr Safed çevrəsinə aid sənədlər var.',
     ],'https://schechter.edu/a-historical-treatise-on-the-lag-bomer-celebration-at-mt-meron/'],
+    ['peqi-in-survey',['Peqi’in mağara araştırması','Peqi’in cave survey','מחקר המערה בפקיעין','Peqiin mağara araşdırması'], [
+      'Peqi’in’de yerel gelenek bir mağarayı Şimon’la ilişkilendirir. 2025 araştırması bazı çanak çömlek parçalarının antik dönemden kalmış olabileceğini bildirir. Bu buluntular mağaranın belirli bir kişi tarafından kullanıldığını göstermiyor. Kesit temsilidir.',
+      'A local tradition associates a cave at Peqi’in with Shimon. A 2025 survey reports potsherds that may date to antiquity. Those finds cannot identify an individual who used the cave. The section is schematic.',
+      'מסורת מקומית קושרת מערה בפקיעין לרבי שמעון. מחקר מ־2025 מדווח על חרסים שייתכן שהם מן העת העתיקה. הממצאים אינם מזהים אדם מסוים שהשתמש במערה. החתך סכמטי.',
+      'Peqiində yerli ənənə bir mağaranı Şimonla bağlayır. 2025-ci il araşdırması bəzi saxsı qırıqlarının qədim dövrə aid ola biləcəyini bildirir. Tapıntılar mağaradan istifadə etmiş konkret şəxsi müəyyənləşdirmir. Kəsik şərtidir.',
+    ],'https://doi.org/10.26351/IHD/14-1/4'],
   ]),
   scene(13, ['Bugünkü kutsal alandan üç yapı','Three structures at the site today','שלושה מבנים באתר כיום','Bugünkü müqəddəs məkanda üç tikili'], [
     ['dome-rock',['Kubbetü’s-Sahra','Dome of the Rock','כיפת הסלע','Qübbət əs-Səxra'],
