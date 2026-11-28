@@ -19,13 +19,13 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.8.7</small>
+  <small dir="ltr">v0.8.8</small>
 </section>
 <div id="app" hidden>
   <header class="top">
-    <a class="mark" href="#game">WALL</a>
-    <button id="episodes-button" type="button"></button>
-    <button id="library-button" type="button"></button>
+    <a id="game-mark" class="mark" href="#game" hidden>WALL</a>
+    <button id="episodes-button" type="button" hidden></button>
+    <button id="library-button" type="button" hidden></button>
     <select id="lang" aria-label="Language">
       <option value="tr" lang="tr">Türkçe</option><option value="en" lang="en">English</option>
       <option value="he" lang="he" dir="rtl">עברית</option><option value="az" lang="az">Azərbaycanca</option>
@@ -34,6 +34,12 @@
   </header>
   <p id="storage-notice" class="storage-warning" role="status"></p>
   <main id="game" tabindex="-1">
+    <section id="arrival" hidden>
+      <h1 lang="en" dir="ltr">WALL</h1>
+      <p id="arrival-description"></p>
+      <button id="start-campaign" class="primary" type="button" aria-describedby="arrival-description"></button>
+    </section>
+    <div id="campaign" hidden>
     <section class="stage">
       <span id="era" class="era" dir="auto"></span>
       <canvas id="world" width="480" height="240" aria-hidden="true"></canvas>
@@ -122,8 +128,9 @@
         </section>
       </div>
     </section>
+    </div>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.7</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.8</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>

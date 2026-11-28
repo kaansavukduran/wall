@@ -7,8 +7,16 @@ const target = process.argv[2] || 'http://127.0.0.1:8765/';
 const browserOptions = engine === 'chromium' ? { args:['--no-sandbox', '--disable-dev-shm-usage'] } : {};
 if (process.env.WALL_BROWSER) browserOptions.executablePath = process.env.WALL_BROWSER;
 
+async function enterCampaign(page, input = 'click') {
+  await page.locator('#app').waitFor();
+  if (input === 'keyboard') await page.locator('#start-campaign').press('Enter');
+  else if (input === 'tap') await page.tap('#start-campaign');
+  else await page.click('#start-campaign');
+  await page.locator('#campaign').waitFor();
+}
+
 async function main() {
-  const { chapters, plaza } = await import('../content.js');
+  const { chapters, languages, plaza, ui } = await import('../content.js');
   const { ancientLessons } = await import('../ancient-lessons.js');
   const { secondTempleLessons } = await import('../second-temple-lessons.js');
   const { romanLessons } = await import('../roman-lessons.js');
@@ -44,7 +52,8 @@ async function main() {
   const browser = await playwright[engine].launch(browserOptions);
   try {
     for (const [locale, width] of [['tr',1100],['en',320],['he',320],['az',320]]) {
-      const page = await browser.newPage({ viewport:{ width, height:750 },locale,hasTouch:width === 320 });
+      const context = await browser.newContext({ viewport:{ width, height:750 },locale,hasTouch:width === 320 });
+      const page = await context.newPage();
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
       const loadedLessons = new Set();
@@ -54,14 +63,22 @@ async function main() {
       await page.goto(target);
       await page.locator('#app').waitFor();
       assert.match(await page.locator('#download').getAttribute('href'), /kaansavukduran\/wall\/releases$/);
+      assert.equal(await page.locator('#start-campaign').evaluate(button => button === document.activeElement),true);
       await page.selectOption('#lang', locale);
       assert.equal(await page.locator('html').getAttribute('dir'), locale === 'he' ? 'rtl' : 'ltr');
+      const newGame = {tr:'Yeni oyun',en:'New game',he:'משחק חדש',az:'Yeni oyun'};
+      assert.equal(await page.locator('#start-campaign').textContent(),newGame[locale]);
+      assert.equal(await page.locator('#campaign').isHidden(),true);
+      assert.equal(await page.evaluate(() => localStorage.getItem('wall.progress.v1')),null);
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
       await page.click('#settings-button');
       assert.equal(await page.locator('#settings').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth),false);
       await page.keyboard.press('Escape');
       assert.equal(await page.locator('#settings-button').evaluate(el => el === document.activeElement),true);
+      await enterCampaign(page, width === 320 ? 'tap' : 'keyboard');
+      assert.equal(await page.locator('#title').evaluate(title => title === document.activeElement),true);
+      assert.equal(await page.locator('#arrival').isHidden(),true);
       await page.click('#source');
       await page.locator('#reader[open]').waitFor();
       await page.click('#catalogue summary');
@@ -1024,10 +1041,20 @@ async function main() {
       await page.click('.kabbalah-exercise summary');
       assert.equal(await page.locator('#kabbalah-draft').inputValue(), 'WALL rabash-group-application');
       await page.keyboard.press('Escape');
+      const returning = await context.newPage();
+      await returning.goto(target);
+      await returning.locator('#arrival').waitFor();
+      const chapterTitle = chapters.at(-1).text[languages.indexOf(locale)][0];
+      assert.ok((await returning.locator('#arrival-description').textContent()).includes(chapterTitle));
+      assert.equal(await returning.locator('#start-campaign').textContent(),ui[locale][3]);
+      assert.equal(await returning.evaluate(() => JSON.parse(localStorage.getItem('wall.progress.v1')).active),'24');
+      await enterCampaign(returning);
+      assert.equal(await returning.locator('#chapter').textContent(),'24');
+      await returning.close();
       await page.click('#next');
       await page.waitForURL('**/#game');
       assert.deepEqual(errors, []);
-      await page.close();
+      await context.close();
       console.log(locale, width, '25 checkpoints, workshops and saved evidence exhibition: PASS');
     }
     const edge = await browser.newPage();
@@ -1046,8 +1073,11 @@ async function main() {
       };
       probe.afterPaint = () => new Promise(resolve => frame(() => frame(resolve)));
     });
-    await edge.goto(target);
-    await edge.locator('#app').waitFor();
+    await edge.goto(target + '#chapter-24');
+    await edge.locator('#arrival').waitFor();
+    assert.equal(await edge.locator('#campaign').isHidden(),true);
+    await enterCampaign(edge,'keyboard');
+    await edge.waitForURL('**/#game');
     await edge.keyboard.down('ArrowLeft');
     await edge.waitForFunction(() => window.edgeProbe.x === 16);
     await edge.evaluate(() => window.edgeProbe.afterPaint());
@@ -1078,6 +1108,9 @@ async function main() {
       await padPage.evaluate(id => { window.fixtureController.buttons[id].pressed = false; }, button);
       await padPage.evaluate(() => new Promise(done => requestAnimationFrame(() => requestAnimationFrame(done))));
     }
+    await press(1, () => document.documentElement.hasAttribute('data-controller-input'));
+    assert.equal(await padPage.locator('#arrival').isVisible(),true);
+    await press(0, () => !document.getElementById('campaign').hidden);
     await press(2, () => document.activeElement === document.querySelector('#choices button'));
     await press(13, () => document.activeElement.dataset.choice === '1');
     assert.equal(await padPage.evaluate(() => getComputedStyle(document.activeElement).outlineWidth), '3px');
@@ -1118,7 +1151,7 @@ async function main() {
 
     const source = await browser.newPage({locale:'he',viewport:{width:320,height:700},hasTouch:true});
     await source.goto(target);
-    await source.locator('#app').waitFor();
+    await enterCampaign(source,'tap');
     await source.selectOption('#lang','he');
     await source.click('[data-choice="' + plaza.correct + '"]');
     await source.click('#next');
@@ -1167,7 +1200,7 @@ async function main() {
       };
     });
     await blocked.goto(target);
-    await blocked.locator('#app').waitFor();
+    await enterCampaign(blocked,'tap');
     await blocked.evaluate(() => { window.blockSaveWrites = true; });
     await blocked.tap('[data-choice="' + plaza.correct + '"]');
     const notice = blocked.locator('#storage-notice');
@@ -1210,7 +1243,7 @@ async function main() {
 
     const reading = await browser.newPage({locale:'az',viewport:{width:320,height:700},hasTouch:true,colorScheme:'dark'});
     await reading.goto(target);
-    await reading.locator('#app').waitFor();
+    await enterCampaign(reading,'tap');
     await reading.tap('#settings-button');
     const behindSettings = await reading.locator('#world').evaluate(canvas => canvas.toDataURL());
     await reading.keyboard.down('ArrowRight');
@@ -1260,7 +1293,7 @@ async function main() {
       }
       await recovery.unroute('**/visitor.png');
       await recovery.click('#retry');
-      await recovery.locator('#app').waitFor();
+      await enterCampaign(recovery);
       await recovery.close();
     }
     console.log('Loading error, readable version and retry in four locales: PASS');

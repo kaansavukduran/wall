@@ -48,6 +48,11 @@ button:disabled{opacity:.52;cursor:default}
 .top,main,footer,#storage-notice{inline-size:min(69rem,100% - 2rem);margin-inline:auto}
 .top,footer{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;padding-block:.8rem}
 .top .mark{font:700 2rem Pixelify,system-ui;text-decoration:none;margin-inline-end:auto;color:var(--ink);letter-spacing:.08em}
+#game-mark[hidden] ~ #lang{margin-inline-start:auto}
+#arrival{max-inline-size:44rem;margin:clamp(.75rem,5vh,3rem) auto;padding:clamp(1rem,4vw,2.5rem);background:var(--paper);border:1px solid var(--edge);border-block-start:4px solid var(--accent)}
+#arrival h1{inline-size:fit-content;font:700 clamp(2rem,6vw,3.5rem)/1.2 Pixelify,system-ui,sans-serif}
+#arrival p{max-inline-size:55ch;margin-block:1rem}
+#arrival button{max-inline-size:100%}
 .stage{position:relative;border:1px solid var(--edge);background:var(--stage-bg);min-inline-size:0}
 canvas{display:block;inline-size:100%;height:auto;aspect-ratio:2;image-rendering:pixelated}
 .era,.controls{background:var(--field-bg);border:1px solid var(--edge);border-radius:.3rem}
@@ -56,7 +61,7 @@ canvas{display:block;inline-size:100%;height:auto;aspect-ratio:2;image-rendering
 .controls button{touch-action:manipulation}
 .story{display:grid;align-content:start;gap:1rem;padding:1.1rem;background:var(--paper);border:1px solid var(--edge);border-block-start:0}
 .story>*{min-inline-size:0}
-@media(min-width:52rem){main{display:grid;grid-template-columns:minmax(0,2fr) minmax(17rem,1fr);gap:1rem;align-items:start}.story{border-block-start:1px solid var(--edge);min-block-size:18rem}}
+@media(min-width:52rem){#campaign{display:grid;grid-template-columns:minmax(0,2fr) minmax(17rem,1fr);gap:1rem;align-items:start}.story{border-block-start:1px solid var(--edge);min-block-size:18rem}}
 h1,h2{line-height:1.2;text-wrap:balance;margin:.25em 0}
 .chapter,footer{color:var(--muted);font-size:.86rem}
 .chapter{margin:0}

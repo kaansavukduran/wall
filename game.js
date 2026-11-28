@@ -64,6 +64,12 @@ const settingsLabels = {
   az:{title:'Ayarlar',backup:['Yaddaşı köçür','Yaddaş alətləri yüklənir…','Alətlər açılmadı. Bağlayıb yenidən aç.'],restored:'Yaddaşlar birləşdirildi.'},
 };
 const saveLabels = Object.fromEntries(Object.entries(settingsLabels).map(([lang,labels]) => [lang,labels.backup]));
+const arrivalCopy = {
+  tr:['Yeni oyun','Ağlama Duvarı’nın tarihini keşfet. Bugünkü meydandan bakıp eski bir fotoğrafı incele.', chapter => `Son açtığın bölüm “${chapter}”.`],
+  en:['New game','Explore the history of the Western Wall. Begin in today’s plaza and examine a historic photograph.', chapter => `You last visited “${chapter}”.`],
+  he:['משחק חדש','גלו את תולדות הכותל המערבי. התחילו ברחבה של היום ובחנו תצלום היסטורי.', chapter => `ביקרתם לאחרונה בפרק ״${chapter}״.`],
+  az:['Yeni oyun','Qərb divarının tarixini araşdır. Bugünkü meydandan başla və tarixi fotoşəkli nəzərdən keçir.', chapter => `Son açdığın bölmə “${chapter}” idi.`],
+};
 const storageCopy = {
   tr:[
     'Bazı değişiklikler kaydedilemedi. Çıkmadan önce Ayarlar’dan kayıt metnini kopyalayabilirsin.',
@@ -196,6 +202,10 @@ export async function start(initialLanguage) {
   const bakuView = {};
   const talmudView = {reading:null,side:0,position:0,answers:[['','',''],['','','']]};
   const progress = readProgress(read);
+  const arrival = find('arrival');
+  const campaign = find('campaign');
+  const startCampaign = find('start-campaign');
+  const campaignLinks = ['game-mark','episodes-button','library-button'].map(find);
   let active = 0;
   let movement = null;
   let direction = 0;
@@ -343,12 +353,8 @@ export async function start(initialLanguage) {
     save();
   }
 
-  function render(focus = false) {
-    const episode = episodes[active];
-    const index = locale();
-    const text = episode.text[index];
+  function renderLanguage() {
     const labels = ui[language];
-    const completed = progress.completed.has(episodeId(active));
     document.documentElement.lang = language;
     document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
     showStorageStatus();
@@ -358,6 +364,24 @@ export async function start(initialLanguage) {
     find('library-button').textContent = libraryLabels[language][0];
     find('settings-button').textContent = settingsLabels[language].title;
     find('download').textContent = transferLabels[language][3];
+  }
+
+  function renderArrival(savedIndex) {
+    renderLanguage();
+    const [startLabel, intro, resume] = arrivalCopy[language];
+    startCampaign.textContent = savedIndex >= 0 ? ui[language][3] : startLabel;
+    find('arrival-description').textContent = savedIndex >= 0
+      ? resume(episodes[savedIndex].text[locale()][0])
+      : intro;
+  }
+
+  function render(focus = false) {
+    const episode = episodes[active];
+    const index = locale();
+    const text = episode.text[index];
+    const labels = ui[language];
+    const completed = progress.completed.has(episodeId(active));
+    renderLanguage();
     const visit = find('visit-button');
     visit.textContent = visitLabels[language][0];
     visit.hidden = active !== 0 && active !== episodes.length - 1;
@@ -418,6 +442,12 @@ export async function start(initialLanguage) {
 
   function go(index, updateHash = true) {
     if (!episodes[index] || !unlocked(index)) return;
+    const entering = campaign.hidden;
+    if (entering) {
+      arrival.hidden = true;
+      campaign.hidden = false;
+      for (const link of campaignLinks) link.hidden = false;
+    }
     active = index;
     stop();
     selectedLayer = '';
@@ -438,7 +468,7 @@ export async function start(initialLanguage) {
     letters.clear();
     if (updateHash) history.replaceState(null, '', index === 0 ? '#game' : '#chapter-' + episodeId(index));
     save();
-    render(updateHash);
+    render(updateHash || entering);
   }
 
   evidence.addEventListener('toggle', () => {
@@ -793,6 +823,7 @@ export async function start(initialLanguage) {
   }
 
   function openChapters() {
+    if (campaign.hidden) return;
     stop();
     chooser.querySelector('h2').textContent = ui[language][11];
     chooser.querySelector('button').textContent = ui[language][4];
@@ -810,6 +841,7 @@ export async function start(initialLanguage) {
   }
 
   function openLibrary() {
+    if (campaign.hidden) return;
     stop();
     const index = locale();
     studyRoom.querySelector('h2').textContent = libraryLabels[language][0];
@@ -847,10 +879,10 @@ export async function start(initialLanguage) {
     cancelAnimationFrame(movement);
     movement = null;
     direction = 0;
-    world.idle();
+    if (!campaign.hidden) world.idle();
   }
   function walk(value) {
-    if (direction === value) return;
+    if (campaign.hidden || direction === value) return;
     stop();
     direction = value;
     if (!world.move(value, 2)) return;
@@ -878,7 +910,7 @@ export async function start(initialLanguage) {
     });
   }
   document.addEventListener('keydown', event => {
-    if (document.querySelector('dialog[open]') || event.metaKey || event.ctrlKey
+    if (campaign.hidden || document.querySelector('dialog[open]') || event.metaKey || event.ctrlKey
       || event.target.closest('select, input, textarea, [contenteditable]')) return;
     const value = event.key === 'ArrowLeft' ? -1 : event.key === 'ArrowRight' ? 1 : 0;
     if (value) {
@@ -931,6 +963,7 @@ export async function start(initialLanguage) {
   });
   find('source').addEventListener('click', openSource);
   function inspect() {
+    if (campaign.hidden) return;
     stop();
     world.inspect();
     options.querySelector('button').focus();
@@ -962,7 +995,8 @@ export async function start(initialLanguage) {
     if (!languages.includes(selector.value)) return;
     language = selector.value;
     store('wall.language', language);
-    render();
+    if (campaign.hidden) renderArrival(savedIndex);
+    else render();
   });
 
   function fromHash() {
@@ -972,10 +1006,19 @@ export async function start(initialLanguage) {
   window.addEventListener('hashchange', () => go(fromHash(), false));
   const requested = fromHash();
   const saved = episodes.findIndex((_, index) => episodeId(index) === progress.active);
-  const startAt = requested >= 0 && unlocked(requested) ? requested : saved >= 0 && unlocked(saved) ? saved : 0;
-  go(startAt, false);
+  const savedIndex = unlocked(saved) ? saved : -1;
+  startCampaign.addEventListener('click', () => go(Math.max(0,savedIndex)));
+  if (unlocked(requested)) {
+    go(requested, false);
+  } else if (restored) {
+    go(Math.max(0,savedIndex));
+  } else {
+    renderArrival(savedIndex);
+    arrival.hidden = false;
+  }
   mountController({
     walk, stop, inspect, timeline:openChapters, library:openLibrary,
     showHint() { find('controller-hint').hidden = false; },
   });
+  return arrival.hidden ? null : startCampaign;
 }

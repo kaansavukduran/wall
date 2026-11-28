@@ -40,6 +40,8 @@ async function main() {
     assert.deepEqual(manifest.languages,['tr','en','he','az']);
     assert.match(manifest.sourceCatalogueRevision,/^[0-9a-f]{64}$/);
     assert.match(await first.page.locator('footer').textContent(),new RegExp('v'+manifest.version+'$'));
+    assert.equal(await first.page.locator('#start-campaign').textContent(),'Yeni oyun');
+    await first.page.tap('#start-campaign');
     await first.page.tap('[data-choice="1"]');
     await first.page.tap('#next');
     assert.equal(await first.page.locator('#chapter').textContent(),'1');
@@ -54,6 +56,7 @@ async function main() {
       }));
     });
     const {page} = archive;
+    assert.equal(await page.locator('#arrival').isHidden(),true);
     await page.tap('#baku-archive > summary');
     const canvas = page.locator('#baku-archive canvas');
     await canvas.waitFor();

@@ -83,7 +83,10 @@ PYDIAG
 adb install WALL-*.apk
 adb shell am start -W -n "$package/.WallActivity"
 adb shell pidof "$package"
-wait_for_screen 'A trail of stone|Bir taşın izi|בעקבות האבן|Daşın izi'
+plaza='A trail of stone|Bir taşın izi|בעקבות האבן|Daşın izi'
+new_game='New game|Yeni oyun|משחק חדש'
+wait_for_screen "$plaza|$new_game"
+tap_label "$new_game" "$plaza"
 if [[ -n "${WALL_TAG:-}" ]]; then
   version=$(adb shell dumpsys package "$package" | awk '!found && /versionName=/{sub(/.*versionName=/, ""); print; found=1}')
   [[ "$version" == "${WALL_TAG#v}" ]]
@@ -123,5 +126,8 @@ wait_for_screen 'rotation="0"'
 
 adb shell am force-stop "$package"
 adb shell am start -W -n "$package/.WallActivity"
-wait_for_screen 'Solomon’s description|Süleyman’ın tasviri|תיאור מקדש שלמה|Süleyman məbədinin təsviri'
+resume='Continue|Devam et|המשך|Davam et'
+chapter_two='An exact plan recovered in excavation|Kazıda bulunan birebir plan|תוכנית מדויקת שנתגלתה בחפירה|Qazıntıda tapılmış dəqiq plan'
+wait_for_screen "$chapter_two|$resume"
+tap_label "$resume" "$chapter_two"
 echo 'The Android APK completed checkpoints in both orientations, handled emulator gamepad buttons and restored chapter 2 after relaunch'

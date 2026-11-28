@@ -47,7 +47,11 @@ function evaluate(expression) {
 try {
   let ready = false;
   while (!ready && Date.now() < deadline) {
-    ready = await evaluate("Boolean(document.querySelector('#app:not([hidden]) [data-choice]'))");
+    ready = await evaluate(`(() => {
+      const app = document.querySelector('#app:not([hidden])');
+      app?.querySelector('#arrival:not([hidden]) #start-campaign')?.click();
+      return Boolean(app?.querySelector('[data-choice]')?.getClientRects().length);
+    })()`);
     if (!ready) await wait(250);
   }
   assert.ok(ready, 'The packaged browser did not reach a playable scene');

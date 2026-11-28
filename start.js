@@ -14,11 +14,12 @@ const retry = document.querySelector('#retry');
 status.textContent = phrases[language][0];
 retry.textContent = phrases[language][2];
 let failed = false;
+let initialControl;
 retry.addEventListener('click', () => location.reload());
 try {
   await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
   const { start } = await import('./game.js');
-  await start(language);
+  initialControl = await start(language);
 } catch (error) {
   failed = true;
   console.error(error);
@@ -31,4 +32,5 @@ if (failed) {
 } else {
   document.querySelector('#app').hidden = false;
   document.querySelector('#boot').hidden = true;
+  initialControl?.focus();
 }
