@@ -114,6 +114,7 @@ export async function start(initialLanguage) {
   let language = initialLanguage;
   const pending = new Map();
   const storageNotice = find('storage-notice');
+  const libraryStorage = find('library-storage');
   const settingsStorage = find('settings-storage');
   const retryStorage = find('retry-storage');
   const read = keyName => pending.get(keyName) ?? readStored(keyName);
@@ -122,7 +123,9 @@ export async function start(initialLanguage) {
     const [warning, settingsWarning, retryTitle, saved] = storageCopy[language];
     const mainText = pending.size ? warning : '';
     const modalText = pending.size ? settingsWarning : recovered ? saved : '';
-    if (storageNotice.textContent !== mainText) storageNotice.textContent = mainText;
+    for (const notice of [storageNotice,libraryStorage]) {
+      if (notice.textContent !== mainText) notice.textContent = mainText;
+    }
     if (settingsStorage.textContent !== modalText) settingsStorage.textContent = modalText;
     retryStorage.textContent = retryTitle;
     retryStorage.hidden = pending.size === 0;

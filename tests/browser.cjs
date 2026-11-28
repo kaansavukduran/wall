@@ -1179,6 +1179,9 @@ async function main() {
     await blocked.fill('#transfer-draft','בדיקת התאוששות');
     await blocked.selectOption('#lang','he');
     assert.match(await notice.textContent(), /לא נשמרו/);
+    await blocked.tap('#library-button');
+    assert.match(await blocked.locator('#library-storage:visible').textContent(), /לא נשמרו/);
+    await blocked.keyboard.press('Escape');
     await blocked.tap('#settings-button');
     await blocked.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
     assert.equal(await blocked.locator('#settings').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth),false);
