@@ -12,6 +12,11 @@ export const sequences = [
     ['MÖ 597 ele geçirme ve sürgün','Capture and deportation, 597 BCE','כיבוש והגליה, 597 לפנה״ס','E.ə. 597, şəhərin alınması və sürgün'],
     ['MÖ 587/586 yıkım','Destruction, 587/586 BCE','חורבן, 587/586 לפנה״ס','E.ə. 587/586, dağıntı'],
   ]),
+  make(4, ['Pers döneminden üç tarih','Three dates under Persian rule','שלושה תאריכים בשלטון פרס','Fars hakimiyyətindən üç tarix'], [2,0,1], [
+    ['Kudüs’te İkinci Tapınak tamamlandı · MÖ 516/515','The Second Temple was completed in Jerusalem · 516/515 BCE','הושלם בית המקדש השני בירושלים · 516/515 לפנה״ס','Yerusəlimdə İkinci Məbəd tamamlandı · e.ə. 516/515'],
+    ['Elephantine dilekçesi yazıldı · MÖ 407','The Elephantine petition was written · 407 BCE','נכתבה הבקשה מיב · 407 לפנה״ס','Elefantin müraciəti yazıldı · e.ə. 407'],
+    ['Kyros Babil’i aldı · MÖ 539','Cyrus took Babylon · 539 BCE','כורש כבש את בבל · 539 לפנה״ס','Kir Babili aldı · e.ə. 539'],
+  ]),
   make(11, ['Bir sayfayı oluştur','Assemble a page','סדרו דף תלמוד','Səhifəni qur'], [1,0,2], [
     ['Gemara soruyu tartışır','Gemara discusses the question','הגמרא דנה בשאלה','Gemara sualı müzakirə edir'],
     ['Mişna soruyu ortaya koyar','Mishnah poses the question','המשנה מציגה את השאלה','Mişna sualı ortaya qoyur'],
