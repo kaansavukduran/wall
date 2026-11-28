@@ -54,6 +54,20 @@ async function main() {
     assert.deepEqual(first.errors,[]);
     await first.page.close();
 
+    const model = await openOffline(browser,'#chapter-6',() => {
+      localStorage.setItem('wall.progress.v1',JSON.stringify({
+        active:'6',completed:['plaza','1','2','3','4','5'],
+      }));
+    });
+    const assembly = model.page.locator('#platform-assembly');
+    await assembly.locator('summary').tap();
+    await assembly.locator('[data-platform-part="0"]').tap();
+    await assembly.locator('[data-platform-place="0"]').tap();
+    assert.match(await assembly.locator('.platform-feedback').textContent(),/İstinad divarı/);
+    assert.deepEqual(model.requests,[]);
+    assert.deepEqual(model.errors,[]);
+    await model.page.close();
+
     const archive = await openOffline(browser,'#chapter-24',() => {
       localStorage.setItem('wall.progress.v1',JSON.stringify({
         active:'24',

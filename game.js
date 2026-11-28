@@ -55,6 +55,12 @@ const transferDecks = [
   () => import('./transfer-middle-lessons.js'),
   () => import('./transfer-late-lessons.js'),
 ];
+const platformLabels = {
+  tr:['Mimari kesiti kur','Parçalar hazırlanıyor…','Parçalar açılamadı. Kapatıp yeniden aç.'],
+  en:['Assemble the cross-section','Loading the pieces…','The pieces could not be loaded. Close and reopen to try again.'],
+  he:['הרכבת החתך','החלקים נטענים…','טעינת החלקים נכשלה. סגרו ופתחו מחדש.'],
+  az:['Memarlıq kəsiyini qur','Hissələr yüklənir…','Hissələr açılmadı. Bağla və yenidən aç.'],
+};
 const talmudLabels = {
   tr:['Talmud sayfasını aç','Sayfa yükleniyor…','Sayfa açılamadı. Kapatıp yeniden aç.'],
   en:['Open a Talmud page','Loading the page…','The page could not open. Close it and reopen it.'],
@@ -177,6 +183,7 @@ export async function start(initialLanguage) {
   const timeline = find('messianic-timeline');
   const press = find('press-timeline');
   const displacement = find('displacement');
+  const platform = find('platform-assembly');
   const talmud = find('talmud-page');
   const geniza = find('geniza-desk');
   const circle = find('study-circle');
@@ -201,6 +208,7 @@ export async function start(initialLanguage) {
   const wordMethodView = {};
   const ashlagView = {};
   const bakuView = {};
+  const platformView = {};
   const talmudView = {reading:null,side:0,position:0,answers:[['','',''],['','','']]};
   const initialProgress = readCampaign(readStored,pending);
   const {completed} = initialProgress;
@@ -340,6 +348,9 @@ export async function start(initialLanguage) {
   const refreshDisplacement = connectDisclosure('displacement', displacementLabels, () =>
     import('./displacement.js').then(({mountDisplacement}) =>
       (panel, current, index) => mountDisplacement(panel,index,displacementView)));
+  const refreshPlatform = connectDisclosure('platform-assembly', platformLabels, () =>
+    import('./platform-assembly.js').then(({mountPlatformAssembly}) =>
+      (panel, current) => mountPlatformAssembly(panel,current,platformView)));
   const refreshTalmud = connectDisclosure('talmud-page', talmudLabels, () =>
     import('./talmud-page.js').then(({mountTalmudPage}) =>
       (panel, current, index) => mountTalmudPage(panel,current,index,talmudView)));
@@ -486,6 +497,8 @@ export async function start(initialLanguage) {
     if (!press.hidden) refreshPress();
     displacement.hidden = episode.id !== 22;
     if (!displacement.hidden) refreshDisplacement();
+    platform.hidden = episode.id !== 6;
+    if (!platform.hidden) refreshPlatform();
     talmud.hidden = episode.id !== 11;
     if (!talmud.hidden) refreshTalmud();
     geniza.hidden = episode.id !== 15;

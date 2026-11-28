@@ -236,6 +236,42 @@ async function main() {
           await page.selectOption('#lang', locale === 'he' ? 'az' : 'he');
           assert.equal(await page.locator('#chapter').textContent(), '6');
           await page.selectOption('#lang', locale);
+          const assembly = page.locator('#platform-assembly');
+          const diagram = assembly.locator('canvas');
+          const load = page.waitForResponse(response => response.url().endsWith('/platform-assembly.js'));
+          await assembly.locator('summary').press('Enter');
+          assert.ok((await load).ok());
+          const frames = [];
+          const readDiagram = () => diagram.evaluate(canvas => canvas.toDataURL());
+          const part = index => assembly.locator('[data-platform-part="' + index + '"]');
+          const place = index => assembly.locator('[data-platform-place="' + index + '"]');
+          frames.push(await readDiagram());
+          await part(2).press('Enter');
+          await place(0).press('Enter');
+          assert.equal(await readDiagram(), frames[0]);
+          await place(2).press('Enter');
+          frames.push(await readDiagram());
+          await page.selectOption('#lang', locale === 'he' ? 'tr' : 'he');
+          assert.equal(await part(2).isDisabled(),true);
+          assert.equal(await readDiagram(),frames[1]);
+          await page.selectOption('#lang', locale);
+          await part(0).press('Enter');
+          if (width === 320) {
+            const {width:diagramWidth,height:diagramHeight} = await diagram.boundingBox();
+            await diagram.tap({position:{x:diagramWidth*59/240,y:diagramHeight*69/112}});
+          } else {
+            await place(0).press('Enter');
+          }
+          frames.push(await readDiagram());
+          await part(1).press('Enter');
+          await place(1).press('Enter');
+          frames.push(await readDiagram());
+          assert.equal(new Set(frames).size,4);
+          assert.equal(await assembly.locator('fieldset').first().locator('button:disabled').count(),3);
+          assert.match(await assembly.locator('a').getAttribute('href'),/id=25662$/);
+          await assembly.locator('[data-platform-reset]').press('Enter');
+          assert.equal(await readDiagram(),frames[0]);
+          await assembly.locator('summary').press('Enter');
         }
         if (episode.id === 8) {
           await page.click('[data-layer="before"]');
