@@ -4,7 +4,7 @@ const buttons = [
 ];
 const actions = new Set([...buttons.map(([, action]) => action), 'move-left', 'move-right']);
 const range = 'input[type="range"]:enabled';
-const controls = `button:enabled, select:enabled, ${range}, summary, a[href]`;
+const controls = `button:enabled, select:enabled, input[type="checkbox"]:enabled, ${range}, summary, a[href]`;
 
 function available(root) {
   return [...root.querySelectorAll(controls)].filter(element =>

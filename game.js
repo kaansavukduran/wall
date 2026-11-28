@@ -1,7 +1,7 @@
 import { controllerHelp, mountController } from './controller.js';
 import { connectAppearance } from './appearance.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { accountabilityLabels, atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, genizaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, studyCircleLabels, visitLabels } from './library.js';
+import { accountabilityLabels, atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, genizaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, studyCircleLabels, visitLabels, wordMethodLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -112,6 +112,7 @@ export async function start(initialLanguage) {
   const accountabilityView = {record:null};
   const genizaView = {};
   const circleView = {};
+  const wordMethodView = {};
   const talmudView = {reading:null,side:0,position:0,answers:[['','',''],['','','']]};
   const progress = readProgress();
   let language = initialLanguage;
@@ -200,6 +201,9 @@ export async function start(initialLanguage) {
   const refreshCircle = connectDisclosure('study-circle', studyCircleLabels, () =>
     import('./study-circle.js').then(({mountStudyCircle}) =>
       (panel, current, index) => mountStudyCircle(panel,index,circleView)));
+  const refreshWordMethods = connectDisclosure('word-methods', wordMethodLabels, () =>
+    import('./word-methods.js').then(({mountWordMethods}) =>
+      (panel, current, index) => mountWordMethods(panel,index,wordMethodView)));
   const refreshSave = connectDisclosure('save-transfer', saveLabels, () =>
     import('./portable-save.js').then(module => module.mountPortableSave));
   const refreshTransfer = connectDisclosure('transfer', transferLabels, async chapter => {
@@ -394,6 +398,7 @@ export async function start(initialLanguage) {
       if (request !== labToken) return;
       renderHebrewLabs(labRoot, locale(), labState);
       labRoot.hidden = false;
+      refreshWordMethods();
     } catch {
       if (request !== labToken) return;
       message.textContent = {

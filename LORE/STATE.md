@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified web release: v0.7.2, abb1da42c9093ed1bd0335a2d1afb7f9d3fea37e.
-Pages: 46124998983 and exact public build manifest. Chromium, Firefox and WebKit passed 46124712789. Chapter 7 distinguishes scriptural copy, communal rules and pesher commentary. Chapter 21 covers the 1928 screen, 1929 violence, 1930 commission and 1931 order. 322 catalogue records.
-Packages: v0.7.1 run 46124538186 passed package tests for Linux AppImage, Windows Setup and Portable, and Android API 35 touch and relaunch. v0.7.2 is building. Actions secrets still return HTTP 403 to this integration; Android uses preview signing. Physical device/controller testing and independent editorial review remain open.
-Candidate v0.7.3: E14 compares a 1320 endowment record, a 1613 garden-house entry and the later paved passage. E20 links Gaza-associated Nathan’s Cairo letter, the conversion in Edirne and the Livorno/Hamburg report. The Meir/Posen dating difference appears on the scene and in the timeline. 324 catalogue records. A local Chromium same-scene language switch at the plaza recorded 411 rectangle draws before the scene-cache change and zero after it. 26 content/build tests passed.
-Next: verify travel views, hosted browsers and native downloads for v0.7.3. Continue with separate gematria, notarikon, Atbash and lexical readings, followed by Ashlag's direct light and screen model.
+Verified web release: v0.7.3, 745af07df86dd7c624548078360001979244af07.
+Pages: 46125495564 and exact public build manifest. The four-language Chromium, Firefox and WebKit matrix passed 46125200152. Chapters 14 and 20 add the 1320 endowment, 1613 house, later passage, and the 1665–1666 letters. Same-scene language switch in Chromium went from 411 scenery rectangle draws to zero. 324 catalogue records.
+Packages: v0.7.2 run 46125001243 completed all six assets and installed Windows, Linux and Android checks. v0.7.3 is building. Actions secrets return HTTP 403 to the integration, so Android uses preview signing. Physical device/controller testing and independent editorial review remain open.
+Candidate v0.7.4: four letter-reading methods in chapter 16. Standard and extended-final gematria, Shabbat 105a:3 notarikon, Jeremiah/Rashi Atbash, and a Genesis/BDB lexical example. 331 catalogue records. Only the selected workbench loads its explanatory data. Controls keep the selected sample through language changes. 27 content/build tests passed.
+Next: finish the v0.7.4 hosted matrix and publication, then add Ashlag's phases, screen and returning light as an interactive diagram.

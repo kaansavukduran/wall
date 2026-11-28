@@ -315,3 +315,14 @@ html[data-controller-input] :is(button,select,summary,a,input[type="range"]):foc
 .circle-speaker b{display:block;margin-block-end:.3rem}
 #circle-response{color:var(--accent)}
 #circle-next{margin-block-start:.55rem}
+
+#word-methods{min-inline-size:0;overflow-wrap:anywhere}
+.method-convention{display:flex;align-items:center;gap:.55rem;min-block-size:var(--hit);padding-block:.35rem;cursor:pointer}
+.method-convention input{margin:0;flex:none;accent-color:var(--accent)}
+.method-tiles{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:.4rem;margin-block:.45rem}
+.method-tiles button{max-inline-size:100%}
+.method-tiles button[aria-pressed=true]{background:var(--selected-bg);border-color:var(--accent)}
+.method-tiles button bdi:last-child:not(:empty){display:block;color:var(--accent)}
+.method-result{display:block;color:var(--accent);margin-block:.45rem}
+.method-result:empty{display:none}
+.method-reset{margin-block-start:.55rem}

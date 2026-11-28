@@ -134,3 +134,10 @@ export const studyCircleLabels = {
   he:['חוג לימוד עם חברים','השיחה נטענת…','השיחה לא נפתחה. סגרו את האזור ופתחו אותו שוב.'],
   az:['Dostlarla oxu qrupu','Söhbət yüklənir…','Söhbət açılmadı. Bölməni bağlayıb yenidən aç.'],
 };
+
+export const wordMethodLabels = {
+  tr:['Harflerle dört okuma yöntemi','Örnekler yükleniyor…','Örnekler açılamadı. Kapatıp yeniden aç.'],
+  en:['Four ways to read the letters','Loading the examples…','The examples could not open. Close this section and reopen it.'],
+  he:['ארבע דרכים לקרוא את האותיות','הדוגמאות נטענות…','הדוגמאות לא נפתחו. סגרו את האזור ופתחו אותו שוב.'],
+  az:['Hərflərlə dörd oxu üsulu','Nümunələr yüklənir…','Nümunələr açılmadı. Bölməni bağlayıb yenidən aç.'],
+};

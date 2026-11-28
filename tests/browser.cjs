@@ -347,6 +347,39 @@ async function main() {
           assert.equal(await page.locator('#aleph-total').textContent(), '8 + 20 = 28');
           await page.click('#clear-letters');
           assert.equal(await page.locator('#aleph-total').textContent(), '0');
+          assert.equal(loadedLessons.has('word-method-lessons.js'),false);
+          const methods = page.locator('#word-methods');
+          await methods.locator(':scope > summary').press('Enter');
+          const methodOutput = methods.locator('.method-result');
+          const examples = [
+            ['gematria',3,'40 + 30 + 20 = 90'],
+            ['notarikon',4,'אנא נפשי כתיבת יהבית'],
+            ['atbash',3,'בבל'],
+            ['lexical',1,'ש־ב־ת'],
+          ];
+          for (const [id,count,expected] of examples) {
+            await methods.locator('[data-method="' + id + '"]').press('Enter');
+            for (let index = 0; index < count; index++) {
+              const tile = methods.locator('[data-method-tile="' + index + '"]');
+              if (width === 320) await tile.tap();
+              else await tile.press('Enter');
+            }
+            assert.equal(await methodOutput.textContent(),expected);
+            if (id === 'gematria') {
+              const convention = methods.locator('input[type="checkbox"]');
+              await convention.check();
+              assert.equal(await methodOutput.textContent(),'40 + 30 + 500 = 570');
+              await convention.uncheck();
+            }
+          }
+          await methods.locator('.daily-sources summary').click();
+          assert.match(await methods.locator('a').first().getAttribute('href'),/Genesis\.2\.2/);
+          await page.selectOption('#lang', locale === 'he' ? 'en' : 'he');
+          assert.equal(await methodOutput.textContent(),'ש־ב־ת');
+          await page.selectOption('#lang', locale);
+          await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+          await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
           await page.click('#sefirot-summary');
           await page.click('[data-sefirah="5"]');
           assert.equal(await page.locator('#sefirah-name').textContent(), 'תפארת');

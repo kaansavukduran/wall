@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.7.3</small>
+  <small dir="ltr">v0.7.4</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -60,6 +60,7 @@
           <p id="aramaic-note"></p>
           <a id="letter-values" href="https://www.jewishencyclopedia.com/articles/6571-gematria" target="_blank" rel="noopener noreferrer"></a>
         </details>
+        <details id="word-methods" name="hebrew-workbench"><summary></summary><p role="status" hidden></p><div></div></details>
         <details id="sefirot-lab" name="hebrew-workbench">
           <summary id="sefirot-summary"></summary>
           <p id="sefirot-intro"></p>
@@ -117,7 +118,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.7.3</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.7.4</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -225,6 +226,17 @@
     <div class="visit-choices" role="group" aria-labelledby="culture-question"></div>
     <p role="status"></p>
   </details>
+</template>
+<template id="word-method-template">
+  <p></p>
+  <div class="visit-choices" role="group"></div>
+  <p></p>
+  <label class="method-convention"><input type="checkbox"><span></span></label>
+  <div class="method-tiles" role="group" dir="rtl"></div>
+  <output class="method-result" aria-live="polite"></output>
+  <p hidden></p>
+  <details class="daily-sources"><summary></summary><ul></ul></details>
+  <button type="button" class="method-reset"></button>
 </template>
 <template id="circle-template">
   <p></p>

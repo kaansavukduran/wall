@@ -89,8 +89,28 @@ const daat = ['דעת',['Daat','Daat','דעת','Daat'],[
   'Bilik. Anlaşılan fikri insanın öz münasibəti ilə bağlayır. Bu sayım Daatı onlu düzülüşə daxil edir.',
 ]];
 
-export function gematriaValues(letters) {
-  return [...letters].map(letter => numericValues.get(letter)).filter(value => value !== undefined);
+export function gematriaValues(letters, extendedFinals = false) {
+  return [...letters].map(letter => {
+    if (extendedFinals) {
+      const finalIndex = finals.indexOf(letter);
+      if (finalIndex >= 0) return 500 + 100 * finalIndex;
+    }
+    return numericValues.get(letter);
+  }).filter(value => value !== undefined);
+}
+
+const regularForms = [...'כמנפצ'];
+
+export function atbash(letters) {
+  const sequence = [...letters];
+  return sequence.map((letter,index) => {
+    const form = regularForms[finals.indexOf(letter)] ?? letter;
+    const position = regular.indexOf(form);
+    if (position < 0) return letter;
+    const paired = regular[regular.length - 1 - position];
+    if (index === sequence.length - 1) return finals[regularForms.indexOf(paired)] ?? paired;
+    return paired;
+  });
 }
 
 export function renderHebrewLabs(root, locale, state) {
