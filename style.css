@@ -133,6 +133,7 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 #text-scale:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 #scale-reset{display:block;margin:.25rem 0 .65rem}
 #library :is(select,input[type=search]){display:block;inline-size:100%;min-inline-size:0;margin-block:.3rem .65rem}
+#visit-topic{padding-inline:.4em}
 #library input[type=search]{font:inherit;color:inherit;background:var(--field-bg);border:1px solid var(--edge);border-radius:.35rem;min-block-size:var(--hit);padding:.45em .8em}
 #library input[type=search]:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .calendar-days,.calendar-filters,.atlas-filters{display:grid;gap:.35rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr))}
