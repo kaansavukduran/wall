@@ -167,7 +167,7 @@ dialog a{overflow-wrap:anywhere}
 #talmud-page{padding:.65rem;background:#1b242c}
 #talmud-page summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
 #talmud-page summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-#talmud-reading,#talmud-fields select{display:block;inline-size:100%;min-inline-size:0;margin-block:.2rem .55rem}
+#talmud-reading,#talmud-fields select{display:block;inline-size:100%;min-inline-size:0;max-inline-size:100%;margin-block:.2rem .55rem;overflow:hidden;text-overflow:ellipsis}
 .talmud-reading{padding:.65rem;background:#293944}
 .talmud-reading p,.talmud-reading ul{margin-block:.3rem .55rem}
 .talmud-reading p:first-child{font-weight:650}
@@ -186,7 +186,7 @@ dialog a{overflow-wrap:anywhere}
 #talmud-exercise{min-inline-size:0;margin:.7rem 0 0;padding:.55rem;border:1px solid var(--edge)}
 #talmud-exercise legend{max-inline-size:100%;overflow-wrap:anywhere}
 #talmud-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,8em),1fr));gap:.4rem}
-#talmud-fields>*{min-inline-size:0}
+#talmud-fields>*{min-inline-size:0;overflow-wrap:anywhere}
 #talmud-feedback{color:var(--accent)}
 #talmud-feedback:empty{margin:0}
 #messianic-timeline summary{cursor:pointer;min-block-size:var(--hit);align-content:center;font-weight:650}
@@ -244,9 +244,10 @@ dialog a{overflow-wrap:anywhere}
 #compare-history{border-block-start:1px solid var(--edge);padding-block-start:.6rem;margin-block-start:.3rem}
 @media(min-width:45rem){.photo-layout{grid-template-columns:minmax(0,2fr) minmax(0,3fr)}#photo img{max-block-size:45vh}}
 
-#sequence{display:grid;gap:.45rem;padding:.65rem;background:#1b242c}
+#sequence{display:grid;grid-template-columns:minmax(0,1fr);gap:.45rem;padding:.65rem;background:#1b242c;overflow-wrap:anywhere}
 #sequence p,#sequence ol{margin:0}
 #sequence div{display:flex;flex-wrap:wrap;gap:.4rem}
+#sequence div button{max-inline-size:100%}
 #sequence output{color:var(--accent)}
 #sequence-reset{justify-self:start}
 #catalogue{margin-block-start:1rem}
