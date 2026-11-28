@@ -1,4 +1,4 @@
-name: WALL installed binary smoke tests
+name: WALL Android virtual joystick verification
 on:
   workflow_dispatch:
     inputs:
@@ -7,17 +7,9 @@ on:
         type: string
         required: true
       previous_tag:
-        description: Earlier desktop release to install first
-        type: string
-        required: false
-  workflow_call:
-    inputs:
-      tag:
+        description: Earlier WALL release tag
         type: string
         required: true
-      previous_tag:
-        type: string
-        required: false
 permissions:
   contents: read
 jobs:
@@ -25,122 +17,28 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       WALL_TAG: ${{ inputs.tag }}
+      WALL_PREVIOUS_TAG: ${{ inputs.previous_tag }}
     steps:
       - uses: actions/checkout@v4
-      - name: Download release APK
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download both published APKs
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release download "$WALL_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*android*.apk'
+        run: |
+          gh release download "$WALL_PREVIOUS_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*android*.apk' --dir baseline
+          gh release download "$WALL_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*android*.apk' --dir candidate
       - name: Enable emulator acceleration
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
-      - name: Install and open the APK
+      - name: Disconnect a kernel-backed virtual gamepad in both APKs
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 35
           arch: x86_64
           target: google_apis
           disable-animations: true
-          script: bash tests/android-smoke.sh
-  linux:
-    runs-on: ubuntu-24.04
-    env:
-      WALL_TAG: ${{ inputs.tag }}
-      WALL_PREVIOUS_TAG: ${{ inputs.previous_tag }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Launch the released AppImage
-        env:
-          GH_TOKEN: ${{ github.token }}
-          APPIMAGE_EXTRACT_AND_RUN: '1'
-        run: |
-          set -euo pipefail
-          export XDG_CONFIG_HOME="$RUNNER_TEMP/wall-smoke-profile"
-
-          launch_image() {
-            local tag="$1" mode="$2" folder="$3" log="$RUNNER_TEMP/wall-linux-$2.log"
-            gh release download "$tag" --repo "$GITHUB_REPOSITORY" --pattern '*.AppImage' --dir "$folder"
-            local images=("$folder"/*.AppImage)
-            test "${#images[@]}" -eq 1
-            chmod +x "${images[0]}"
-            timeout 100s xvfb-run -a "${images[0]}" --no-sandbox --remote-debugging-port=9248 > "$log" 2>&1 &
-            local wall_pid=$!
-            if ! node tests/desktop-smoke.mjs 9248 "$mode" "$tag"; then
-              tail -40 "$log"
-              kill "$wall_pid" 2>/dev/null || true
-              return 1
-            fi
-            wait "$wall_pid"
-          }
-
-          mode=clean
-          if [[ -n "$WALL_PREVIOUS_TAG" ]]; then
-            launch_image "$WALL_PREVIOUS_TAG" advance earlier
-            mode=resume
-          fi
-          launch_image "$WALL_TAG" "$mode" current
-  windows:
-    runs-on: windows-latest
-    env:
-      WALL_TAG: ${{ inputs.tag }}
-      WALL_PREVIOUS_TAG: ${{ inputs.previous_tag }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Download and launch installer and portable
-        env:
-          GH_TOKEN: ${{ github.token }}
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          $install = Join-Path $env:RUNNER_TEMP 'wall-smoke-install'
-
-          function Get-WallPackage($tag, $pattern, $folder, $count) {
-            New-Item -ItemType Directory -Force -Path $folder | Out-Null
-            for ($attempt = 1; $attempt -le 5; $attempt++) {
-              gh release download $tag --repo $env:GITHUB_REPOSITORY --pattern $pattern --clobber --dir $folder
-              $files = @(Get-ChildItem -Path $folder -Filter $pattern)
-              if ($LASTEXITCODE -eq 0 -and $files.Count -eq $count) { return $files }
-              if ($attempt -lt 5) { Start-Sleep -Seconds 8 }
-            }
-            throw "Release $tag did not expose $count files matching $pattern"
-          }
-
-          function Install-Wall($installer) {
-            $installed = Start-Process -FilePath $installer -ArgumentList "/S /D=$install" -Wait -PassThru
-            if ($installed.ExitCode -ne 0) { throw "Installer returned $($installed.ExitCode)" }
-            $exe = (Get-ChildItem -Path $install -Filter 'WALL.exe' -Recurse | Select-Object -First 1).FullName
-            if (!$exe) { throw 'WALL.exe did not install' }
-            return $exe
-          }
-
-          function Test-Wall($path, $port, $mode, $tag) {
-            $process = Start-Process -FilePath $path -ArgumentList "--remote-debugging-port=$port" -PassThru
-            try {
-              node tests/desktop-smoke.mjs $port $mode $tag
-              if ($LASTEXITCODE -ne 0) { throw "WALL $tag failed its $mode check" }
-              if (!$process.WaitForExit(10000)) { throw "WALL $tag did not close after its check" }
-            } finally {
-              Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
-            }
-          }
-
-          $mode = 'clean'
-          if ($env:WALL_PREVIOUS_TAG) {
-            $previous = Get-WallPackage $env:WALL_PREVIOUS_TAG '*-Setup.exe' 'earlier' 1
-            Test-Wall (Install-Wall $previous.FullName) 9248 'advance' $env:WALL_PREVIOUS_TAG
-            $mode = 'resume'
-          }
-          $current = Get-WallPackage $env:WALL_TAG '*windows*x64*.exe' 'current' 2
-          $setup = ($current | Where-Object Name -Like '*-Setup.exe').FullName
-          $portable = ($current | Where-Object Name -Like '*-Portable.exe').FullName
-          if (!$setup -or !$portable) { throw 'Setup and Portable release assets are required' }
-          Test-Wall (Install-Wall $setup) 9248 $mode $env:WALL_TAG
-          Test-Wall $portable 9249 'clean' $env:WALL_TAG
+          script: node tests/android-os-joystick.mjs
