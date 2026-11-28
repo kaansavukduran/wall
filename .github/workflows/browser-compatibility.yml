@@ -55,6 +55,7 @@ jobs:
           curl -fsS --retry 5 --retry-connrefused http://127.0.0.1:8765/wall/build.json
           node tests/browser.cjs http://127.0.0.1:8765/wall/
           if [[ "$WALL_BROWSER_ENGINE" == chromium ]]; then
+            node tests/android-transfer.cjs "$site/wall"
             node scripts/standalone.mjs "$site/wall" "$site/WALL-Offline.html"
             node tests/offline.cjs "$site/WALL-Offline.html"
           fi

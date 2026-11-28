@@ -4,20 +4,31 @@ const phrases = {
   he: ['בטעינה…', 'טעינת המשחק נכשלה.', 'ניסיון נוסף'],
   az: ['Yüklənir…', 'Oyun yüklənmədi.', 'Yenidən cəhd et'],
 };
-const storedLanguage = (() => { try { return localStorage.getItem('wall.language'); } catch { return null; } })();
-const candidates = [storedLanguage, ...navigator.languages].filter(Boolean).map(value => value.split('-')[0]);
-const language = candidates.find(value => Object.hasOwn(phrases, value)) ?? 'tr';
-document.documentElement.lang = language;
-document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
 const status = document.querySelector('#boot-status');
 const retry = document.querySelector('#retry');
-status.textContent = phrases[language][0];
-retry.textContent = phrases[language][2];
+function displayLanguage() {
+  const stored = (() => { try { return localStorage.getItem('wall.language'); } catch { return null; } })();
+  const candidates = [stored, ...navigator.languages].filter(Boolean).map(value => value.split('-')[0]);
+  const language = candidates.find(value => Object.hasOwn(phrases,value)) ?? 'tr';
+  document.documentElement.lang = language;
+  document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
+  status.textContent = phrases[language][0];
+  retry.textContent = phrases[language][2];
+  return language;
+}
+let language = displayLanguage();
 let failed = false;
 let initialControl;
 retry.addEventListener('click', () => location.reload());
 try {
   await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+  if (location.origin === 'https://appassets.androidplatform.net' && location.search.startsWith('?wall-process=')) {
+    const { recoverAndroidSave } = await import('./android-transfer.js');
+    if (await recoverAndroidSave(localStorage)) {
+      language = displayLanguage();
+      history.replaceState({...history.state,wallRestored:true},'');
+    }
+  }
   const { start } = await import('./game.js');
   initialControl = await start(language);
 } catch (error) {

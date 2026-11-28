@@ -25,7 +25,7 @@ const files = [
   'culture-archive.js', 'culture-lessons.js',
   'accountability-archive.js', 'accountability-lessons.js',
   'talmud-page.js', 'talmud-lessons.js', 'geniza-desk.js', 'geniza-lessons.js',
-  'portable-save.js', 'save-data.js',
+  'portable-save.js', 'save-data.js', 'android-transfer.js',
   'appearance.js', 'study-circle.js', 'study-circle-lessons.js',
   'word-methods.js', 'word-method-lessons.js',
   'ashlag-workbench.js', 'ashlag-lessons.js', 'baku-archive.js', 'baku-lessons.js',

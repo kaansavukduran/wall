@@ -48,6 +48,7 @@ export function mountPortableSave(panel, language, pending, retryPending) {
   const labels = copy[language];
   const numbers = new Intl.NumberFormat(language);
   let approvedText = '';
+  let restoring = false;
 
   exportButton.textContent = labels.export;
   outLabel.textContent = labels.exported;
@@ -98,16 +99,28 @@ export function mountPortableSave(panel, language, pending, retryPending) {
       status.textContent = labels.invalid;
     }
   });
-  confirm.addEventListener('click', () => {
-    if (!approvedText || approvedText !== inText.value) return;
+  confirm.addEventListener('click', async () => {
+    if (restoring || !approvedText || approvedText !== inText.value) return;
     if (pending.size && !retryPending()) {
       status.textContent = labels.failed;
       return;
     }
     try {
-      mergeSave(localStorage,approvedText);
+      if (location.origin === 'https://appassets.androidplatform.net' && location.search.startsWith('?wall-process=')) {
+        const text = approvedText;
+        restoring = true;
+        incoming.setAttribute('aria-busy','true');
+        inText.readOnly = true;
+        const { importAndroidSave } = await import('./android-transfer.js');
+        await importAndroidSave(localStorage,text);
+      } else {
+        mergeSave(localStorage,approvedText);
+      }
     } catch {
       status.textContent = labels.failed;
+      restoring = false;
+      incoming.removeAttribute('aria-busy');
+      inText.readOnly = false;
       return;
     }
     const url = location.href.split('#')[0];

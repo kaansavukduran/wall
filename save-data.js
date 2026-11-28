@@ -132,7 +132,7 @@ export function saveSummary(values) {
   };
 }
 
-export function mergeSave(storage, text) {
+export function planSaveMerge(storage, text) {
   const incoming = parseSave(text);
   const current = snapshot(storage);
   const merged = {...incoming,...current};
@@ -148,14 +148,22 @@ export function mergeSave(storage, text) {
     merged[progressKey] = encodeCampaign(resume.active,completed,resume.placement);
   }
 
-  const changed = Object.entries(merged).filter(([key,value]) => current[key] !== value);
+  const entries = Object.entries(merged);
+  const changed = entries.filter(([key,value]) => current[key] !== value);
   for (const id of incomingProgress?.completed ?? []) {
     const key = completionKey(id);
     if (storage.getItem(key) !== '1') changed.push([key,'1']);
   }
+  for (const id of validProgress(merged[progressKey])?.completed ?? []) {
+    entries.push([completionKey(id),'1']);
+  }
+  return {changed,snapshot:entries};
+}
+
+export function writeSaveEntries(storage, entries) {
   const written = [];
   try {
-    for (const [key,value] of changed) {
+    for (const [key,value] of entries) {
       const previous = storage.getItem(key);
       storage.setItem(key,value);
       written.push([key,previous]);
@@ -167,4 +175,8 @@ export function mergeSave(storage, text) {
     }
     throw error;
   }
+}
+
+export function mergeSave(storage, text) {
+  writeSaveEntries(storage,planSaveMerge(storage,text).changed);
 }

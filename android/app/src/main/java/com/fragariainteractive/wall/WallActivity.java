@@ -19,8 +19,11 @@ import android.webkit.WebViewClient;
 
 import androidx.webkit.WebViewAssetLoader;
 
+import java.util.UUID;
+
 public final class WallActivity extends Activity implements InputManager.InputDeviceListener {
     private static final String HOST = "appassets.androidplatform.net";
+    private static final String PROCESS_TOKEN = UUID.randomUUID().toString();
     private final JoystickInput joystick = new JoystickInput(this::send);
     private InputManager inputManager;
     private WebView game;
@@ -69,7 +72,7 @@ public final class WallActivity extends Activity implements InputManager.InputDe
             });
         }
         setContentView(game);
-        game.loadUrl("https://" + HOST + "/assets/index.html");
+        game.loadUrl("https://" + HOST + "/assets/index.html?wall-process=" + PROCESS_TOKEN);
     }
 
     private void send(String action, boolean pressed) {
