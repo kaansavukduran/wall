@@ -808,7 +808,14 @@ async function main() {
       await shabbat.locator('[data-shabbat-place="nava-tehila"]').press('Enter');
       assert.equal(await shabbat.locator('[role="status"]').innerText(),shabbatStudy.feedback[shabbatIndex]);
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
-      assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
+      const calendarOverflow = await page.locator('#library').evaluate(dialog => {
+        if (dialog.scrollWidth <= dialog.clientWidth) return [];
+        return [dialog,...dialog.querySelectorAll('#calendar *')].flatMap(element =>
+          element.scrollWidth > element.clientWidth && element.clientWidth > 0
+            ? [[element.id || element.className || element.tagName, element.scrollWidth, element.clientWidth]]
+            : []);
+      });
+      assert.deepEqual(calendarOverflow, []);
       await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
       await page.selectOption('#calendar-period', '12');
       await page.locator('[data-event="purim"]').waitFor();

@@ -140,6 +140,8 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .shabbat-study{margin-block-start:.75rem;overflow-wrap:anywhere}
 .shabbat-study details{border-block-start:1px solid var(--edge)}
 .shabbat-study details[open]{padding-block-end:.6rem}
+.shabbat-study .visit-choices{grid-template-columns:minmax(0,1fr)}
+.shabbat-study .visit-choices button{min-inline-size:0;white-space:normal}
 #shabbat-question{margin-block-start:.6rem}
 :is(.calendar-practice,.shabbat-study) [role=status]{color:var(--accent)}
 .atlas-status{color:var(--muted);margin-block:.1rem .65rem}
