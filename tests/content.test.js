@@ -77,7 +77,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 242);
+  assert.equal(entries.length, 244);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -227,6 +227,20 @@ test('language workshop indexes original spellings and all four localized explan
     }
     if (lesson.term) assert.match(lesson.term, /\p{Script=Hebrew}/u);
     else assert.ok(lesson.options[lesson.correct]);
+  }
+});
+
+test('the early settings link nine inspectable objects to chapter sources', () => {
+  for (const id of [1,3,4]) {
+    const model = models.find(entry => entry.id === id);
+    assert.equal(model.options.length, 3);
+    assert.equal(new Set(model.options.map(([key]) => key)).size, 3);
+    for (const [, names, bodies, url] of model.options) {
+      assert.ok(entries.some(entry => entry.url === url && belongsTo(entry,id)), url);
+      assert.match(names[2], /\p{Script=Hebrew}/u);
+      assert.match(bodies[2], /\p{Script=Hebrew}/u);
+      assert.doesNotMatch(bodies[0], /\p{Script=Hebrew}/u);
+    }
   }
 });
 

@@ -18,6 +18,7 @@ async function main() {
   const { feynmanCases } = await import('../kabbalah-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
   const { languageLessons } = await import('../language-lessons.js');
+  const { models } = await import('../scenes.js');
   const { messianicLessons } = await import('../messianic-lessons.js');
   const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
   const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js', 'modern-lessons.js'];
@@ -146,6 +147,22 @@ async function main() {
           const before = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
           await page.click('[data-layer="sanctuary"]');
           assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), before);
+        }
+        if ([1,3,4].includes(episode.id)) {
+          const model = models.find(entry => entry.id === episode.id);
+          let previous = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
+          for (const [layer, , readings, source] of model.options) {
+            const button = page.locator('[data-layer="' + layer + '"]');
+            const stable = await button.elementHandle();
+            await button.press('Enter');
+            assert.ok(await stable.evaluate(element => element === document.activeElement && element.isConnected));
+            assert.equal(await button.getAttribute('aria-pressed'), 'true');
+            assert.equal(await page.locator('#models output').innerText(), readings[['tr','en','he','az'].indexOf(locale)]);
+            assert.equal(await page.locator('#model-reference').getAttribute('href'), source);
+            const current = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
+            assert.notEqual(current, previous);
+            previous = current;
+          }
         }
         if (episode.id === 4) {
           for (const card of [2,0,1]) await page.click('[data-sequence="' + card + '"]');

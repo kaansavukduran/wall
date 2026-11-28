@@ -314,29 +314,42 @@ export async function start(initialLanguage) {
     const id = episodes[active].id ?? 0;
     const surface = find('models');
     const model = models.find(entry => entry.id === id);
-    world.scene(id, selectedLayer);
     surface.hidden = !model;
-    if (!model) return;
+    if (!model) {
+      world.scene(id, selectedLayer);
+      return;
+    }
     const index = locale();
+    const controls = surface.querySelector('div');
+    const output = surface.querySelector('output');
+    const reference = find('model-reference');
     surface.querySelector('p').textContent = model.name[index];
     const photoButton = find('photo-button');
     photoButton.hidden = id !== 0 && id !== 23;
     photoButton.textContent = photo.title[index];
-    const activeOption = model.options.find(option => option[0] === selectedLayer);
-    surface.querySelector('output').textContent = activeOption?.[2][index] ?? '';
-    surface.querySelector('div').replaceChildren(...model.options.map(([key, titles]) => {
+
+    function updateModel() {
+      const activeOption = model.options.find(option => option[0] === selectedLayer);
+      output.textContent = activeOption?.[2][index] ?? '';
+      reference.hidden = !activeOption?.[3];
+      if (activeOption?.[3]) reference.href = activeOption[3];
+      for (const button of controls.children) button.setAttribute('aria-pressed', String(button.dataset.layer === selectedLayer));
+      world.scene(id, selectedLayer);
+    }
+
+    reference.textContent = ui[language][5];
+    controls.replaceChildren(...model.options.map(([key, titles]) => {
       const button = document.createElement('button');
       button.type = 'button';
       button.dataset.layer = key;
       button.textContent = titles[index];
-      button.setAttribute('aria-pressed', String(selectedLayer === key));
       button.addEventListener('click', () => {
         selectedLayer = key;
-        renderModel();
-        surface.querySelector('[data-layer="' + key + '"]').focus();
+        updateModel();
       });
       return button;
     }));
+    updateModel();
   }
 
   function renderStudy() {

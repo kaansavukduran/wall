@@ -152,6 +152,99 @@ export async function makeWorld(canvas, reducedMotion) {
     }
   }
   function drawSetting(background, index, stone, mortar, layer) {
+    if (index === 1) {
+      rect(background, '#493840', 124, 69, 356, 132);
+      rect(background, '#7c5b51', 129, 72, 351, 116);
+      rect(background, '#49343b', 320, 78, 133, 49);
+      rect(background, '#d79871', 324, 81, 125, 41);
+      rect(background, '#e7ae79', 325, 107, 124, 14);
+      rect(background, '#614754', 376, 81, 4, 43);
+      rect(background, '#453341', 181, 155, 265, 26);
+      rect(background, '#9f795e', 184, 150, 261, 23);
+      rect(background, '#695045', 200, 178, 9, 19);
+      rect(background, '#695045', 421, 178, 9, 19);
+      rect(background, '#75544a', 213, 145, 51, 17);
+      rect(background, layer === 'matzah' ? '#ffe1a0' : '#caa16f', 219, 145, 43, 11);
+      rect(background, '#967657', 224, 147, 33, 1);
+      for (let x = 224; x < 255; x += 4) {
+        rect(background, '#826043', x, 151 + x % 2, 2, 2);
+      }
+      rect(background, '#537261', 258, 152, 17, 6);
+      const book = layer === 'questions' ? '#ffe1a0' : '#e4d8bb';
+      rect(background, '#4b4c56', 296, 145, 65, 17);
+      rect(background, book, 300, 144, 28, 14);
+      rect(background, book, 330, 144, 27, 14);
+      for (const x of [304,334]) for (let y = 148; y < 156; y += 3) {
+        rect(background, '#9a7861', x, y, 18, 1);
+      }
+      const scroll = layer === 'exodus' ? '#ffe1a0' : '#e1bc8b';
+      rect(background, scroll, 388, 145, 39, 11);
+      rect(background, '#8a634e', 386, 143, 4, 15);
+      rect(background, '#8a634e', 425, 143, 4, 15);
+      rect(background, '#8a634e', 394, 148, 23, 1);
+      rect(background, '#8a634e', 394, 152, 15, 1);
+      return;
+    }
+    if (index === 3) {
+      rect(background, '#3f3742', 120, 68, 360, 128);
+      rect(background, '#58454a', 125, 73, 355, 118);
+      if (layer === 'destruction-587') {
+        for (const [x,y,width] of [[142,142,48],[192,120,45],[265,148,57],[338,114,35],[387,152,66]]) {
+          rect(background, '#886f65', x, y, width, 46);
+          rect(background, '#c49d7f', x, y, width - 12, 4);
+          rect(background, '#4a3b41', x + 12, y + 17, 15, 29);
+          rect(background, '#aa836d', x + width - 10, y + 12, 8, 20);
+        }
+      } else if (layer === 'stayed-exiled') {
+        for (const [x,color] of [[164,'#c6a77d'],[381,'#cea56f']]) {
+          for (let block = 0; block < 3; block++) {
+            const left = x + block * 16;
+            rect(background, color, left, 125 - block % 2 * 8, 14, 38 + block % 2 * 8);
+            rect(background, '#745550', left + 4, 145, 5, 18);
+          }
+        }
+        for (let x = 223; x < 380; x += 9) {
+          rect(background, '#dfba82', x, 150 - (x % 4), 5, 3);
+        }
+        rect(background, '#d7ab76', 178, 173, 33, 5);
+        rect(background, '#d7ab76', 393, 173, 28, 5);
+      } else {
+        rect(background, '#46323a', 252, 98, 106, 84);
+        rect(background, '#b7815d', 259, 92, 94, 83);
+        rect(background, '#d1a076', 263, 97, 84, 2);
+        for (let y = 105; y < 170; y += 8) for (let x = 269; x < 343; x += 9) {
+          rect(background, '#805542', x, y, 5, 2);
+          rect(background, '#805542', x + 3, y + 2, 2, 3);
+        }
+        if (layer === 'chronicle-597') rect(background, '#ffe1a0', 257, 177, 96, 3);
+      }
+      return;
+    }
+    if (index === 4) {
+      rect(background, '#453a43', 112, 69, 354, 121);
+      rect(background, '#ab9671', 118, 75, 342, 109);
+      if (layer === 'petition-407') {
+        rect(background, '#704f46', 180, 111, 218, 53);
+        rect(background, '#edd6a0', 187, 112, 204, 48);
+        for (let y = 120; y < 154; y += 6) {
+          rect(background, '#a18363', 196, y, 182 - y % 13, 2);
+        }
+        rect(background, '#9e744e', 185, 108, 6, 56);
+        rect(background, '#9e744e', 386, 108, 6, 56);
+      } else {
+        for (let row = 0; row < 5; row++) {
+          rect(background, '#557d86', 150 - row * 5, 75 + row * 22, 73, 21);
+        }
+        const marker = ['jerusalem-temple', 'elephantine'].includes(layer) ? layer : '';
+        rect(background, marker === 'elephantine' ? '#ffe1a0' : '#d6bd85', 151, 130, 31, 17);
+        rect(background, '#8f7257', 161, 131, 11, 12);
+        rect(background, marker === 'jerusalem-temple' ? '#ffe1a0' : '#d6bd85', 348, 116, 59, 31);
+        rect(background, '#745a4f', 356, 124, 44, 21);
+        for (const x of [360,376,392]) rect(background, '#c19d69', x, 124, 4, 20);
+        rect(background, '#84634f', 344, 114, 67, 4);
+      }
+      return;
+    }
     if (index === 2) {
       rect(background, mortar, 119, 91, 310, 107);
       rect(background, stone, 112, 88, 328, 10);
@@ -260,15 +353,6 @@ export async function makeWorld(canvas, reducedMotion) {
         for (let y = 142; y < 166; y += 5) {
           rect(background, '#796452', x + 30, y, 38, 1);
         }
-      }
-      return;
-    }
-    if ([3,4].includes(index)) {
-      for (let i = 0; i < 9; i++) {
-        const x = 125 + i * 42;
-        rect(background, mortar, x, 114 - i % 3 * 9, 36, 88);
-        rect(background, stone, x + 2, 119 - i % 3 * 9, 32, 80);
-        rect(background, '#453944', x + 14, 158, 10, 43);
       }
       return;
     }
