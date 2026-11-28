@@ -807,6 +807,7 @@ async function main() {
       assert.equal(await shabbat.locator('[role="status"]').innerText(),shabbatStudy.retry[shabbatIndex]);
       await shabbat.locator('[data-shabbat-place="nava-tehila"]').press('Enter');
       assert.equal(await shabbat.locator('[role="status"]').innerText(),shabbatStudy.feedback[shabbatIndex]);
+      await page.selectOption('#calendar-year', 'leap');
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       const calendarOverflow = await page.locator('#library').evaluate(dialog => {
         if (dialog.scrollWidth <= dialog.clientWidth) return [];
@@ -817,6 +818,7 @@ async function main() {
       });
       assert.deepEqual(calendarOverflow, []);
       await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+      await page.selectOption('#calendar-year', 'common');
       await page.selectOption('#calendar-period', '12');
       await page.locator('[data-event="purim"]').waitFor();
       assert.equal(await shabbat.isVisible(), false);

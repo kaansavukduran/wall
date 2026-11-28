@@ -11,8 +11,8 @@ const copy = {
   tr: {
     intro:'İbrani takvimi Ay’a ve Güneş’e göre düzenlenir. Yıl numarası Tişri’de değişir. Bazı yıllarda ikinci bir Adar ayı eklenir. Takvimde bir gün, önceki akşam başlar.',
     month:'Dönem', monthly:'Her ay', days:'Takvim günleri', empty:'Bu dönem için henüz bir kart yok.',
-    year:'Yıl türü', common:'12 ay', leap:'13 ay · artık yıl', firstAdar:'Adar I',
-    custom:'Takvim geleneği', israel:'İsrail', diaspora:'Geleneksel diaspora',
+    year:'Yıl türü', common:'12 ay', leap:'Artık yıl', firstAdar:'Adar I',
+    custom:'Geleneksel bayram günleri', israel:'İsrail', diaspora:'Diaspora',
     practice:'Bir günü takvime yerleştir', answer:'Ayı seç', check:'Kontrol et', next:'Sonraki örnek',
     retry:'Bir daha dene. İpucundaki uygulamayı takvim kartlarında ara.',
     clues:['Matsa yenir ve Çıkış anlatısı bir sofrada yeniden anlatılır.','Kandiller sekiz gece yakılır. İlk gece hangi aya denk gelir?','Yılın başında birçok cemaatte şofar sesi duyulur.','Pesah bitince bazı Fas Yahudisi aileler evlerini misafirlere açar. Mimuna hangi aya denk gelir?'],
@@ -20,8 +20,8 @@ const copy = {
   en: {
     intro:'The Hebrew calendar follows both the Moon and Sun. The year number changes in Tishrei. Some years add a second Adar. A calendar day starts the evening before.',
     month:'Period', monthly:'Every month', days:'Calendar dates', empty:'There is no card for this period yet.',
-    year:'Year type', common:'12 months', leap:'13 months · leap year', firstAdar:'Adar I',
-    custom:'Festival schedule', israel:'Israel', diaspora:'Traditional diaspora',
+    year:'Year type', common:'12 months', leap:'Leap year', firstAdar:'Adar I',
+    custom:'Traditional festival dates', israel:'Israel', diaspora:'Diaspora',
     practice:'Place an observance on the calendar', answer:'Choose the month', check:'Check', next:'Next example',
     retry:'Try again. Look for the practice in the calendar cards.',
     clues:['People eat matzah and retell the Exodus around a table.','Lamps are lit for eight nights. Which month has the first night?','Many communities sound the shofar as the new year begins.','After Passover, some Moroccan Jewish families welcome guests for Mimouna. Which month is it?'],
@@ -29,8 +29,8 @@ const copy = {
   he: {
     intro:'הלוח העברי מתואם עם הירח והשמש. מספר השנה משתנה בתשרי. בשנים מסוימות נוסף אדר שני. היום בלוח מתחיל בערב שלפניו.',
     month:'תקופה', monthly:'בכל חודש', days:'מועדים בלוח', empty:'עדיין אין כרטיס לתקופה הזאת.',
-    year:'סוג השנה', common:'12 חודשים', leap:'13 חודשים · שנה מעוברת', firstAdar:'אדר א׳',
-    custom:'לוח החגים', israel:'ישראל', diaspora:'המנהג המסורתי בתפוצות',
+    year:'סוג השנה', common:'12 חודשים', leap:'שנה מעוברת', firstAdar:'אדר א׳',
+    custom:'מועדי החגים לפי המנהג', israel:'ישראל', diaspora:'תפוצות',
     practice:'שבצו את המועד בלוח', answer:'בחרו חודש', check:'בדיקה', next:'הדוגמה הבאה',
     retry:'נסו שוב. חפשו בכרטיסי הלוח את המנהג שברמז.',
     clues:['אוכלים מצה ומספרים סביב השולחן את סיפור יציאת מצרים.','מדליקים נרות במשך שמונה לילות. באיזה חודש חל הלילה הראשון?','בקהילות רבות תוקעים בשופר בתחילת השנה.','אחרי פסח משפחות מיהודי מרוקו מארחות במימונה. באיזה חודש זה?'],
@@ -38,8 +38,8 @@ const copy = {
   az: {
     intro:'İbrani təqvimi Ay və Günəş dövrlərinə əsaslanır. İlin nömrəsi Tişridə dəyişir. Bəzi illərdə ikinci Adar ayı əlavə olunur. Təqvim günü əvvəlki axşam başlayır.',
     month:'Dövr', monthly:'Hər ay', days:'Təqvim günləri', empty:'Bu dövr üçün hələ kart yoxdur.',
-    year:'İlin növü', common:'12 ay', leap:'13 ay · uzun il', firstAdar:'I Adar',
-    custom:'Bayram cədvəli', israel:'İsrail', diaspora:'Ənənəvi diaspora',
+    year:'İlin növü', common:'12 ay', leap:'Uzun il', firstAdar:'I Adar',
+    custom:'Ənənəvi bayram günləri', israel:'İsrail', diaspora:'Diaspor',
     practice:'Mərasimi təqvimdə yerləşdir', answer:'Ayı seç', check:'Yoxla', next:'Növbəti nümunə',
     retry:'Bir də cəhd et. İpucundakı adəti təqvim kartlarında axtar.',
     clues:['Matsa yeyilir və süfrə ətrafında Misirdən çıxış əhvalatı danışılır.','Çıraqlar səkkiz gecə yandırılır. Birinci gecə hansı aya düşür?','Yeni il başlayanda bir çox icmada şofar çalınır.','Pesahdan sonra bəzi Mərakeş yəhudi ailələri Mimunada qonaq qəbul edir. Mimuna hansı aya düşür?'],
