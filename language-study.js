@@ -42,7 +42,7 @@ function sourceItems(lesson) {
   });
 }
 
-export function mountLanguageStudy(panel, language, locale) {
+export function mountLanguageStudy(panel, language, locale, view) {
   const fragment = document.getElementById('language-study-template').content.cloneNode(true);
   const card = fragment.querySelector('#language-card');
   const [heading, word, pointing, evidence, note, sources] = fragment.querySelector('.language-reading').children;
@@ -53,18 +53,18 @@ export function mountLanguageStudy(panel, language, locale) {
   const labels = copy[language];
   const number = new Intl.NumberFormat(language);
   const {cards,exercises} = languageLessons;
-  let marked = true;
 
   function showSpelling() {
     const lesson = cards[card.selectedIndex];
     const bare = withoutPointing(lesson.term);
-    original.textContent = marked ? lesson.term : bare;
+    original.textContent = view.marked ? lesson.term : bare;
     pointing.hidden = lesson.term === bare;
-    pointing.setAttribute('aria-pressed', String(marked));
+    pointing.setAttribute('aria-pressed', String(view.marked));
   }
 
   function showCard() {
     const lesson = cards[card.selectedIndex];
+    view.card = lesson.id;
     heading.textContent = lesson.label[locale];
     origin.textContent = lesson.language[locale];
     original.lang = lesson.originalLanguage ?? 'he';
@@ -77,24 +77,32 @@ export function mountLanguageStudy(panel, language, locale) {
 
   function showExample() {
     const sample = exercises[example.selectedIndex];
-    feedback.textContent = '';
-    exampleSources.hidden = true;
+    view.example = sample.id;
     exampleSources.replaceChildren(...sourceItems(sample));
     prompt.textContent = sample.prompt[locale];
+
+    function showAnswer() {
+      for (const button of choices.children) {
+        button.setAttribute('aria-pressed',String(Number(button.dataset.languageChoice) === view.choice));
+      }
+      feedback.textContent = view.choice === undefined ? ''
+        : view.choice === sample.correct ? sample.feedback[locale] : labels.retry;
+      exampleSources.hidden = view.choice === undefined;
+    }
+
     choices.replaceChildren(...sample.options.map((_, index) => {
       const choice = (index + example.selectedIndex + 1) % sample.options.length;
       const button = document.createElement('button');
       button.type = 'button';
       button.textContent = sample.options[choice][locale];
       button.dataset.languageChoice = String(choice);
-      button.setAttribute('aria-pressed', 'false');
       button.addEventListener('click', () => {
-        for (const sibling of choices.children) sibling.setAttribute('aria-pressed', String(sibling === button));
-        feedback.textContent = choice === sample.correct ? sample.feedback[locale] : labels.retry;
-        exampleSources.hidden = false;
+        view.choice = choice;
+        showAnswer();
       });
       return button;
     }));
+    showAnswer();
   }
 
   fragment.querySelector('.language-study-intro').textContent = labels.intro;
@@ -106,12 +114,21 @@ export function mountLanguageStudy(panel, language, locale) {
   exampleSources.setAttribute('aria-label',labels.link);
   card.replaceChildren(...cards.map(lesson => new Option(lesson.label[locale],lesson.id)));
   example.replaceChildren(...exercises.map((sample,index) => new Option(labels.number(number.format(index + 1)),sample.id)));
+  if (view.card) card.value = view.card;
+  if (view.example) example.value = view.example;
+  sources.open = !!view.sourcesOpen;
+  exercise.open = !!view.exerciseOpen;
+  sources.addEventListener('toggle',() => { view.sourcesOpen = sources.open; });
+  exercise.addEventListener('toggle',() => { view.exerciseOpen = exercise.open; });
   card.addEventListener('change',showCard);
   pointing.addEventListener('click', () => {
-    marked = !marked;
+    view.marked = !view.marked;
     showSpelling();
   });
-  example.addEventListener('change',showExample);
+  example.addEventListener('change',() => {
+    view.choice = undefined;
+    showExample();
+  });
   showCard();
   showExample();
   panel.replaceChildren(fragment);

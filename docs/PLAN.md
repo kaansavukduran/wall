@@ -108,13 +108,13 @@ Epizot numaraları kaynak kataloğuyla bağlantı kurar. Her epizot, tarihlenmi�
 | 8 | MS 66–73/74. Titus, MS 70 yıkımı ve Masada. Arkeoloji, Josephus, Titus Takı ve sonraki rabbanî hafızayı karşılaştır. | S09, H03 |
 | 9 | MS 115–117. Traianus döneminde diaspora ayaklanmaları. Mısır, Kuzey Afrika ve Kıbrıs'ı ayrı harita duraklarında aç. | Cambridge diaspora bölümü ve D24–D26 |
 | 10 | MS 130–135/136 civarı. Aelia Capitolina, Hadrianus ve Bar Kohba. Sikke, mektup ve sonraki Betar hafızasını incele. | S10, H02 |
-| 11 | MS 70–yaklaşık 600. Mişna, Tosefta, Yeruşalmi ve Bavli. Bir kısa hükümden soru, itiraz ve çözüm zincirini kur. | S06–S13 |
+| 11 | MS 70–yaklaşık 600. Mişna, Tosefta, Yeruşalmi ve Bavli. Bir kısa hükümden soru, itiraz ve çözüm zincirini kur. İbranice ve Aramice terimleri bölümden dil tezgâhında aç. | S06–S13 |
 | 12 | Anlatı ortamı MS 2. yüzyıl. Şimon ve Elazar, mağara, çalışma ve öğrenim. Peqi'in mağara geleneğini Meron anmasından ayır. | S11 |
 | 13 | 4. yüzyıl–1099. Bizans, erken İslam Kudüs'ü, Emevî yapıları, İsrâ ve Miraç geleneği. Ziyaret güzergâhlarını incele. | Kur’an 17:1 (S33), Emevî yazıtı (D30), Sophronios bağlamı (D31) |
 | 14 | 1099–1516/17. Haçlı dönemi, Selahaddin, Eyyûbîler, Memlükler ve Mağribi Mahallesi. Vakıf ve konut haritası. | H08 |
 | 15 | Yaklaşık 900–1500. Kahire Genizası, Raşi, Maimonides, Karailer ve Rabbanî gelenek. Bir mektup ve hukuk metni oku. | S16 |
 | 16 | Geç Antik Çağ–14. yüzyıl. Heikhalot, Merkava, Sefer Yetsira, Bahir, Gerona, Kastilya ve Zohar. Nüsha, anlatı zamanı ve dolaşımı ayır. | S14–S18 |
-| 17 | 1492–16. yüzyıl ortası. İberya'dan ayrılış, Osmanlı Kudüs'ü, Selanik ve İstanbul. Sefarad yolları ve Ladino. | Elhamra Kararnamesi (D34), Sefarad kaynakları (A04, H14–H15), Ferrara baskısı (CULT05) |
+| 17 | 1492–16. yüzyıl ortası. İberya'dan ayrılış, Osmanlı Kudüs'ü, Selanik ve İstanbul. Osmanlı Sefarad cemaatlerini bölümden atlasta aç ve Ladino’yu incele. | Elhamra Kararnamesi (D34), Sefarad kaynakları (A04, H14–H15), Ferrara baskısı (CULT05) |
 | 18 | 16. yüzyıl. Safed'de Karo, Cordovero, Luria ve Vital. Hukuk, kozmoloji ve gündelik uygulama atölyeleri. | S19 |
 | 19 | 1530'lar–1917. Kanûnî'nin surları ve sebilleri, Kotel katmanları, Mağribi Mahallesi ve geç Osmanlı meydan girişimi. Üç yapıyı kesitte ayır. | H03–H05, H08 |
 | 20 | 17. yüzyıl–20. yüzyıl başı. Sabatay Sevi, Hasidizm ve karşıtları, Haskala, pogromlar, dinî akımlar ve Siyonizm. Matbaa ve tartışma sahneleri. | S20, S21 |

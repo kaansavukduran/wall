@@ -15,10 +15,14 @@ const chapterWorkshopLinks = {
     labels:['Takvimde Pesah','Passover in the calendar','פסח בלוח','Təqvimdə Pesah']},
   5:{workshop:'calendar', period:'9', event:'chanukah',
     labels:['Takvimde Hanuka','Hanukkah in the calendar','חנוכה בלוח','Təqvimdə Hanuka']},
+  11:{workshop:'language-study', card:'lang-talmud-gemara', example:'language-ex-genres',
+    labels:['Talmud’un dilini incele','Explore the Talmud’s languages','חקרו את שפות התלמוד','Talmudun dillərini araşdır']},
   12:{workshop:'calendar', period:'2', event:'lag-baomer',
     labels:['Takvimde Lag BaOmer','Lag BaOmer in the calendar','ל״ג בעומר בלוח','Təqvimdə Laq BaOmer']},
   16:{workshop:'kabbalah', lesson:'zohar-rose-commentaries',
     labels:['Zohar yorumlarını karşılaştır','Compare readings of the Zohar','השוו פירושים לזוהר','Zoharın şərhlərini müqayisə et']},
+  17:{workshop:'atlas', category:'communities', record:'ottoman-sephardi',
+    labels:['Sefarad cemaatlerini haritada gör','See Sephardi communities on the map','ראו קהילות ספרדיות במפה','Sefarad icmalarına xəritədə bax']},
   18:{workshop:'kabbalah', lesson:'tzimtzum-partzufim-abya',
     labels:['ABiYA dünyalarını incele','Explore the four worlds','חקרו את ארבעת העולמות','ABiYA aləmlərini araşdır']},
   20:{workshop:'calendar', period:'0', event:'shabbat',
@@ -215,6 +219,9 @@ export async function start(initialLanguage) {
   const labState = {word:[], sefirah:0, daat:false};
   const kabbalahView = {lesson:null,sourcesOpen:false,exerciseOpen:false,solved:new Set(),commentariesOpen:new Set(),route:0};
   const atlasView = {category:'all',search:'',record:null};
+  const languageView = {marked:true};
+  let activeAtlasView = atlasView;
+  let activeLanguageView = languageView;
   const calendarView = {period:'7',year:'common',custom:'israel',event:null,route:0,
     shabbat:{open:false,cards:new Set(),answer:null}};
   const cultureView = {record:null};
@@ -342,11 +349,12 @@ export async function start(initialLanguage) {
     ['calendar', calendarLabels, () => import('./calendar.js').then(({mountCalendar}) =>
       (panel, current, index) => mountCalendar(panel,current,index,calendarView)), () => calendarView.route],
     ['atlas', atlasLabels, () => import('./atlas.js').then(({mountAtlas}) =>
-      (panel, current, index) => mountAtlas(panel, current, index, atlasView))],
+      (panel, current, index) => mountAtlas(panel, current, index, activeAtlasView)), () => activeAtlasView],
     ['kabbalah', kabbalahLabels, () => import('./kabbalah.js').then(({mountKabbalah}) =>
       (panel, current, index) => mountKabbalah(panel, current, index, {read,store}, kabbalahView)), () => kabbalahView.route],
     ['visit', visitLabels, () => import('./kotel.js').then(module => module.mountKotel)],
-    ['language-study', languageStudyLabels, () => import('./language-study.js').then(module => module.mountLanguageStudy)],
+    ['language-study', languageStudyLabels, () => import('./language-study.js').then(({mountLanguageStudy}) =>
+      (panel,current,index) => mountLanguageStudy(panel,current,index,activeLanguageView)), () => activeLanguageView],
     ['diaspora-archive', diasporaLabels, () => import('./diaspora-archive.js').then(module => module.mountDiasporaArchive)],
     ['daily-life', dailyLabels, () => import('./daily-life.js').then(module => module.mountDailyLife)],
     ['culture-archive', cultureLabels, () => import('./culture-archive.js').then(({mountCultureArchive}) =>
@@ -969,10 +977,14 @@ export async function start(initialLanguage) {
     chooser.showModal();
   }
 
-  function openLibrary() {
+  function openLibrary(route) {
     if (campaign.hidden) return;
     stop();
     synchronizeProgress();
+    activeAtlasView = route?.workshop === 'atlas'
+      ? {category:route.category,search:'',record:route.record} : atlasView;
+    activeLanguageView = route?.workshop === 'language-study'
+      ? {card:route.card,example:route.example,marked:languageView.marked,exerciseOpen:true} : languageView;
     const index = locale();
     studyRoom.querySelector('h2').textContent = libraryLabels[language][0];
     for (const refresh of workshops) refresh();
@@ -1128,7 +1140,7 @@ export async function start(initialLanguage) {
   }
   find('inspect').addEventListener('click', inspect);
   find('episodes-button').addEventListener('click', openChapters);
-  find('library-button').addEventListener('click', openLibrary);
+  find('library-button').addEventListener('click', () => openLibrary());
   find('settings-button').addEventListener('click', () => {
     stop();
     find('settings-title').textContent = settingsLabels[language].title;
@@ -1137,8 +1149,8 @@ export async function start(initialLanguage) {
     refreshSave();
     settings.showModal();
   });
-  function openWorkshop(id) {
-    openLibrary();
+  function openWorkshop(id, route) {
+    openLibrary(route);
     const workshop = find(id);
     workshop.open = true;
     workshop.querySelector('summary').focus();
@@ -1153,7 +1165,7 @@ export async function start(initialLanguage) {
         kabbalahView.lesson = link.lesson;
         kabbalahView.route++;
       }
-    } else {
+    } else if (link.workshop === 'calendar') {
       const revealShabbat = link.event === 'shabbat' && !calendarView.shabbat.open;
       if (calendarView.period !== link.period || calendarView.event !== link.event || revealShabbat) {
         calendarView.period = link.period;
@@ -1163,7 +1175,7 @@ export async function start(initialLanguage) {
       }
     }
     event.currentTarget.focus({preventScroll:true});
-    openWorkshop(link.workshop);
+    openWorkshop(link.workshop,link);
   });
   next.addEventListener('click', () => {
     synchronizeProgress();

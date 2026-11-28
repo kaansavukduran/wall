@@ -1383,6 +1383,48 @@ async function main() {
     await chapterStudy.close();
     console.log('Chapter links keep scene, focus and localized workshop state: PASS');
 
+    const chapterResources = await browser.newPage({locale:'he',viewport:{width:320,height:700},hasTouch:true});
+    await chapterResources.addInitScript(() => localStorage.setItem('wall.progress.v1',JSON.stringify({
+      active:'11',completed:['plaza',...Array.from({length:17},(_,index) => String(index + 1))],
+    })));
+    await chapterResources.goto(target + '#chapter-11');
+    const resourcesShortcut = chapterResources.locator('#chapter-study-button');
+    const libraryButton = chapterResources.locator('#library-button');
+    const languageCard = chapterResources.locator('#language-card');
+    const atlasSearch = chapterResources.locator('#atlas-search');
+    await libraryButton.press('Enter');
+    await chapterResources.locator('#language-study summary').press('Enter');
+    await languageCard.selectOption('lang-malka');
+    await chapterResources.locator('#atlas summary').press('Enter');
+    await atlasSearch.fill('Qumran');
+    await chapterResources.locator('#library .dialog-heading form button').press('Enter');
+    await chapterResources.evaluate(() => {document.documentElement.style.fontSize='200%';});
+    await resourcesShortcut.press('Enter');
+    await languageCard.waitFor();
+    assert.equal(await languageCard.inputValue(),'lang-talmud-gemara');
+    assert.equal(await chapterResources.locator('#language-example').inputValue(),'language-ex-genres');
+    assert.ok(await chapterResources.locator('#language-example').isVisible());
+    await chapterResources.keyboard.press('Escape');
+    assert.ok(await resourcesShortcut.evaluate(button => button===document.activeElement));
+    await chapterResources.locator('#episodes-button').press('Enter');
+    await chapterResources.locator('#chapters ol button').nth(17).press('Enter');
+    await resourcesShortcut.tap();
+    const entry = chapterResources.locator('#atlas-entry');
+    await entry.waitFor();
+    assert.equal(await entry.inputValue(),'ottoman-sephardi');
+    assert.equal(await chapterResources.locator('#atlas-category').inputValue(),'communities');
+    assert.equal(await chapterResources.locator('#atlas .atlas-marker').count(),2);
+    await chapterResources.keyboard.press('Escape');
+    assert.ok(await resourcesShortcut.evaluate(button => button===document.activeElement));
+    await libraryButton.press('Enter');
+    await atlasSearch.waitFor();
+    assert.equal(await atlasSearch.inputValue(),'Qumran');
+    await chapterResources.locator('#language-study summary').press('Enter');
+    await languageCard.waitFor();
+    assert.equal(await languageCard.inputValue(),'lang-malka');
+    await chapterResources.close();
+    console.log('Chapter resources open the correct language and atlas reading without resetting the study room: PASS');
+
     const edge = await browser.newPage();
     await edge.addInitScript(() => {
       const frame = window.requestAnimationFrame.bind(window);
