@@ -27,6 +27,15 @@ const tourLoadLabels = {
   he:['ספרו למבקר את סיפור התערוכה','התערוכה נטענת…','התערוכה לא נפתחה. רעננו את הדף ונסו שוב.'],
   az:['Ziyarətçiyə sərgini anlat','Sərgi yüklənir…','Sərgi açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
+const transferLabels = {
+  tr:['Yeni bir örnekte dene','Örnek yükleniyor…','Örnek açılamadı. Kapatıp yeniden aç.','Oyunu indir'],
+  en:['Try a new example','Loading the example…','The example could not open. Close it and reopen it.','Download WALL'],
+  he:['נסו דוגמה חדשה','הדוגמה נטענת…','הדוגמה לא נפתחה. סגרו אותה ופתחו שוב.','הורידו את WALL'],
+  az:['Yeni nümunədə sına','Nümunə yüklənir…','Nümunə açılmadı. Bağlayıb yenidən aç.','WALL-u endir'],
+};
+const transferDecks = [
+  () => import('./transfer-early-lessons.js'),
+];
 const lessonDecks = [
   () => import('./ancient-lessons.js').then(module => module.ancientLessons),
   () => import('./second-temple-lessons.js').then(module => module.secondTempleLessons),
@@ -73,6 +82,7 @@ export async function start(initialLanguage) {
   const sequenceSurface = find('sequence');
   const evidence = find('evidence');
   const timeline = find('messianic-timeline');
+  const transfer = find('transfer');
   const evidenceChoices = find('evidence-choices');
   const labRoot = find('language-labs');
   const labs = labRoot.querySelectorAll('details');
@@ -98,28 +108,34 @@ export async function start(initialLanguage) {
   const unlocked = index => index >= 0 && (index === 0 || index === firstIncomplete() || progress.completed.has(episodeId(index)));
   const save = () => store(key, JSON.stringify({active:episodeId(active),completed:[...progress.completed]}));
   const locale = () => languages.indexOf(language);
-  function connectDisclosure(id, translations, load) {
+  function connectDisclosure(id, translations, load, scope = () => null) {
     const detail = find(id);
     const [summary, status, panel] = detail.children;
-    let loadedLanguage;
+    let request;
     async function refresh() {
       const current = language;
       const labels = translations[current];
       summary.textContent = labels[0];
-      if (detail.hidden || !detail.open || loadedLanguage === current) return;
-      loadedLanguage = current;
-      panel.replaceChildren();
+      const context = scope();
+      if (request && (request.language !== current || request.context !== context)) {
+        request = undefined;
+        panel.replaceChildren();
+        status.hidden = true;
+      }
+      if (detail.hidden || !detail.open || request) return;
+      const pending = {language:current,context};
+      request = pending;
       status.hidden = false;
       status.textContent = labels[1];
       try {
-        const mount = await load();
-        if (loadedLanguage === current) {
+        const mount = await load(context);
+        if (request === pending) {
           mount(panel, current, languages.indexOf(current));
           status.hidden = true;
         }
       } catch {
-        if (loadedLanguage === current) {
-          loadedLanguage = undefined;
+        if (request === pending) {
+          request = undefined;
           status.textContent = labels[2];
         }
       }
@@ -139,6 +155,19 @@ export async function start(initialLanguage) {
   ].map(([id, labels, load]) => connectDisclosure(id, labels, load));
   const refreshTimeline = connectDisclosure('messianic-timeline', timelineLabels, () =>
     import('./messianic-timeline.js').then(module => module.mountMessianicTimeline));
+  const refreshTransfer = connectDisclosure('transfer', transferLabels, async chapter => {
+    const [{mountTransfer},{transferLessons}] = await Promise.all([
+      import('./transfer.js'), transferDecks[Math.floor((chapter - 1) / 8)](),
+    ]);
+    const lesson = transferLessons.find(item => item.chapter === chapter);
+    return (panel, current) => mountTransfer(panel, current, lesson, {read,store});
+  }, () => episodes[active].id);
+
+  function offerTransfer(completed) {
+    const chapter = episodes[active].id;
+    transfer.hidden = !completed || !transferDecks[Math.floor((chapter - 1) / 8)];
+    refreshTransfer();
+  }
 
   function choose(selected) {
     const episode = episodes[active];
@@ -156,6 +185,7 @@ export async function start(initialLanguage) {
     result.textContent = text[5];
     next.hidden = false;
     next.textContent = firstIncomplete() < 0 ? ui[language][13] : ui[language][3];
+    offerTransfer(true);
     renderTour();
     save();
   }
@@ -172,6 +202,7 @@ export async function start(initialLanguage) {
     selector.setAttribute('aria-label', labels[8]);
     find('episodes-button').textContent = labels[0];
     find('library-button').textContent = libraryLabels[language][0];
+    find('download').textContent = transferLabels[language][3];
     const visit = find('visit-button');
     visit.textContent = visitLabels[language][0];
     visit.hidden = active !== 0 && active !== episodes.length - 1;
@@ -202,6 +233,7 @@ export async function start(initialLanguage) {
     result.textContent = completed ? text[5] : '';
     next.textContent = firstIncomplete() < 0 ? labels[13] : labels[3];
     next.hidden = !completed;
+    offerTransfer(completed);
     renderModel();
     renderStudy();
     renderSequence();
@@ -221,6 +253,7 @@ export async function start(initialLanguage) {
     evidenceCard = null;
     evidence.open = false;
     timeline.open = false;
+    transfer.open = false;
     labState.word.length = 0;
     labState.sefirah = 0;
     labState.daat = false;

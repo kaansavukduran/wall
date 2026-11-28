@@ -18,6 +18,7 @@ async function main() {
   const { feynmanCases } = await import('../kabbalah-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
   const { dailyCases } = await import('../daily-life.js');
+  const { transferLessons } = await import('../transfer-early-lessons.js');
   const { languageLessons } = await import('../language-lessons.js');
   const { archiveCases } = await import('../diaspora-archive.js');
   const { diasporaRecords } = await import('../diaspora-lessons.js');
@@ -37,6 +38,7 @@ async function main() {
       });
       await page.goto(target);
       await page.locator('#app').waitFor();
+      assert.match(await page.locator('#download').getAttribute('href'), /kaansavukduran\/wall\/releases$/);
       await page.selectOption('#lang', locale);
       assert.equal(await page.locator('html').getAttribute('dir'), locale === 'he' ? 'rtl' : 'ltr');
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
@@ -344,6 +346,34 @@ async function main() {
         }
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
         await page.click('[data-choice="' + episode.correct + '"]');
+        const transfer = transferLessons.find(item => item.chapter === episode.id);
+        if (transfer) {
+          if (episode.id === 1) assert.equal(loadedLessons.has('transfer-early-lessons.js'), false);
+          const summary = page.locator('#transfer summary');
+          if (width === 320) await summary.tap();
+          else await summary.press('Enter');
+          const correct = page.locator('[data-transfer-choice="' + transfer.correct + '"]');
+          await correct.waitFor();
+          assert.equal(await page.locator('#transfer-scenario').textContent(), transfer.scenario[locale]);
+          assert.deepEqual(await page.locator('#transfer-sources a').evaluateAll(links =>
+            links.map(link => link.href)), transfer.sources.map(source => source.url));
+          await page.click('[data-transfer-choice="' + (transfer.correct + 1) % 3 + '"]');
+          assert.ok((await page.locator('#transfer-feedback').textContent()).length);
+          assert.equal(await page.locator('#transfer-draft').isVisible(), false);
+          await correct.click();
+          assert.equal(await page.locator('#transfer-feedback').textContent(), transfer.feedback[locale]);
+          assert.equal(await correct.getAttribute('aria-pressed'), 'true');
+          if (episode.id === 1) {
+            await page.fill('#transfer-draft', 'WALL ' + locale);
+            await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+            assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
+            await page.reload();
+            await page.locator('#app').waitFor();
+            await page.click('#transfer summary');
+            assert.equal(await page.locator('#transfer-draft').inputValue(), 'WALL ' + locale);
+            assert.equal(await page.locator('#transfer-feedback').textContent(), transfer.feedback[locale]);
+          }
+        }
         if (episode.id !== 24) await page.click('#next');
       }
       await page.selectOption('#tour-stops select >> nth=0', 'photo');

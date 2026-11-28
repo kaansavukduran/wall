@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.5.9</small>
+  <small dir="ltr">v0.6.0</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -91,6 +91,7 @@
         <button id="visit-button" type="button" hidden></button>
         <button id="diaspora-button" type="button" hidden></button>
         <button id="next" class="primary" type="button" hidden></button>
+        <details id="transfer" hidden><summary></summary><p role="status" hidden></p><div></div></details>
         <section id="journal" aria-labelledby="tour-title" hidden>
           <h2 id="tour-title"></h2>
           <p id="tour-load" role="status" hidden></p>
@@ -111,7 +112,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.9</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.6.0</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -254,6 +255,18 @@
     <p role="status"></p>
     <a target="_blank" rel="noopener noreferrer" hidden></a>
   </details>
+</template>
+<template id="transfer-template">
+  <p id="transfer-scenario"></p>
+  <div id="transfer-options" role="group" aria-labelledby="transfer-scenario"></div>
+  <p id="transfer-feedback" role="status"></p>
+  <div id="transfer-explanation" hidden>
+    <p></p>
+    <label for="transfer-draft"></label>
+    <textarea id="transfer-draft" dir="auto" rows="3" maxlength="1200" aria-describedby="transfer-storage"></textarea>
+    <p id="transfer-storage"></p>
+  </div>
+  <div id="transfer-sources"><p></p><ul></ul></div>
 </template>
 <template id="kabbalah-template">
   <label for="kabbalah-lesson"></label><select id="kabbalah-lesson"></select>

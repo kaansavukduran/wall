@@ -27,6 +27,7 @@ import { models, photo } from '../scenes.js';
 import { secondTempleLessons } from '../second-temple-lessons.js';
 import { tour } from '../tour.js';
 import { tourEvidence } from '../tour-evidence.js';
+import { transferLessons } from '../transfer-early-lessons.js';
 
 test('every checkpoint has four equivalent locales and a valid source', () => {
   let previousId = 0;
@@ -89,6 +90,25 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
   assert.ok(Array.from({length:24}, (_, index) => index + 1).every(id => entries.some(entry => belongsTo(entry, id))));
   assert.ok(belongsTo({chapters:'1–4,6'}, 3));
   assert.equal(belongsTo({chapters:'Prolog,1'}, 10), false);
+});
+
+test('chapter transfer examples have distinct localized choices and exact catalogue links', () => {
+  assert.deepEqual(transferLessons.map(item => item.chapter), chapters.slice(0,8).map(episode => episode.id));
+  const urls = new Set(entries.map(entry => entry.url));
+  for (const lesson of transferLessons) {
+    assert.equal(lesson.choices.length, 3);
+    assert.ok(lesson.choices[lesson.correct]);
+    for (const language of languages) {
+      assert.equal(new Set(lesson.choices.map(choice => choice[language])).size, 3);
+      const fields = [lesson.scenario, lesson.feedback, lesson.explain, ...lesson.choices];
+      for (const field of fields) {
+        assert.ok(field[language].trim());
+        assert.equal(/[\u0590-\u05ff]/u.test(field[language]), language === 'he');
+      }
+    }
+    assert.ok(lesson.sources.length > 0);
+    for (const source of lesson.sources) assert.ok(urls.has(source.url), source.url);
+  }
 });
 
 test('festival calendar dates and four localized readings use indexed sources', () => {
