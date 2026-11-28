@@ -10,6 +10,10 @@ import { makeWorld } from './world.js';
 
 const episodes = [plaza, ...chapters];
 const find = id => document.getElementById(id);
+const chapterWorkshopLinks = {
+  16:{workshop:'kabbalah',labels:['Zohar’da aynı pasaja üç yorum','Three readings of one Zohar passage','שלושה פירושים לקטע בזוהר','Zohardakı bir parçaya üç şərh']},
+  20:{workshop:'calendar',labels:['Bir Şabat, dört cemaat','One Shabbat, four communities','שבת אחת, ארבע קהילות','Bir Şabbat, dörd icma']},
+};
 const evidenceLabels = {
   tr: ['Kaynakları karşılaştır', 'Bu soruya yanıt veren kaynağı bulmak için diğer kartlara da bak.', 'Kaynak kartları yükleniyor…', 'Kaynak kartları açılamadı. Sayfayı yenileyip tekrar dene.'],
   en: ['Compare the sources', 'Check the other cards for the source that answers this question.', 'Loading source cards…', 'The cards could not open. Reload the page and try again.'],
@@ -183,9 +187,10 @@ export async function start(initialLanguage) {
   const labRoot = find('language-labs');
   const labs = labRoot.querySelectorAll('details');
   const labState = {word:[], sefirah:0, daat:false};
-  const kabbalahView = {lesson:null,sourcesOpen:false,exerciseOpen:false,solved:new Set()};
+  const kabbalahView = {lesson:null,sourcesOpen:false,exerciseOpen:false,solved:new Set(),commentariesOpen:new Set(),route:0};
   const atlasView = {category:'all',search:'',record:null};
-  const calendarView = {period:'7',year:'common',custom:'israel',event:null};
+  const calendarView = {period:'7',year:'common',custom:'israel',event:null,route:0,
+    shabbat:{open:false,cards:new Set(),answer:null}};
   const cultureView = {record:null};
   const accountabilityView = {record:null};
   const genizaView = {};
@@ -306,11 +311,11 @@ export async function start(initialLanguage) {
   }
   const workshops = [
     ['calendar', calendarLabels, () => import('./calendar.js').then(({mountCalendar}) =>
-      (panel, current, index) => mountCalendar(panel,current,index,calendarView))],
+      (panel, current, index) => mountCalendar(panel,current,index,calendarView)), () => calendarView.route],
     ['atlas', atlasLabels, () => import('./atlas.js').then(({mountAtlas}) =>
       (panel, current, index) => mountAtlas(panel, current, index, atlasView))],
     ['kabbalah', kabbalahLabels, () => import('./kabbalah.js').then(({mountKabbalah}) =>
-      (panel, current, index) => mountKabbalah(panel, current, index, {read,store}, kabbalahView))],
+      (panel, current, index) => mountKabbalah(panel, current, index, {read,store}, kabbalahView)), () => kabbalahView.route],
     ['visit', visitLabels, () => import('./kotel.js').then(module => module.mountKotel)],
     ['language-study', languageStudyLabels, () => import('./language-study.js').then(module => module.mountLanguageStudy)],
     ['diaspora-archive', diasporaLabels, () => import('./diaspora-archive.js').then(module => module.mountDiasporaArchive)],
@@ -319,7 +324,7 @@ export async function start(initialLanguage) {
       (panel, current, index) => mountCultureArchive(panel, current, index, cultureView))],
     ['accountability-archive', accountabilityLabels, () => import('./accountability-archive.js').then(({mountAccountabilityArchive}) =>
       (panel, current, index) => mountAccountabilityArchive(panel, current, index, accountabilityView))],
-  ].map(([id, labels, load]) => connectDisclosure(id, labels, load));
+  ].map(([id, labels, load, scope]) => connectDisclosure(id, labels, load, scope));
   const refreshTimeline = connectDisclosure('messianic-timeline', timelineLabels, async () => {
     const [{mountSourceTimeline},{messianicLessons}] = await Promise.all([
       import('./source-timeline.js'),import('./messianic-lessons.js'),
@@ -435,6 +440,10 @@ export async function start(initialLanguage) {
     const diaspora = find('diaspora-button');
     diaspora.textContent = diasporaLabels[language][0];
     diaspora.hidden = ![17,20,22,24].includes(episode.id);
+    const chapterStudy = find('chapter-study-button');
+    const link = chapterWorkshopLinks[episode.id];
+    chapterStudy.textContent = link?.labels[index] ?? '';
+    chapterStudy.hidden = !link;
     renderTour();
     find('inspect').textContent = labels[1];
     controls.querySelector('[data-move="-1"]').setAttribute('aria-label', labels[6]);
@@ -1051,6 +1060,22 @@ export async function start(initialLanguage) {
   }
   find('visit-button').addEventListener('click', () => openWorkshop('visit'));
   find('diaspora-button').addEventListener('click', () => openWorkshop('diaspora-archive'));
+  find('chapter-study-button').addEventListener('click', () => {
+    const link = chapterWorkshopLinks[episodes[active].id];
+    if (!link) return;
+    if (link.workshop === 'kabbalah') {
+      if (kabbalahView.lesson !== 'zohar-rose-commentaries') {
+        kabbalahView.lesson = 'zohar-rose-commentaries';
+        kabbalahView.route++;
+      }
+    } else if (calendarView.event !== 'shabbat' || !calendarView.shabbat.open) {
+      calendarView.period = '0';
+      calendarView.event = 'shabbat';
+      calendarView.shabbat.open = true;
+      calendarView.route++;
+    }
+    openWorkshop(link.workshop);
+  });
   next.addEventListener('click', () => {
     synchronizeProgress();
     go(upcomingIndex());

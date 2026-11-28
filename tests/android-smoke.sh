@@ -83,6 +83,36 @@ PYDIAG
   return 1
 }
 
+activate_with_gamepad() {
+  local label="$1" after="$2" selected
+  for attempt in {1..18}; do
+    adb shell input gamepad keyevent KEYCODE_DPAD_DOWN
+    if ! read_screen; then continue; fi
+    selected=$(python3 - "$screen_file" "$label" <<'PY'
+import re
+import sys
+from xml.etree import ElementTree
+
+screen, pattern = sys.argv[1:]
+for node in ElementTree.parse(screen).iter("node"):
+    if node.get("focused") == "true" and any(
+        re.fullmatch(pattern, node.get(key, "")) for key in ("text", "content-desc")
+    ):
+        print("yes")
+        break
+PY
+    )
+    if [[ "$selected" == yes ]]; then
+      echo "Activate $label with the emulator gamepad"
+      adb shell input gamepad keyevent KEYCODE_BUTTON_A
+      wait_for_screen "$after"
+      return
+    fi
+  done
+  echo "Gamepad focus did not reach: $label" >&2
+  return 1
+}
+
 adb install WALL-*.apk
 adb shell am start -W -n "$package/.WallActivity"
 adb shell pidof "$package"
@@ -122,7 +152,7 @@ adb shell input gamepad keyevent KEYCODE_BUTTON_B
 wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
 echo 'Play chapter 1 in landscape'
 tap_label 'An early record of the name Israel in Canaan|Kenan’da İsrail adının erken bir kaydı|אזכור קדום של השם ישראל בכנען|Kənanda İsrail adının erkən qeydi' 'The inscription records a name|Yazıt bir topluluk|הכתובת מתעדת שם|Kitabə bir adı'
-tap_label 'Continue|Devam et|המשך|Davam et' 'Solomon’s description|Süleyman’ın tasviri|תיאור מקדש שלמה|Süleyman məbədinin təsviri'
+activate_with_gamepad 'Continue|Devam et|המשך|Davam et' 'Solomon’s description|Süleyman’ın tasviri|תיאור מקדש שלמה|Süleyman məbədinin təsviri'
 wait_for_screen 'Solomon’s description|Süleyman’ın tasviri|תיאור מקדש שלמה|Süleyman məbədinin təsviri'
 adb shell cmd window user-rotation lock 0
 wait_for_screen 'rotation="0"'

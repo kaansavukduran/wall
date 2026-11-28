@@ -131,6 +131,12 @@ export function mountKabbalah(panel, language, locale, memory, view) {
       date.textContent = commentary.period[locale];
       reading.textContent = commentary.study[locale];
       card.append(speaker, date, reading, sourceLink(commentary.reference, commentary.url));
+      card.open = view.commentariesOpen.has(commentary.url);
+      card.addEventListener('toggle', () => {
+        if (!card.isConnected) return;
+        if (card.open) view.commentariesOpen.add(commentary.url);
+        else view.commentariesOpen.delete(commentary.url);
+      });
       return card;
     }));
     showCase(exercises.get(lesson.id), select.selectedIndex + 1);

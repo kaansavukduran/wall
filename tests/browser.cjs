@@ -1158,6 +1158,54 @@ async function main() {
       await context.close();
       console.log(locale, width, '25 checkpoints, workshops and saved evidence exhibition: PASS');
     }
+    const chapterStudy = await browser.newPage({locale:'en',viewport:{width:320,height:750},hasTouch:true});
+    await chapterStudy.addInitScript(() => localStorage.setItem('wall.progress.v1',JSON.stringify({
+      active:'16', completed:['plaza',...Array.from({length:20},(_,index) => String(index + 1))],
+    })));
+    await chapterStudy.goto(target + '#chapter-16');
+    const chapterStudyButton = chapterStudy.locator('#chapter-study-button');
+    await chapterStudyButton.waitFor();
+    const manuscriptFrame = await visitorFootprint(chapterStudy);
+    await chapterStudyButton.press('Enter');
+    const kabbalahPicker = chapterStudy.locator('#kabbalah-lesson');
+    await kabbalahPicker.waitFor();
+    assert.equal(await kabbalahPicker.inputValue(),'zohar-rose-commentaries');
+    const manuscripts = chapterStudy.locator('.kabbalah-commentaries details');
+    await manuscripts.first().locator('summary').tap();
+    await chapterStudy.locator('.kabbalah-exercise summary').press('Enter');
+    await chapterStudy.locator('[data-case-choice="1"]').press('Enter');
+    await chapterStudy.fill('#kabbalah-draft','WALL from chapter 16');
+    await kabbalahPicker.selectOption('bahir');
+    await chapterStudy.keyboard.press('Escape');
+    assert.ok(await chapterStudyButton.evaluate(button => document.activeElement === button));
+    assert.deepEqual(await visitorFootprint(chapterStudy),manuscriptFrame);
+    await chapterStudy.selectOption('#lang','he');
+    await chapterStudyButton.press('Enter');
+    await kabbalahPicker.waitFor();
+    assert.equal(await kabbalahPicker.inputValue(),'zohar-rose-commentaries');
+    assert.equal(await manuscripts.first().getAttribute('open'),'');
+    assert.equal(await chapterStudy.locator('#kabbalah-draft').inputValue(),'WALL from chapter 16');
+    await chapterStudy.keyboard.press('Escape');
+    await chapterStudy.click('#episodes-button');
+    await chapterStudy.locator('#chapters ol').getByRole('button',{name:chapters[19].text[2][0],exact:true}).click();
+    await chapterStudyButton.press('Enter');
+    const shabbatWorkshop = chapterStudy.locator('.shabbat-study');
+    await shabbatWorkshop.waitFor();
+    assert.equal(await shabbatWorkshop.getAttribute('open'),'');
+    await shabbatWorkshop.locator('details').first().locator('summary').tap();
+    await shabbatWorkshop.locator('[data-shabbat-place="nava-tehila"]').tap();
+    await chapterStudy.selectOption('#calendar-period','7');
+    await chapterStudy.keyboard.press('Escape');
+    await chapterStudy.selectOption('#lang','az');
+    await chapterStudyButton.press('Enter');
+    await shabbatWorkshop.waitFor();
+    assert.equal(await chapterStudy.locator('#calendar-period').inputValue(),'0');
+    assert.equal(await shabbatWorkshop.locator('details').first().getAttribute('open'),'');
+    assert.equal(await shabbatWorkshop.locator('[data-shabbat-place="nava-tehila"]').getAttribute('aria-pressed'),'true');
+    assert.equal(await shabbatWorkshop.locator('[role="status"]').innerText(),shabbatStudy.feedback[3]);
+    await chapterStudy.close();
+    console.log('Chapter links keep scene, focus and localized workshop state: PASS');
+
     const edge = await browser.newPage();
     await edge.addInitScript(() => {
       const frame = window.requestAnimationFrame.bind(window);
