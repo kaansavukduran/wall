@@ -774,6 +774,34 @@ async function main() {
       assert.match(await page.locator('.calendar-practice [role="status"]').innerText(), /15/);
       await page.click('.calendar-practice button');
       assert.equal(await page.locator('#calendar-answer').inputValue(), '');
+      await page.selectOption('#calendar-period','1');
+      await page.selectOption('#calendar-custom','israel');
+      const mimouna = page.locator('[data-event="mimouna"]');
+      await mimouna.press('Enter');
+      assert.match(await mimouna.textContent(),/22/);
+      assert.match(await page.locator('.calendar-reading a').first().getAttribute('href'),/recf5zztixexjse0q$/);
+      assert.match(await page.locator('.calendar-reading a').last().getAttribute('href'),/seder-mimounah/);
+      await page.selectOption('#calendar-custom','diaspora');
+      assert.match(await mimouna.textContent(),/23/);
+      assert.equal(await mimouna.getAttribute('aria-pressed'),'true');
+      for (const month of ['9','7','1']) {
+        await page.selectOption('#calendar-answer',month);
+        await page.click('.calendar-practice button');
+        if (month !== '1') await page.click('.calendar-practice button');
+      }
+      assert.match(await page.locator('.calendar-practice [role="status"]').textContent(),/23/);
+      await page.click('#library form button');
+      await page.selectOption('#lang',locale === 'he' ? 'en' : 'he');
+      await page.click('#library-button');
+      await mimouna.waitFor();
+      assert.equal(await page.locator('#calendar-period').inputValue(),'1');
+      assert.equal(await page.locator('#calendar-custom').inputValue(),'diaspora');
+      assert.equal(await mimouna.getAttribute('aria-pressed'),'true');
+      assert.match(await mimouna.textContent(),locale === 'he' ? /Mimouna/ : /מימונה/);
+      await page.click('#library form button');
+      await page.selectOption('#lang',locale);
+      await page.click('#library-button');
+      await mimouna.waitFor();
       assert.equal(loadedLessons.has('atlas-lessons.js'), false);
       const atlasRequest = page.waitForResponse(response => response.url().endsWith('/atlas-lessons.js'));
       await page.click('#atlas summary');

@@ -100,6 +100,15 @@ export const calendarEvents = [
     source:{title:'Leviticus 23:15–16',url:'https://www.sefaria.org/Leviticus.23.15-16'}
   },
   {
+    id:'mimouna', month:1, day:22, diasporaDay:23,
+    name:['Mimuna','Mimouna','מימונה','Mimuna'],
+    practice:['Fas Yahudilerinin Mimuna kutlaması, Pesah yerel takvime göre sona erdiğinde başlar. Böylece İsrail’de genellikle 22 Nisan, geleneksel diaspora takviminde 23 Nisan’dır. Ev ziyaretleri yapılır. Bazı aileler müfleta ve tatlı ikram eder.','Moroccan Jewish Mimouna celebrations begin after Passover ends on the local schedule. This usually means 22 Nisan in Israel and 23 Nisan on the traditional diaspora calendar. People visit homes. Some families serve mufleta and sweets.','מנהג המימונה של יהודי מרוקו מתחיל בצאת הפסח לפי הלוח המקומי. בישראל זה בדרך כלל כ״ב בניסן ובתפוצות לפי הלוח המסורתי כ״ג בניסן. מבקרים בבתים. יש משפחות שמגישות מופלטה וממתקים.','Mərakeş yəhudilərinin Mimuna bayramı yerli təqvimə görə Pesah bitəndə başlayır. İsraildə bu, adətən 22 Nisana, ənənəvi diaspora təqvimində 23 Nisana düşür. Ailələr bir-birini ziyarət edir. Bəziləri mufleta və şirniyyat verir.'],
+    history:['Kudüs’te 1970’te çekilen fotoğraf, açık havada bir Mimuna buluşmasını belgeler. Ev sofraları, müzik ve kamusal kutlamalar farklı yerlerde ve dönemlerde değişti.','A photograph from Jerusalem in 1970 documents an outdoor Mimouna gathering. Home tables, music and public celebrations have varied across places and periods.','תצלום מירושלים משנת 1970 מתעד מפגש מימונה באוויר הפתוח. המאכלים בבתים, המוזיקה והחגיגות הציבוריות השתנו ממקום למקום ומתקופה לתקופה.','1970-ci ildə Qüdsdə çəkilən foto açıq havada Mimuna görüşünü sənədləşdirir. Ev süfrələri, musiqi və ictimai şənliklər yerə və dövrə görə dəyişib.'],
+    source:{title:'National Library of Israel · Mimouna Celebration, Jerusalem, 1970',url:'https://education-fr.nli.org.il/primary-sources/recf5zztixexjse0q'},
+    context:{title:'Grosglik and Levy · Culinary variety in Israeli Mimouna',url:'https://cris.bgu.ac.il/en/publications/culinary-versatility-and-the-mufletization-of-israeli-mimouna-rit-3/'},
+    schedule:{title:'Open Siddur · Seder Mimounah, calendar note',url:'https://opensiddur.org/prayers/lunisolar/pilgrimage/pesah/mimouna/seder-mimounah/'},
+  },
+  {
     id:'shavuot', month:3, day:6,
     name:['Şavuot','Shavuot','שבועות','Şavuot'],
     practice:['Sivan’ın 6. gününde kutlanır; diaspora cemaatlerinin çoğunda 6–7 Sivan sürer. Tora okunur, bazı topluluklarda gece boyunca öğrenim yapılır.','Observed on 6 Sivan; most diaspora communities observe 6–7 Sivan. Torah is read, and some communities study through the night.','חל בו׳ בסיוון; ברוב קהילות התפוצות מציינים אותו בו׳–ז׳ בסיוון. קוראים בתורה ובקהילות מסוימות לומדים כל הלילה.','6 Sivan günü qeyd olunur; diasporanın əksər icmalarında 6–7 Sivan davam edir. Tövrat oxunur, bəzi icmalarda gecə boyu öyrənilir.'],

@@ -125,6 +125,7 @@ export async function start(initialLanguage) {
   const labState = {word:[], sefirah:0, daat:false};
   const kabbalahView = {lesson:null,sourcesOpen:false,exerciseOpen:false,solved:new Set()};
   const atlasView = {category:'all',search:'',record:null};
+  const calendarView = {period:'7',year:'common',custom:'israel',event:null};
   const cultureView = {record:null};
   const accountabilityView = {record:null};
   const genizaView = {};
@@ -199,7 +200,8 @@ export async function start(initialLanguage) {
     return refresh;
   }
   const workshops = [
-    ['calendar', calendarLabels, () => import('./calendar.js').then(module => module.mountCalendar)],
+    ['calendar', calendarLabels, () => import('./calendar.js').then(({mountCalendar}) =>
+      (panel, current, index) => mountCalendar(panel,current,index,calendarView))],
     ['atlas', atlasLabels, () => import('./atlas.js').then(({mountAtlas}) =>
       (panel, current, index) => mountAtlas(panel, current, index, atlasView))],
     ['kabbalah', kabbalahLabels, () => import('./kabbalah.js').then(({mountKabbalah}) =>

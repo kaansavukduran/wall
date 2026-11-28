@@ -15,7 +15,7 @@ const copy = {
     custom:'Takvim geleneği', israel:'İsrail', diaspora:'Geleneksel diaspora',
     practice:'Bir günü takvime yerleştir', answer:'Ayı seç', check:'Kontrol et', next:'Sonraki örnek',
     retry:'Bir daha dene. İpucundaki uygulamayı takvim kartlarında ara.',
-    clues:['Matsa yenir ve Çıkış anlatısı bir sofrada yeniden anlatılır.','Kandiller sekiz gece yakılır. İlk gece hangi aya denk gelir?','Yılın başında birçok cemaatte şofar sesi duyulur.'],
+    clues:['Matsa yenir ve Çıkış anlatısı bir sofrada yeniden anlatılır.','Kandiller sekiz gece yakılır. İlk gece hangi aya denk gelir?','Yılın başında birçok cemaatte şofar sesi duyulur.','Pesah bitince bazı Fas Yahudisi aileler evlerini misafirlere açar. Mimuna hangi aya denk gelir?'],
   },
   en: {
     intro:'The Hebrew calendar follows both the Moon and Sun. The year number changes in Tishrei. Some years add a second Adar. A calendar day starts the evening before.',
@@ -24,7 +24,7 @@ const copy = {
     custom:'Festival schedule', israel:'Israel', diaspora:'Traditional diaspora',
     practice:'Place an observance on the calendar', answer:'Choose the month', check:'Check', next:'Next example',
     retry:'Try again. Look for the practice in the calendar cards.',
-    clues:['People eat matzah and retell the Exodus around a table.','Lamps are lit for eight nights. Which month has the first night?','Many communities sound the shofar as the new year begins.'],
+    clues:['People eat matzah and retell the Exodus around a table.','Lamps are lit for eight nights. Which month has the first night?','Many communities sound the shofar as the new year begins.','After Passover, some Moroccan Jewish families welcome guests for Mimouna. Which month is it?'],
   },
   he: {
     intro:'הלוח העברי מתואם עם הירח והשמש. מספר השנה משתנה בתשרי. בשנים מסוימות נוסף אדר שני. היום בלוח מתחיל בערב שלפניו.',
@@ -33,7 +33,7 @@ const copy = {
     custom:'לוח החגים', israel:'ישראל', diaspora:'המנהג המסורתי בתפוצות',
     practice:'שבצו את המועד בלוח', answer:'בחרו חודש', check:'בדיקה', next:'הדוגמה הבאה',
     retry:'נסו שוב. חפשו בכרטיסי הלוח את המנהג שברמז.',
-    clues:['אוכלים מצה ומספרים סביב השולחן את סיפור יציאת מצרים.','מדליקים נרות במשך שמונה לילות. באיזה חודש חל הלילה הראשון?','בקהילות רבות תוקעים בשופר בתחילת השנה.'],
+    clues:['אוכלים מצה ומספרים סביב השולחן את סיפור יציאת מצרים.','מדליקים נרות במשך שמונה לילות. באיזה חודש חל הלילה הראשון?','בקהילות רבות תוקעים בשופר בתחילת השנה.','אחרי פסח משפחות מיהודי מרוקו מארחות במימונה. באיזה חודש זה?'],
   },
   az: {
     intro:'İbrani təqvimi Ay və Günəş dövrlərinə əsaslanır. İlin nömrəsi Tişridə dəyişir. Bəzi illərdə ikinci Adar ayı əlavə olunur. Təqvim günü əvvəlki axşam başlayır.',
@@ -42,14 +42,14 @@ const copy = {
     custom:'Bayram cədvəli', israel:'İsrail', diaspora:'Ənənəvi diaspora',
     practice:'Mərasimi təqvimdə yerləşdir', answer:'Ayı seç', check:'Yoxla', next:'Növbəti nümunə',
     retry:'Bir də cəhd et. İpucundakı adəti təqvim kartlarında axtar.',
-    clues:['Matsa yeyilir və süfrə ətrafında Misirdən çıxış əhvalatı danışılır.','Çıraqlar səkkiz gecə yandırılır. Birinci gecə hansı aya düşür?','Yeni il başlayanda bir çox icmada şofar çalınır.'],
+    clues:['Matsa yeyilir və süfrə ətrafında Misirdən çıxış əhvalatı danışılır.','Çıraqlar səkkiz gecə yandırılır. Birinci gecə hansı aya düşür?','Yeni il başlayanda bir çox icmada şofar çalınır.','Pesahdan sonra bəzi Mərakeş yəhudi ailələri Mimunada qonaq qəbul edir. Mimuna hansı aya düşür?'],
   },
 };
 
 const periodOrder = [0,-1,7,8,9,10,11,12,13,1,2,3,4,5,6];
-const practiceDates = [[1,15],[9,25],[7,1]];
+const practiceEvents = ['pesach','chanukah','rosh-hashanah','mimouna'];
 
-export function mountCalendar(panel, language, locale) {
+export function mountCalendar(panel, language, locale, view) {
   const fragment = document.getElementById('calendar-template').content.cloneNode(true);
   const labels = copy[language];
   const monthNames = months[language];
@@ -59,7 +59,7 @@ export function mountCalendar(panel, language, locale) {
   const custom = fragment.querySelector('#calendar-custom');
   const dates = fragment.querySelector('.calendar-days');
   const reading = fragment.querySelector('.calendar-reading');
-  const [name, practice, history, source] = reading.children;
+  const [name, practice, history, links] = reading.children;
   const answer = fragment.querySelector('#calendar-answer');
   const exercise = fragment.querySelector('.calendar-practice');
   const clue = exercise.querySelector('#calendar-clue');
@@ -67,6 +67,7 @@ export function mountCalendar(panel, language, locale) {
   const status = exercise.querySelector('[role="status"]');
   let example = 0;
   let solved = false;
+  const eventDay = event => custom.value === 'diaspora' ? event.diasporaDay ?? event.day : event.day;
 
   function dateLabel(day, month) {
     return month === 0 ? monthNames[0] : number.format(day) + ' ' + monthNames[month];
@@ -76,16 +77,26 @@ export function mountCalendar(panel, language, locale) {
     for (const button of dates.querySelectorAll('button')) {
       button.setAttribute('aria-pressed', String(button === selected));
     }
+    view.event = event.id;
     name.textContent = event.name[locale];
     practice.textContent = event.practice[locale];
     history.textContent = event.history[locale];
-    source.textContent = event.source.title;
-    source.href = event.source.url;
+    links.replaceChildren(...[event.source,event.context,event.schedule].filter(Boolean).map(source => {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      link.textContent = source.title;
+      link.href = source.url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.dir = 'auto';
+      item.append(link);
+      return item;
+    }));
     reading.hidden = false;
   }
 
   function updatePeriods() {
-    const lastPeriod = period.value;
+    const lastPeriod = period.value || view.period;
     const leap = year.value === 'leap';
     const periods = periodOrder.filter(month => leap || month !== 13);
     period.replaceChildren(...periods.map(month => {
@@ -99,22 +110,24 @@ export function mountCalendar(panel, language, locale) {
 
   function showDates() {
     const month = Number(period.value);
-    const day = event => custom.value === 'diaspora' ? event.diasporaDay ?? event.day : event.day;
+    view.period = period.value;
+    view.year = year.value;
+    view.custom = custom.value;
     const events = calendarEvents.filter(event => {
       const current = year.value === 'leap' ? event.leapMonth ?? event.month : event.month;
       return (current ?? 0) === month;
-    }).sort((a, b) => day(a) - day(b));
+    }).sort((a, b) => eventDay(a) - eventDay(b));
     if (!events.length) {
       dates.textContent = labels.empty;
       reading.hidden = true;
       return;
     }
-    const previous = dates.querySelector('[aria-pressed="true"]')?.dataset.event;
+    const previous = view.event;
     const buttons = events.map(event => {
       const button = document.createElement('button');
       button.type = 'button';
       button.dataset.event = event.id;
-      button.textContent = month > 0 ? number.format(day(event)) + ' · ' + event.name[locale] : event.name[locale];
+      button.textContent = month > 0 ? number.format(eventDay(event)) + ' · ' + event.name[locale] : event.name[locale];
       button.addEventListener('click', () => showReading(event, button));
       return button;
     });
@@ -141,6 +154,8 @@ export function mountCalendar(panel, language, locale) {
   exercise.querySelector('[for="calendar-answer"]').textContent = labels.answer;
   year.replaceChildren(new Option(labels.common, 'common'), new Option(labels.leap, 'leap'));
   custom.replaceChildren(new Option(labels.israel, 'israel'), new Option(labels.diaspora, 'diaspora'));
+  year.value = view.year;
+  custom.value = view.custom;
   answer.replaceChildren(new Option('—', ''), ...periodOrder.filter(month => month > 0 && month !== 13)
     .map(month => new Option(monthNames[month], month)));
   period.addEventListener('change', showDates);
@@ -154,16 +169,15 @@ export function mountCalendar(panel, language, locale) {
   });
   check.addEventListener('click', () => {
     if (solved) {
-      example = (example + 1) % practiceDates.length;
+      example = (example + 1) % practiceEvents.length;
       showExample();
       answer.focus();
       return;
     }
-    const [month, day] = practiceDates[example];
-    solved = Number(answer.value) === month;
+    const event = calendarEvents.find(item => item.id === practiceEvents[example]);
+    solved = Number(answer.value) === event.month;
     if (solved) {
-      const event = calendarEvents.find(item => item.month === month && item.day === day);
-      status.textContent = event.name[locale] + ' · ' + dateLabel(day, month);
+      status.textContent = event.name[locale] + ' · ' + dateLabel(eventDay(event), event.month);
       check.textContent = labels.next;
     } else {
       status.textContent = labels.retry;

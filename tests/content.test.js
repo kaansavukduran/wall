@@ -148,7 +148,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 402);
+  assert.equal(entries.length, 405);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -318,7 +318,7 @@ test('the Talmud folio distinguishes six readings with indexed texts and a histo
 
 test('festival calendar dates and four localized readings use indexed sources', () => {
   const urls = new Set(parseCatalogue(readFileSync('docs/SOURCES.tsv', 'utf8')).map(item => item.url));
-  assert.equal(calendarEvents.length, 19);
+  assert.equal(calendarEvents.length, 20);
   assert.equal(new Set(calendarEvents.map(event => event.id)).size, calendarEvents.length);
   for (const event of calendarEvents) {
     assert.ok(urls.has(event.source.url), event.source.url);
@@ -332,6 +332,11 @@ test('festival calendar dates and four localized readings use indexed sources', 
   assert.equal(find('purim').leapMonth, 13);
   assert.equal(find('simchat-torah').diasporaDay, 23);
   assert.equal(find('sigd').day, 29);
+  const mimouna = find('mimouna');
+  assert.deepEqual([mimouna.month,mimouna.day,mimouna.diasporaDay],[1,22,23]);
+  for (const source of [mimouna.source,mimouna.context,mimouna.schedule]) {
+    assert.ok(entries.some(item => item.url === source.url && belongsTo(item,24)));
+  }
 });
 
 test('community atlas has separate categories with four-language indexed readings', () => {
