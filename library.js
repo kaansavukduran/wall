@@ -120,3 +120,10 @@ export const accountabilityLabels = {
   he:['מסמכים על אלימות ואחריות','המסמכים נטענים…','הארכיון לא נפתח. סגרו אותו ופתחו שוב.'],
   az:['Zorakılıq və məsuliyyət sənədləri','Sənədlər yüklənir…','Arxiv açılmadı. Bağlayıb yenidən aç.'],
 };
+
+export const genizaLabels = {
+  tr:['Geniza mektup masası','Mektuplar açılıyor…','Mektuplar açılamadı. Kapatıp yeniden aç.'],
+  en:['Geniza letter desk','Opening the letters…','The letters could not open. Close this section and reopen it.'],
+  he:['שולחן המכתבים מן הגניזה','המכתבים נטענים…','המכתבים לא נפתחו. סגרו את האזור ופתחו אותו שוב.'],
+  az:['Geniza məktub masası','Məktublar açılır…','Məktublar açılmadı. Bölməni bağlayıb yenidən aç.'],
+};

@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.6.8</small>
+  <small dir="ltr">v0.6.9</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -45,6 +45,7 @@
       <div id="workbench" hidden><p></p><div></div><output aria-live="polite"></output><small></small></div>
       <div id="models" hidden><p></p><div></div><output></output><a id="model-reference" target="_blank" rel="noopener noreferrer" hidden></a><button id="photo-button" type="button" hidden></button></div>
       <details id="talmud-page" hidden><summary></summary><p role="status" hidden></p><div></div></details>
+      <details id="geniza-desk" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="messianic-timeline" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <p id="language-lab-message" role="status" hidden></p>
       <div id="language-labs" hidden>
@@ -115,7 +116,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.6.8</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.6.9</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -223,6 +224,20 @@
     <div class="visit-choices" role="group" aria-labelledby="culture-question"></div>
     <p role="status"></p>
   </details>
+</template>
+<template id="geniza-template">
+  <p></p>
+  <div class="visit-choices geniza-letters" role="group"></div>
+  <article class="visit-reading geniza-letter">
+    <figure class="visit-object"><canvas width="64" height="48" aria-hidden="true" hidden></canvas><figcaption></figcaption></figure>
+    <button id="geniza-flip" type="button"></button>
+    <a id="geniza-source" target="_blank" rel="noopener noreferrer"></a>
+  </article>
+  <section class="geniza-exercise" hidden>
+    <p id="geniza-question"></p>
+    <div class="visit-choices" role="group" aria-labelledby="geniza-question"></div>
+    <p role="status"></p>
+  </section>
 </template>
 <template id="accountability-template">
   <label for="accountability-record"></label><select id="accountability-record"></select>

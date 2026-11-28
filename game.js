@@ -1,7 +1,7 @@
 import { controllerHelp, mountController } from './controller.js';
 import { connectAppearance } from './appearance.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { accountabilityLabels, atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
+import { accountabilityLabels, atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, genizaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -100,6 +100,7 @@ export async function start(initialLanguage) {
   const evidence = find('evidence');
   const timeline = find('messianic-timeline');
   const talmud = find('talmud-page');
+  const geniza = find('geniza-desk');
   const transfer = find('transfer');
   const evidenceChoices = find('evidence-choices');
   const labRoot = find('language-labs');
@@ -108,6 +109,7 @@ export async function start(initialLanguage) {
   const kabbalahView = {lesson:null,sourcesOpen:false,exerciseOpen:false,solved:new Set()};
   const cultureView = {record:null};
   const accountabilityView = {record:null};
+  const genizaView = {};
   const talmudView = {reading:null,side:0,position:0,answers:[['','',''],['','','']]};
   const progress = readProgress();
   let language = initialLanguage;
@@ -190,6 +192,9 @@ export async function start(initialLanguage) {
   const refreshTalmud = connectDisclosure('talmud-page', talmudLabels, () =>
     import('./talmud-page.js').then(({mountTalmudPage}) =>
       (panel, current, index) => mountTalmudPage(panel,current,index,talmudView)));
+  const refreshGeniza = connectDisclosure('geniza-desk', genizaLabels, () =>
+    import('./geniza-desk.js').then(({mountGenizaDesk}) =>
+      (panel, current, index) => mountGenizaDesk(panel,index,genizaView)));
   const refreshSave = connectDisclosure('save-transfer', saveLabels, () =>
     import('./portable-save.js').then(module => module.mountPortableSave));
   const refreshTransfer = connectDisclosure('transfer', transferLabels, async chapter => {
@@ -282,6 +287,8 @@ export async function start(initialLanguage) {
     if (!timeline.hidden) refreshTimeline();
     talmud.hidden = episode.id !== 11;
     if (!talmud.hidden) refreshTalmud();
+    geniza.hidden = episode.id !== 15;
+    if (!geniza.hidden) refreshGeniza();
     renderEvidence();
     renderLanguageLabs();
     if (focus) find('title').focus();

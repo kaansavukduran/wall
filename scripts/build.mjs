@@ -21,7 +21,7 @@ const files = [
   'daily-life.js', 'daily-lessons.js', 'object-sprite.js',
   'culture-archive.js', 'culture-lessons.js',
   'accountability-archive.js', 'accountability-lessons.js',
-  'talmud-page.js', 'talmud-lessons.js',
+  'talmud-page.js', 'talmud-lessons.js', 'geniza-desk.js', 'geniza-lessons.js',
   'portable-save.js', 'save-data.js',
   'appearance.js',
   'transfer.js', 'transfer-early-lessons.js', 'transfer-middle-lessons.js', 'transfer-late-lessons.js',

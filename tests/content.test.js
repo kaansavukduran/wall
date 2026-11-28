@@ -19,6 +19,7 @@ import { dailyCases } from '../daily-life.js';
 import { archiveCases } from '../diaspora-archive.js';
 import { diasporaRecords } from '../diaspora-lessons.js';
 import { earlyModernLessons } from '../early-modern-lessons.js';
+import { deskCopy, genizaLetters } from '../geniza-lessons.js';
 import { gematriaValues, sefirot } from '../hebrew-labs.js';
 import { feynmanCases, kabbalahLessons } from '../kabbalah-lessons.js';
 import { advancedReadings, comparisonCases } from '../kabbalah-advanced-lessons.js';
@@ -141,7 +142,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 311);
+  assert.equal(entries.length, 312);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -149,6 +150,19 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
   assert.ok(Array.from({length:24}, (_, index) => index + 1).every(id => entries.some(entry => belongsTo(entry, id))));
   assert.ok(belongsTo({chapters:'1–4,6'}, 3));
   assert.equal(belongsTo({chapters:'Prolog,1'}, 10), false);
+});
+
+test('Geniza desk distinguishes two chronological records, with sources and localized sides', () => {
+  assert.deepEqual(genizaLetters.map(letter => letter.id),['ena-2558-10','ts-12-203']);
+  assert.ok(deskCopy.every(label => label.length === languages.length && label.every(text => text.trim())));
+  for (const letter of genizaLetters) {
+    assert.ok(entries.some(entry => entry.url === letter.url && belongsTo(entry,15)));
+    assert.ok(letter.options[letter.correct]);
+    for (const line of [letter.title,letter.front,letter.back,letter.prompt,letter.result,...letter.options]) {
+      assert.equal(line.length,languages.length);
+      assert.ok(line.every(text => text.trim()));
+    }
+  }
 });
 
 test('responsibility records stay chronological with sources and localized exercises', () => {

@@ -305,6 +305,32 @@ export async function makeWorld(canvas, reducedMotion) {
       }
       return;
     }
+    if (index === 15) {
+      rect(background, '#4b382e', 105, 60, 375, 138);
+      rect(background, '#7d5849', 110, 65, 370, 130);
+      rect(background, '#42363a', 134, 82, 98, 65);
+      rect(background, '#c3a477', 138, 85, 90, 57);
+      rect(background, '#a17b57', 139, 120, 88, 21);
+      for (const x of [139,163,188,212]) rect(background, '#8a653d', x, 88, 3, 54);
+      for (const y of [92,110,128]) rect(background, '#8a653d', 139, y, 88, 2);
+      rect(background, '#4e3d3b', 332, 83, 114, 59);
+      rect(background, '#755447', 336, 87, 106, 48);
+      for (const x of [345,374,402,423]) {
+        rect(background, '#ae835e', x, 102 - x % 7, 13, 24 + x % 7);
+        rect(background, '#c8a579', x + 2, 114, 8, 2);
+      }
+      rect(background, '#513d35', 179, 152, 263, 25);
+      rect(background, '#b18154', 174, 149, 271, 16);
+      rect(background, '#604533', 185, 175, 11, 23);
+      rect(background, '#604533', 426, 175, 11, 23);
+      for (const [x,y,w] of [[216,143,35],[275,144,48],[344,145,32]]) {
+        rect(background, '#dfbf81', x, y, w, 12);
+        for (let row = 0; row < 3; row++) rect(background, '#937052', x+4, y+3+row*3, w - 8 - row*4, 1);
+      }
+      rect(background, '#453638', 398, 139, 13, 12);
+      rect(background, '#a5724e', 401, 140, 6, 4);
+      return;
+    }
     if (index === 17) {
       rect(background, '#624a3d', 109, 57, 326, 128);
       rect(background, '#436776', 114, 62, 316, 118);

@@ -30,6 +30,7 @@ try {
     ['kotel.js','assets/kotel-props.png','image/png'],
     ['daily-life.js','assets/daily-props.png','image/png'],
     ['culture-archive.js','assets/culture-objects.png','image/png'],
+    ['geniza-desk.js','assets/geniza-letters.png','image/png'],
     ['catalogue.js','docs/SOURCES.tsv','text/tab-separated-values;charset=utf-8'],
   ]) {
     if (!files.includes(entry)) continue;

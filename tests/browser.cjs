@@ -19,6 +19,7 @@ async function main() {
   const { comparisonCases } = await import('../kabbalah-advanced-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
   const { dailyCases } = await import('../daily-life.js');
+  const { genizaLetters } = await import('../geniza-lessons.js');
   const { cultureCases, cultureRecords } = await import('../culture-lessons.js');
   const { accountabilityCases, accountabilityRecords } = await import('../accountability-lessons.js');
   const { pageFeedback } = await import('../talmud-lessons.js');
@@ -286,6 +287,42 @@ async function main() {
           for (const card of [1,2,0]) await page.click('[data-sequence="' + card + '"]');
           const dates = await page.locator('#sequence li').allTextContents();
           assert.deepEqual(dates.map(item => item.match(/\d+/)[0]), ['1099','1187','1193']);
+        }
+        if (episode.id === 15) {
+          assert.equal(loadedLessons.has('geniza-lessons.js'),false);
+          const desk = page.locator('#geniza-desk');
+          await desk.locator('summary').press('Enter');
+          const picture = desk.locator('canvas');
+          await picture.waitFor();
+          const index = ['tr','en','he','az'].indexOf(locale);
+          for (const letter of genizaLetters) {
+            await desk.locator('[data-geniza-letter="' + letter.id + '"]').press('Enter');
+            assert.equal(await desk.locator('figcaption').textContent(),letter.front[index]);
+            assert.equal(await desk.locator('#geniza-source').getAttribute('href'),letter.url);
+            const front = await picture.evaluate(canvas => canvas.toDataURL());
+            const flip = desk.locator('#geniza-flip');
+            if (width === 320) await flip.tap();
+            else await flip.press('Enter');
+            const back = await picture.evaluate(canvas => canvas.toDataURL());
+            assert.notEqual(back,front);
+            assert.equal(await desk.locator('figcaption').textContent(),letter.back[index]);
+            const feedback = desk.locator('.geniza-exercise [role="status"]');
+            await desk.locator('[data-geniza-choice="0"]').click();
+            assert.notEqual(await feedback.textContent(),letter.result[index]);
+            await desk.locator('[data-geniza-choice="' + letter.correct + '"]').click();
+            assert.equal(await feedback.textContent(),letter.result[index]);
+            assert.notEqual(await picture.evaluate(canvas => canvas.toDataURL()),back);
+            if (width === 320 && letter.id === 'ena-2558-10') {
+              await page.setViewportSize({width:750,height:320});
+              assert.equal(await feedback.textContent(),letter.result[index]);
+              await page.setViewportSize({width:320,height:750});
+              await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+              assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+              await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+            }
+            await flip.press('Enter');
+            assert.equal(await picture.evaluate(canvas => canvas.toDataURL()),front);
+          }
         }
         if (episode.id === 16) {
           await page.click('[data-study="0"]');
