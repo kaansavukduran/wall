@@ -4,12 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#121a22">
 <title>WALL</title>
-<link rel="stylesheet" href="./runtime-0.7.3-745af07df86d/style.css">
+<link rel="stylesheet" href="./runtime-0.7.4-01aaa32d96a6/style.css">
 <body>
 <section id="boot" aria-label="Fragaria Interactive">
   <div class="boot-shell">
     <div class="boot-brand">
-      <img src="./runtime-0.7.3-745af07df86d/assets/fragaria-strawberry.png" alt="" width="116" height="130">
+      <img src="./runtime-0.7.4-01aaa32d96a6/assets/fragaria-strawberry.png" alt="" width="116" height="130">
       <h1>Fragaria<br>Interactive</h1>
     </div>
     <div class="boot-load">
@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.7.3</small>
+  <small dir="ltr">v0.7.4</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -60,6 +60,7 @@
           <p id="aramaic-note"></p>
           <a id="letter-values" href="https://www.jewishencyclopedia.com/articles/6571-gematria" target="_blank" rel="noopener noreferrer"></a>
         </details>
+        <details id="word-methods" name="hebrew-workbench"><summary></summary><p role="status" hidden></p><div></div></details>
         <details id="sefirot-lab" name="hebrew-workbench">
           <summary id="sefirot-summary"></summary>
           <p id="sefirot-intro"></p>
@@ -117,7 +118,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.7.3</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.7.4</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -143,7 +144,7 @@
   <h2 id="photo-title" tabindex="-1" autofocus></h2>
   <div class="photo-layout">
     <figure>
-      <img loading="lazy" src="./runtime-0.7.3-745af07df86d/assets/matpc-14762.jpg" width="433" height="640" alt="">
+      <img loading="lazy" src="./runtime-0.7.4-01aaa32d96a6/assets/matpc-14762.jpg" width="433" height="640" alt="">
       <figcaption></figcaption>
       <a id="photo-source" target="_blank" rel="noopener noreferrer"></a>
     </figure>
@@ -225,6 +226,17 @@
     <div class="visit-choices" role="group" aria-labelledby="culture-question"></div>
     <p role="status"></p>
   </details>
+</template>
+<template id="word-method-template">
+  <p></p>
+  <div class="visit-choices" role="group"></div>
+  <p></p>
+  <label class="method-convention"><input type="checkbox"><span></span></label>
+  <div class="method-tiles" role="group" dir="rtl"></div>
+  <output class="method-result" aria-live="polite"></output>
+  <p hidden></p>
+  <details class="daily-sources"><summary></summary><ul></ul></details>
+  <button type="button" class="method-reset"></button>
 </template>
 <template id="circle-template">
   <p></p>
@@ -419,6 +431,6 @@
     <a target="_blank" rel="noopener noreferrer" dir="auto"></a>
   </article>
 </template>
-<script type="module" src="./runtime-0.7.3-745af07df86d/start.js"></script>
+<script type="module" src="./runtime-0.7.4-01aaa32d96a6/start.js"></script>
 </body>
 </html>
