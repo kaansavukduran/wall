@@ -358,6 +358,9 @@ export async function makeWorld(canvas, reducedMotion) {
         rect(background, '#50463e', 313, 163, 5, 17);
         if (dusk) {
           rect(background, '#efd097', 370, 72, 39, 22);
+          rect(background, '#c7bba7', 299, 124, 4, 9);
+          rect(background, '#cfa684', 292, 146, 10, 4);
+          rect(background, '#cfa684', 317, 146, 11, 4);
           for (const x of [279,326]) {
             rect(background, '#66734f', x, 138, 15, 14);
             rect(background, '#a6ad71', x + 2, 137, 11, 4);
