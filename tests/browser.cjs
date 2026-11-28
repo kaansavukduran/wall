@@ -174,6 +174,7 @@ async function main() {
       await page.click('[data-choice="' + plaza.correct + '"]');
       assert.equal(await photoTask.evaluate(button => button.classList.contains('primary')),false);
       await page.click('#next');
+      const calendarRoutes = {1:['1','pesach'],5:['9','chanukah'],12:['2','lag-baomer']};
       for (const episode of chapters) {
         await page.waitForURL('**/#chapter-' + episode.id);
         assert.equal(await page.locator('#chapter').textContent(), String(episode.id));
@@ -203,6 +204,24 @@ async function main() {
           const index = ['tr','en','he','az'].indexOf(locale);
           assert.equal(await page.locator('#evidence-feedback').textContent(), evidence.feedback[index]);
           assert.ok(loadedLessons.has(filename));
+        }
+        if (calendarRoutes[episode.id] || episode.id === 18) {
+          const before = await visitorFootprint(page);
+          const shortcut = page.locator('#chapter-study-button');
+          if (width === 320) await shortcut.tap();
+          else await shortcut.press('Enter');
+          if (episode.id === 18) {
+            await page.locator('#kabbalah-lesson').waitFor();
+            assert.equal(await page.locator('#kabbalah-lesson').inputValue(),'tzimtzum-partzufim-abya');
+          } else {
+            const [period,event] = calendarRoutes[episode.id];
+            await page.locator('#calendar [data-event="' + event + '"]').waitFor();
+            assert.equal(await page.locator('#calendar-period').inputValue(),period);
+            assert.equal(await page.locator('#calendar [data-event="' + event + '"]').getAttribute('aria-pressed'),'true');
+          }
+          await page.keyboard.press('Escape');
+          assert.equal(await shortcut.evaluate(button => button === document.activeElement),true);
+          assert.deepEqual(await visitorFootprint(page),before);
         }
         if (episode.id === 1) {
           for (const card of [2,0,1]) await page.click('[data-sequence="' + card + '"]');
@@ -843,6 +862,7 @@ async function main() {
       }));
       await page.keyboard.press('Escape');
       assert.ok(await page.locator('#tour-present').evaluate(button => document.activeElement === button));
+      loadedLessons.clear();
       await page.reload();
       await page.locator('#tour-builder').waitFor();
       assert.equal(await page.locator('#journal-text').inputValue(), 'WALL');

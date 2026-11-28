@@ -11,8 +11,18 @@ import { makeWorld } from './world.js';
 const episodes = [plaza, ...chapters];
 const find = id => document.getElementById(id);
 const chapterWorkshopLinks = {
-  16:{workshop:'kabbalah',labels:['Zohar yorumlarını karşılaştır','Compare readings of the Zohar','השוו פירושים לזוהר','Zoharın şərhlərini müqayisə et']},
-  20:{workshop:'calendar',labels:['Bir Şabat, dört cemaat','One Shabbat, four communities','שבת אחת, ארבע קהילות','Bir Şabbat, dörd icma']},
+  1:{workshop:'calendar', period:'1', event:'pesach',
+    labels:['Takvimde Pesah','Passover in the calendar','פסח בלוח','Təqvimdə Pesah']},
+  5:{workshop:'calendar', period:'9', event:'chanukah',
+    labels:['Takvimde Hanuka','Hanukkah in the calendar','חנוכה בלוח','Təqvimdə Hanuka']},
+  12:{workshop:'calendar', period:'2', event:'lag-baomer',
+    labels:['Takvimde Lag BaOmer','Lag BaOmer in the calendar','ל״ג בעומר בלוח','Təqvimdə Laq BaOmer']},
+  16:{workshop:'kabbalah', lesson:'zohar-rose-commentaries',
+    labels:['Zohar yorumlarını karşılaştır','Compare readings of the Zohar','השוו פירושים לזוהר','Zoharın şərhlərini müqayisə et']},
+  18:{workshop:'kabbalah', lesson:'tzimtzum-partzufim-abya',
+    labels:['ABiYA dünyalarını incele','Explore the four worlds','חקרו את ארבעת העולמות','ABiYA aləmlərini araşdır']},
+  20:{workshop:'calendar', period:'0', event:'shabbat',
+    labels:['Bir Şabat, dört cemaat','One Shabbat, four communities','שבת אחת, ארבע קהילות','Bir Şabbat, dörd icma']},
 };
 const evidenceLabels = {
   tr: ['Kaynakları karşılaştır', 'Bu soruya yanıt veren kaynağı bulmak için diğer kartlara da bak.', 'Kaynak kartları yükleniyor…', 'Kaynak kartları açılamadı. Sayfayı yenileyip tekrar dene.'],
@@ -1083,20 +1093,24 @@ export async function start(initialLanguage) {
   }
   find('visit-button').addEventListener('click', () => openWorkshop('visit'));
   find('diaspora-button').addEventListener('click', () => openWorkshop('diaspora-archive'));
-  find('chapter-study-button').addEventListener('click', () => {
+  find('chapter-study-button').addEventListener('click', event => {
     const link = chapterWorkshopLinks[episodes[active].id];
     if (!link) return;
     if (link.workshop === 'kabbalah') {
-      if (kabbalahView.lesson !== 'zohar-rose-commentaries') {
-        kabbalahView.lesson = 'zohar-rose-commentaries';
+      if (kabbalahView.lesson !== link.lesson) {
+        kabbalahView.lesson = link.lesson;
         kabbalahView.route++;
       }
-    } else if (calendarView.event !== 'shabbat' || !calendarView.shabbat.open) {
-      calendarView.period = '0';
-      calendarView.event = 'shabbat';
-      calendarView.shabbat.open = true;
-      calendarView.route++;
+    } else {
+      const revealShabbat = link.event === 'shabbat' && !calendarView.shabbat.open;
+      if (calendarView.period !== link.period || calendarView.event !== link.event || revealShabbat) {
+        calendarView.period = link.period;
+        calendarView.event = link.event;
+        if (revealShabbat) calendarView.shabbat.open = true;
+        calendarView.route++;
+      }
     }
+    event.currentTarget.focus({preventScroll:true});
     openWorkshop(link.workshop);
   });
   next.addEventListener('click', () => {
