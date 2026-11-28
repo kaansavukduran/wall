@@ -17,7 +17,7 @@ S15	Orta Çağ dolaşımı	16	Bahir – Posen Library metin kaydı	Birincil meti
 S16	12. yüzyıl	15	Mişne Tora	Birincil metin	Maimonides ve hukuk derlemesi	https://www.sefaria.org/Mishneh_Torah	Referans; pasaj seçilecek
 S17	13. yüzyıl sonu	16	Zohar	Birincil metin	Kastilya dolaşımı ve Celile anlatı ortamı	https://www.sefaria.org/Zohar	Referans; edisyon seçilecek
 S18	Modern akademik edisyon	16	Pritzker Zohar girişi	Araştırma	Kastilya, Moşe de Leon ve külliyat kronolojisi	https://www.sup.org/books/pages/4810/Front_Matter.pdf	Açık giriş eşleşti
-S19	16. yüzyıl	18	Tomer Devora; Pardes Rimonim; Ets Hayim; Şulhan Aruh	Eser adayları	Cordovero, Luria/Vital ve Karo	https://www.sefaria.org/texts/Kabbalah	Eser ve pasaj bazında kaynak eşleştirilecek
+S19	16. yüzyıl	18	Pardes Rimmonim – Moşe Kordovero	Mistik eser kaydı	Safed’de sefirot öğretisinin sistemleştirilmesi	https://cja.huji.ac.il/browser.php?id=39128&many=5&mode=set&sort=DESC&start=5	Eser ve koleksiyon kaydı eşleşti
 S20	18. yüzyıl sonu	20	Tanya	Birincil metin	Hasidik düşünce ve manevî çalışma	https://www.sefaria.org/Tanya	Referans; pasaj seçilecek
 S21	Katmanlı litürji	Prolog,11,24	Sefaria Litürji	Katalog	Sidur, mahzor, farklı rite örnekleri	https://www.sefaria.org/texts/Liturgy	Çatı kaynak; tarih ve rite ayrı doğrulanacak
 B01	20. yüzyıl	24	Aşlag – Sulam’a Önsöz	Gelenek içi metin	Kabala teknik kavramları	https://kabbalah.academy/en/library/sources/articles/11/	Kaynak eşleşti; alıntı hakkı incelenecek
@@ -121,3 +121,13 @@ S34	Orta Çağ mistik metni	16	Tikkunei Zohar 17a	Birincil mistik metin	On sefir
 H11	Güncel başvuru	16	Jewish Encyclopedia – Gemaṭria	Ansiklopedi	Harfleri sayısal değerle okuma	https://www.jewishencyclopedia.com/articles/6571-gematria	Hesap yöntemi ve farklı yorumlar
 H12	Kabala öğretim geleneği	16	Chabad – Two Systems of Ten Sefirot	Gelenek içi açıklama	Keter ve Daat kullanılan iki sayım	https://www.chabad.org/kabbalah/article_cdo/aid/380536/jewish/Two-Systems-of-Ten-Sefirot.htm	İki sayım açıklaması eşleşti
 H13	Güncel başvuru	16	Unicode – Hebrew	Karakter standardı	İbrani harfleri ve beş son biçim	https://www.unicode.org/charts/nameslist/c_0590.html	Karakter adları ve biçimler eşleşti
+D34	31 Mart 1492	17	Elhamra Kararnamesi	Birincil kararname çevirisi	Kastilya ve Aragon’da Yahudilere çıkarılan sürgün emri	https://www.fau.edu/artsandletters/pjhr/chhre/pdf/hh-alhambra-1492-english.pdf	Florida Atlantic University eğitim kopyası; oyunda özgün özet
+H14	Osmanlı dönemi ve sonrası	17	Jewish Language Project – Judeo-Spanish	Dil araştırması	Ladino ve Sefarad diasporası	https://www.jewishlanguages.org/judeo-spanish	Dil kaydı ve göç bağlamı eşleşti
+H15	15. yüzyıl ve sonrası	17	Britannica – Sephardi	Ansiklopedi	Sefarad diasporasının farklı göç yönleri	https://www.britannica.com/topic/Sephardi	Çoklu güzergâh ve önceden var olan topluluklar
+D35	1535–1538	19	İsrail Müzesi – Kudüs suru inşa kitabesi	Müze nesne kaydı	Kanûnî döneminde Eski Şehir çevre suru	https://www.imj.org.il/en/node/6581296	Kitabenin tarih aralığı ve yapının kimliği eşleşti
+H16	Birden çok dönem	19	Western Wall Heritage Foundation – Stone Rows	Kurum açıklaması	Kotel’in görünen üst sıralarında Müslüman onarımları	https://thekotel.org/en/wailing-wall-western-wall/	Kurum atfı; tek tek sıra tarihi ve yaptıran kişi belirtilmez
+H17	1920	19,21	Katharina Galor – Finding Jerusalem	Akademik kitap	Britanya idaresinin başında Batı Duvarı’nın üst sıralarında onarım	https://webfiles.ucpress.edu/oa/9780520968073_WEB.pdf	Three Controversies bölümünde 1920 onarımı
+D36	1666	20	Cambridge – Joseph Halevi mektupları	Birincil mektuplar ve inceleme	Sabatay Sevi hareketine yakın dönem tanıklığı	https://www.cambridge.org/core/books/abs/sabbatai-zevi/letters-of-joseph-halevi/74E89AA93DEACFBE5C9ABD475E809CCF	Mektup bölümü eşleşti; oyunda özgün özet
+H18	18. yüzyıl ve sonrası	20	YIVO – Hasidism, Historical Overview	Akademik ansiklopedi	Hasidizmin Doğu Avrupa’da gelişimi	https://encyclopedia.yivo.org/article.aspx/Hasidism/Historical_Overview	Hareketin kronolojisi eşleşti
+H19	18. ve 19. yüzyıl	20	YIVO – Haskalah	Akademik ansiklopedi	Yahudi Aydınlanması ve farklı bölgeler	https://encyclopedia.yivo.org/article.aspx/Haskalah	Hareketin kronolojisi eşleşti
+H20	Kabala öğretim geleneği	18	Chabad – The Four Worlds	Gelenek içi açıklama	ABiYA, Adam Kadmon ve dört dünyanın adları	https://www.chabad.org/library/article_cdo/aid/361902/jewish/The-Four-Worlds.htm	Dört ad ve geleneğe özgü öğretim çerçevesi eşleşti

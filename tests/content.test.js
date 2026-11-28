@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import { ancientLessons } from '../ancient-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
+import { earlyModernLessons } from '../early-modern-lessons.js';
 import { gematriaValues, sefirot } from '../hebrew-labs.js';
 import { library, libraryLabels } from '../library.js';
 import { medievalLessons } from '../medieval-lessons.js';
@@ -67,7 +68,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 122);
+  assert.equal(entries.length, 132);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -78,10 +79,10 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
 });
 
 test('ancient source exercises contain four versions of each card and matched catalogue entries', () => {
-  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons};
-  assert.deepEqual(Object.keys(lessons), Array.from({length:16}, (_, index) => String(index + 1)));
+  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons};
+  assert.deepEqual(Object.keys(lessons), Array.from({length:20}, (_, index) => String(index + 1)));
   for (const [chapter, lesson] of Object.entries(lessons)) {
-    assert.equal(lesson.cards.length, 3);
+    assert.ok(lesson.cards.length >= 3);
     assert.ok(lesson.cards[lesson.correct]);
     const translations = [lesson.prompt, lesson.feedback];
     for (const card of lesson.cards) {

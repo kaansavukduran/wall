@@ -42,6 +42,11 @@ export const sequences = [
     ['Modern edisyon ve inceleme','Modern edition and study','מהדורה ומחקר מודרניים','Müasir nəşr və araşdırma'],
     ['Şimon’un anlatı ortamı','Shimon’s narrative setting','זמן העלילה של שמעון','Şimonun rəvayət dövrü'],
   ]),
+  make(18, ['Luria’nın öğretisinde üç aşama','Three stages in Luria’s teaching','שלושה שלבים בתורת האר״י','Lurianın təlimində üç mərhələ'], [1,2,0], [
+    ['Tikkun · onarım ve yeniden düzenlenme','Tikkun · repair and reordering','תיקון · שיקום וארגון מחדש','Tikkun · bərpa və yenidən düzülüş'],
+    ['Tsimtsum · yaratılışa yer açan çekilme','Tzimtzum · withdrawal that makes room for creation','צמצום · נסיגה המפנה מקום לבריאה','Tsimtsum · yaradılışa yer açan çəkilmə'],
+    ['Şevirat ha-kelim · kapların kırılması','Shevirat ha-kelim · breaking of the vessels','שבירת הכלים','Şevirat ha-kelim · qabların sınması'],
+  ]),
   make(20, ['1666 öncesi ve sonrası','Before and after 1666','לפני 1666 ואחריה','1666-dan əvvəl və sonra'], [2,1,0], [
     ['Sonraki Sabataycı topluluklar','Later Sabbatian communities','קהילות שבתאיות מאוחרות','Sonrakı Sabatayçı icmalar'],
     ['Sabatay Sevi İslam’a geçti','Sabbatai Zevi converted to Islam','שבתי צבי התאסלם','Sabatay Sevi İslamı qəbul etdi'],

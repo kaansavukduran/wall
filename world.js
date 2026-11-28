@@ -40,7 +40,8 @@ export async function makeWorld(canvas, reducedMotion) {
       rect(background, hills, i * 43, 86 + (i * 11) % 26, 60, 125);
     }
     const cutaway = index === 6 || index === 8;
-    const site = index === 0 || [13, 14, 19, 21, 23, 24].includes(index);
+    const cityWall = index === 19 && layer === 'city-walls';
+    const site = index === 0 || [13, 14, 21, 23, 24].includes(index) || (index === 19 && !cityWall);
     const wallStart = 166;
     if (cutaway) {
       drawPlatformSection(background, index === 6 || layer === 'before', layer);
@@ -49,7 +50,7 @@ export async function makeWorld(canvas, reducedMotion) {
       for (let row = 0; row < 8; row++) {
         let left = wallStart - row % 2 * 17;
         for (let column = 0; left < 480; column++) {
-          const block = 23 + ((row * 13 + column * 17) % 16);
+          const block = index === 19 && row < 3 ? 13 + column % 6 : 23 + ((row * 13 + column * 17) % 16);
           const x = Math.max(wallStart, left);
           const y = 88 + row * 14;
           const width = left + block - x - 2;
@@ -77,6 +78,9 @@ export async function makeWorld(canvas, reducedMotion) {
       for (const [position, x, y, width] of [['dome-rock',213,84,64],['qibli',346,84,99],['western-wall',180,179,280]]) {
         if (layer === position) rect(background, '#ffe1a0', x, y, width, 3);
       }
+    }
+    if (index === 19 && layer === 'kotel-courses') {
+      rect(background, '#ffe1a0', 168, 128, 312, 2);
     }
     if (layer === 'quarter' || (index === 23 && layer !== 'plaza')) {
       for (let x = 197; x < 430; x += 57) {
@@ -208,14 +212,50 @@ export async function makeWorld(canvas, reducedMotion) {
       }
       return;
     }
-    if ([3,4,17,22].includes(index)) {
+    if (index === 17) {
+      rect(background, '#624a3d', 109, 57, 326, 128);
+      rect(background, '#436776', 114, 62, 316, 118);
+      rect(background, '#a69571', 114, 62, 316, 25);
+      rect(background, '#a69571', 133, 85, 53, 37);
+      rect(background, '#a69571', 184, 86, 25, 17);
+      rect(background, '#a69571', 390, 85, 40, 31);
+      rect(background, '#a69571', 154, 140, 276, 40);
+      rect(background, '#a69571', 195, 132, 94, 13);
+      const destinations = {'portugal':[141,96],'north-africa':[185,145],'salonika':[397,101]};
+      if (destinations[layer]) {
+        const [x,y] = destinations[layer];
+        for (let step = 1; step <= 20; step++) {
+          const proportion = step / 20;
+          rect(background, '#ffe1a0', Math.round(163 + (x - 163) * proportion), Math.round(106 + (y - 106) * proportion), 3, 3);
+        }
+        rect(background, '#ffe1a0', x - 2, y - 2, 7, 7);
+      }
+      rect(background, '#674b43', 160, 103, 8, 8);
+      return;
+    }
+    if (index === 19) {
+      rect(background, '#6f5e51', 108, 103, 372, 95);
+      for (const x of [120,170,220,330,380,430]) {
+        rect(background, '#c7a97f', x, 81, 28, 19);
+      }
+      for (let row = 0; row < 5; row++) {
+        for (let x = 113 + row % 2 * 20; x < 480; x += 40) {
+          rect(background, row < 2 ? '#c8ab80' : '#ad916e', x, 106 + row * 17, 38, 15);
+        }
+      }
+      rect(background, '#443a38', 253, 149, 63, 49);
+      rect(background, '#443a38', 263, 140, 43, 12);
+      rect(background, '#443a38', 273, 132, 23, 9);
+      rect(background, '#d2b584', 272, 117, 23, 7);
+      return;
+    }
+    if ([3,4,22].includes(index)) {
       for (let i = 0; i < 9; i++) {
         const x = 125 + i * 42;
         rect(background, mortar, x, 114 - i % 3 * 9, 36, 88);
         rect(background, stone, x + 2, 119 - i % 3 * 9, 32, 80);
         rect(background, '#453944', x + 14, 158, 10, 43);
       }
-      if (index === 17) rect(background, '#58757e', 0, 150, 120, 49);
       return;
     }
     rect(background, mortar, 145, 86, 335, 112);

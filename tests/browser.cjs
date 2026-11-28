@@ -12,8 +12,9 @@ async function main() {
   const { secondTempleLessons } = await import('../second-temple-lessons.js');
   const { romanLessons } = await import('../roman-lessons.js');
   const { medievalLessons } = await import('../medieval-lessons.js');
-  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons};
-  const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js'];
+  const { earlyModernLessons } = await import('../early-modern-lessons.js');
+  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons};
+  const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js'];
   const browser = await chromium.launch(browserOptions);
   try {
     for (const [locale, width] of [['tr',1100],['en',320],['he',320],['az',740]]) {
@@ -86,7 +87,8 @@ async function main() {
           const filename = decks[Math.floor((episode.id - 1) / 4)];
           if (episode.id % 4 === 1) assert.equal(loadedLessons.has(filename), false);
           await panel.locator('summary').press('Enter');
-          const wrongChoice = page.locator('[data-evidence="' + (evidence.correct + 1) % 3 + '"]');
+          const wrongIndex = (evidence.correct + 1) % evidence.cards.length;
+          const wrongChoice = page.locator('[data-evidence="' + wrongIndex + '"]');
           await wrongChoice.press('Enter');
           const firstLink = await page.locator('#evidence-source').getAttribute('href');
           const correctChoice = page.locator('[data-evidence="' + evidence.correct + '"]');
@@ -195,8 +197,23 @@ async function main() {
           await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
         }
         if (episode.id === 18) {
+          const currentButton = await page.locator('[data-study="3"]').elementHandle();
           await page.click('[data-study="3"]');
           assert.equal(await page.locator('#workbench output bdi').textContent(), 'עשייה');
+          assert.ok(await currentButton.evaluate(button => button.isConnected && button === document.activeElement));
+          assert.ok((await page.locator('#workbench .world-description').textContent()).length > 30);
+          for (const card of [1,2,0]) await page.click('[data-sequence="' + card + '"]');
+          assert.equal(await page.locator('#sequence li').count(), 3);
+        }
+        if (episode.id === 17 || episode.id === 19) {
+          const initial = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
+          await page.click(episode.id === 17 ? '[data-layer="north-africa"]' : '[data-layer="city-walls"]');
+          assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), initial);
+          if (episode.id === 19) {
+            await page.click('[data-layer="kotel-courses"]');
+            await page.click('[data-evidence="3"]');
+            assert.match(await page.locator('#evidence-date').textContent(), /1920/);
+          }
         }
         if (episode.id === 23) {
           await page.click('#photo-button');

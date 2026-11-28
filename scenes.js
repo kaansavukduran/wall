@@ -51,6 +51,20 @@ export const models = [
     ['western-wall',['Batı Duvarı','Western Wall','הכותל המערבי','Qərb Divarı'],
       ['Platformun batı kenarındaki istinat yapısının görünen bölümüdür. Meydana bakan alt seviyededir.','This visible section of the platform’s western retaining wall faces the plaza at a lower level.','חלק זה של קיר התמך המערבי פונה לרחבה במפלס נמוך יותר.','Platformanın qərb istinad divarının görünən bu hissəsi aşağı səviyyədə meydanla üzbəüzdür.']],
   ]),
+  scene(17, ['1492 sonrasında üç güzergâh','Three routes after 1492','שלושה נתיבי הגירה אחרי 1492','1492-dən sonra üç marşrut'], [
+    ['portugal',['Portekiz','Portugal','פורטוגל','Portuqaliya'],
+      ['Bazı aileler önce Portekiz’e geçti. Buradaki 1496 buyruğu ve ardından gelen zorla din değiştirmeler yeni ayrılışlara yol açtı.','Some families first went to Portugal. The order of 1496 and the forced conversions that followed prompted further departures.','משפחות אחדות עברו תחילה לפורטוגל. הצו של 1496 והמרות הדת הכפויות אחריו הביאו לעזיבות נוספות.','Bəzi ailələr əvvəl Portuqaliyaya getdi. 1496-cı il fərmanı və sonra zorla din dəyişdirmə yeni köçlərə səbəb oldu.']],
+    ['north-africa',['Kuzey Afrika','North Africa','צפון אפריקה','Şimali Afrika'],
+      ['Bazı sürgünler Fas ve başka Kuzey Afrika bölgelerine yerleşti. Daha önce bu bölgelerde yaşayan Yahudi cemaatleri de vardı.','Some exiles settled in Morocco and elsewhere in North Africa, where Jewish communities already lived.','חלק מהמגורשים התיישבו במרוקו ובאזורים אחרים בצפון אפריקה, שבהם כבר חיו קהילות יהודיות.','Bəzi sürgünlər Mərakeşdə və Şimali Afrikanın başqa bölgələrində məskunlaşdı. Orada əvvəlcədən yəhudi icmaları yaşayırdı.']],
+    ['salonika',['Osmanlı limanları','Ottoman ports','נמלים עות׳מאניים','Osmanlı limanları'],
+      ['Selanik ve İstanbul önemli varış yerleri oldu. Bazı aileler buralara İtalya veya başka bir liman üzerinden ulaştı.','Salonika and Istanbul became important destinations. Some families reached them through Italy or another port.','סלוניקי ואיסטנבול היו יעדים חשובים. משפחות מסוימות הגיעו דרך איטליה או נמל אחר.','Saloniki və İstanbul mühüm dayanacaqlar oldu. Bəzi ailələr bu şəhərlərə İtaliya və ya başqa liman vasitəsilə gəlib çatdı.']],
+  ]),
+  scene(19, ['Kudüs suru ve Batı Duvarı','City walls and the Western Wall','חומות העיר והכותל המערבי','Şəhər divarları və Qərb Divarı'], [
+    ['city-walls',['Osmanlı şehir suru','Ottoman city wall','חומת העיר העות׳מאנית','Osmanlı şəhər divarı'],
+      ['Kanûnî devrindeki kitabe, Eski Şehir çevre surunun inşasını belgeler. Bu duvar şehri çevreler.','The inscription from Süleyman’s reign documents construction of the city wall that surrounds the Old City.','הכתובת מימי סולימאן מתעדת בנייה של חומת העיר המקיפה את העיר העתיקה.','Süleyman dövrünün kitabəsi İçərişəhəri əhatə edən şəhər divarının tikintisini sənədləşdirir.']],
+    ['kotel-courses',['Batı Duvarı taş sıraları','Western Wall stone courses','נדבכי האבנים בכותל','Qərb Divarının daş sıraları'],
+      ['İri alt taşları ve küçük üst taşları karşılaştır. Kazılar daha eski istinat yapısını gösterir. Üstte farklı dönemlerde eklenen ve onarılan sıralar var.','Compare the large lower blocks and smaller upper ones. Excavations document the older retaining structure. The upper courses include work from later periods.','השוו בין האבנים הגדולות למטה לקטנות למעלה. החפירות מתעדות את קיר התמך הקדום. הנדבכים העליונים כוללים עבודות מתקופות מאוחרות.','Aşağıdakı iri daşları yuxarıdakı kiçik daşlarla müqayisə et. Qazıntılar daha qədim istinad quruluşunu göstərir. Yuxarı sıralarda sonrakı dövrlərin işləri var.']],
+  ]),
   scene(23, ['Mahalle ve meydan','Neighborhood and plaza','שכונה ורחבה','Məhəllə və meydan'], [
     ['quarter',['Mağribi Mahallesi','Maghrebi Quarter','שכונת המוגרבים','Məğrib məhəlləsi'],
       ['Temsili çizimde evlerin ve geçidin duvara yakınlığına bak.','Look at the homes and passage near the wall in this schematic.','שימו לב לבתים ולמעבר שליד הכותל בתרשים.','Şərti təsvirdə evlərin və keçidin divara yaxınlığına bax.']],
@@ -70,17 +84,37 @@ export const alphabetNotes = [
 ];
 
 export const worlds = [
-  ['אצילות', ['Atsilut','Atzilut','אצילות','Atsilut'], ['Yayılım','Emanation','האצלה','Yayılma']],
-  ['בריאה', ['Beria','Beriah','בריאה','Beria'], ['Yaratılış','Creation','בריאה','Yaradılış']],
-  ['יצירה', ['Yetsira','Yetzirah','יצירה','Yetsira'], ['Biçimlenme','Formation','יצירה','Formalaşma']],
-  ['עשייה', ['Asiya','Asiyah','עשייה','Asiya'], ['Eylem','Action','עשייה','Əməl']],
+  ['אצילות', ['Atsilut','Atzilut','אצילות','Atsilut'], ['Yayılım','Emanation','האצלה','Yayılma'], [
+    'Bu düzeyde Kabala, ilahî niteliklerin kaynaklarıyla birliğini vurgular. Bir dostuna mektup yazmaya karar verdiğin andaki niyeti düşün.',
+    'At this level Kabbalah emphasizes the unity of divine qualities with their source. For an analogy, think of your intention to write to a friend.',
+    'ברובד הזה הקבלה מדגישה את האחדות בין המידות האלוהיות למקורן. כדוגמה, חשבו על הכוונה לכתוב מכתב לחבר.',
+    'Bu səviyyədə Kabala ilahi keyfiyyətlərin mənbəyi ilə birliyini vurğulayır. Bir dosta məktub yazmaq niyyətini düşün.',
+  ]],
+  ['בריאה', ['Beria','Beriah','בריאה','Beria'], ['Yaratılış','Creation','בריאה','Yaradılış'], [
+    'Bu düzey, yaratılan bir varlığın belirmesini anlatır. Mektubunda söyleyeceğin düşüncenin ilk kez belirginleşmesi buna benzetilebilir.',
+    'This level describes created existence coming into view. In the letter analogy, it is like the message first taking shape in your mind.',
+    'הרובד מתאר הופעה של מציאות נבראת. במשל המכתב, זה הרגע שבו המסר מתחיל להתבהר במחשבה.',
+    'Bu səviyyə yaradılmış varlığın meydana çıxmasını təsvir edir. Məktub misalında demək istədiyin fikir ilk dəfə aydınlaşır.',
+  ]],
+  ['יצירה', ['Yetsira','Yetzirah','יצירה','Yetsira'], ['Biçimlenme','Formation','יצירה','Formalaşma'], [
+    'Yaratılanların ayırt edilebilir biçimler kazanmasını anlatan düzeydir. Mektupta bir düşüncenin sözcüklere ve cümlelere dönüşmesini düşün.',
+    'This level describes creation taking distinguishable forms. Think of arranging an idea into words and sentences for the letter.',
+    'ברובד הזה לבריאה יש צורות מובחנות. במשל המכתב, רעיון מקבל צורה במילים ובמשפטים.',
+    'Bu səviyyədə yaradılanlar seçilən formalar alır. Məktubdakı fikrin sözlərə və cümlələrə çevrilməsini düşün.',
+  ]],
+  ['עשייה', ['Asiya','Asiyah','עשייה','Asiya'], ['Eylem','Action','עשייה','Əməl'], [
+    'Bu düzey, eyleme ve somut dünyaya uzanır. Mektubu kâğıda yazıp dostuna gönderdiğin adımı düşün.',
+    'This level reaches into action and the material world. In the letter analogy, you put the words on paper and send them.',
+    'הרובד מגיע אל המעשה ואל העולם החומרי. במשל, כותבים את המכתב על נייר ושולחים אותו.',
+    'Bu səviyyə əməli və maddi dünyanı əhatə edir. Məktubu kağıza yazıb dostuna göndərdiyin addımı düşün.',
+  ]],
 ];
 
 export const worldNote = [
-  'Bu gösterim dört adın sırasını öğretir. Farklı Kabala yazarları dünyalar ve sefirot ilişkisini farklı açıklar.',
-  'This diagram teaches the sequence of the four names. Kabbalistic authors explain their relation to the sefirot in different ways.',
-  'התרשים מלמד את סדר ארבעת השמות. מחברים קבליים שונים מסבירים בדרכים שונות את הקשר לספירות.',
-  'Bu sxem dörd adın ardıcıllığını öyrədir. Kabala müəllifləri dünyalarla sefirotların əlaqəsini fərqli izah edirlər.',
+  'ABiYA dört adın baş harflerini birleştirir. Her dünyayı ayrı incele. Mektup örneği bir benzetmedir. Bazı Luria okumalarında Adam Kadmon bu dörtlüden önce gelir. Partzuf, sefirotun birbiriyle ilişkili bir yapı olarak düzenlenişidir.',
+  'ABYA combines the initials of the four names. Explore each world. The letter is an analogy. Some readings of Luria place Adam Kadmon before these four. A partzuf is a configuration of sefirot in relation to one another.',
+  'אבי״ע הוא ראשי התיבות של ארבעת השמות. בחנו כל עולם בנפרד. המכתב הוא משל. בכמה קריאות של תורת האר״י, אדם קדמון קודם לארבעת העולמות. פרצוף הוא מבנה של ספירות הקשורות זו לזו.',
+  'ABiYA dörd adın baş hərflərini birləşdirir. Hər dünyaya ayrıca bax. Məktub nümunəsi bənzətmədir. Lurianın bəzi şərhlərində Adam Kadmon bu dörd dünyadan əvvəl gəlir. Partsuf sefirotun əlaqəli bir quruluşda düzülüşüdür.',
 ];
 
 export const photo = {

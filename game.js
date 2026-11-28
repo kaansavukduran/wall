@@ -20,6 +20,7 @@ const lessonDecks = [
   () => import('./second-temple-lessons.js').then(module => module.secondTempleLessons),
   () => import('./roman-lessons.js').then(module => module.romanLessons),
   () => import('./medieval-lessons.js').then(module => module.medievalLessons),
+  () => import('./early-modern-lessons.js').then(module => module.earlyModernLessons),
 ];
 
 function read(keyName) {
@@ -300,8 +301,36 @@ export async function start(initialLanguage) {
     const controls = surface.querySelector('div');
     const rows = id === 16
       ? [['ח', 8], ['י', 10]].map(([letter, value]) => ({ label:letter + ' · ' + value, lang:'he', value }))
-      : worlds.map(([hebrew, names, meanings], order) =>
-          ({ label:names[index], hebrew, value:order, meaning:meanings[index] }));
+      : worlds.map(([hebrew, names, meanings, descriptions], order) =>
+          ({ label:names[index], hebrew, value:order, meaning:meanings[index], description:descriptions[index] }));
+
+    function updateStudy() {
+      for (const button of controls.children) {
+        const rowIndex = Number(button.dataset.study);
+        const selected = id === 16 ? letters.has(rows[rowIndex].value) : studyOption === rowIndex;
+        button.setAttribute('aria-pressed', String(selected));
+      }
+      if (id === 16) {
+        const values = [8, 10].filter(value => letters.has(value));
+        const total = values.reduce((sum, value) => sum + value, 0);
+        output.dir = 'ltr';
+        output.textContent = values.length === 2 ? '8 + 10 = 18' : String(total);
+        note.textContent = alphabetNotes[Number(total === 18)][index];
+        return;
+      }
+      output.dir = 'auto';
+      output.replaceChildren();
+      if (studyOption === null) return;
+      const row = rows[studyOption];
+      const original = document.createElement('bdi');
+      original.lang = 'he';
+      original.dir = 'rtl';
+      original.textContent = row.hebrew;
+      const description = document.createElement('span');
+      description.className = 'world-description';
+      description.textContent = row.description;
+      output.append(original, ' · ' + row.meaning, description);
+    }
 
     controls.replaceChildren(...rows.map(({label,lang,value}, rowIndex) => {
       const button = document.createElement('button');
@@ -310,37 +339,19 @@ export async function start(initialLanguage) {
       if (lang) button.lang = lang;
       button.dir = 'auto';
       button.dataset.study = String(rowIndex);
-      button.setAttribute('aria-pressed', String(id === 16 ? letters.has(value) : studyOption === rowIndex));
       button.addEventListener('click', () => {
         if (id === 16) {
           if (letters.has(value)) letters.delete(value); else letters.add(value);
         } else {
           studyOption = rowIndex;
         }
-        renderStudy();
-        controls.querySelector('[data-study="' + rowIndex + '"]').focus();
+        updateStudy();
+        button.focus({preventScroll:true});
       });
       return button;
     }));
-    if (id === 16) {
-      const values = [8, 10].filter(value => letters.has(value));
-      const total = values.reduce((sum, value) => sum + value, 0);
-      output.dir = 'ltr';
-      output.textContent = values.length === 2 ? '8 + 10 = 18' : String(total);
-      note.textContent = alphabetNotes[Number(total === 18)][index];
-      return;
-    }
-    output.dir = 'auto';
-    output.replaceChildren();
-    if (studyOption !== null) {
-      const row = rows[studyOption];
-      const original = document.createElement('bdi');
-      original.lang = 'he';
-      original.dir = 'rtl';
-      original.textContent = row.hebrew;
-      output.append(original, ' · ' + row.meaning);
-    }
-    note.textContent = worldNote[index];
+    if (id === 18) note.textContent = worldNote[index];
+    updateStudy();
   }
 
   function renderLights(surface, output, note) {

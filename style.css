@@ -79,6 +79,7 @@ dialog a{overflow-wrap:anywhere}
 #workbench button[aria-pressed=true]{background:#47351e;border-color:#f5c466}
 #workbench output{font-weight:650}
 #workbench small{color:var(--muted)}
+.world-description{display:block;margin-block-start:.3rem;font-weight:400}
 
 #language-labs{display:grid;gap:.4rem;padding:.55rem;background:#1b242c}
 #language-labs details{border-block-start:1px solid var(--edge);padding:.2rem .4rem .4rem}
