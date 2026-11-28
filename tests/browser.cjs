@@ -957,7 +957,7 @@ async function main() {
       const roseCards = page.locator('.kabbalah-commentaries details');
       await page.selectOption('#kabbalah-lesson', rose.id);
       assert.equal(await page.locator('.kabbalah-excerpt bdi[lang="arc"][dir="rtl"]').innerText(), rose.excerpt);
-      assert.equal(await roseCards.count(), 3);
+      assert.equal(await roseCards.count(), rose.commentaries.length);
       for (const [index, commentary] of rose.commentaries.entries()) {
         const summary = roseCards.nth(index).locator('summary');
         assert.equal(await summary.textContent(), commentary.title[localeIndex]);
@@ -967,7 +967,7 @@ async function main() {
         assert.equal(await roseCards.nth(index).locator('p').last().innerText(), commentary.study[localeIndex]);
         assert.equal(await roseCards.nth(index).locator('a').getAttribute('href'), commentary.url);
       }
-      assert.equal(await page.locator('.kabbalah-commentaries details[open]').count(), 3);
+      assert.equal(await page.locator('.kabbalah-commentaries details[open]').count(), rose.commentaries.length);
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
       await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
@@ -1188,7 +1188,7 @@ async function main() {
     await kabbalahPicker.waitFor();
     assert.equal(await kabbalahPicker.inputValue(),'zohar-rose-commentaries');
     const manuscripts = chapterStudy.locator('.kabbalah-commentaries details');
-    await manuscripts.first().locator('summary').tap();
+    await manuscripts.last().locator('summary').tap();
     await chapterStudy.locator('.kabbalah-exercise summary').press('Enter');
     await chapterStudy.locator('[data-case-choice="1"]').press('Enter');
     await chapterStudy.fill('#kabbalah-draft','WALL from chapter 16');
@@ -1200,7 +1200,7 @@ async function main() {
     await chapterStudyButton.press('Enter');
     await kabbalahPicker.waitFor();
     assert.equal(await kabbalahPicker.inputValue(),'zohar-rose-commentaries');
-    assert.equal(await manuscripts.first().getAttribute('open'),'');
+    assert.equal(await manuscripts.last().getAttribute('open'),'');
     assert.equal(await chapterStudy.locator('#kabbalah-draft').inputValue(),'WALL from chapter 16');
     await chapterStudy.keyboard.press('Escape');
     await chapterStudy.click('#episodes-button');

@@ -7,7 +7,7 @@ const exercises = new Map([...feynmanCases, ...comparisonCases].map(sample => [s
 const copy = {
   tr: {
     choose:'Okuma durağı', sources:'Kaynaklar ve bağlam', apply:'Kendi sözlerinle açıkla',
-    commentaries:'Aynı pasaja üç yorum',
+    commentaries:'Aynı pasajın yorumları ve ders kaydı',
     groups:['Tarih ve temel kavramlar','İleri karşılaştırmalar'],
     retry:'Bu örnek için kaynak ve bağlamı tekrar incele.',
     local:'Taslak bu tarayıcıda saklanır.',
@@ -17,7 +17,7 @@ const copy = {
   },
   en: {
     choose:'Reading stop', sources:'Sources and context', apply:'Explain it in your own words',
-    commentaries:'Three commentaries on the same passage',
+    commentaries:'Commentaries and a lesson on the same passage',
     groups:['History and foundations','Advanced comparisons'],
     retry:'Read the source and context again for this example.',
     local:'The draft stays in this browser.',
@@ -27,7 +27,7 @@ const copy = {
   },
   he: {
     choose:'תחנת קריאה', sources:'מקורות והקשר', apply:'הסבירו במילים שלכם',
-    commentaries:'שלושה פירושים לאותו קטע',
+    commentaries:'פירושים ושיעור על אותו קטע',
     groups:['היסטוריה ומושגי יסוד','השוואות למתקדמים'],
     retry:'קראו שוב את המקור ואת ההקשר לדוגמה הזאת.',
     local:'הטיוטה נשמרת בדפדפן הזה.',
@@ -37,7 +37,7 @@ const copy = {
   },
   az: {
     choose:'Oxu dayanacağı', sources:'Mənbələr və kontekst', apply:'Öz sözlərinlə izah et',
-    commentaries:'Eyni parçaya üç şərh',
+    commentaries:'Eyni parça üzrə şərhlər və dərs yazısı',
     groups:['Tarix və əsas anlayışlar','İrəli səviyyə müqayisələri'],
     retry:'Bu nümunə üçün mənbəni və konteksti yenidən oxu.',
     local:'Qaralama bu brauzerdə saxlanılır.',

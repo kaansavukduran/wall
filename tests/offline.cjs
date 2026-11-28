@@ -49,7 +49,7 @@ async function main() {
     await first.page.tap('#kabbalah > summary');
     await first.page.selectOption('#kabbalah-lesson', 'zohar-rose-commentaries');
     await first.page.locator('.kabbalah-commentaries summary').last().tap();
-    assert.match(await first.page.locator('.kabbalah-commentaries details[open]').innerText(), /Malkut/);
+    assert.match(await first.page.locator('.kabbalah-commentaries details[open]').innerText(), /17 dekabr 2022/);
     assert.deepEqual(first.requests,[]);
     assert.deepEqual(first.errors,[]);
     await first.page.close();

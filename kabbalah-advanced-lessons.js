@@ -1,6 +1,6 @@
 const roseCommentaries = [
   {
-    title:['Hayim Vital · Or ha-Hama','Hayyim Vital · Ohr HaChammah','חיים ויטאל · אור החמה','Hayim Vital · Or ha-Hama'],
+    title:['Hayim Vital’in yorumu · Azulay’ın derlemesi','Hayyim Vital’s reading · Azulai’s anthology','פירוש חיים ויטאל · הקובץ של אזולאי','Hayim Vitalın şərhi · Azulayın toplusu'],
     period:[
       '16–17. yüzyıl · Avraham Azulay’ın 17. yüzyıldaki derlemesinde',
       'Sixteenth–seventeenth centuries · preserved in Abraham Azulai’s seventeenth-century anthology',
@@ -45,6 +45,57 @@ const roseCommentaries = [
     url:'https://www.sefaria.org/Sulam_on_Zohar%2C_Introduction.1.1',
     reference:'Sulam on Zohar, Introduction 1:1 · Sefaria',
   },
+  {
+    title:['Menachem Mendel Schneerson · Habad','Menachem Mendel Schneerson · Chabad','מנחם מנדל שניאורסון · חב״ד','Menaxem Mendel Şneerson · Xabad'],
+    period:[
+      '18 Elul 5732 (1972) · Hasidik söylevin gözden geçirilmemiş kaydı',
+      '18 Elul 5732 (1972) · Unrevised record of a Hasidic discourse',
+      'י״ח באלול תשל״ב (1972) · הנחה בלתי מוגהת של מאמר חסידי',
+      '18 Elul 5732 (1972) · Hasidik çıxışın redaktə edilməmiş yazısı',
+    ],
+    study:[
+      'Schneerson, Ezgiler Ezgisi 2:2’deki dikenler arasındaki gülü Malkut’un dış yönüyle, aynı ayetteki sevgiliyi iç yönüyle ilişkilendirir. Ardından 6:3’teki güller arasında güden imgesine geçer. Zohar’daki on üç yaprakla bağlantı kurarak Elul ayında ruh yaşamına ulaşan merhameti açıklar.',
+      'Schneerson links the rose among thorns in Song of Songs 2:2 with the outer aspect of Malkhut and the beloved in the same verse with its inner aspect. He then turns to the image of grazing among roses in 6:3. Drawing on the Zohar’s thirteen petals, he explains mercy reaching the life of the soul in Elul.',
+      'שניאורסון קושר את השושנה בין החוחים בשיר השירים ב:ב לחיצוניות המלכות, ואת הרעיה שבאותו פסוק לפנימיות המלכות. משם הוא פונה לדימוי ״הרועה בשושנים״ בו:ג. הוא קושר אותו לשלושה עשר העלים שבזוהר ומסביר כיצד הרחמים מגיעים לחיי הנשמה באלול.',
+      'Şneerson Nəğmələr Nəğməsi 2:2-dəki tikanlar arasındakı gülü Malkutun zahiri, həmin ayədəki sevgilini daxili cəhəti ilə bağlayır. Sonra 6:3-dəki güllər arasında otaran obrazına keçir. Zohardakı on üç ləçəklə əlaqə quraraq Elul ayında ruh həyatına çatan mərhəməti izah edir.',
+    ],
+    url:'https://www.chabad.org/therebbe/article_cdo/aid/5989336/jewish/page.htm',
+    reference:'Ani LeDodi, 18 Elul 5732 · Chabad',
+  },
+  {
+    title:['Michael Laitman · Aşlag üzerine notlar','Michael Laitman · Annotations to Ashlag','מיכאל לייטמן · הערות לפירוש אשלג','Mixael Laytman · Aşlağın şərhinə qeydlər'],
+    period:[
+      'Şubat 2009 · İlk İngilizce baskı',
+      'February 2009 · First English edition',
+      'פברואר 2009 · מהדורה ראשונה באנגלית',
+      'Fevral 2009 · İlk ingiliscə nəşr',
+    ],
+    study:[
+      'Laitman gül imgesini Malkut’un iki durumu üzerinden açar. Küçüklük durumu (katnut), onun okumasında dokuz sefiranın Atsilut’un altında bulunmasıyla dikenler arasındaki güle karşılık gelir. Olgunluk durumunda (gadlut) bu sefirot Atsilut’a geri döner.',
+      'Laitman explains the rose through two states of Malkhut. In his reading, the smaller state (katnut) is the rose among thorns, with nine sefirot below Atzilut. In the mature state (gadlut), those sefirot return to Atzilut.',
+      'לייטמן מסביר את השושנה דרך שני מצבים של המלכות. בפירושו מצב הקטנות הוא השושנה בין החוחים, כאשר תשע ספירות נמצאות מתחת לעולם האצילות. במצב הגדלות הספירות האלה שבות לאצילות.',
+      'Laytman gül obrazını Malkutun iki halı ilə izah edir. Onun şərhində kiçiklik halı (katnut) tikanlar arasındakı gülə uyğundur və doqquz sefira Atsilutdan aşağıdadır. Yetkinlik halında (qadlut) həmin sefirot Atsiluta qayıdır.',
+    ],
+    url:'https://files.kabbalahmedia.info/files/eng_t_ml-sefer-zohar.pdf#page=57',
+    reference:'The Zohar: Annotations to the Ashlag Commentary · The Rose, p. 57',
+  },
+  {
+    title:['Bnei Baruch · Birlikte okuma','Bnei Baruch · Reading together','בני ברוך · קריאה משותפת','Bney Barux · Birgə oxu'],
+    period:[
+      '17 Aralık 2022 · Kayıt ve eşzamanlı çeviriden yazıya geçirilen ders',
+      '17 December 2022 · Lesson recording and transcript from simultaneous translation',
+      '17 בדצמבר 2022 · הקלטת שיעור ותמליל מתרגום סימולטני',
+      '17 dekabr 2022 · Dərsin yazısı və sinxron tərcümə əsasında hazırlanmış mətn',
+    ],
+    study:[
+      '08:50’de öğretmen Zohar’ın sözleriyle Aşlag’ın yorumunun sınırını gösterir. 20:05’te bir öğrenci gül imgesini onlu çalışma grubunda nasıl okuyacaklarını sorar. Öğretmenin yanıtı grubun üyeleri arasındaki yakınlaşmaya odaklanır.',
+      'At 08:50 the teacher marks where the words of the Zohar give way to Ashlag’s commentary. At 20:05 a student asks how to read the image of the rose in a study group of ten. The teacher’s answer turns to how group members draw closer to one another.',
+      'ב־08:50 המורה מצביע על המעבר מדברי הזוהר לפירוש אשלג. ב־20:05 תלמיד שואל כיצד לקרוא את דימוי השושנה בעשירייה, קבוצת לימוד של עשרה. תשובת המורה מתמקדת בהתקרבות בין חברי הקבוצה.',
+      '08:50-də müəllim Zoharın sözlərindən Aşlağın şərhinə keçidi göstərir. 20:05-də bir şagird gül obrazını on nəfərlik qrupda necə oxumağı soruşur. Müəllimin cavabı qrup üzvlərinin bir-birinə yaxınlaşmasına yönəlir.',
+    ],
+    url:'https://kabbalahmedia.info/en/lessons/cu/7YkmU9jp?mediaType=video',
+    reference:'Kabbalah Media · The Rose, item 1, 08:50 and 20:05',
+  },
 ];
 
 export const advancedReadings = [
@@ -79,6 +130,7 @@ export const advancedReadings = [
     sources:[
       {title:'Sefaria · Song of Songs 2:2',url:'https://www.sefaria.org/Song_of_Songs.2.2',kind:'text'},
       {title:'Sefaria · Zohar, Introduction 1:1',url:'https://www.sefaria.org/Zohar%2C_Introduction.1.1',kind:'text'},
+      {title:'Sefaria · Song of Songs 6:3',url:'https://www.sefaria.org/Song_of_Songs.6.3',kind:'text'},
       {title:'Stanford University Press · The Zohar: Pritzker Edition, introduction',url:'https://www.sup.org/books/pages/4810/Front_Matter.pdf',kind:'research'},
     ],
     commentaries:roseCommentaries,
@@ -207,10 +259,10 @@ export const comparisonCases = [
       'Rabbi Hizkiya on üç yarpağı mərhəmət keyfiyyətləri ilə əlaqələndirir. Vital on iki qəbiləni gülün birləşdirdiyi başqa bir izah irəli sürür.',
     ],
     transfer:[
-      'Bir arkadaşına anlatır gibi yaz. Zohar gülü kime benzetiyor? Seçtiğin bir yorumcu bu benzetmeye ne katıyor?',
-      'Write as if you were telling a friend. Whom does the Zohar compare to the rose? What does one commentator add to that image?',
-      'כתבו כאילו אתם מסבירים לחבר. למי הזוהר מדמה את השושנה? מה מוסיף אחד הפרשנים לדימוי הזה?',
-      'Dostuna danışırmış kimi yaz. Zohar gülü kimə bənzədir? Seçdiyin şərhçi bu bənzətməyə nə əlavə edir?',
+      'Bir arkadaşına anlatır gibi yaz. Zohar gülü kime benzetiyor? Bir yorumcu bu benzetmeye ne katıyor? İstersen 2022 dersinde öğrencinin sorduğu soruyu da ekle.',
+      'Write as if you were telling a friend. Whom does the Zohar compare to the rose? What does one commentator add? You can also include the question a student asks in the 2022 lesson.',
+      'כתבו כאילו אתם מסבירים לחבר. למי הזוהר מדמה את השושנה? מה מוסיף אחד הפרשנים? אפשר גם לציין את שאלת התלמיד בשיעור משנת 2022.',
+      'Dostuna danışırmış kimi yaz. Zohar gülü kimə bənzədir? Şərhçilərdən biri nə əlavə edir? İstəsən, 2022-ci il dərsində şagirdin verdiyi sualı da yaz.',
     ],
   },
   {

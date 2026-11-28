@@ -11,7 +11,7 @@ import { makeWorld } from './world.js';
 const episodes = [plaza, ...chapters];
 const find = id => document.getElementById(id);
 const chapterWorkshopLinks = {
-  16:{workshop:'kabbalah',labels:['Zohar’da aynı pasaja üç yorum','Three readings of one Zohar passage','שלושה פירושים לקטע בזוהר','Zohardakı bir parçaya üç şərh']},
+  16:{workshop:'kabbalah',labels:['Zohar yorumlarını karşılaştır','Compare readings of the Zohar','השוו פירושים לזוהר','Zoharın şərhlərini müqayisə et']},
   20:{workshop:'calendar',labels:['Bir Şabat, dört cemaat','One Shabbat, four communities','שבת אחת, ארבע קהילות','Bir Şabbat, dörd icma']},
 };
 const evidenceLabels = {

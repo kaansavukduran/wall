@@ -180,7 +180,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 420);
+  assert.equal(entries.length, 424);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -461,7 +461,7 @@ test('Kabbalah source stops and explanation cases have matched references and fo
   assert.deepEqual(rose.sources.slice(0, 2).map(source => source.url),
     ['ZOH02','ZOH03'].map(id => entries.find(entry => entry.id === id).url));
   assert.deepEqual(rose.commentaries.map(commentary => commentary.url),
-    ['ZOH04','ZOH05','ZOH06'].map(id => entries.find(entry => entry.id === id).url));
+    ['ZOH04','ZOH05','ZOH06','ZOH07','ZOH08','ZOH09'].map(id => entries.find(entry => entry.id === id).url));
   for (const {title, period, study} of rose.commentaries) {
     for (const values of [title, period, study]) {
       assert.equal(values.length, languages.length);
