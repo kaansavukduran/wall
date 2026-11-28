@@ -256,12 +256,44 @@ async function main() {
       await page.click('#library-button');
       await page.locator('#library[open]').waitFor();
       assert.ok(await page.locator('#library details').count() >= 8);
+      assert.equal(loadedLessons.has('calendar-lessons.js'), false);
+      const calendarRequest = page.waitForResponse(response => response.url().endsWith('/calendar-lessons.js'));
+      if (width === 320) await page.tap('#calendar summary');
+      else await page.click('#calendar summary');
+      assert.ok((await calendarRequest).ok());
+      await page.locator('[data-event="simchat-torah"]').waitFor();
+      await page.click('[data-event="simchat-torah"]');
+      assert.match(await page.locator('[data-event="simchat-torah"]').innerText(), /^22/);
+      await page.selectOption('#calendar-custom', 'diaspora');
+      assert.match(await page.locator('[data-event="simchat-torah"]').innerText(), /^23/);
+      assert.equal(await page.locator('[data-event="simchat-torah"]').getAttribute('aria-pressed'), 'true');
+      await page.selectOption('#calendar-period', '12');
+      await page.locator('[data-event="purim"]').waitFor();
+      await page.selectOption('#calendar-year', 'leap');
+      assert.equal(await page.locator('[data-event="purim"]').count(), 0);
+      await page.selectOption('#calendar-period', '13');
+      await page.click('[data-event="purim"]');
+      assert.match(await page.locator('.calendar-reading a').getAttribute('href'), /Esther/);
+      await page.selectOption('#calendar-period', '8');
+      await page.locator('[data-event="sigd"]').waitFor();
+      await page.click('.calendar-practice summary');
+      await page.selectOption('#calendar-answer', '7');
+      await page.click('.calendar-practice button');
+      assert.doesNotMatch(await page.locator('.calendar-practice [role="status"]').innerText(), /15/);
+      await page.selectOption('#calendar-answer', '1');
+      await page.click('.calendar-practice button');
+      assert.match(await page.locator('.calendar-practice [role="status"]').innerText(), /15/);
+      await page.click('.calendar-practice button');
+      assert.equal(await page.locator('#calendar-answer').inputValue(), '');
+      await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+      assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
       await page.keyboard.press('Escape');
+      assert.ok(await page.locator('#library-button').evaluate(button => button === document.activeElement));
       await page.click('#next');
       await page.waitForURL('**/#game');
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(locale, width, '25 checkpoints, sources, movement, save, library: PASS');
+      console.log(locale, width, '25 checkpoints, sources, movement, save, study room, festival calendar: PASS');
     }
     const padPage = await browser.newPage({ locale:'he' });
     await padPage.addInitScript(() => {
@@ -299,6 +331,21 @@ async function main() {
       detail:{action:'library',pressed:true},
     })));
     await padPage.locator('#library[open]').waitFor();
+    async function native(action) {
+      await padPage.evaluate(value => window.dispatchEvent(new CustomEvent('wall-controller', {
+        detail:{action:value,pressed:true},
+      })), action);
+    }
+    await native('next');
+    assert.equal(await padPage.evaluate(() => document.activeElement.parentElement.id), 'calendar');
+    await native('activate');
+    await padPage.locator('#calendar-period').waitFor();
+    await native('next');
+    assert.equal(await padPage.evaluate(() => document.activeElement.id), 'calendar-period');
+    await native('activate');
+    await padPage.locator('[data-event="sigd"]').waitFor();
+    await native('back');
+    assert.equal(await padPage.locator('#library[open]').count(), 0);
     await padPage.close();
     console.log('Gamepad browser mapping and native event path (simulated): PASS');
 

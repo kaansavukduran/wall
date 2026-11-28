@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified release: v0.4.8, 4e56287495c01064cee85e505fbda69e43e3d874.
-Pages: run 46110798854. Played live chapter 18 ABiYA and chapter 19 Ottoman masonry and 1920 repair source.
-Packages: v0.4.8 platform and web runs 46110800987 and 46110801014 attached six files. v0.4.7 Linux AppImage, Windows Setup and Portable, and Android API 35 passed installed checks (46110744411). Physical devices/controllers and stable Android signing are open.
-Candidate v0.4.9: all 24 chapters have source exercises. Chapters 21–24 add the Mandate, distinct Holocaust and Nakba exhibits, the 1949 armistice and 1967 demolition, and paired modern claims and responses. All 25 checkpoints, saves, reading room and the simulated controller passed in four locales. The source catalogue has 137 entries.
-Next: verify v0.4.9 live and installed; add a playable festival calendar to the study room. Then deepen the community atlas, modern Kabbalah and the final exhibition.
+Verified release: v0.4.9, 434c79bf57ae1bb1e4161f84299420287c8d0974.
+Pages: run 46111399497. Played chapters 19–22 from the normal timeline and verified the Holocaust source comparison live.
+Packages: v0.4.9 platform and web runs 46111402959 and 46111402935 attached six files. Installed checks run 46111873930. Physical devices/controllers and stable Android signing are open.
+Candidate v0.5.0: festival calendar with 19 events, 12/13-month years, Israel and traditional diaspora schedules, and date placement questions. Its module is deferred until the calendar opens. All 25 checkpoints and the calendar passed in four locales, including desktop, 320px touch, Hebrew RTL at 200% text, simulated controller input, and offline Hebrew with external network blocked. The catalogue has 162 entries.
+Next: verify v0.5.0 live and installed. Add the community atlas, modern Kabbalah and final exhibition.

@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ancientLessons } from '../ancient-lessons.js';
+import { calendarEvents } from '../calendar-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
 import { earlyModernLessons } from '../early-modern-lessons.js';
@@ -69,7 +70,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 137);
+  assert.equal(entries.length, 162);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -77,6 +78,24 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
   assert.ok(Array.from({length:24}, (_, index) => index + 1).every(id => entries.some(entry => belongsTo(entry, id))));
   assert.ok(belongsTo({chapters:'1–4,6'}, 3));
   assert.equal(belongsTo({chapters:'Prolog,1'}, 10), false);
+});
+
+test('festival calendar dates and four localized readings use indexed sources', () => {
+  const urls = new Set(parseCatalogue(readFileSync('docs/SOURCES.tsv', 'utf8')).map(item => item.url));
+  assert.equal(calendarEvents.length, 19);
+  assert.equal(new Set(calendarEvents.map(event => event.id)).size, calendarEvents.length);
+  for (const event of calendarEvents) {
+    assert.ok(urls.has(event.source.url), event.source.url);
+    for (const field of ['name','practice','history']) {
+      assert.equal(event[field].length, languages.length);
+      assert.ok(event[field].every(line => line.trim()));
+    }
+  }
+  const find = id => calendarEvents.find(event => event.id === id);
+  assert.equal(find('shabbat').month, null);
+  assert.equal(find('purim').leapMonth, 13);
+  assert.equal(find('simchat-torah').diasporaDay, 23);
+  assert.equal(find('sigd').day, 29);
 });
 
 test('all 24 source exercises contain four versions of each card and matched catalogue entries', () => {

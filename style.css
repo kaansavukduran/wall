@@ -62,8 +62,18 @@ dialog li{margin-block:.4rem}
 dialog a{overflow-wrap:anywhere}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 
+#library > header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;margin-block-end:.55rem}
+#library > header :is(h2,form){margin:0}
 #library details{border-block-start:1px solid var(--edge);padding-block:.55rem}
 #library summary{cursor:pointer;min-block-size:var(--hit);align-content:center;font-weight:650}
+#library summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#calendar select{display:block;inline-size:100%;min-inline-size:0;margin-block:.3rem .65rem}
+.calendar-days,.calendar-filters{display:grid;gap:.35rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr))}
+.calendar-days button{text-align:start;overflow-wrap:anywhere}
+.calendar-days button[aria-pressed=true]{background:#47351e;border-color:var(--accent)}
+.calendar-reading{padding:.65rem;margin-block:.7rem;background:#1b242c}
+.calendar-reading h3,.calendar-reading p{margin-block:0 .6rem}
+.calendar-practice [role=status]{color:var(--accent)}
 #journal{margin-block-start:1rem}
 #journal textarea{display:block;font:inherit;color:inherit;background:#171d24;border:1px solid var(--edge);border-radius:.35rem;padding:.55rem;inline-size:100%;resize:vertical}
 

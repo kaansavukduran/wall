@@ -57,3 +57,10 @@ export const libraryLabels = {
   he: ['בית המדרש', 'מקורות שנפתחו', 'החפץ שבדקתי', 'כתבו הסבר משלכם', 'ההערה נשמרת רק בדפדפן הזה.'],
   az: ['Öyrənmə otağı', 'Açılan mənbələr', 'Araşdırdığım əşya', 'Öz izahını yaz', 'Bu qeyd yalnız bu brauzerdə qalır.'],
 };
+
+export const calendarLabels = {
+  tr: ['Bayram takvimi', 'Takvim yükleniyor…', 'Takvim açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en: ['Festival calendar', 'Loading the calendar…', 'The calendar could not open. Reload the page and try again.'],
+  he: ['לוח חגים', 'הלוח נטען…', 'הלוח לא נפתח. רעננו את הדף ונסו שוב.'],
+  az: ['Bayram təqvimi', 'Təqvim yüklənir…', 'Təqvim açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
+};
