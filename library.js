@@ -148,3 +148,10 @@ export const ashlagLabels = {
   he:['אור ומסך אצל אשלג','התרשים נטען…','התרשים לא נפתח. סגרו את האזור ופתחו אותו שוב.'],
   az:['Aşlaqda nur və pərdə','Sxem açılır…','Sxem açılmadı. Bölməni bağlayıb yenidən aç.'],
 };
+
+export const bakuLabels = {
+  tr:['Qırmızı Qəsəbə’den Bakü’ye','Arşiv yükleniyor…','Arşiv açılamadı. Kapatıp yeniden aç.'],
+  en:['From Qırmızı Qəsəbə to Baku','Loading the archive…','The archive could not open. Close and reopen it.'],
+  he:['מקירמיזי קסבה לבאקו','הארכיון נטען…','הארכיון לא נפתח. סגרו אותו ופתחו שוב.'],
+  az:['Qırmızı Qəsəbədən Bakıya','Arxiv yüklənir…','Arxiv açılmadı. Bağlayıb yenidən aç.'],
+};

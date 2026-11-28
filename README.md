@@ -4,6 +4,8 @@ WALL is a four-language 2D pixel-art game about the Western Wall, Jewish history
 
 The atlas covers ancient groups, regional communities and later movements. Activities include the Geniza letters, a turnable Talmud folio, the 1930 commission map, Safed’s three reading tables, and an interactive model of Yehuda Ashlag’s four phases, screen and returning light.
 
+[Play WALL in your browser](https://kaansavukduran.github.io/wall/)
+
 ## Play locally
 
 Open the standalone HTML file from [GitHub Releases](https://github.com/kaansavukduran/wall/releases) directly in a browser that permits downloaded HTML files. The game and its catalogue are bundled; following external source links still requires an internet connection.

@@ -8,6 +8,7 @@ import { ashlagCopy, ashlagPhases, ashlagScreen } from '../ashlag-lessons.js';
 import { accountabilityCases, accountabilityRecords } from '../accountability-lessons.js';
 import { ancientLessons } from '../ancient-lessons.js';
 import { atlasEntries } from '../atlas-lessons.js';
+import { bakuCopy, bakuStops } from '../baku-lessons.js';
 import { calendarEvents } from '../calendar-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
@@ -145,7 +146,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 361);
+  assert.equal(entries.length, 364);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -346,6 +347,24 @@ test('community atlas has separate categories with four-language indexed reading
     }
   }
   assert.equal(atlasEntries.find(entry => entry.id === 'mizrahim').regions, undefined);
+});
+
+test('Baku archive distinguishes building, writing and photograph evidence in four languages', () => {
+  const urls = new Set(entries.map(entry => entry.url));
+  assert.deepEqual(bakuStops.map(stop => stop.year),[1906,1909,1976]);
+  assert.deepEqual(bakuStops[1].views.map(side => side.example.slice(1)),[
+    ['Hebr','rtl'],['Latn','ltr'],['Cyrl','ltr'],['Cyrl','ltr'],
+  ]);
+  assert.notEqual(bakuStops[1].views[2].example[0],bakuStops[1].views[3].example[0]);
+  for (const stop of bakuStops) {
+    for (const {url} of stop.sources) assert.ok(urls.has(url),url);
+    assert.ok(stop.answers[stop.correct]);
+    for (const copy of [...bakuCopy,stop.title,stop.question,stop.feedback,...stop.answers,
+      ...stop.views.flatMap(side => [side.label,side.note])]) {
+      assert.equal(copy.length,languages.length);
+      assert.ok(copy.every(text => text.trim()));
+    }
+  }
 });
 
 test('Kabbalah source stops and explanation cases have matched references and four languages', () => {

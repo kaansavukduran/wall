@@ -64,7 +64,17 @@ tap_label 'Western retaining wall|Batı istinat duvarı|הקיר התומך המ
 tap_label 'Continue|Devam et|המשך|Davam et'
 wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
 
+adb shell cmd window user-rotation lock 1
+wait_for_screen 'rotation="1"'
+wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
+adb shell input gamepad keyevent KEYCODE_BUTTON_Y
+wait_for_screen 'Unlocked chapters|Açık bölümler|פרקים פתוחים|Açıq bölmələr'
+adb shell input gamepad keyevent KEYCODE_BUTTON_B
+wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
+adb shell cmd window user-rotation lock 0
+wait_for_screen 'rotation="0"'
+
 adb shell am force-stop "$package"
 adb shell am start -W -n "$package/.WallActivity"
 wait_for_screen 'At the seder table|Seder sofrası|ליד שולחן הסדר|Seder süfrəsində'
-echo 'The released Android package opened, accepted touch and restored chapter 1 after relaunch'
+echo 'The released Android package accepted touch, preserved chapter 1 through rotation, handled emulator gamepad buttons and restored chapter 1 after relaunch'

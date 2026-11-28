@@ -22,6 +22,7 @@ async function main() {
   const { ashlagPhases, ashlagScreen } = await import('../ashlag-lessons.js');
   const { circleTurns } = await import('../study-circle-lessons.js');
   const { genizaLetters } = await import('../geniza-lessons.js');
+  const { bakuCopy,bakuStops } = await import('../baku-lessons.js');
   const { cultureCases, cultureRecords } = await import('../culture-lessons.js');
   const { accountabilityCases, accountabilityRecords } = await import('../accountability-lessons.js');
   const { pageFeedback } = await import('../talmud-lessons.js');
@@ -546,7 +547,51 @@ async function main() {
             assert.ok(await respond(0).evaluate(button => document.activeElement === button));
           }
           assert.equal(await circle.locator('figcaption b').textContent(),circleTurns[0].name[index]);
-          await circle.locator(':scope > summary').press('Enter');
+          assert.equal(loadedLessons.has('baku-lessons.js'),false);
+          const baku = page.locator('#baku-archive');
+          const bakuRequest = page.waitForResponse(response => response.url().endsWith('/baku-lessons.js'));
+          await baku.locator(':scope > summary').press('Enter');
+          assert.ok((await bakuRequest).ok());
+          assert.equal(await circle.getAttribute('open'),null);
+          const evidencePicture = baku.locator('canvas');
+          await evidencePicture.waitFor();
+          const bakuFrames = new Set();
+          for (const [stopIndex, stop] of bakuStops.entries()) {
+            await baku.locator('[data-baku-stop="' + stopIndex + '"]').press('Enter');
+            for (const [sideIndex, side] of stop.views.entries()) {
+              const sideButton = baku.locator('[data-baku-view="' + sideIndex + '"]');
+              if (width === 320) await sideButton.tap();
+              else await sideButton.press('Enter');
+              bakuFrames.add(await evidencePicture.evaluate(canvas => canvas.toDataURL()));
+              assert.equal(await baku.locator('figcaption span').textContent(),side.note[index]);
+              const word = baku.locator('.baku-word');
+              assert.equal(await word.isVisible(),Boolean(side.example));
+              if (side.example) {
+                assert.equal(await word.textContent(),side.example[0]);
+                assert.equal(await word.getAttribute('lang'),'jdt-' + side.example[1]);
+                assert.equal(await word.getAttribute('dir'),side.example[2]);
+              }
+            }
+            assert.deepEqual(await baku.locator('a').evaluateAll(links => links.map(link => link.href)),
+              stop.sources.map(source => source.url));
+            const answer = choice => baku.locator('[data-baku-answer="' + choice + '"]');
+            const status = baku.locator('.baku-exercise [role=status]');
+            await answer((stop.correct + 1) % stop.answers.length).press('Enter');
+            assert.equal(await status.textContent(),bakuCopy[3][index]);
+            await answer(stop.correct).press('Enter');
+            assert.equal(await status.textContent(),stop.feedback[index]);
+          }
+          assert.equal(bakuFrames.size,8);
+          await page.selectOption('#lang',locale === 'he' ? 'az' : 'he');
+          await baku.locator('[data-baku-stop="2"][aria-pressed=true]').waitFor();
+          assert.equal(await baku.locator('[data-baku-view="1"]').getAttribute('aria-pressed'),'true');
+          assert.equal(await baku.locator('[data-baku-answer="2"]').getAttribute('aria-pressed'),'true');
+          await page.selectOption('#lang',locale);
+          await baku.locator('[data-baku-stop="2"][aria-pressed=true]').waitFor();
+          await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+          await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+          await baku.locator(':scope > summary').press('Enter');
           await page.click('[data-evidence="4"]');
           assert.match(await page.locator('#evidence-date').textContent(), /2025/);
           assert.equal(await page.locator('#evidence-source').getAttribute('href'),

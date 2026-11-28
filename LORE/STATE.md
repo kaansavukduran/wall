@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified web release: v0.7.6, 13aa7db6300ef71f014030591a2095372bacd28c.
-Pages: 46127008418 and exact public build manifest. The exact Chromium, Firefox and WebKit matrix passed 46126751200. The atlas has 25 entries, including ancient groups, the distinct Samaritan tradition, Mitnagdim and Musar. Atlas filters and selected reading survive a language change. 347 catalogue records.
-Packages: v0.7.6 run 46127010912 is in progress. v0.7.5 six files and all installed checks passed 46126261984. Actions secrets return HTTP 403, so Android uses preview signing. Physical device/controller testing and independent editorial review remain open.
-Candidate v0.7.7: the Kabbalah workshop has 20 readings, adding five comparisons with their own application exercise and saved explanation. New readings cover prayer intention and devekut, the five soul names, the gilgul disagreement, Pico and Hermetic correspondences. 361 catalogue records. All 28 content/build tests, the single-file build and the four full local Chromium routes passed.
-Next: finish the exact hosted matrix and publish v0.7.7, then deepen the Azerbaijani Jewish archive and verify expanded Android controls in a released APK.
+Verified web release: v0.7.7, 1e16ae74c0c3b4273a67b95e53159d2a0aecbb74.
+Pages: 46127519549 and exact public build manifest. Browser matrix 46127232681 passed in Chromium, Firefox and WebKit. The Kabbalah workshop has 20 readings, including prayer intention and devekut, soul names, gilgul, Christian reception and Hermetic correspondences. 361 catalogue records.
+Packages: v0.7.7 run 46127522374 is in progress. v0.7.6 six files and installed checks passed 46127010912. Actions secrets return HTTP 403, so Android uses preview signing. Physical devices/controllers and independent editorial review remain open.
+Candidate v0.7.8: chapter 24 links three archive stops in Qırmızı Qəsəbə and Baku. Original illustrations cover eight views, with Cuhuri in four script variants. Chapter 24 has a single open workshop at a time. The installed Android smoke now includes display rotation and synthetic Android gamepad key events. 364 catalogue records.
+Next: publish and verify v0.7.8, then deepen the atlas with historic Hasidic courts and present-day identity terminology.

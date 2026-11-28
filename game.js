@@ -1,7 +1,7 @@
 import { controllerHelp, mountController } from './controller.js';
 import { connectAppearance } from './appearance.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { accountabilityLabels, ashlagLabels, atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, genizaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, studyCircleLabels, visitLabels, wordMethodLabels } from './library.js';
+import { accountabilityLabels, ashlagLabels, atlasLabels, bakuLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, genizaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, studyCircleLabels, visitLabels, wordMethodLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -103,6 +103,7 @@ export async function start(initialLanguage) {
   const geniza = find('geniza-desk');
   const circle = find('study-circle');
   const ashlag = find('ashlag-workbench');
+  const baku = find('baku-archive');
   const transfer = find('transfer');
   const evidenceChoices = find('evidence-choices');
   const labRoot = find('language-labs');
@@ -116,6 +117,7 @@ export async function start(initialLanguage) {
   const circleView = {};
   const wordMethodView = {};
   const ashlagView = {};
+  const bakuView = {};
   const talmudView = {reading:null,side:0,position:0,answers:[['','',''],['','','']]};
   const progress = readProgress();
   let language = initialLanguage;
@@ -211,6 +213,9 @@ export async function start(initialLanguage) {
   const refreshAshlag = connectDisclosure('ashlag-workbench', ashlagLabels, () =>
     import('./ashlag-workbench.js').then(({mountAshlagWorkbench}) =>
       (panel, current, index) => mountAshlagWorkbench(panel,index,ashlagView)));
+  const refreshBaku = connectDisclosure('baku-archive', bakuLabels, () =>
+    import('./baku-archive.js').then(({mountBakuArchive}) =>
+      (panel, current, index) => mountBakuArchive(panel,index,bakuView)));
   const refreshSave = connectDisclosure('save-transfer', saveLabels, () =>
     import('./portable-save.js').then(module => module.mountPortableSave));
   const refreshTransfer = connectDisclosure('transfer', transferLabels, async chapter => {
@@ -309,6 +314,8 @@ export async function start(initialLanguage) {
     if (!circle.hidden) refreshCircle();
     ashlag.hidden = episode.id !== 24;
     if (!ashlag.hidden) refreshAshlag();
+    baku.hidden = episode.id !== 24;
+    if (!baku.hidden) refreshBaku();
     renderEvidence();
     renderLanguageLabs();
     if (focus) find('title').focus();
