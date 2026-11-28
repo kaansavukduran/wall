@@ -908,6 +908,15 @@ async function main() {
       assert.equal(await page.locator('#tour-presentation li').count(), 3);
       assert.equal(await page.locator('.tour-open-question').innerText(), await page.locator('#tour-question-preview').innerText());
       assert.equal(await page.locator('.tour-personal-note').innerText(), 'WALL');
+      const visitorExercise = page.locator('#tour-followup');
+      await visitorExercise.locator('[data-followup-source="quarter"]').press('Enter');
+      assert.ok((await visitorExercise.locator('[role="status"]').textContent()).trim());
+      assert.ok(await visitorExercise.locator('#tour-companion').isHidden());
+      const secondSource = visitorExercise.locator('[data-followup-source="photo"]');
+      if (width === 320) await secondSource.tap();
+      else await secondSource.press('Enter');
+      assert.equal(await visitorExercise.locator('#tour-companion a').getAttribute('href'),'https://www.palquest.org/en/node/21938');
+      assert.ok(await visitorExercise.locator('#tour-companion-title').evaluate(el=>el===document.activeElement));
       await page.locator('.tour-personal-note').scrollIntoViewIfNeeded();
       assert.ok(await page.locator('#tour-presentation button').evaluate(button => {
         const rect = button.getBoundingClientRect();
@@ -922,6 +931,10 @@ async function main() {
       assert.equal(await page.locator('#tour-stops select').first().inputValue(), 'photo');
       assert.equal(await page.locator('#tour-question').inputValue(), 'photo');
       assert.equal(await page.locator('#tour-present').isEnabled(), true);
+      await page.locator('#tour-present').press('Enter');
+      assert.equal(await visitorExercise.locator('#tour-companion a').getAttribute('href'),'https://www.palquest.org/en/node/21938');
+      assert.ok(await visitorExercise.locator('#tour-followup-choices').isHidden());
+      await page.keyboard.press('Escape');
       await page.click('#library-button');
       await page.locator('#library[open]').waitFor();
       assert.ok(await page.locator('#library details').count() >= 8);

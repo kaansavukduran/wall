@@ -92,8 +92,8 @@ footer{justify-content:space-between}
 #download{display:inline-flex;align-items:center;min-block-size:var(--hit)}
 dialog{inline-size:min(37rem,100% - 2rem);max-block-size:calc(100% - 2rem);overflow:auto;background:var(--paper);color:var(--ink);border:1px solid var(--edge);border-radius:.5rem;padding:1rem}
 dialog::backdrop{background:#090e14bb}
-#library:modal{overscroll-behavior:contain}
-#library::backdrop{overflow:hidden;overscroll-behavior:contain}
+:is(#library,#tour-presentation):modal{overscroll-behavior:contain}
+:is(#library,#tour-presentation)::backdrop{overflow:hidden;overscroll-behavior:contain}
 dialog form{margin-block-start:1rem}
 dialog li{margin-block:.4rem}
 dialog a{overflow-wrap:anywhere}
@@ -172,6 +172,9 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .tour-feedback:empty{display:none}
 #tour-note-help,#tour-question-preview{color:var(--muted)}
 #tour-presentation ol{padding-inline-start:1.4rem}
+#tour-followup{min-inline-size:0;margin:1rem 0;padding:.6rem;border:1px solid var(--edge);overflow-wrap:anywhere}
+#tour-followup legend{font-weight:650}
+#tour-companion h3{margin-block:.5rem}
 .tour-personal-note{white-space:pre-wrap}
 .language-reading{padding:.65rem;background:var(--panel-bg)}
 .language-reading h3,.language-reading p{margin-block:0 .55rem}

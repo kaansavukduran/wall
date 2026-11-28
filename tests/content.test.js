@@ -42,6 +42,7 @@ import { secondTempleLessons } from '../second-temple-lessons.js';
 import { methodCopy, wordMethods } from '../word-method-lessons.js';
 import { tour } from '../tour.js';
 import { tourEvidence } from '../tour-evidence.js';
+import { tourFollowup } from '../tour-followup-lessons.js';
 import { transferLessons as earlyTransfers } from '../transfer-early-lessons.js';
 import { transferLessons as middleTransfers } from '../transfer-middle-lessons.js';
 import { transferLessons as lateTransfers } from '../transfer-late-lessons.js';
@@ -89,6 +90,7 @@ test('portable saves merge valid progress without replacing local drafts or touc
   const importedProgress = JSON.stringify({active:'2',completed:['plaza','1'],placement:[121,-1]});
   const source = mockStorage({
     [progressKey]:importedProgress, [draft]:'עברית • Türkçe', 'wall.journal':'Açıq sual',
+    'wall.tour.solved.followup-photo':'1',
     'wall.language':'he', 'unrelated.preferences':'private', 'wall.unknown-scope':'ignored',
     [appearanceKey]:JSON.stringify({theme:'contrast',motion:'reduce',size:175}),
   });
@@ -106,6 +108,7 @@ test('portable saves merge valid progress without replacing local drafts or touc
   assert.equal(destination.getItem(draft),'Existing note');
   assert.equal(destination.getItem('wall.language'),'az');
   assert.equal(destination.getItem('wall.journal'),'Açıq sual');
+  assert.equal(destination.getItem('wall.tour.solved.followup-photo'),'1');
   assert.equal(parseAppearance(destination.getItem(appearanceKey)).size,175);
   assert.throws(() => parseSave('{"format":"WALL save","version":1,"values":{"__proto__":"bad"}}'),/Save data/);
   assert.throws(() => parseSave(encoded.replace('"version":1','"version":2')),/Save version/);
@@ -582,6 +585,22 @@ test('all six exhibition sources have a supported claim and open question in the
       assert.ok(values.every(value => value.trim()));
       assert.match(values[2], /\p{Script=Hebrew}/u);
       for (const slot of [0,1,3]) assert.doesNotMatch(values[slot], /\p{Script=Hebrew}/u);
+    }
+  }
+});
+
+test('the visitor can ask about every exhibition stop and check another chapter source', () => {
+  assert.deepEqual(Object.keys(tourFollowup),Object.keys(tourEvidence));
+  for (const [id,followup] of Object.entries(tourFollowup)) {
+    assert.equal(new Set(followup.choices).size,3);
+    assert.ok(followup.choices.includes(id));
+    assert.ok(followup.choices.every(choice => Object.hasOwn(tourFollowup,choice)));
+    assert.ok(entries.some(entry => entry.url === followup.url && belongsTo(entry,24)),followup.url);
+    assert.notEqual(followup.url,tour.flatMap(stop => stop.options).find(([option])=>option===id)[2]);
+    for (const values of [followup.title,followup.prompt,followup.note]) {
+      assert.equal(values.length,languages.length);
+      assert.ok(values.every(value => value.trim()));
+      assert.match(values[2],/\p{Script=Hebrew}/u);
     }
   }
 });

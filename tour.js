@@ -1,4 +1,5 @@
 import { tourEvidence } from './tour-evidence.js';
+import { tourFollowup } from './tour-followup-lessons.js';
 import { ui } from './content.js';
 import { libraryLabels } from './library.js';
 
@@ -39,24 +40,32 @@ const copy = {
     retry:'Bu ifade kaynakta belirlenebilenin ötesine gidiyor. Başka bir açıklamayı dene.',
     count:n => n + ' / 3 durak kaynağa bağlandı.',
     question:'Açık kalan bir soru', choose:'Bir soru seç', present:'Sergiyi ziyaretçiye göster', title:'Senin sergin',
+    visitor:'Ziyaretçinin sorusu', companion:'Sergiye eklenen ikinci kaynak',
+    hint:'Sorudaki yer ve belge türünü düşün. Başka bir kaynak seç.',
   },
   en: {
     source:'Source to examine', claim:'What does the source support?',
     retry:'This claim goes beyond what the source establishes. Try another explanation.',
     count:n => n + ' of 3 stops connected to evidence.',
     question:'A question that remains open', choose:'Choose a question', present:'Show your exhibition', title:'Your exhibition',
+    visitor:'The visitor’s question', companion:'Second source added to the exhibition',
+    hint:'Look for the place and kind of document named in the question. Try another source.',
   },
   he: {
     source:'מקור לבדיקה', claim:'מה המקור מבסס?',
     retry:'הטענה חורגת ממה שהמקור מבסס. נסו הסבר אחר.',
     count:n => n + ' מתוך 3 תחנות קושרו למקור.',
     question:'שאלה שנשארה פתוחה', choose:'בחרו שאלה', present:'הציגו את התערוכה', title:'התערוכה שלכם',
+    visitor:'שאלת המבקר', companion:'המקור השני בתערוכה',
+    hint:'בדקו איזה מקום וסוג מסמך נזכרים בשאלה. נסו מקור אחר.',
   },
   az: {
     source:'Araşdırılacaq mənbə', claim:'Mənbə hansı fikri dəstəkləyir?',
     retry:'Bu fikir mənbənin göstərdiyindən daha irəli gedir. Başqa izahı yoxla.',
     count:n => '3 dayanacaqdan ' + n + '-i mənbə ilə bağlandı.',
     question:'Açıq qalan sual', choose:'Sualı seç', present:'Sərgini ziyarətçiyə göstər', title:'Sənin sərgin',
+    visitor:'Ziyarətçinin sualı', companion:'Sərgiyə əlavə olunan ikinci mənbə',
+    hint:'Sualda adı çəkilən yerə və sənəd növünə bax. Başqa mənbəni seç.',
   },
 };
 
@@ -164,6 +173,51 @@ export function mountTour(journal, presentation, language, locale, memory) {
     detail.append(summary, label, reference, claimPrompt, group, feedback);
     return detail;
   });
+  function showFollowup(id) {
+    const caseStudy = tourFollowup[id];
+    const controls = presentation.querySelector('#tour-followup-choices');
+    const feedback = presentation.querySelector('#tour-followup-feedback');
+    const companion = presentation.querySelector('#tour-companion');
+    const heading = presentation.querySelector('#tour-companion-title');
+    const followupKey = 'wall.tour.solved.followup-' + id;
+    presentation.querySelector('#tour-followup-label').textContent = labels.visitor;
+    presentation.querySelector('#tour-followup-prompt').textContent = caseStudy.prompt[locale];
+    feedback.textContent = '';
+    companion.hidden = true;
+    controls.hidden = false;
+
+    function addCompanion() {
+      heading.textContent = labels.companion;
+      presentation.querySelector('#tour-companion-note').textContent = caseStudy.note[locale];
+      presentation.querySelector('#tour-companion-source').replaceChildren(sourceLink(caseStudy.url,caseStudy.title[locale]));
+      feedback.textContent = '';
+      companion.hidden = false;
+      controls.hidden = true;
+    }
+
+    controls.replaceChildren();
+    if (memory.read(followupKey) === '1') {
+      addCompanion();
+      return;
+    }
+    controls.append(...caseStudy.choices.map(choice => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.dataset.followupSource = choice;
+      button.textContent = tourFollowup[choice].title[locale];
+      button.addEventListener('click', () => {
+        if (choice !== id) {
+          feedback.textContent = labels.hint;
+          return;
+        }
+        memory.store(followupKey,'1');
+        addCompanion();
+        heading.focus();
+      });
+      return button;
+    }));
+  }
+
   function showPresentation() {
     presentation.querySelector('ol').replaceChildren(...selections.map(([id, names, url]) => {
       const stop = document.createElement('li');
@@ -175,9 +229,11 @@ export function mountTour(journal, presentation, language, locale, memory) {
       return stop;
     }));
     presentation.querySelector('.tour-open-question').textContent = tourEvidence[question.value].unanswered[locale];
+    showFollowup(question.value);
     const note = presentation.querySelector('.tour-personal-note');
     note.textContent = draft.value.trim();
     note.hidden = !note.textContent;
+    present.focus({preventScroll:true});
     presentation.showModal();
   }
 
