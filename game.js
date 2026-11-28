@@ -1,7 +1,7 @@
 import { controllerHelp, mountController } from './controller.js';
 import { connectAppearance } from './appearance.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
+import { accountabilityLabels, atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -107,6 +107,7 @@ export async function start(initialLanguage) {
   const labState = {word:[], sefirah:0, daat:false};
   const kabbalahView = {lesson:null,sourcesOpen:false,exerciseOpen:false,solved:new Set()};
   const cultureView = {record:null};
+  const accountabilityView = {record:null};
   const talmudView = {reading:null,side:0,position:0,answers:[['','',''],['','','']]};
   const progress = readProgress();
   let language = initialLanguage;
@@ -181,6 +182,8 @@ export async function start(initialLanguage) {
     ['daily-life', dailyLabels, () => import('./daily-life.js').then(module => module.mountDailyLife)],
     ['culture-archive', cultureLabels, () => import('./culture-archive.js').then(({mountCultureArchive}) =>
       (panel, current, index) => mountCultureArchive(panel, current, index, cultureView))],
+    ['accountability-archive', accountabilityLabels, () => import('./accountability-archive.js').then(({mountAccountabilityArchive}) =>
+      (panel, current, index) => mountAccountabilityArchive(panel, current, index, accountabilityView))],
   ].map(([id, labels, load]) => connectDisclosure(id, labels, load));
   const refreshTimeline = connectDisclosure('messianic-timeline', timelineLabels, () =>
     import('./messianic-timeline.js').then(module => module.mountMessianicTimeline));

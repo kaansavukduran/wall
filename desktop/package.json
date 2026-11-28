@@ -1,6 +1,6 @@
 {
   "name": "wall-desktop",
-  "version": "0.6.7",
+  "version": "0.6.8",
   "private": true,
   "description": "Desktop packaging for the WALL static learning game",
   "scripts": {

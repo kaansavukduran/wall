@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified release: v0.6.6, ec928c38bafd515bc424ac6a94c059aa9a828393.
-Pages: run 46121535429. Opened the live Settings and confirmed invalid save text is rejected. Browser compatibility run 46121319484 passed in Chromium, Firefox and WebKit. The shared sequence now wraps and the Talmud page uses direct region selection, resolving the enlarged-text failures in v0.6.5.
-Packages: v0.6.6 web run 46121537586 passed and platform run 46121537619 builds native packages. The v0.6.5 installed checks passed (46120365541). Actions secrets still return HTTP 403 to the integration. The APK uses preview signing. Physical device and controller tests remain open.
-Candidate v0.6.7: added 80–200% appearance scale, dark/light/system/high-contrast color themes and reduced motion in four languages. Current saves can carry these preferences. Checked the primary text and control contrast pairs. All 23 content tests and four Chromium campaigns passed locally, including system color change, 200% at 320 CSS px, relaunch and independent setting resets.
-Next: verify v0.6.7 in hosted browsers, release and installed builds. Add the chronological accountability archive.
+Verified release: v0.6.7, 11bef701f57665a071d34fa0a64d3794a78e6608.
+Pages: run 46121981331 and exact live build manifest. Opened Settings in the deployed game and selected high contrast; the scale and reduced-motion controls were visible. Chromium, Firefox and WebKit passed run 46121700027. The theme, 80–200% scale and motion preference persist alongside progress.
+Packages: v0.6.7 platform run 46121983121 produced all six release assets. Installed run 46122408301 passed Windows and Linux; Android still running at this check. Full v0.6.6 installed run 46121974406 passed. Actions secrets remain inaccessible to the integration (HTTP 403). Android APK uses preview signing. Physical device, controller and independent editorial reviews remain open.
+Candidate v0.6.8: seven chronological violence and responsibility records in four languages, from John Hyrcanus to the AMIA attack. The Farhud, King David Hotel and AMIA questions distinguish aid records, provisional counts and distinct legal findings. 311 catalogue records. New work loads only on opening its study-room panel.
+Next: finish v0.6.8 hosted, release and installed checks. Turn the Geniza letter stop into a physical workbench.

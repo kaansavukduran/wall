@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.6.7</small>
+  <small dir="ltr">v0.6.8</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -115,7 +115,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.6.7</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.6.8</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -167,6 +167,7 @@
   <details id="diaspora-archive" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <details id="daily-life" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <details id="culture-archive" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
+  <details id="accountability-archive" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <div id="library-readings" role="group"></div>
 </dialog>
 <template id="calendar-template">
@@ -220,6 +221,21 @@
     <summary></summary>
     <p id="culture-question"></p>
     <div class="visit-choices" role="group" aria-labelledby="culture-question"></div>
+    <p role="status"></p>
+  </details>
+</template>
+<template id="accountability-template">
+  <label for="accountability-record"></label><select id="accountability-record"></select>
+  <article class="visit-reading accountability-reading">
+    <h3></h3><p class="diaspora-date" dir="auto"></p>
+    <dl><dt></dt><dd></dd><dt></dt><dd></dd></dl>
+    <p></p>
+    <details class="daily-sources"><summary></summary><p></p><ul></ul></details>
+  </article>
+  <details class="visit-exercise">
+    <summary></summary>
+    <p id="accountability-question"></p>
+    <div class="visit-choices" role="group" aria-labelledby="accountability-question"></div>
     <p role="status"></p>
   </details>
 </template>

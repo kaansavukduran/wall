@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { accountabilityCases, accountabilityRecords } from '../accountability-lessons.js';
 import { ancientLessons } from '../ancient-lessons.js';
 import { atlasEntries } from '../atlas-lessons.js';
 import { calendarEvents } from '../calendar-lessons.js';
@@ -140,7 +141,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 295);
+  assert.equal(entries.length, 311);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -148,6 +149,32 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
   assert.ok(Array.from({length:24}, (_, index) => index + 1).every(id => entries.some(entry => belongsTo(entry, id))));
   assert.ok(belongsTo({chapters:'1–4,6'}, 3));
   assert.equal(belongsTo({chapters:'Prolog,1'}, 10), false);
+});
+
+test('responsibility records stay chronological with sources and localized exercises', () => {
+  assert.deepEqual(accountabilityRecords.map(record => record.id), [
+    'hasmonean-idumea', 'rhine-1096', 'thrace-1934', 'baghdad-farhud-1941',
+    'king-david-hotel-1946', 'kafr-qasim-1956', 'amia-1994',
+  ]);
+  for (const record of accountabilityRecords) {
+    for (const field of ['label','title','datePlace','actor','affected','account','evidenceLimit']) {
+      assert.equal(record[field].length,languages.length);
+      assert.ok(record[field].every(value => value.trim()));
+    }
+    assert.ok(record.sources.length >= 2);
+    for (const source of record.sources) {
+      assert.ok(entries.some(entry => entry.id === source.id && entry.url === source.url));
+    }
+  }
+  for (const [id, exercise] of Object.entries(accountabilityCases)) {
+    assert.ok(accountabilityRecords.some(record => record.id === id));
+    assert.ok(exercise.choices[exercise.correct]);
+    for (const locale of languages.keys()) {
+      assert.ok(exercise.question[locale].trim());
+      assert.ok(exercise.result[locale].trim());
+      assert.equal(new Set(exercise.choices.map(choice => choice[locale])).size,exercise.choices.length);
+    }
+  }
 });
 
 test('chapter transfer examples have distinct localized choices and exact catalogue links', () => {

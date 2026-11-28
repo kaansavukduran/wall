@@ -113,3 +113,10 @@ export const cultureLabels = {
   he:['חפצים וקולות מן התפוצות','הארכיון נטען…','הארכיון לא נפתח. סגרו אותו ופתחו שוב.'],
   az:['Diasporadan əşyalar və səslər','Arxiv yüklənir…','Arxiv açılmadı. Bağlayıb yenidən aç.'],
 };
+
+export const accountabilityLabels = {
+  tr:['Şiddet ve sorumluluk belgeleri','Belgeler yükleniyor…','Arşiv açılamadı. Kapatıp yeniden aç.'],
+  en:['Records of violence and responsibility','Loading the records…','The archive could not open. Close it and reopen it.'],
+  he:['מסמכים על אלימות ואחריות','המסמכים נטענים…','הארכיון לא נפתח. סגרו אותו ופתחו שוב.'],
+  az:['Zorakılıq və məsuliyyət sənədləri','Sənədlər yüklənir…','Arxiv açılmadı. Bağlayıb yenidən aç.'],
+};

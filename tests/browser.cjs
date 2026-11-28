@@ -20,6 +20,7 @@ async function main() {
   const { kotelScenarios } = await import('../kotel-lessons.js');
   const { dailyCases } = await import('../daily-life.js');
   const { cultureCases, cultureRecords } = await import('../culture-lessons.js');
+  const { accountabilityCases, accountabilityRecords } = await import('../accountability-lessons.js');
   const { pageFeedback } = await import('../talmud-lessons.js');
   const { transferLessons:earlyTransfers } = await import('../transfer-early-lessons.js');
   const { transferLessons:middleTransfers } = await import('../transfer-middle-lessons.js');
@@ -626,6 +627,30 @@ async function main() {
         assert.ok((await result.textContent()).length);
         await page.click('[data-culture-choice="' + sample.correct + '"]');
         assert.equal(await result.textContent(),sample.feedback[['tr','en','he','az'].indexOf(locale)]);
+      }
+      assert.equal(loadedLessons.has('accountability-lessons.js'),false);
+      await page.click('#accountability-archive summary');
+      const eventSelect = page.locator('#accountability-record');
+      const eventPanel = page.locator('#accountability-archive');
+      const eventLocale = ['tr','en','he','az'].indexOf(locale);
+      for (const record of accountabilityRecords) {
+        await eventSelect.selectOption(record.id);
+        assert.equal(await eventPanel.locator('h3').innerText(),record.title[eventLocale]);
+        const sources = eventPanel.locator('.daily-sources');
+        if (await sources.getAttribute('open') === null) await sources.locator('summary').click();
+        assert.equal(await sources.locator('a').first().getAttribute('href'),record.sources[0].url);
+        const sample = accountabilityCases[record.id];
+        const exercise = eventPanel.locator('.visit-exercise');
+        if (!sample) {
+          assert.equal(await exercise.isVisible(),false);
+          continue;
+        }
+        if (await exercise.getAttribute('open') === null) await exercise.locator('summary').click();
+        const status = exercise.locator('[role="status"]');
+        await exercise.locator('[data-accountability-choice="' + (1 - sample.correct) + '"]').click();
+        assert.notEqual(await status.textContent(),sample.result[eventLocale]);
+        await exercise.locator('[data-accountability-choice="' + sample.correct + '"]').click();
+        assert.equal(await status.textContent(),sample.result[eventLocale]);
       }
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
