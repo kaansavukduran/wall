@@ -7,8 +7,10 @@ const range = 'input[type="range"]:enabled';
 const controls = `button:enabled, select:enabled, input[type="checkbox"]:enabled, ${range}, summary, a[href]`;
 
 function available(root) {
+  // A closed details element may still give its hidden descendants layout rectangles.
   return [...root.querySelectorAll(controls)].filter(element =>
-    !element.closest('[hidden], [inert]') && element.getClientRects().length > 0);
+    !element.closest('[hidden], [inert], details:not([open]) > :not(summary)')
+    && element.getClientRects().length > 0);
 }
 
 export function mountController(game) {
