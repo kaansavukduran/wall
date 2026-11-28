@@ -86,10 +86,11 @@ async function main() {
       assert.equal(await page.locator('#settings-button').evaluate(el => el === document.activeElement),true);
       await enterCampaign(page, width === 320 ? 'tap' : 'keyboard');
       assert.equal(await page.locator('#title').evaluate(title => title === document.activeElement),true);
-      const photoTask = page.locator('#intro + #photo-button');
+      const photoTask = page.locator('#title + #photo-button');
       assert.ok(await photoTask.evaluate(button => {
         const viewport = button.getBoundingClientRect();
-        return button.classList.contains('primary') && viewport.top >= 0 && viewport.bottom <= innerHeight;
+        const title = button.previousElementSibling.getBoundingClientRect();
+        return button.classList.contains('primary') && title.top >= 0 && viewport.bottom <= innerHeight;
       }));
       assert.match(await page.locator('#intro').textContent(), /[?？]$/);
       assert.equal(await page.locator('#arrival').isHidden(),true);
