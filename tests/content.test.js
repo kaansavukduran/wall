@@ -13,6 +13,7 @@ import { bakuCopy, bakuStops } from '../baku-lessons.js';
 import { calendarEvents, shabbatStudy } from '../calendar-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
+import { contemporaryLessons } from '../contemporary-lessons.js';
 import { cultureCases, cultureRecords } from '../culture-lessons.js';
 import { pageFeedback, pageNote, talmudCards } from '../talmud-lessons.js';
 import { completionKey, exportSave, mergeSave, parseSave, progressKey, readCampaign, saveSchemaVersion, saveSummary } from '../save-data.js';
@@ -190,7 +191,7 @@ test('browser and desktop versions follow VERSION and scene options localize', (
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 456);
+  assert.equal(entries.length, 461);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -212,6 +213,31 @@ test('the late Mandate exercise orders the strike, commission and policy with ch
     for (const source of [card.source,card.relatedSource].filter(Boolean)) {
       assert.ok(entries.some(record => record.url === source.url && belongsTo(record,21)),source.url);
     }
+  }
+});
+
+test('the contemporary timeline preserves document types, dates and separate source records', () => {
+  const {cards,displayOrder,activity} = contemporaryLessons;
+  assert.deepEqual(activity.correctOrder,cards.map(card => card.id));
+  assert.deepEqual([...displayOrder].sort((a,b) => a-b),[0,1,2,3,4]);
+  assert.deepEqual(cards.map(card => card.date[1]),[
+    '26 January 2024','10 June 2024','19 July 2024','16 September 2025','21 May 2026',
+  ]);
+  for (const card of cards) {
+    for (const field of ['title','date','sourceClass','placeActor','explanation']) {
+      assert.equal(card[field].length,languages.length);
+      assert.ok(card[field].every(value => value.trim()));
+    }
+    for (const source of [card.source,card.relatedSource].filter(Boolean)) {
+      assert.equal(source.title.length,languages.length);
+      assert.ok(entries.some(record => record.url === source.url && belongsTo(record,24)),source.url);
+    }
+  }
+  const {check} = activity;
+  assert.equal(check.correct,0);
+  for (const text of [activity.instruction,activity.feedback,check.question,check.result,check.retry,...check.options]) {
+    assert.equal(text.length,languages.length);
+    assert.ok(text.every(value => value.trim()));
   }
 });
 

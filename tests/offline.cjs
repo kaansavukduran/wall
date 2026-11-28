@@ -132,6 +132,16 @@ async function main() {
     await page.tap('[data-baku-view="3"]');
     assert.notEqual(await canvas.evaluate(el => el.toDataURL()),building);
     assert.equal(await page.locator('.baku-word').textContent(),'зуһун дәдәји');
+    const {contemporaryLessons} = await import('../contemporary-lessons.js');
+    const documents = page.locator('#contemporary-timeline');
+    await documents.locator('summary').tap();
+    for (const id of contemporaryLessons.activity.correctOrder) {
+      await documents.locator('[data-timeline-card="' + id + '"]').tap();
+    }
+    assert.equal(await documents.locator('.timeline-order li').count(),5);
+    const question = documents.locator('.timeline-check');
+    await question.getByRole('button').first().tap();
+    assert.match(await question.getByRole('status').textContent(),/2027 və 2029/);
     assert.deepEqual(archive.requests,[]);
     assert.deepEqual(archive.errors,[]);
     await page.close();

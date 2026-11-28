@@ -61,6 +61,7 @@ async function main() {
   const { messianicLessons } = await import('../messianic-lessons.js');
   const { pressLessons } = await import('../press-lessons.js');
   const { mandateLessons } = await import('../mandate-lessons.js');
+  const { contemporaryLessons } = await import('../contemporary-lessons.js');
   const { displacementRecords } = await import('../displacement-lessons.js');
   const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
   const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js', 'modern-lessons.js'];
@@ -848,6 +849,50 @@ async function main() {
           await archive.locator(':scope > summary').press('Enter');
         }
         if (episode.id === 24) {
+          assert.equal(loadedLessons.has('contemporary-lessons.js'),false);
+          const documents = page.locator('#contemporary-timeline');
+          const summary = documents.locator(':scope > summary');
+          const cardButton = id => documents.locator('[data-timeline-card="' + id + '"]');
+          const order = documents.locator('.timeline-order');
+          const question = documents.locator('.timeline-check');
+          const {cards,activity} = contemporaryLessons;
+          const languageIndex = languages.indexOf(locale);
+          const campaignBefore = await page.evaluate(() => localStorage.getItem('wall.progress.v1'));
+          const moduleRequest = page.waitForResponse(response => response.url().endsWith('/contemporary-lessons.js'));
+          await summary.press('Enter');
+          assert.ok((await moduleRequest).ok());
+          await cardButton(cards[4].id).press('Enter');
+          assert.equal(await order.locator('li').count(),0);
+          assert.equal(await question.isHidden(),true);
+          for (const card of cards) {
+            const button = cardButton(card.id);
+            if (width === 320) await button.tap();
+            else await button.press('Enter');
+            assert.equal(await button.isDisabled(),true);
+            assert.equal(await documents.locator('.timeline-reading h3').textContent(),card.title[languageIndex]);
+            const links = await documents.locator('.timeline-reading a').evaluateAll(nodes =>
+              nodes.map(link => [link.textContent,link.href]));
+            assert.deepEqual(links,[card.source,card.relatedSource].filter(Boolean).map(source =>
+              [source.title[languageIndex],source.url]));
+          }
+          assert.equal(await order.locator('li').count(),5);
+          assert.equal(await documents.locator('.timeline-status').textContent(),activity.feedback[languageIndex]);
+          const answers = question.getByRole('button');
+          await answers.nth(1).press('Enter');
+          assert.equal(await question.getByRole('status').textContent(),activity.check.retry[languageIndex]);
+          await answers.first().press('Enter');
+          assert.equal(await question.getByRole('status').textContent(),activity.check.result[languageIndex]);
+          await page.selectOption('#lang',locale === 'he' ? 'az' : 'he');
+          assert.equal(await answers.first().getAttribute('aria-pressed'),'true');
+          await page.selectOption('#lang',locale);
+          await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+          await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+          await documents.locator('.timeline-reset').press('Enter');
+          assert.equal(await question.isHidden(),true);
+          assert.equal(await order.locator('li').count(),0);
+          assert.equal(await page.evaluate(() => localStorage.getItem('wall.progress.v1')),campaignBefore);
+          await summary.press('Enter');
           assert.equal(loadedLessons.has('ashlag-lessons.js'),false);
           const ashlag = page.locator('#ashlag-workbench');
           await ashlag.locator(':scope > summary').press('Enter');

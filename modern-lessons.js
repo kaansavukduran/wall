@@ -382,10 +382,10 @@ export const modernLessons = {
           "BMT İstintaq Komissiyasının hesabatı"
         ],
         "date": [
-          "12 Haziran 2024; 7 Ekim 2023 ve Gazze savaşı bulguları",
-          "12 June 2024; findings on 7 October 2023 and the Gaza war",
-          "12 ביוני 2024; ממצאים על 7 באוקטובר 2023 ועל המלחמה בעזה",
-          "12 iyun 2024; 7 oktyabr 2023 və Qəzza müharibəsi üzrə nəticələr"
+          "14 Haziran 2024 · A/HRC/56/26",
+          "14 June 2024 · A/HRC/56/26",
+          "14 ביוני 2024 · A/HRC/56/26",
+          "14 iyun 2024 · A/HRC/56/26"
         ],
         "description": [
           "BM Bağımsız Uluslararası Soruşturma Komisyonu, 7 Ekim’de Hamas ve diğer Filistinli silahlı grupların eylemleri ile Gazze’deki İsrail makamlarının eylemlerine ilişkin bulgular yayımladı. Bunlar komisyonun bulgularıdır; hükümetlerin siyasi açıklamaları ve mahkeme kararlarıyla aynı kaynak türü değildir.",
@@ -393,7 +393,7 @@ export const modernLessons = {
           "ועדת החקירה הבינלאומית העצמאית של האו״ם פרסמה ממצאים על פעולות חמאס וקבוצות פלסטיניות חמושות אחרות ב־7 באוקטובר ועל פעולות הרשויות הישראליות בעזה. אלה ממצאי ועדה, סוג מקור שונה מהצהרות ממשלה או מפסקי דין.",
           "BMT-nin Müstəqil Beynəlxalq İstintaq Komissiyası 7 oktyabrda HƏMAS və digər fələstinli silahlı qrupların, eləcə də Qəzzada İsrail hakimiyyətlərinin hərəkətləri barədə nəticələr yayımladı. Bunlar komissiyanın nəticələridir; hökumət siyasi bəyanatları və məhkəmə qərarları ilə eyni mənbə növü deyil."
         ],
-        "url": "https://www.un.org/unispal/document/coi-war-crimes-isreal-hamas-gaza-12jun24/"
+        "url": "https://digitallibrary.un.org/record/4051243/files/A_HRC_56_26-EN.pdf"
       },
       {
         "title": [
@@ -409,12 +409,12 @@ export const modernLessons = {
           "16 sentyabr 2025 · A/HRC/60/CRP.3"
         ],
         "description": [
-          "BM İnsan Hakları Konseyi’nin kurduğu soruşturma komisyonu, İsrail makamlarının Gazze’de Filistinlilere karşı soykırım işlediği sonucuna vardı. Bu, bir soruşturma komisyonunun değerlendirmesidir. İsrail hükümetinin aynı günkü yanıtı ayrı kartta yer alır.",
-          "The commission of inquiry established by the UN Human Rights Council concluded that Israeli authorities had committed genocide against Palestinians in Gaza. This is the commission’s finding. The Israeli government’s response from the same day has a separate card.",
-          "ועדת החקירה שהקימה מועצת זכויות האדם של האו״ם הגיעה למסקנה שהרשויות הישראליות ביצעו רצח עם בפלסטינים בעזה. זו מסקנת הוועדה. תגובת ממשלת ישראל מאותו יום מופיעה בכרטיס נפרד.",
-          "BMT İnsan Hüquqları Şurasının yaratdığı istintaq komissiyası İsrail hakimiyyətinin Qəzzada fələstinlilərə qarşı soyqırımı törətdiyi qənaətinə gəldi. Bu, komissiyanın rəyidir. İsrail hökumətinin həmin günkü cavabı ayrı kartdadır."
+          "BM İnsan Hakları Konseyi’nin kurduğu soruşturma komisyonu, 7 Ekim 2023’ten itibaren Gazze’deki Filistinlilere yönelik eylemleri değerlendirdi. İsrail Devleti’nin soykırımı işlemekten ve onu önleme ile cezalandırma yükümlülüklerini yerine getirmemekten sorumlu olduğu sonucuna vardı.",
+          "The commission of inquiry established by the UN Human Rights Council examined acts against Palestinians in Gaza since 7 October 2023. It concluded that the State of Israel bore responsibility for committing genocide and for failing to prevent and punish it.",
+          "ועדת החקירה שהקימה מועצת זכויות האדם של האו״ם בחנה מעשים נגד הפלסטינים בעזה מ־7 באוקטובר 2023. היא קבעה שמדינת ישראל נושאת באחריות לביצוע רצח עם ולאי־מניעתו ואי־הענישה עליו.",
+          "BMT İnsan Hüquqları Şurasının yaratdığı istintaq komissiyası 7 oktyabr 2023-cü ildən Qəzzadakı fələstinlilərə qarşı əməlləri araşdırdı. İsrail Dövlətini soyqırımı törətməyə və onun qarşısını almaqla cəzalandırmaq öhdəliklərini yerinə yetirməməyə görə məsul saydı."
         ],
-        "url": "https://www.un.org/unispal/document/commission-of-inquiry-report-genocide-in-gaza-a-hrc-60-crp-3/"
+        "url": "https://digitallibrary.un.org/record/4089577/files/A_HRC_60_CRP.3-EN.pdf#page=71"
       },
       {
         "title": [

@@ -230,7 +230,7 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .visit-choices button[aria-pressed=true]{background:var(--selected-bg);border-color:var(--accent)}
 .visit-exercise [role=status],.daily-exercise [role=status]{color:var(--accent)}
 @media(max-width:25rem){.visit-object{flex-direction:column}.visit-object canvas{inline-size:6rem;max-inline-size:100%}}
-#kingdom-map,#messianic-timeline,#mandate-timeline,#press-timeline,#displacement{padding:.65rem;background:var(--panel-bg)}
+#kingdom-map,#messianic-timeline,#mandate-timeline,#press-timeline,#contemporary-timeline,#displacement{padding:.65rem;background:var(--panel-bg)}
 #platform-assembly,#first-fruits,#quarter-map,#wall-transfer{padding:.65rem;background:var(--panel-bg)}
 :is(#platform-assembly,#first-fruits,#quarter-map,#wall-transfer) summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
 :is(#platform-assembly,#first-fruits,#quarter-map,#wall-transfer) summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
@@ -284,8 +284,8 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 #talmud-fields button[aria-pressed=true]{background:var(--selected-bg);border-color:var(--accent)}
 #talmud-feedback{color:var(--accent)}
 #talmud-feedback:empty{margin:0}
-:is(#kingdom-map,#messianic-timeline,#mandate-timeline,#press-timeline,#displacement) summary{cursor:pointer;min-block-size:var(--hit);align-content:center;font-weight:650}
-:is(#kingdom-map,#messianic-timeline,#mandate-timeline,#press-timeline,#displacement) summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+:is(#kingdom-map,#messianic-timeline,#mandate-timeline,#press-timeline,#contemporary-timeline,#displacement) summary{cursor:pointer;min-block-size:var(--hit);align-content:center;font-weight:650}
+:is(#kingdom-map,#messianic-timeline,#mandate-timeline,#press-timeline,#contemporary-timeline,#displacement) summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 #kingdom-map figure{margin:0 0 .6rem}
 #kingdom-map canvas{display:block;inline-size:min(100%,12rem);block-size:auto;image-rendering:pixelated}
 #kingdom-map fieldset{min-inline-size:0;margin:0 0 .6rem;border:1px solid var(--edge);overflow-wrap:anywhere}
@@ -302,6 +302,10 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .timeline-reading :is(h3,p){margin-block:0 .55rem}
 .timeline-reading ul,.timeline-order{padding-inline-start:1.4rem}
 .timeline-source-kind{color:var(--muted)}
+.timeline-check{min-inline-size:0;margin:.75rem 0 0;padding:0;border:0}
+.timeline-check legend{padding:0;margin-block-end:.55rem}
+.timeline-check button[aria-pressed=true]{background:var(--selected-bg);border-color:var(--accent)}
+.timeline-check p:empty{margin:0}
 
 #models{display:grid;grid-template-columns:minmax(0,1fr);gap:.45rem;padding:.65rem;background:var(--panel-bg)}
 #models p{margin:0;font-weight:650}

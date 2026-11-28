@@ -52,6 +52,12 @@ const pressLabels = {
   he:['השכלה, ציונות והבונד','המסמכים נטענים…','המסמכים לא נפתחו. סגרו את החלונית ופתחו שוב.'],
   az:['Maarifçilik, sionizm və Bund','Sənədlər yüklənir…','Sənədlər açılmadı. Bölməni bağlayıb yenidən aç.'],
 };
+const contemporaryLabels = {
+  tr:['7 Ekim ve Gazze belgeleri','Belgeler yükleniyor…','Belgeler açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en:['7 October and Gaza documents','Loading the documents…','The documents could not open. Reload the page and try again.'],
+  he:['מסמכים על 7 באוקטובר ועזה','המסמכים נטענים…','המסמכים לא נפתחו. רעננו את הדף ונסו שוב.'],
+  az:['7 oktyabr və Qəzza sənədləri','Sənədlər yüklənir…','Sənədlər açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
+};
 const displacementLabels = {
   tr:['Holokost ve yerinden edilme arşivi','Arşiv yükleniyor…','Arşiv açılamadı. Kapatıp yeniden aç.'],
   en:['Holocaust and displacement archive','Loading the archive…','The archive could not open. Close and reopen the panel.'],
@@ -229,6 +235,7 @@ export async function start(initialLanguage) {
   const timeline = find('messianic-timeline');
   const mandate = find('mandate-timeline');
   const press = find('press-timeline');
+  const contemporary = find('contemporary-timeline');
   const displacement = find('displacement');
   const kingdomMap = find('kingdom-map');
   const platform = find('platform-assembly');
@@ -261,6 +268,7 @@ export async function start(initialLanguage) {
   const messianicView = {};
   const mandateView = {};
   const pressView = {};
+  const contemporaryView = {};
   const displacementView = {};
   const kingdomAnswers = {};
   const circleView = {};
@@ -405,6 +413,12 @@ export async function start(initialLanguage) {
       import('./source-timeline.js'),import('./press-lessons.js'),
     ]);
     return (panel, current, index) => mountSourceTimeline(panel,current,index,pressLessons,pressView);
+  });
+  const refreshContemporary = connectDisclosure('contemporary-timeline', contemporaryLabels, async () => {
+    const [{mountSourceTimeline},{contemporaryLessons}] = await Promise.all([
+      import('./source-timeline.js'),import('./contemporary-lessons.js'),
+    ]);
+    return (panel, current, index) => mountSourceTimeline(panel,current,index,contemporaryLessons,contemporaryView);
   });
   const refreshMandate = connectDisclosure('mandate-timeline', mandateLabels, async () => {
     const [{mountSourceTimeline},{mandateLessons}] = await Promise.all([
@@ -582,6 +596,8 @@ export async function start(initialLanguage) {
     if (!mandate.hidden) refreshMandate();
     press.hidden = episode.id !== 22;
     if (!press.hidden) refreshPress();
+    contemporary.hidden = episode.id !== 24;
+    if (!contemporary.hidden) refreshContemporary();
     displacement.hidden = episode.id !== 22;
     if (!displacement.hidden) refreshDisplacement();
     kingdomMap.hidden = episode.id !== 2;
