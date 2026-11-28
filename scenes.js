@@ -56,7 +56,7 @@ export const models = [
     ['temple',['Tapınak','Temple','בית המקדש','Məbəd'],
       ['Kutsal bina bu alanın üzerinde bulunuyordu.','The sacred building stood on this raised area.','המבנה הקדוש עמד על המשטח הזה.','Müqəddəs bina bu yüksəldilmiş sahədə yerləşirdi.']],
   ]),
-  scene(7, ['İlk ürünlerin yolculuğu ve Kumran tomarları','The first-fruits procession and the Qumran scrolls','מסע הביכורים ומגילות קומראן','İlk məhsulun səfəri və Qumran tumarları'], [
+  scene(7, ['Kudüs ve Kumran','Jerusalem and Qumran','ירושלים וקומראן','Yerusəlim və Qumran'], [
     ['pilgrim-gathering',['Toplanma','Gathering','התכנסות','Toplaşma'], [
       'Mişna Bikkurim 3:2, ilk ürünleri getirenlerin yola çıkmadan önce bir kentte toplandığını anlatır. Mişna yaklaşık MS 200’de derlendi. Çizim metinde anlatılan yolculuk sırasını gösterir.',
       'Mishnah Bikkurim 3:2 says people bringing their first fruits gathered in a town before setting out. The Mishnah was compiled around 200 CE. The drawing follows the stages described in the text.',
@@ -75,6 +75,12 @@ export const models = [
       'במשנה ביכורים ג׳:ד׳ עולי הרגל מגיעים להר הבית והסל נישא אל העזרה. הסל מכיל את הביכורים שמביאים כמנחה. מגילת הסופר נושאת טקסט לקריאה או למסירה. השוו בין שתי הפעולות.',
       'Mişna Bikkurim 3:4-də zəvvarlar Məbəd dağına çatır və səbət həyətə aparılır. Səbətdə təqdim olunacaq ilk məhsul, katibin tumarında isə oxunan və ya ötürülən mətn var. Şəkildə iki işi müqayisə et.',
     ],'https://www.sefaria.org/Mishnah_Bikkurim.3.2-4'],
+    ['theodotos-inscription',['Sinagog kitabesi','Synagogue inscription','כתובת בית הכנסת','Sinaqoq kitabəsi'], [
+      'Kudüs’te bulunan Yunanca Theodotos kitabesi genellikle MÖ 1. yüzyıl sonu ile MS 1. yüzyıl başına tarihlenir. Kitabe, sinagogun işlevleri arasında Tevrat okumayı, buyrukları öğretmeyi, uzaktan gelenlere konaklama ve su sağlamayı sayar. Dua hakkında bilgi için başka bir kaynak gerekir. Çizim bu işlevleri simgeler.',
+      'The Greek Theodotos inscription from Jerusalem is usually dated to the late first century BCE or early first century CE. It names Torah reading, instruction in the commandments, lodging and water facilities for visitors from abroad. Information about prayer calls for another source. The drawing illustrates these functions.',
+      'כתובת תאודוטוס ביוונית נמצאה בירושלים ומקובל לתארך אותה לסוף המאה הראשונה לפנה״ס או לתחילת המאה הראשונה לספירה. היא מציינת קריאה בתורה, לימוד המצוות, מקום לינה ומתקני מים לאורחים מחוץ לארץ. כדי לברר על תפילה דרוש מקור נוסף. האיור ממחיש את השימושים האלה.',
+      'Yerusəlimdə tapılmış yunanca Teodotos kitabəsi adətən e.ə. I əsrin sonuna və ya eramızın I əsrinin əvvəlinə aid edilir. Kitabədə Tövratın oxunması, əmrlərin öyrədilməsi, uzaqdan gələnlər üçün qalacaq yer və su qurğuları qeyd olunur. Dua haqqında məlumat üçün başqa mənbə lazımdır. Şəkil bu işləri göstərir.',
+    ],'https://image-database.nes.lsa.umich.edu/items/show/196'],
     ['scroll-isaiah',['Yeşaya nüshası · 1QIsaᵃ','Isaiah copy · 1QIsaᵃ','עותק ישעיהו · 1QIsaᵃ','Yeşaya nüsxəsi · 1QIsaᵃ'], [
       'Uzun tomarın sütunlarını aç. Kumran yakınında bulunan Büyük Yeşaya Tomarı MÖ 2. yüzyıla tarihlenir ve kitabın 66 bölümünü içerir. Masa, bir metnin nasıl kopyalanabileceğini gösteren temsili çizimdir. Nüshanın nerede kopyalandığı kesin bilinmiyor.',
       'Unroll the long scroll. Found near Qumran, the Great Isaiah Scroll dates to the second century BCE and contains all 66 chapters. The desk illustrates how a text could be copied. The place where this copy was made is uncertain.',
