@@ -11,6 +11,7 @@ import { earlyModernLessons } from '../early-modern-lessons.js';
 import { gematriaValues, sefirot } from '../hebrew-labs.js';
 import { library, libraryLabels } from '../library.js';
 import { medievalLessons } from '../medieval-lessons.js';
+import { modernLessons } from '../modern-lessons.js';
 import { romanLessons } from '../roman-lessons.js';
 import { models, photo } from '../scenes.js';
 import { secondTempleLessons } from '../second-temple-lessons.js';
@@ -68,7 +69,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 132);
+  assert.equal(entries.length, 137);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -78,9 +79,9 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
   assert.equal(belongsTo({chapters:'Prolog,1'}, 10), false);
 });
 
-test('ancient source exercises contain four versions of each card and matched catalogue entries', () => {
-  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons};
-  assert.deepEqual(Object.keys(lessons), Array.from({length:20}, (_, index) => String(index + 1)));
+test('all 24 source exercises contain four versions of each card and matched catalogue entries', () => {
+  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
+  assert.deepEqual(Object.keys(lessons), chapters.map(chapter => String(chapter.id)));
   for (const [chapter, lesson] of Object.entries(lessons)) {
     assert.ok(lesson.cards.length >= 3);
     assert.ok(lesson.cards[lesson.correct]);

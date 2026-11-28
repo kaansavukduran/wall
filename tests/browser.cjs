@@ -13,8 +13,9 @@ async function main() {
   const { romanLessons } = await import('../roman-lessons.js');
   const { medievalLessons } = await import('../medieval-lessons.js');
   const { earlyModernLessons } = await import('../early-modern-lessons.js');
-  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons};
-  const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js'];
+  const { modernLessons } = await import('../modern-lessons.js');
+  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
+  const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js', 'modern-lessons.js'];
   const browser = await chromium.launch(browserOptions);
   try {
     for (const [locale, width] of [['tr',1100],['en',320],['he',320],['az',740]]) {
@@ -221,6 +222,26 @@ async function main() {
           assert.match(await page.locator('#compare-history').textContent(), /1967/);
           assert.equal(await page.locator('#compare-history-source').getAttribute('href'), 'https://whc.unesco.org/document/8721');
           await page.locator('#photo form button').click();
+        }
+        if (episode.id === 21) {
+          for (const card of [1,2,0]) await page.click('[data-sequence="' + card + '"]');
+          const dates = await page.locator('#sequence li').allTextContents();
+          assert.deepEqual(dates.map(item => item.match(/\d+/)[0]), ['1917','1929','1930']);
+        }
+        if (episode.id === 22) {
+          await page.click('[data-layer="holocaust"]');
+          const firstNote = await page.locator('#models output').textContent();
+          await page.click('[data-layer="nakba"]');
+          assert.notEqual(await page.locator('#models output').textContent(), firstNote);
+        }
+        if (episode.id === 24) {
+          await page.click('[data-evidence="4"]');
+          assert.match(await page.locator('#evidence-date').textContent(), /2025/);
+          assert.equal(await page.locator('#evidence-source').getAttribute('href'),
+            'https://www.un.org/unispal/document/commission-of-inquiry-report-genocide-in-gaza-a-hrc-60-crp-3/');
+          await page.click('[data-evidence="5"]');
+          assert.equal(await page.locator('#evidence-source').getAttribute('href'),
+            'https://embassies.gov.il/ungeneva/en/news/16-09-2025');
         }
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
         await page.click('[data-choice="' + episode.correct + '"]');

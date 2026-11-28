@@ -249,7 +249,21 @@ export async function makeWorld(canvas, reducedMotion) {
       rect(background, '#d2b584', 272, 117, 23, 7);
       return;
     }
-    if ([3,4,22].includes(index)) {
+    if (index === 22) {
+      rect(background, '#35404a', 116, 82, 364, 117);
+      rect(background, '#24353c', 127, 92, 342, 102);
+      for (const [archive,x] of [['holocaust',157],['nakba',326]]) {
+        rect(background, '#514940', x, 116, 103, 73);
+        rect(background, '#987e62', x + 5, 121, 93, 63);
+        rect(background, layer === archive ? '#d6bd87' : '#594e48', x + 10, 126, 83, 52);
+        rect(background, '#dfc9a0', x + 25, 137, 55, 31);
+        for (let y = 142; y < 166; y += 5) {
+          rect(background, '#796452', x + 30, y, 38, 1);
+        }
+      }
+      return;
+    }
+    if ([3,4].includes(index)) {
       for (let i = 0; i < 9; i++) {
         const x = 125 + i * 42;
         rect(background, mortar, x, 114 - i % 3 * 9, 36, 88);

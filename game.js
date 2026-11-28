@@ -21,6 +21,7 @@ const lessonDecks = [
   () => import('./roman-lessons.js').then(module => module.romanLessons),
   () => import('./medieval-lessons.js').then(module => module.medievalLessons),
   () => import('./early-modern-lessons.js').then(module => module.earlyModernLessons),
+  () => import('./modern-lessons.js').then(module => module.modernLessons),
 ];
 
 function read(keyName) {

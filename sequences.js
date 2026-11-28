@@ -52,6 +52,11 @@ export const sequences = [
     ['Sabatay Sevi İslam’a geçti','Sabbatai Zevi converted to Islam','שבתי צבי התאסלם','Sabatay Sevi İslamı qəbul etdi'],
     ['Mesih beklentisi ve haber ağı','Messianic expectation and reports','ציפייה משיחית וידיעות','Məsih gözləntisi və xəbərlər'],
   ]),
+  make(21, ['Manda öncesi ve sırasında üç tarih','Three dates before and during the Mandate','שלושה תאריכים לפני המנדט ובמהלכו','Mandatdan əvvəl və mandat dövründə üç tarix'], [1,2,0], [
+    ['Batı Duvarı Komisyonu raporu · 1930','Western Wall Commission report · 1930','דוח ועדת הכותל · 1930','Qərb Divarı Komissiyasının hesabatı · 1930'],
+    ['Balfour Deklarasyonu · 1917','Balfour Declaration · 1917','הצהרת בלפור · 1917','Balfur Bəyannaməsi · 1917'],
+    ['Kudüs, Hebron ve başka yerlerde şiddet · 1929','Violence in Jerusalem, Hebron and elsewhere · 1929','אלימות בירושלים, בחברון ובמקומות נוספים · 1929','Yerusəlimdə, Xevronda və başqa yerlərdə zorakılıq · 1929'],
+  ]),
 ];
 
 export const sequenceLabels = {
