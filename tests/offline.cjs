@@ -129,6 +129,16 @@ async function main() {
     await bergheim.waitFor();
     await bergheim.evaluate(image => image.decode());
     assert.equal(await bergheim.evaluate(image => image.naturalWidth),640);
+    const reservoir = ottoman.page.locator('#reservoir');
+    const basin = reservoir.locator('canvas');
+    await reservoir.locator('summary').tap();
+    await basin.waitFor();
+    const earlier = await basin.evaluate(el => el.toDataURL());
+    await reservoir.locator('.reservoir-phases button').last().tap();
+    assert.notEqual(await basin.evaluate(el => el.toDataURL()),earlier);
+    const reservoirQuestion = reservoir.locator('.reservoir-question');
+    await reservoirQuestion.locator('button').first().tap();
+    assert.match(await reservoirQuestion.getByRole('status').textContent(),/3,2 m/);
     assert.deepEqual(ottoman.requests,[]);
     assert.deepEqual(ottoman.errors,[]);
     await ottoman.page.close();

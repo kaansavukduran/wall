@@ -13,7 +13,7 @@ export const letterSources = [
 
 const copy = [
   {
-    letter:'MS 132–135. Şimon ben Kosiba, Aramice mektupta Yehuda ben Menaşe’ye iki eşek gönderdiğini yazıyor. Yehuda’dan, bu eşekleri iki kişiyle Yehonatan bar Beayan ve Masabala’ya göndermesini istiyor. Onlar palmiye dallarını ve etrogu (ağaç kavunu) hazırlayıp kampa yollayacak. Yehuda bulunduğu yerden başka kişileri de mersin ve söğüt getirmeye gönderecek.',
+    letter:'MS 132–135. Şimon ben Kosiba, Aramice mektupta Yehuda ben Menaşe’ye iki eşek gönderdiğini yazıyor. Yehuda’dan, bu eşekleri iki kişiyle Yehonatan bar Beayan ve Masabala’ya göndermesini istiyor. Onlar palmiye dallarını ve etrogu (ağaç kavunu) hazırlayıp kampa yollayacak. Yehuda bulunduğu yerden başka kişileri de kamp için mersin ve söğüt getirmeye gönderecek.',
     task:'Mektuptaki iki talebi ilgili bitkilerle eşleştir.',
     routes:['Yehonatan ile Masabala’dan istenen', 'Yehuda’nın bulunduğu çevreden istenen'],
     plants:['Palmiye dalları ve etrog', 'Mersin ve söğüt'],
@@ -26,7 +26,7 @@ const copy = [
     context:'Mektup Sukot’un adını vermez. Levililer 23:40 bayramın bitki kullanımını anlatır. Ashmolean Müzesi de sikkenin arka yüzünde palmiye dalı ve etrog imgeleri tanımlar. Geç Antik Çağ’da derlenen Yeruşalmi, Rabbi Akiva’nın Bar Kosiba’yı mesih olarak gördüğünü ve Rabbi Yohanan ben Torta’nın buna itiraz ettiğini anlatır.',
   },
   {
-    letter:'132–135 CE. In an Aramaic letter, Shimon ben Kosiba writes that he sent two donkeys to Yehuda ben Menashe. He tells Yehuda to send two people with those donkeys to Yehonatan bar Beayan and Masabala, who are to pack and send palm branches and citrons to the camp. Yehuda is also to send people from his own area to bring myrtle and willow.',
+    letter:'132–135 CE. In an Aramaic letter, Shimon ben Kosiba writes that he sent two donkeys to Yehuda ben Menashe. He tells Yehuda to send two people with those donkeys to Yehonatan bar Beayan and Masabala, who are to pack and send palm branches and citrons to the camp. Yehuda is also to send people from his own area to bring myrtle and willow for the camp.',
     task:'Match the two requests in the letter to the plants.',
     routes:['Requested from Yehonatan and Masabala', 'Requested from Yehuda’s area'],
     plants:['Palm branches and citrons', 'Myrtle and willow'],
@@ -39,7 +39,7 @@ const copy = [
     context:'The letter does not name Sukkot. Leviticus 23:40 describes the use of plants at the festival. The Ashmolean Museum identifies a palm branch and a citron on the back of the coin. The Jerusalem Talmud, compiled in Late Antiquity, recounts that Rabbi Akiva saw Bar Kosiba as the messiah and that Rabbi Yohanan ben Torta disagreed.',
   },
   {
-    letter:'132–135 לספירה. באיגרת בארמית שמעון בן כוסבה כותב ששלח ליהודה בן מנשה שני חמורים. הוא מורה ליהודה לשלוח אותם עם שני אנשים אל יהונתן בר בעיאן ומסבלה, כדי שיארזו וישלחו למחנה לולבים ואתרוגים. יהודה מתבקש גם לשלוח אנשים ממקומו להביא הדסים וערבות.',
+    letter:'132–135 לספירה. באיגרת בארמית שמעון בן כוסבה כותב ששלח ליהודה בן מנשה שני חמורים. הוא מורה ליהודה לשלוח אותם עם שני אנשים אל יהונתן בר בעיאן ומסבלה, כדי שיארזו וישלחו למחנה לולבים ואתרוגים. יהודה מתבקש גם לשלוח אנשים ממקומו להביא הדסים וערבות למחנה.',
     task:'התאימו את שתי הבקשות באיגרת לצמחים.',
     routes:['הבקשה ליהונתן ולמסבלה', 'הבקשה לאנשים ממקומו של יהודה'],
     plants:['לולבים ואתרוגים', 'הדסים וערבות'],
@@ -52,7 +52,7 @@ const copy = [
     context:'האיגרת אינה מציינת את חג הסוכות. ויקרא כ״ג:מ׳ מתאר שימוש בצמחים בחג. מוזיאון אשמוליאן מזהה על גב המטבע דימויים של לולב ואתרוג. התלמוד הירושלמי, שנערך בעת העתיקה המאוחרת, מספר שרבי עקיבא ראה בבר כוסבה משיח ושרבי יוחנן בן תורתא חלק עליו.',
   },
   {
-    letter:'Eramızın 132–135-ci illəri. Şimon ben Kosiba aramicə məktubda iki eşşəyi Yehuda ben Menaşeyə göndərdiyini yazır. O, eşşəkləri iki nəfərlə Yehonatan bar Beayan və Masabalaya göndərməyi tapşırır. Onlar xurma budaqları ilə etroqu (sitronu) qablaşdırıb düşərgəyə yollamalıdırlar. Yehuda olduğu yerdən başqa adamları mərsin və söyüd gətirməyə göndərməlidir.',
+    letter:'Eramızın 132–135-ci illəri. Şimon ben Kosiba aramicə məktubda iki eşşəyi Yehuda ben Menaşeyə göndərdiyini yazır. O, eşşəkləri iki nəfərlə Yehonatan bar Beayan və Masabalaya göndərməyi tapşırır. Onlar xurma budaqları ilə etroqu (sitronu) qablaşdırıb düşərgəyə yollamalıdırlar. Yehuda olduğu yerdən başqa adamları düşərgə üçün mərsin və söyüd gətirməyə göndərməlidir.',
     task:'Məktubdakı iki tapşırığı müvafiq bitkilərlə uyğunlaşdır.',
     routes:['Yehonatan və Masabaladan istənilən', 'Yehudanın olduğu yerdən istənilən'],
     plants:['Xurma budaqları və etroq', 'Mərsin və söyüd'],

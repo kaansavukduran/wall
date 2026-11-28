@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.8.47</small>
+  <small dir="ltr">v0.8.48</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -60,6 +60,7 @@
       <details id="bar-kosiba-letter" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="wall-transfer" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="quarter-map" hidden><summary></summary><p role="status" hidden></p><div></div></details>
+      <details id="reservoir" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="talmud-page" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="ashlag-workbench" name="chapter-24-workshop" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="study-circle" name="chapter-24-workshop" hidden><summary></summary><p role="status" hidden></p><div></div></details>
@@ -147,7 +148,7 @@
     </section>
     </div>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.47</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.48</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -452,6 +453,18 @@
   <p role="status"></p>
   <a href="https://www.archives.openjerusalem.org/index.php/jerusalem-the-old-city-1945" target="_blank" rel="noopener noreferrer"></a>
   <a href="https://doi.org/10.5334/johd.169" target="_blank" rel="noopener noreferrer"></a>
+</template>
+
+<template id="reservoir-template">
+  <p></p>
+  <fieldset class="reservoir-phases">
+    <legend></legend><div><button type="button"></button><button type="button"></button></div>
+  </fieldset>
+  <figure><canvas width="128" height="76" aria-hidden="true" hidden></canvas><figcaption aria-live="polite"></figcaption></figure>
+  <fieldset class="reservoir-question" hidden>
+    <legend></legend><div><button type="button"></button><button type="button"></button></div><p role="status"></p>
+  </fieldset>
+  <a target="_blank" rel="noopener noreferrer"></a>
 </template>
 
 <template id="first-fruits-template">

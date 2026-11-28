@@ -36,6 +36,7 @@ try {
     ['baku-archive.js','assets/baku-archive.png','image/png'],
     ['first-fruits.js','assets/first-fruits.png','image/png'],
     ['bar-kosiba-letter.js','assets/bar-kosiba-letter.png','image/png'],
+    ['reservoir.js','assets/reservoir.png','image/png'],
     ['wall-transfer-lessons.js','assets/western-wall-2016.jpg','image/jpeg'],
     ['early-modern-lessons.js','assets/bergheim-1865.jpg','image/jpeg'],
     ['catalogue.js','docs/SOURCES.tsv','text/tab-separated-values;charset=utf-8'],

@@ -99,6 +99,12 @@ const quarterMapLabels = {
   he:['שלושה מקומות בשכונה הישנה','המפה נטענת…','המפה לא נפתחה. נסו לפתוח אותה שוב.'],
   az:['Köhnə məhəllədə üç yer','Xəritə yüklənir…','Xəritə açıla bilmədi. Yenidən açmağa çalış.'],
 };
+const reservoirLabels = {
+  tr:['Wilson Kemeri’nin altındaki su haznesi','Kesit açılıyor…','Kesit açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en:['The reservoir beneath Wilson’s Arch','Opening the cross-section…','The cross-section could not open. Reload and try again.'],
+  he:['מאגר המים מתחת לקשת וילסון','החתך נטען…','החתך לא נפתח. רעננו ונסו שוב.'],
+  az:['Vilson tağının altındakı su anbarı','Kəsik açılır…','Kəsik açıla bilmədi. Səhifəni yenilə və yenidən cəhd et.'],
+};
 const firstFruitsLabels = {
   tr:['İlk ürün sepeti','Sahne yükleniyor…','Sahne açılamadı. Yeniden açmayı dene.'],
   en:['The first-fruits basket','Loading the scene…','The scene could not open. Try opening it again.'],
@@ -248,6 +254,7 @@ export async function start(initialLanguage) {
   const firstFruits = find('first-fruits');
   const barKosibaLetter = find('bar-kosiba-letter');
   const quarterMap = find('quarter-map');
+  const reservoir = find('reservoir');
   const wallTransfer = find('wall-transfer');
   const talmud = find('talmud-page');
   const geniza = find('geniza-desk');
@@ -272,6 +279,7 @@ export async function start(initialLanguage) {
   const firstFruitsView = {};
   const barKosibaView = {};
   const quarterMapView = {};
+  const reservoirView = {phase:0,answer:null};
   const wallTransferView = {};
   const messianicView = {};
   const mandateView = {};
@@ -449,6 +457,9 @@ export async function start(initialLanguage) {
   const refreshQuarterMap = connectDisclosure('quarter-map', quarterMapLabels, () =>
     import('./quarter-map-lessons.js').then(({mountQuarterMap}) =>
       (panel, current, index) => mountQuarterMap(panel,index,quarterMapView)));
+  const refreshReservoir = connectDisclosure('reservoir', reservoirLabels, () =>
+    import('./reservoir.js').then(({mountReservoir}) =>
+      (panel, current, index) => mountReservoir(panel,index,reservoirView)));
   const refreshWallTransfer = connectDisclosure('wall-transfer', wallTransferLabels, () =>
     import('./wall-transfer-lessons.js').then(({mountWallTransfer}) =>
       (panel, current) => mountWallTransfer(panel,current,wallTransferView)));
@@ -621,6 +632,8 @@ export async function start(initialLanguage) {
     if (!barKosibaLetter.hidden) refreshBarKosibaLetter();
     quarterMap.hidden = episode.id !== 23;
     if (!quarterMap.hidden) refreshQuarterMap();
+    reservoir.hidden = episode.id !== 19;
+    if (!reservoir.hidden) refreshReservoir();
     talmud.hidden = episode.id !== 11;
     if (!talmud.hidden) refreshTalmud();
     geniza.hidden = episode.id !== 15;
@@ -666,6 +679,7 @@ export async function start(initialLanguage) {
     displacement.open = false;
     kingdomMap.open = false;
     barKosibaLetter.open = false;
+    reservoir.open = false;
     talmud.open = false;
     transfer.open = false;
     labState.word.length = 0;
