@@ -4,12 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#121a22">
 <title>WALL</title>
-<link rel="stylesheet" href="./runtime-0.5.0-4042ee55a7ba/style.css">
+<link rel="stylesheet" href="./runtime-0.5.1-cbe4b0a9ceb4/style.css">
 <body>
 <section id="boot" aria-label="Fragaria Interactive">
   <div class="boot-shell">
     <div class="boot-brand">
-      <img src="./runtime-0.5.0-4042ee55a7ba/assets/fragaria-strawberry.png" alt="" width="116" height="130">
+      <img src="./runtime-0.5.1-cbe4b0a9ceb4/assets/fragaria-strawberry.png" alt="" width="116" height="130">
       <h1>Fragaria<br>Interactive</h1>
     </div>
     <div class="boot-load">
@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.5.0</small>
+  <small dir="ltr">v0.5.1</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -92,7 +92,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.0</span></footer>
+  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.1</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -100,7 +100,7 @@
   <h2 id="photo-title" tabindex="-1" autofocus></h2>
   <div class="photo-layout">
     <figure>
-      <img loading="lazy" src="./runtime-0.5.0-4042ee55a7ba/assets/matpc-14762.jpg" width="433" height="640" alt="">
+      <img loading="lazy" src="./runtime-0.5.1-cbe4b0a9ceb4/assets/matpc-14762.jpg" width="433" height="640" alt="">
       <figcaption></figcaption>
       <a id="photo-source" target="_blank" rel="noopener noreferrer"></a>
     </figure>
@@ -118,7 +118,8 @@
 </dialog>
 <dialog id="library" aria-labelledby="library-title">
   <header><h2 id="library-title"></h2><form method="dialog"><button></button></form></header>
-  <details id="calendar"><summary></summary><p role="status" class="calendar-status" hidden></p><div></div></details>
+  <details id="calendar" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
+  <details id="atlas" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <div id="library-readings" role="group"></div>
 </dialog>
 <template id="calendar-template">
@@ -144,6 +145,25 @@
     <p role="status"></p>
   </details>
 </template>
-<script type="module" src="./runtime-0.5.0-4042ee55a7ba/start.js"></script>
+<template id="atlas-template">
+  <p class="atlas-intro"></p>
+  <search class="atlas-filters">
+    <div><label for="atlas-category"></label><select id="atlas-category"></select></div>
+    <div><label for="atlas-search"></label><input type="search" id="atlas-search" dir="auto" autocomplete="off" spellcheck="false"></div>
+  </search>
+  <p class="atlas-status" role="status"></p>
+  <label for="atlas-entry"></label><select id="atlas-entry"></select>
+  <article class="atlas-reading">
+    <h3></h3>
+    <figure class="atlas-figure">
+      <div class="atlas-map" aria-hidden="true"><img width="384" height="144" alt=""></div>
+      <figcaption></figcaption>
+    </figure>
+    <p></p>
+    <p></p>
+    <a target="_blank" rel="noopener noreferrer" dir="auto"></a>
+  </article>
+</template>
+<script type="module" src="./runtime-0.5.1-cbe4b0a9ceb4/start.js"></script>
 </body>
 </html>
