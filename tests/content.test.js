@@ -10,6 +10,7 @@ import { calendarEvents } from '../calendar-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
 import { cultureCases, cultureRecords } from '../culture-lessons.js';
+import { pageFeedback, pageNote, talmudCards } from '../talmud-lessons.js';
 import { dailyCards } from '../daily-lessons.js';
 import { dailyCases } from '../daily-life.js';
 import { archiveCases } from '../diaspora-archive.js';
@@ -86,7 +87,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 291);
+  assert.equal(entries.length, 295);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -143,6 +144,23 @@ test('diaspora objects and exhibition labels have four locales and linked record
       assert.equal(values.length, languages.length);
       assert.ok(values.every(line => line.trim()));
     }
+  }
+});
+
+test('the Talmud folio distinguishes six readings with indexed texts and a historical scan', () => {
+  assert.equal(talmudCards.length,6);
+  assert.equal(new Set(talmudCards.map(card => card.id)).size,talmudCards.length);
+  const fields = [pageFeedback,pageNote];
+  for (const card of talmudCards) {
+    assert.ok(card.refs.length > 0);
+    assert.ok(card.refs.every(source => entries.some(entry => entry.url === source.url)));
+    fields.push(card.title,card.layer,card.meaning,card.limit,...card.refs.map(source => source.title));
+  }
+  assert.match(talmudCards.at(-1).refs.at(-1).url,/Berakhot2a.jpg$/);
+  for (const values of fields) {
+    assert.equal(values.length,languages.length);
+    assert.ok(values.every(value => value.trim()));
+    assert.match(values[2], /\p{Script=Hebrew}/u);
   }
 });
 

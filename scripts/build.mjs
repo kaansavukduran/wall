@@ -20,6 +20,7 @@ const files = [
   'language-study.js', 'language-lessons.js', 'diaspora-archive.js', 'diaspora-lessons.js',
   'daily-life.js', 'daily-lessons.js', 'object-sprite.js',
   'culture-archive.js', 'culture-lessons.js',
+  'talmud-page.js', 'talmud-lessons.js',
   'transfer.js', 'transfer-early-lessons.js', 'transfer-middle-lessons.js', 'transfer-late-lessons.js',
   'scenes.js', 'catalogue.js', 'sequences.js', 'hebrew-labs.js', 'controller.js', 'tour.js', 'tour-evidence.js', 'assets',
 ];

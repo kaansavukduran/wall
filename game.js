@@ -38,6 +38,12 @@ const transferDecks = [
   () => import('./transfer-middle-lessons.js'),
   () => import('./transfer-late-lessons.js'),
 ];
+const talmudLabels = {
+  tr:['Talmud sayfasını aç','Sayfa yükleniyor…','Sayfa açılamadı. Kapatıp yeniden aç.'],
+  en:['Open a Talmud page','Loading the page…','The page could not open. Close it and reopen it.'],
+  he:['פתחו דף תלמוד','הדף נטען…','הדף לא נפתח. סגרו אותו ופתחו שוב.'],
+  az:['Talmud səhifəsini aç','Səhifə yüklənir…','Səhifə açılmadı. Bağlayıb yenidən aç.'],
+};
 const lessonDecks = [
   () => import('./ancient-lessons.js').then(module => module.ancientLessons),
   () => import('./second-temple-lessons.js').then(module => module.secondTempleLessons),
@@ -84,6 +90,7 @@ export async function start(initialLanguage) {
   const sequenceSurface = find('sequence');
   const evidence = find('evidence');
   const timeline = find('messianic-timeline');
+  const talmud = find('talmud-page');
   const transfer = find('transfer');
   const evidenceChoices = find('evidence-choices');
   const labRoot = find('language-labs');
@@ -91,6 +98,7 @@ export async function start(initialLanguage) {
   const labState = {word:[], sefirah:0, daat:false};
   const kabbalahView = {lesson:null,sourcesOpen:false,exerciseOpen:false,solved:new Set()};
   const cultureView = {record:null};
+  const talmudView = {reading:null,side:0,answers:[['','',''],['','','']]};
   const progress = readProgress();
   let language = initialLanguage;
   let active = 0;
@@ -161,6 +169,9 @@ export async function start(initialLanguage) {
   ].map(([id, labels, load]) => connectDisclosure(id, labels, load));
   const refreshTimeline = connectDisclosure('messianic-timeline', timelineLabels, () =>
     import('./messianic-timeline.js').then(module => module.mountMessianicTimeline));
+  const refreshTalmud = connectDisclosure('talmud-page', talmudLabels, () =>
+    import('./talmud-page.js').then(({mountTalmudPage}) =>
+      (panel, current, index) => mountTalmudPage(panel,current,index,talmudView)));
   const refreshTransfer = connectDisclosure('transfer', transferLabels, async chapter => {
     const [{mountTransfer},{transferLessons}] = await Promise.all([
       import('./transfer.js'), transferDecks[Math.floor((chapter - 1) / 8)](),
@@ -245,6 +256,8 @@ export async function start(initialLanguage) {
     renderSequence();
     timeline.hidden = episode.id !== 20;
     if (!timeline.hidden) refreshTimeline();
+    talmud.hidden = episode.id !== 11;
+    if (!talmud.hidden) refreshTalmud();
     renderEvidence();
     renderLanguageLabs();
     if (focus) find('title').focus();
@@ -259,6 +272,7 @@ export async function start(initialLanguage) {
     evidenceCard = null;
     evidence.open = false;
     timeline.open = false;
+    talmud.open = false;
     transfer.open = false;
     labState.word.length = 0;
     labState.sefirah = 0;
