@@ -9,6 +9,7 @@ import { atlasEntries } from '../atlas-lessons.js';
 import { calendarEvents } from '../calendar-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
+import { cultureCases, cultureRecords } from '../culture-lessons.js';
 import { dailyCards } from '../daily-lessons.js';
 import { dailyCases } from '../daily-life.js';
 import { archiveCases } from '../diaspora-archive.js';
@@ -85,7 +86,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 276);
+  assert.equal(entries.length, 291);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -112,6 +113,36 @@ test('chapter transfer examples have distinct localized choices and exact catalo
     }
     assert.ok(lesson.sources.length > 0);
     for (const source of lesson.sources) assert.ok(urls.has(source.url), source.url);
+  }
+});
+
+test('diaspora objects and exhibition labels have four locales and linked records', () => {
+  assert.deepEqual(cultureRecords.map(record => record.id), [
+    'kaifeng-stele','ferrara-bible','tsenerene-print','glikl-memoir',
+    'baldones-census','regina-jonas','maimunah-song','juhuri-recording',
+  ]);
+  assert.equal(cultureCases.length, 3);
+  for (const record of cultureRecords) {
+    assert.ok(chapters.some(chapter => chapter.id === record.chapter));
+    for (const field of ['title','era','object','context','limit']) {
+      assert.equal(record[field].length, languages.length);
+      assert.ok(record[field].every(line => line.trim()));
+      assert.match(record[field][2], /\p{Script=Hebrew}/u);
+      assert.doesNotMatch(record[field][0], /\p{Script=Hebrew}/u);
+    }
+    for (const source of record.sources) {
+      assert.ok(entries.some(entry => entry.url === source.url));
+      assert.equal(source.title.length, languages.length);
+    }
+  }
+  for (const sample of cultureCases) {
+    assert.ok(cultureRecords.some(record => record.id === sample.recordId));
+    assert.equal(sample.choices.length, 3);
+    assert.ok(sample.choices[sample.correct]);
+    for (const values of [sample.question,sample.feedback,...sample.choices]) {
+      assert.equal(values.length, languages.length);
+      assert.ok(values.every(line => line.trim()));
+    }
   }
 });
 

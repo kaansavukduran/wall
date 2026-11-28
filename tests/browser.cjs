@@ -19,6 +19,7 @@ async function main() {
   const { comparisonCases } = await import('../kabbalah-advanced-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
   const { dailyCases } = await import('../daily-life.js');
+  const { cultureCases, cultureRecords } = await import('../culture-lessons.js');
   const { transferLessons:earlyTransfers } = await import('../transfer-early-lessons.js');
   const { transferLessons:middleTransfers } = await import('../transfer-middle-lessons.js');
   const { transferLessons:lateTransfers } = await import('../transfer-late-lessons.js');
@@ -33,7 +34,7 @@ async function main() {
   const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js', 'modern-lessons.js'];
   const browser = await playwright[engine].launch(browserOptions);
   try {
-    for (const [locale, width] of [['tr',1100],['en',320],['he',320],['az',740]]) {
+    for (const [locale, width] of [['tr',1100],['en',320],['he',320],['az',320]]) {
       const page = await browser.newPage({ viewport:{ width, height:750 },locale,hasTouch:width === 320 });
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
@@ -546,6 +547,30 @@ async function main() {
         assert.notEqual(await status.innerText(),text);
         await page.click('[data-daily-choice="' + sample.answer + '"]');
         assert.equal(await status.innerText(),text);
+      }
+      assert.equal(loadedLessons.has('culture-lessons.js'),false);
+      await page.click('#culture-archive summary');
+      const cultureImage = page.locator('#culture-archive canvas');
+      const cultureSelect = page.locator('#culture-object');
+      await cultureImage.waitFor();
+      const textures = new Set();
+      for (const item of cultureRecords) {
+        await cultureSelect.selectOption(item.id);
+        textures.add(await cultureImage.evaluate(canvas => canvas.toDataURL()));
+      }
+      assert.equal(textures.size,cultureRecords.length);
+      await page.click('#culture-archive .daily-sources summary');
+      assert.match(await page.locator('#culture-archive .daily-sources a').first().getAttribute('href'),/lashon.org\/en\/node\/9467/);
+      for (const sample of cultureCases) {
+        await cultureSelect.selectOption(sample.recordId);
+        if (await page.locator('#culture-archive .visit-exercise').getAttribute('open') === null) {
+          await page.click('#culture-archive .visit-exercise summary');
+        }
+        await page.click('[data-culture-choice="' + (sample.correct + 1) % 3 + '"]');
+        const result = page.locator('#culture-archive .visit-exercise [role="status"]');
+        assert.ok((await result.textContent()).length);
+        await page.click('[data-culture-choice="' + sample.correct + '"]');
+        assert.equal(await result.textContent(),sample.feedback[['tr','en','he','az'].indexOf(locale)]);
       }
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);

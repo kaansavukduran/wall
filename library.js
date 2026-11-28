@@ -106,3 +106,10 @@ export const dailyLabels = {
   he: ['חיי יום־יום יהודיים', 'הנושאים נטענים…', 'הסדנה לא נפתחה. רעננו את הדף ונסו שוב.'],
   az: ['Yəhudilərin gündəlik həyatı', 'Mövzular yüklənir…', 'Emalatxana açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
+
+export const cultureLabels = {
+  tr:['Diasporadan nesneler ve sesler','Arşiv yükleniyor…','Arşiv açılamadı. Kapatıp yeniden aç.'],
+  en:['Objects and voices of the diaspora','Loading the archive…','The archive could not open. Close it and reopen it.'],
+  he:['חפצים וקולות מן התפוצות','הארכיון נטען…','הארכיון לא נפתח. סגרו אותו ופתחו שוב.'],
+  az:['Diasporadan əşyalar və səslər','Arxiv yüklənir…','Arxiv açılmadı. Bağlayıb yenidən aç.'],
+};

@@ -1,6 +1,6 @@
 import { controllerHelp, mountController } from './controller.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { atlasLabels, calendarLabels, dailyLabels, diasporaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
+import { atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -90,6 +90,7 @@ export async function start(initialLanguage) {
   const labs = labRoot.querySelectorAll('details');
   const labState = {word:[], sefirah:0, daat:false};
   const kabbalahView = {lesson:null,sourcesOpen:false,exerciseOpen:false,solved:new Set()};
+  const cultureView = {record:null};
   const progress = readProgress();
   let language = initialLanguage;
   let active = 0;
@@ -155,6 +156,8 @@ export async function start(initialLanguage) {
     ['language-study', languageStudyLabels, () => import('./language-study.js').then(module => module.mountLanguageStudy)],
     ['diaspora-archive', diasporaLabels, () => import('./diaspora-archive.js').then(module => module.mountDiasporaArchive)],
     ['daily-life', dailyLabels, () => import('./daily-life.js').then(module => module.mountDailyLife)],
+    ['culture-archive', cultureLabels, () => import('./culture-archive.js').then(({mountCultureArchive}) =>
+      (panel, current, index) => mountCultureArchive(panel, current, index, cultureView))],
   ].map(([id, labels, load]) => connectDisclosure(id, labels, load));
   const refreshTimeline = connectDisclosure('messianic-timeline', timelineLabels, () =>
     import('./messianic-timeline.js').then(module => module.mountMessianicTimeline));
