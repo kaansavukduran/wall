@@ -1,0 +1,220 @@
+// Advanced Kabbalah study module. Sources distinguish primary texts, later interpretations,
+// institutional self-descriptions, and academic historical metadata.
+export const kabbalahLessons = [
+  {
+    id:'mystical-texts-before-kabbalah',
+    title:['Erken Yahudi mistisizmi: Heikhalot ve Sefer Yetsira','Early Jewish mysticism: Heikhalot and Sefer Yetzirah','מיסטיקה יהודית קדומה: היכלות וספר יצירה','Erkən yəhudi mistisizmi: Heikhalot və Sefer Yetsira'],
+    period:['Geç Antik Çağ; kesin metin tarihleri tartışmalı','Late Antiquity; exact textual dates are debated','העת העתיקה המאוחרת; תאריכי החיבור המדויקים שנויים במחלוקת','Son Antik dövr; dəqiq mətn tarixləri mübahisəlidir'],
+    genre:['Heikhalot: göksel saraylar ve taht vizyonları çevresindeki anonim mistik yazılar. Sefer Yetsira: harfler, sayılar ve yaratılış üzerine kısa bir kozmolojik risale.','Heikhalot: anonymous mystical writings around visions of heavenly palaces and the divine throne. Sefer Yetzirah: a short cosmological treatise on letters, numbers, and creation.','היכלות: כתבים מיסטיים אנונימיים על חזיונות של היכלות שמימיים וכיסא האל. ספר יצירה: חיבור קוסמולוגי קצר על אותיות, מספרים ובריאה.','Heikhalot: göy sarayları və ilahi taxt görüntüləri ətrafında anonim mistik yazılar. Sefer Yetsira: hərflər, rəqəmlər və yaradılış haqqında qısa kosmoloji risalə.'],
+    study:['Sefer Yetsira 1’deki on “sefirot belima” ile 22 temel harfi, sonraki Kabaladaki aynı terimlerle özdeş kabul edilmemelidir. Heikhalot yazıları da sonraki Zohar veya Luria sisteminin bölümleri değildir.','Sefer Yetzirah 1’s ten “sefirah belimah” and 22 foundational letters should not automatically be equated with later Kabbalistic uses of the same terms. Heikhalot writings are not chapters of the later Zohar or Lurianic system.','אין לזהות אוטומטית את עשר ״ספירות בלימה״ ואת 22 האותיות שבספר יצירה א׳ עם שימושי המונחים בקבלה המאוחרת. כתבי היכלות אינם פרקים בזוהר או בשיטה הלוריאנית המאוחרים.','Sefer Yetsira 1-dəki 10 “sefirot belima” və 22 əsas hərfi sonrakı Kabbaladakı eyni terminlərlə avtomatik eyniləşdirmək olmaz. Heikhalot yazıları sonrakı Zohar və ya Lurian sisteminin fəsilləri deyil.'],
+    limit:['Metinlerin katmanları ve tarihleri konusunda araştırma sürer; bunları tek bir yazarın ya da sabit bir dönemin ürünü gibi sunma.','The layers and dates of these texts remain under study; do not present them as the work of one author or a single settled period.','שכבות הטקסטים ותאריכיהם עדיין נחקרים; אין להציגם כיצירה של מחבר יחיד או של תקופה אחת מוסכמת.','Mətnlərin təbəqələri və tarixləri araşdırılır; onları bir müəllifin və ya dəqiq müəyyən edilmiş tək dövrün əsəri kimi təqdim etmə.'],
+    sources:[
+      {title:'Sefer Yetzirah 1, Sefaria text and notes',url:'https://www.sefaria.org/Sefer_Yetzirah.1',kind:'annotated'},
+      {title:'Heikhalot Rabbati 24:1, Sefaria',url:'https://www.sefaria.org/Heikhalot_Rabbati.24.1',kind:'text'},
+      {title:'Cambridge History of Judaism: Early forms of Jewish mysticism',url:'https://www.cambridge.org/core/books/abs/cambridge-history-of-judaism/early-forms-of-jewish-mysticism/5FBD63B88E328C3025D3697D533CF71E',kind:'research'}
+    ]
+  },
+  {
+    id:'bahir',
+    title:['Sefer ha-Bahir: oluşan metin','Sefer ha-Bahir: a text taking shape','ספר הבהיר: טקסט בהתהוות','Sefer ha-Bahir: formalaşan mətn'],
+    period:['Geç 12. veya erken 13. yüzyıl; kesin yer ve redaksiyon tartışmalı','Late 12th or early 13th century; exact place and redaction are debated','סוף המאה ה־12 או ראשית המאה ה־13; המקום והעריכה המדויקים שנויים במחלוקת','XII əsrin sonu və ya XIII əsrin əvvəli; dəqiq məkan və redaktə mübahisəlidir'],
+    genre:['Anonim, midraşik biçimde yazılmış bir mistik metin; sonraki baskı ve elyazmalarında farklı metin biçimleri bulunur.','An anonymous mystical text in a midrash-like form; later printed editions and manuscripts preserve differing textual forms.','חיבור מיסטי אנונימי בצורת מדרש; כתבי יד ומהדורות מאוחרות משמרים נוסחים שונים.','Midraş üslubunda yazılmış anonim mistik mətndir; sonrakı əlyazma və nəşrlərdə fərqli mətn formaları var.'],
+    study:['Bahir, sefirot dilinin erken gelişiminde etkili oldu. Eski öğeleri bulunabilir; bugünkü metin biçimini doğrudan antik çağa tarihleme.','The Bahir influenced early development of sefirot language. It may preserve older materials; that does not date the text in its received form to antiquity.','הבהיר השפיע על התפתחותו המוקדמת של שיח הספירות. ייתכן שיש בו חומרים קדומים, אך אין בכך כדי לתארך את נוסחו שהתקבל לימי קדם.','Bahir sefirot dilinin erkən inkişafına təsir göstərib. İçində qədim materiallar ola bilər, lakin bu, hazırkı mətn formasının qədim dövrə aid olduğunu sübut etmir.'],
+    limit:['Araştırmacılar Provence redaksiyonu, daha eski kaynaklar ve olası İberya bağlantıları üzerine tartışıyor. “Tek tarih ve yer kesinleşti” deme.','Scholars debate Provençal redaction, older sources, and possible Iberian connections. Do not claim that one date and place are settled.','חוקרים דנים בעריכה פרובנסלית, במקורות קדומים יותר ובקשרים אפשריים לאיבריה. אין לומר שתאריך ומקום יחידים הוכרעו.','Tədqiqatçılar Provans redaktəsi, daha qədim mənbələr və mümkün İberiya əlaqələrini müzakirə edirlər. Tək bir tarix və məkanın dəqiq müəyyənləşdiyini demə.'],
+    sources:[
+      {title:'Sefer ha-Bahir 1, Sefaria',url:'https://www.sefaria.org/Sefer_HaBahir.1',kind:'text'},
+      {title:'The Bahir and Its Historiography: A Reassessment, Journal of Religion (2023)',url:'https://www.journals.uchicago.edu/doi/10.1086/723757',kind:'research'},
+      {title:'National Library of Israel: The Zohar and its predecessors',url:'https://www.nli.org.il/en/discover/judaism/jewish-bookshelf/zohar',kind:'overview'}
+    ]
+  },
+  {
+    id:'zohar-tradition-and-manuscripts',
+    title:['Zohar: geleneksel atıf ve metin tarihi','The Zohar: traditional attribution and textual history','הזוהר: ייחוס מסורתי ותולדות הטקסט','Zohar: ənənəvi atribusiya və mətn tarixi'],
+    period:['Zohar alıntıları ve yayılımı 13. yüzyıl Kastilya’sında görünür; farklı metin katmanları sonraki yüzyıllarda da dolaştı.','Zohar citations and circulation appear in 13th-century Castile; different textual layers continued to circulate in later centuries.','ציטוטים והפצה של הזוהר מופיעים בקסטיליה במאה ה־13; שכבות טקסט שונות המשיכו להסתובב גם במאות מאוחרות יותר.','Zohar sitatları və yayılması XIII əsr Kastiliyasında görünür; fərqli mətn təbəqələri sonrakı əsrlərdə də dolaşırdı.'],
+    genre:['Aramice ağırlıklı, midraşik anlatılar ve yorumlardan oluşan çok katmanlı bir Kabalistik külliyat.','A multi-layered Kabbalistic corpus, largely in Aramaic, of midrashic narratives and interpretations.','קורפוס קבלי רב־שכבתי, ברובו בארמית, הכולל סיפורים ופרשנות בסגנון מדרשי.','Əsasən aramicə yazılmış, midraş hekayə və şərhlərindən ibarət çoxqatlı Kabbalistik külliyyat.'],
+    study:['Yahudi geleneği Zohar’ı 2. yüzyılda yaşamış Şimon bar Yohay’a atfeder. Akademik metin tarihi, temel Zohar katmanlarını ve erken alıntıları çoğunlukla 13. yüzyıl Kastilyasıyla ilişkilendirir. Bunlar farklı türden tarih iddialarıdır.','Jewish tradition attributes the Zohar to the 2nd-century sage Shimon bar Yohai. Academic textual history generally associates the core Zohar layers and early citations with 13th-century Castile. These are different kinds of historical claims.','המסורת היהודית מייחסת את הזוהר לחכם בן המאה ה־2, שמעון בר יוחאי. חקר הטקסט האקדמי קושר בדרך כלל את שכבות הזוהר המרכזיות ואת הציטוטים המוקדמים לקסטיליה במאה ה־13. אלה סוגים שונים של טענות היסטוריות.','Yəhudi ənənəsi Zoharı II əsrdə yaşamış Şimon bar Yohaya aid edir. Akademik mətn tarixi əsas Zohar qatlarını və ilk sitatları əsasən XIII əsr Kastiliyası ilə əlaqələndirir. Bunlar fərqli növ tarixi iddialardır.'],
+    limit:['Geleneksel atfı kanıtlanmış çağdaş yazarlık bilgisi gibi; akademik tarihlendirmeyi de inananların ortak kabulü gibi sunma.','Do not present traditional attribution as proven contemporary authorship, or academic dating as the shared belief of all practitioners.','אין להציג ייחוס מסורתי כמחברוּת בת־זמנו שהוכחה, או תיארוך אקדמי כאמונה המשותפת לכל המתרגלים.','Ənənəvi atribusiyanı sübut edilmiş dövrdaş müəlliflik, akademik tarixləndirməni isə bütün praktiklərin ortaq inancı kimi təqdim etmə.'],
+    sources:[
+      {title:'Zohar, Sefaria library',url:'https://www.sefaria.org/Zohar',kind:'text'},
+      {title:'National Library of Israel: The Zohar',url:'https://www.nli.org.il/en/discover/judaism/jewish-bookshelf/zohar',kind:'overview'},
+      {title:'Oxford Bibliographies: Zohar',url:'https://academic.oup.com/reference/62376/reference-article-abstract/554969931?login=false',kind:'index'}
+    ]
+  },
+  {
+    id:'cordovero-safed',
+    title:['Safed: Kordovero’nun sistemleştirmesi','Safed: Cordovero’s systematization','צפת: השיטתיות של קורדובירו','Səfəd: Kordoveronun sistemləşdirməsi'],
+    period:['16. yüzyıl; Pardes Rimmonim yaklaşık 1548’de tamamlandı, 1591’de Kraków’da basıldı.','16th century; Pardes Rimmonim was completed around 1548 and printed in Kraków in 1591.','המאה ה־16; פרדס רימונים הושלם בקירוב ב־1548 ונדפס בקרקוב ב־1591.','XVI əsr; Pardes Rimmonim təxminən 1548-ci ildə tamamlandı, 1591-ci ildə Krakovda çap edildi.'],
+    genre:['Moşe Kordovero’nun (Ramak) önceki Kabalistik metinleri uzlaştırıp düzenleyen kapsamlı bir kılavuzu.','A broad guide by Moses Cordovero (Ramak), organizing and reconciling earlier Kabbalistic texts.','מדריך מקיף מאת משה קורדובירו (רמ״ק), המסדר ומיישב טקסטים קבליים קודמים.','Moşe Kordoveronun (Ramak) əvvəlki Kabbalistik mətnləri uzlaşdırıb sistemləşdirən geniş əsəri.'],
+    study:['Kordovero’nun Safed’deki sistematik yaklaşımı, Luria’nın kozmolojisiyle aynı şey değildir. Aynı kent ve yüzyılda farklı öğrenim yolları ve yorumlar vardı.','Cordovero’s systematic approach in Safed is not the same as Luria’s cosmology. Different modes of study and interpretation coexisted in the same city and century.','גישתו השיטתית של קורדובירו בצפת אינה זהה לקוסמולוגיה של לוריא. באותה עיר ובאותה מאה התקיימו דרכי לימוד ופרשנות שונות.','Kordoveronun Səfəddəki sistemli yanaşması Luriyanın kosmologiyası ilə eyni deyil. Eyni şəhər və əsrdə müxtəlif öyrənmə və şərh yolları mövcud idi.'],
+    limit:['Baskı tarihi ile eserin yazım tarihini ayır. Kordovero’nun bütün fikirlerini tek bir kanonik Safed okuluna indirgeme.','Distinguish the date of printing from the date of composition. Do not reduce Cordovero’s thought to one canonical “Safed school.”','יש להבחין בין תאריך הדפוס לתאריך החיבור. אין לצמצם את מחשבת קורדובירו ל״אסכולה צפתי״ אחת וקנונית.','Çap tarixini əsərin yazılma tarixindən ayır. Kordoveronun bütün düşüncəsini vahid kanonik “Səfəd məktəbi”nə endirmə.'],
+    sources:[
+      {title:'Pardes Rimmonim, Center for Jewish Art, Hebrew University',url:'https://cja.huji.ac.il/gross/browser.php?id=36115&mode=set',kind:'edition'},
+      {title:'Safed Spirituality collection, San Diego State University',url:'https://humanitieshub.sdsu.edu/omeka/items/show/1731',kind:'index'},
+      {title:'Sefaria Kabbalah library',url:'https://www.sefaria.org/texts/Kabbalah',kind:'index'}
+    ]
+  },
+  {
+    id:'luria-vital-transmission',
+    title:['Luria ve Vital: aktarım zinciri','Luria and Vital: a chain of transmission','לוריא וויטאל: שרשרת מסירה','Luria və Vital: ötürmə zənciri'],
+    period:['Safed, 16. yüzyılın ikinci yarısı; Hayim Vital 1542–1620, Yits hak Luria 1534–1572.','Safed, second half of the 16th century; Hayyim Vital (1542–1620), Isaac Luria (1534–1572).','צפת, המחצית השנייה של המאה ה־16; חיים ויטאל (1542–1620), יצחק לוריא (1534–1572).','XVI əsrin ikinci yarısı, Səfəd; Hayim Vital (1542–1620), İshaq Luria (1534–1572).'],
+    genre:['Lurianic Kabala, Vital’in ustasından duyduğu öğretileri kaydettiği, yeniden düzenlediği ve metinler halinde aktardığı bir yazı külliyatı üzerinden bilinir.','Lurianic Kabbalah is known through a body of texts in which Vital recorded, reorganized, and transmitted teachings he heard from his master.','הקבלה הלוריאנית מוכרת דרך קורפוס כתבים שבו ויטאל תיעד, סידר מחדש ומסר לימודים ששמע מרבו.','Lurian Kabbalası Vitalin ustadından eşitdiyi təlimləri qeyd etdiyi, yenidən təşkil etdiyi və mətnlər şəklində ötürdüyü külliyyat vasitəsilə tanınır.'],
+    study:['Etz Hayim Luria’nın kendi kaleminden çıkmış çağdaş bir kitap değildir. Vital’in aktarımı, redaksiyonları ve sonraki derlemeler önemlidir; Luria ile Vital’in katkılarını aynılaştırma.','Etz Hayim is not a contemporary book written by Luria himself. Vital’s transmission, recensions, and later compilations matter; do not collapse Luria’s and Vital’s contributions.','עץ חיים אינו ספר בן הזמן שכתב לוריא בעצמו. המסירה, הנוסחים והעריכות המאוחרות של ויטאל חשובים; אין למזג את תרומותיהם של לוריא וויטאל.','Etz Hayim Luriyanın özünün yazdığı dövrdaş kitab deyil. Vitalin ötürməsi, redaksiyaları və sonrakı tərtiblər əhəmiyyətlidir; Luria ilə Vitalin töhfələrini eyniləşdirmə.'],
+    limit:['Tek bir sabit “Luria’nın kitabı” varsayma: elyazmalar, düzenlemeler ve yayın tarihleri katmanlıdır.','Do not assume one fixed “book by Luria”: manuscripts, arrangements, and publication history are layered.','אין להניח שקיים ״ספר יחיד של לוריא״ בנוסח יציב; כתבי היד, הסידורים ותולדות הדפוס רב־שכבתיים.','Vahid sabit “Luriyanın kitabı”nı fərz etmə: əlyazmalar, tərtiblər və nəşr tarixi çoxqatlıdır.'],
+    sources:[
+      {title:'Sefer Etz Chaim 1:1, Sefaria',url:'https://www.sefaria.org/Sefer_Etz_Chaim.1.1',kind:'text'},
+      {title:'Ets Haim Manuscripts: EH 47 A 05',url:'https://etshaimmanuscripts.nl/items/eh-47-a-05/',kind:'edition'},
+      {title:'British Library: Peri Ets Hayim manuscript',url:'https://searcharchives.bl.uk/catalog/032-003467884',kind:'edition'}
+    ]
+  },
+  {
+    id:'tzimtzum-partzufim-abya',
+    title:['Lurianic kavram haritası: tsimtsum, partzufim, ABiYA','Lurianic concept map: tzimtzum, partzufim, ABiYA','מפת מושגים לוריאנית: צמצום, פרצופים, אבי״ע','Lurian anlayış xəritəsi: tsimtsum, partzufim, ABiYA'],
+    period:['16. yüzyıl metinleri ve sonraki yorumlar','16th-century texts and later interpretations','כתבי המאה ה־16 ופרשנויות מאוחרות','XVI əsr mətnləri və sonrakı şərhlər'],
+    genre:['Kozmolojik modeller: tsimtsum (çekilme/gizlenme), kırılma ve onarım anlatıları; partzufim (sefirot konfigürasyonları); dört dünya: Atzilut, Beriah, Yetzirah, Asiyah.','Cosmological models: tzimtzum (contraction/concealment), shattering and repair narratives; partzufim (configurations of sefirot); four worlds: Atzilut, Beriah, Yetzirah, Asiyah.','מודלים קוסמולוגיים: צמצום (הסתרה/התכווצות), סיפורי שבירה ותיקון; פרצופים (תצורות של ספירות); ארבעת העולמות: אצילות, בריאה, יצירה, עשייה.','Kosmoloji modellər: tsimtsum (yığılma/gizlənmə), qırılma və təmir rəvayətləri; partzufim (sefirot konfiqurasiyaları); dörd dünya: Atzilut, Beriah, Yetzirah, Asiyah.'],
+    study:['Etz Hayim’daki tsimtsum anlatısı, sonraki yorumlarda farklı biçimlerde okundu. Örneğin Tanya 7, bunu Tanrı’nın fiziksel olarak çekilmesi şeklinde anlamaya itiraz eder ve gizlenme olarak yorumlar. ABiYA “dört dünya”dır; partzufim ise bunlarla ilişkilendirilen konfigürasyonlardır.','The account of tzimtzum in Etz Hayim was read in different ways by later interpreters. For example, Tanya 7 rejects reading it as God’s physical withdrawal and interprets it as concealment. ABiYA names four worlds; partzufim are configurations associated with them.','תיאור הצמצום בעץ חיים פורש בדרכים שונות בידי פרשנים מאוחרים. לדוגמה, תניא ז׳ דוחה הבנה של הסתלקות פיזית של האל ומפרש אותו כהסתרה. אבי״ע הם ארבעה עולמות; פרצופים הם תצורות הקשורות אליהם.','Etz Hayim-də tsimtsum təsviri sonrakı şərhçilər tərəfindən müxtəlif cür oxunub. Məsələn, Tanya 7 Tanrının fiziki çəkilməsini rədd edir və bunu gizlənmə kimi izah edir. ABiYA dörd dünyanı, partzufim isə onlarla bağlı konfiqurasiyaları bildirir.'],
+    limit:['Bu, tek ve evrensel bir Kabala öğretisi değildir. “Partzuf”, “dünya” ve “sefirah” terimlerini eş anlamlı kullanma; yorum geleneklerini adlandır.','This is not one universal Kabbalistic doctrine. Do not use “partzuf,” “world,” and “sefirah” as synonyms; name the interpretive tradition.','אין זו תורה קבלית יחידה ואוניברסלית. אין להשתמש במונחים ״פרצוף״, ״עולם״ ו״ספירה״ כמילים נרדפות; יש לציין את מסורת הפרשנות.','Bu, vahid və ümumbəşəri Kabbala təlimi deyil. “Partzuf”, “dünya” və “sefirah” sözlərini sinonim kimi işlətmə; şərh ənənəsini göstər.'],
+    sources:[
+      {title:'Sefer Etz Chaim 1:1, Sefaria',url:'https://www.sefaria.org/Sefer_Etz_Chaim.1.1',kind:'text'},
+      {title:'Tanya, Part II, Shaar HaYichud VehaEmunah 7:1, Sefaria',url:'https://www.sefaria.org/Tanya%2C_Part_II%3B_Shaar_HaYichud_VehaEmunah.7.1',kind:'interpretation'},
+      {title:'Nefesh HaChayim, Gate III 7:5, Sefaria',url:'https://www.sefaria.org/Nefesh_HaChayim%2C_Gate_III.7.5',kind:'interpretation'},
+      {title:'Nefesh HaChayim, Gate I 5:12, Sefaria',url:'https://www.sefaria.org/Nefesh_HaChayim%2C_Gate_I.5.12',kind:'annotated'}
+    ]
+  },
+  {
+    id:'baal-hasulam',
+    title:['Baal HaSulam ve Sulam','Baal HaSulam and the Sulam','בעל הסולם והסולם','Baal HaSulam və Sulam'],
+    period:['Yehuda Leib Ashlag, 1885–1954; Sulam Zohar yorumu 1943–1953’te yazıldı ve yayımlandı.','Yehuda Leib Ashlag (1885–1954); the Sulam commentary on the Zohar was written and published between 1943 and 1953.','יהודה לייב אשלג (1885–1954); פירוש הסולם לזוהר נכתב ופורסם בשנים 1943–1953.','Yehuda Leib Aşlaq (1885–1954); Zohara Sulam şərhi 1943–1953-cü illərdə yazılıb nəşr edildi.'],
+    genre:['Sulam (“merdiven”), Zohar’a İbranice çeviri ve yorum sağlayan modern bir tefsirdir; kendisi Zohar’ın antik metni değildir.','Sulam (“ladder”) is a modern Hebrew translation and commentary on the Zohar; it is not the ancient Zohar text itself.','הסולם הוא תרגום ופירוש עברי מודרני לזוהר; הוא אינו הטקסט הזוהרי הקדום עצמו.','Sulam (“nərdivan”) Zoharın müasir ivrit tərcümə və şərhidir; Zoharın qədim mətninin özü deyil.'],
+    study:['Baal HaSulam, Luria’dan sonraki Kabalistik geleneği kendi yorum sistemi içinde okudu. Bir metni anlamak için ana metni, tercümeyi ve yorumu katmanlarına ayır.','Baal HaSulam read the post-Lurianic Kabbalistic tradition through his own interpretive system. To study it, separate the base text, translation, and commentary into layers.','בעל הסולם קרא את המסורת הקבלית שלאחר לוריא דרך שיטת פרשנות משלו. בלימוד יש להפריד בין טקסט היסוד, התרגום והפירוש.','Baal HaSulam Luriyadan sonrakı Kabbalistik ənənəni öz şərh sistemi daxilində oxuyurdu. Öyrənərkən əsas mətni, tərcüməni və şərhi qatlara ayır.'],
+    limit:['Bir hareketin “açıklama” iddiası akademik tarih araştırmasının yerine geçmez; kaynağın kendi amaç ve terimlerini belirt.','A movement’s claim to “explain” a text does not replace academic historical research; state the source’s own aims and vocabulary.','טענתה של תנועה שהיא ״מסבירה״ טקסט אינה מחליפה מחקר היסטורי אקדמי; יש לציין את מטרות המקור ואת אוצר המילים שלו.','Hərəkatın mətni “izah etmək” iddiası akademik tarixi araşdırmanı əvəz etmir; mənbənin məqsəd və terminlərini göstər.' ],
+    sources:[
+      {title:'Sefaria Library: Baal HaSulam',url:'https://www.sefaria.org/texts/Kabbalah/Baal%20HaSulam',kind:'index'},
+      {title:'Bnei Baruch Kabbalah Academy: Rabbi Yehuda Ashlag',url:'https://www.kabbalah.info/en/rabbi-yehuda-leib-halevi-ashlag-baal-hasulam/',kind:'self'},
+      {title:'Sulam commentary publication context',url:'https://seder-olam.com/en/n/hasulam/',kind:'overview'}
+    ]
+  },
+  {
+    id:'rabash-purpose-of-society',
+    title:['Rabaş, 1984: “Toplumun Amacı”','Rabash, 1984: “The Purpose of Society”','רב״ש, 1984: ״מטרת החברה״','Rabaş, 1984: “Cəmiyyətin məqsədi”'],
+    period:['Baruch Shalom Ashlag (Rabaş), 1906–1991; sosyal makale dizisi 1984 tarihli.','Baruch Shalom Ashlag (Rabash), 1906–1991; a series of social articles dated 1984.','ברוך שלום אשלג (רב״ש), 1906–1991; סדרת מאמרים חברתיים משנת 1984.','Barux Şalom Aşlaq (Rabaş), 1906–1991; sosial məqalələr silsiləsi 1984-cü ilə aiddir.'],
+    genre:['Bir öğrenim topluluğunun amacını, dostlar arası ilişkileri ve verme yönelimini tartışan normatif dini metin.','A normative religious text discussing a study group’s purpose, relationships among friends, and an orientation toward bestowal.','טקסט דתי נורמטיבי הדן במטרת קבוצת לימוד, ביחסים בין חברים ובנטייה להשפעה.','Öyrənmə qrupunun məqsədini, dostlararası münasibətləri və vermə yönümünü müzakirə edən normativ dini mətndir.'],
+    study:['Metin, Bnei Baruch’un çağdaş onlu grup pratiğinde temel kaynak olarak okutulur. Önce Rabaş’ın 1984 yazısını, sonra kurumun güncel uygulama açıklamasını oku; bunlar aynı tarihsel nesne değildir.','The text is studied as a source for Bnei Baruch’s contemporary ten-person group practice. Read Rabash’s 1984 article separately from the organization’s current description of its practice; they are not the same historical object.','הטקסט נלמד כמקור לתרגול הקבוצה בת עשרה ב־בני ברוך כיום. יש לקרוא בנפרד את מאמר רב״ש מ־1984 ואת תיאור התרגול הנוכחי של הארגון; אלה אינם אותו מושא היסטורי.','Mətn Bnei Baruchun müasir on nəfərlik qrup praktikası üçün mənbə kimi öyrənilir. Rabaşın 1984-cü il məqaləsini təşkilatın indiki praktika izahından ayrı oxu; bunlar eyni tarixi obyekt deyil.'],
+    limit:['Öğretiyi bütün Yahudilere veya her öğrenim topluluğuna genelleme. Normatif bir kaynak, katılımcıların davranışlarının ampirik araştırması değildir.','Do not generalize the teaching to all Jews or every study group. A normative source is not an empirical study of participants’ behavior.','אין להכליל את הלימוד לכל היהודים או לכל קבוצת לימוד. מקור נורמטיבי אינו מחקר אמפירי של התנהגות המשתתפים.','Təlimi bütün yəhudilərə və ya hər öyrənmə qrupuna aid etmə. Normativ mənbə iştirakçı davranışlarının empirik araşdırması deyil.'],
+    sources:[
+      {title:'Rabash · Purpose of Society – 1 (1984), Kabbalah Academy',url:'https://kabbalah.academy/en/library/sources/articles/835/',kind:'archived'},
+      {title:'Bnei Baruch Kabbalah Academy: The Ten as a Requisite for Adhesion',url:'https://kabbalah.academy/en/library/sources/articles/3454/',kind:'self'}
+    ]
+  },
+  {
+    id:'laitman-bnei-baruch',
+    title:['Michael Laitman ve Bnei Baruch','Michael Laitman and Bnei Baruch','מיכאל לייטמן ובני ברוך','Michael Laitman və Bnei Baruch'],
+    period:[
+      'Din tarihçisi Jonatan Meir’e göre Laitman 1984’te Rusça bir Kabala kitabı yayımladı. 1991’de, öğretmeni Baruh Aşlag’ın ölümünden sonra Bnei Baruch grubunu kurdu. Daha sonra İbranice ve İngilizce yayınlar ve çok dilli sitelerle daha geniş bir kitleye ulaştı.',
+      'Historian of religion Jonatan Meir dates Laitman’s Russian-language Kabbalah book to 1984. Laitman founded Bnei Baruch in 1991 after the death of his teacher, Baruch Ashlag. Later, Hebrew and English publications and multilingual websites reached a wider audience.',
+      'לפי חוקר הדת יונתן מאיר, ב־1984 פרסם לייטמן ספר קבלה ברוסית. ב־1991, לאחר מות מורו ברוך אשלג, ייסד את קבוצת בני ברוך. בהמשך פנה לקהל רחב יותר באמצעות פרסומים בעברית ובאנגלית ואתרים רב־לשוניים.',
+      'Din tarixçisi Jonatan Meirin yazdığına görə, Laitman 1984-cü ildə rus dilində Kabbala kitabı nəşr etdi. 1991-ci ildə müəllimi Barux Aşlağın ölümündən sonra Bnei Baruch qrupunu yaratdı. Sonralar ivrit və ingilis dillərində nəşrlər və çoxdilli saytlar vasitəsilə daha geniş auditoriyaya çatdı.',
+    ],
+    genre:['Kurumun kendi tanımı: Baal HaSulam, Rabaş, Zohar ve ARI metinlerini temel alan çevrimiçi eğitim ağı. Akademik çalışmalar grubu ayrı bir çağdaş dini hareket olarak inceler.','Institutional self-description: an online educational network drawing on Baal HaSulam, Rabash, the Zohar, and the ARI. Academic scholarship studies the group as a distinct contemporary religious movement.','ההגדרה העצמית של הארגון: רשת לימוד מקוונת הנשענת על כתבי בעל הסולם, רב״ש, הזוהר והאר״י. מחקר אקדמי בוחן את הקבוצה כתנועה דתית עכשווית נפרדת.','Qurumun öz təsviri: Baal HaSulam, Rabaş, Zohar və ARI mətnlərinə əsaslanan onlayn təhsil şəbəkəsi. Akademik araşdırmalar qrupu ayrıca müasir dini hərəkat kimi öyrənir.'],
+    study:[
+      'Kurumun kendi anlatısı öğretiyi ve uygulamayı tanıtır. Meir’in 2015 makalesi hareketin Kabalayı “bilim” olarak nasıl sunduğunu ve öğretinin nasıl yayıldığını inceler.',
+      'The organization’s account introduces its teaching and practice. Meir’s 2015 article studies how the movement presented Kabbalah as “science” and spread its teaching.',
+      'תיאור הארגון מציג את הלימוד והתרגול שלו. מאמרו של מאיר מ־2015 בוחן כיצד התנועה הציגה את הקבלה כ״מדע״ והפיצה את תורתה.',
+      'Təşkilat öz təlimini və praktikasını təqdim edir. Meirin 2015-ci il məqaləsi hərəkatın Kabbalanı “elm” kimi necə təqdim etdiyini və öz təlimini necə yaydığını araşdırır.',
+    ],
+    limit:[
+      'Tarih çizgisi için Meir’in 2015 Rusça makalesinin 193. sayfasına bak. Dergi bu metni Meir’in 2007 İbranice çalışmasından bir seçki olarak yayımladı. Makalenin İngilizce özeti üniversite kaydında da okunabilir.',
+      'For the timeline, see page 193 of Meir’s 2015 Russian-language article. The journal published it as an excerpt from his 2007 study in Hebrew. The university record also provides the English abstract.',
+      'לציר הזמן, עיינו בעמ׳ 193 במאמרו של מאיר ברוסית מ־2015. כתב העת פרסם אותו כקטע מתוך מחקרו בעברית מ־2007. אפשר לקרוא את התקציר באנגלית גם ברשומה של האוניברסיטה.',
+      'Xronologiya üçün Meirin 2015-ci ildə rus dilində çap olunmuş məqaləsinin 193-cü səhifəsinə bax. Jurnal bu mətni onun 2007-ci ildə ivrit dilində nəşr edilmiş araşdırmasından bir parça kimi dərc edib. İngiliscə xülasəni universitetin qeydində də oxumaq olar.',
+    ],
+    sources:[
+      {title:'Bnei Baruch Kabbalah Academy: About',url:'https://kabbalah.academy/en/about/',kind:'self'},
+      {title:'Jonatan Meir · Michael Laitman and His Group “Bnei Baruch” (2015), pp. 192–223',url:'https://www.academia.edu/18676960',kind:'research'},
+      {title:'Ben-Gurion University · Michael Laitman and His Group “Bnei Baruch” (2015)',url:'https://cris.bgu.ac.il/en/publications/michael-laitman-and-his-group-bnei-baruch-2/',kind:'metadata'},
+    ]
+  }
+];
+
+export const feynmanCases = [
+  {
+    id:'laitman-source-context', lessonId:'laitman-bnei-baruch',
+    question:[
+      'Bir sergi metninde grubun bugünkü derslerini ve Laitman’ın 1984’teki kitabını anlatıyorsun. Hangi kaynakları kullanırsın?',
+      'You’re writing an exhibit label about the group’s courses today and Laitman’s 1984 book. Which sources do you use?',
+      'אתם כותבים תווית לתערוכה על שיעורי הקבוצה כיום ועל ספרו של לייטמן מ־1984. באילו מקורות תשתמשו?',
+      'Sərgi mətnində qrupun bugünkü dərslərindən və Laitmanın 1984-cü il kitabından bəhs edirsən. Hansı mənbələrdən istifadə edərsən?',
+    ],
+    choices:[
+      ['Akademinin güncel tanıtımını her iki bilgi için kullanırım.', 'I use the academy’s current About page for both claims.', 'אסתמך על עמוד האודות העדכני של האקדמיה לשתי הטענות.', 'Hər iki məlumat üçün akademiyanın indiki tanıtım səhifəsindən istifadə edərəm.'],
+      ['Bugünkü eğitim için akademinin tanıtımını, 1984 kitabı için Meir’in makalesini kullanırım.', 'I use the academy’s About page for its courses and Meir’s article for the 1984 book.', 'אשתמש בעמוד האודות של האקדמיה לתיאור השיעורים, ובמאמר של מאיר לספר מ־1984.', 'Bugünkü dərslər üçün akademiyanın tanıtımından, 1984-cü il kitabı üçün Meirin məqaləsindən istifadə edərəm.'],
+      ['Bugünkü dersleri 2015 makalesinden, 1984 kitabını üniversite kaydındaki İngilizce özetten anlatırım.', 'I use the 2015 article to describe courses today, and the English abstract in the university record for the 1984 book.', 'אתאר את השיעורים כיום לפי המאמר מ־2015, ואת הספר מ־1984 לפי התקציר באנגלית ברשומת האוניברסיטה.', 'Bugünkü dərsləri 2015-ci il məqaləsindən, 1984-cü il kitabını isə universitet qeydindəki ingiliscə xülasədən təsvir edərəm.'],
+    ], correct:1,
+    feedback:[
+      'Akademinin sayfası derslerini bugün nasıl tanıttığını gösterir. Meir’in 193. sayfası Laitman’ın daha erken Rusça yayını hakkında bilgi verir. Sergi metninde iki kaynağın da adını yaz.',
+      'The academy’s page shows how it describes its courses today. Page 193 of Meir’s article dates Laitman’s earlier Russian-language publication. Credit both sources on your label.',
+      'עמוד האקדמיה מראה איך היא מתארת את שיעוריה כיום. עמ׳ 193 במאמרו של מאיר מתארך את פרסומו המוקדם של לייטמן ברוסית. ציינו את שני המקורות בתווית.',
+      'Akademiyanın səhifəsi öz dərslərini bu gün necə təqdim etdiyini göstərir. Meirin məqaləsinin 193-cü səhifəsi Laitmanın rus dilindəki əvvəlki nəşrinin tarixini göstərir. Sərgi mətnində hər iki mənbənin adını yaz.',
+    ],
+    transfer:[
+      'Başka bir cemaat için hangi bilgiyi kendi sitesinde, hangi bilgiyi tarih araştırmasında arardın? İki örnek yaz.',
+      'For another community, which fact would you look up on its own site and which would you look for in historical research? Give two examples.',
+      'לגבי קהילה אחרת, איזו עובדה תחפשו באתר שלה ואיזו במחקר היסטורי? תנו שתי דוגמאות.',
+      'Başqa bir icma barədə hansı məlumatı onun öz saytında, hansını tarix araşdırmasında axtarardın? İki nümunə yaz.',
+    ]
+  },
+  {
+    id:'early-text-genre', lessonId:'mystical-texts-before-kabbalah',
+    question:['Sefer Yetsira’daki 10 sefirot ile sonraki Lurianic sefirot kavramlarını anlatırken en dikkatli açıklama hangisi?','Which is the most careful explanation when comparing Sefer Yetzirah’s ten sefirot with later Lurianic sefirot?','מהו ההסבר הזהיר ביותר בהשוואה בין עשר הספירות בספר יצירה לבין הספירות בקבלה הלוריאנית המאוחרת?','Sefer Yetsiradakı on sefirotu sonrakı Lurian sefirotları ilə müqayisə edərkən ən ehtiyatlı izah hansıdır?'],
+    choices:[
+      ['Aynı kelime kullanıldığına göre her iki metinde de tamamen aynı kavramdır.','Because the same word appears, it means exactly the same thing in both texts.','מכיוון שאותה מילה מופיעה, פירושה זהה לחלוטין בשני הטקסטים.','Eyni söz işlədildiyinə görə hər iki mətndə tam eyni məna daşıyır.'],
+      ['Sefer Yetsira erken bir harf-sayı kozmolojisi sunar; sonraki anlamlar tarih içinde gelişti ve terim benzerliği tek başına özdeşlik kanıtı değildir.','Sefer Yetzirah presents an early letter-and-number cosmology; later meanings developed historically, and shared terminology alone does not prove identity.','ספר יצירה מציג קוסמולוגיה מוקדמת של אותיות ומספרים; המשמעויות המאוחרות התפתחו היסטורית, ודמיון במונח לבדו אינו מוכיח זהות.','Sefer Yetsira erkən hərf-rəqəm kosmologiyası təqdim edir; sonrakı mənalar tarixən inkişaf edib və termin oxşarlığı eyniliyi sübut etmir.'],
+      ['Sefer Yetsira, 16. yüzyılda Luria tarafından yazılmıştır.','Sefer Yetzirah was written by Luria in the 16th century.','ספר יצירה נכתב בידי לוריא במאה ה־16.','Sefer Yetsiranı XVI əsrdə Luria yazıb.']
+    ], correct:1,
+    feedback:['Aynı terimler zaman içinde farklı sistemlerde yeniden kullanılır; erken metnin kendi bağlamını koru.','Terms can be reused in later systems; preserve the early text’s own context.','מונחים עשויים לשמש מחדש בשיטות מאוחרות; יש לשמור על ההקשר של הטקסט הקדום.','Terminlər sonrakı sistemlərdə yenidən işlənə bilər; erkən mətnin öz kontekstini qoru.'],
+    transfer:['Bir metindeki terimi başka bir döneme taşımadan önce metnin tarihini, türünü ve kendi tanımlarını kontrol et.','Before carrying a term from one text into another period, check the text’s date, genre, and own definitions.','לפני שמעבירים מונח מטקסט לתקופה אחרת, בודקים את תאריך הטקסט, סוגו והגדרותיו שלו.','Bir termini başqa dövrə daşımadan əvvəl mətnin tarixini, janrını və öz təriflərini yoxla.']
+  },
+  {
+    id:'zohar-attribution', lessonId:'zohar-tradition-and-manuscripts',
+    question:['Zohar’ın yazarlığı ve tarihi hakkında iki kaynağı nasıl yan yana açıklarsın?','How should you explain two sources on the Zohar’s authorship and date side by side?','כיצד יש להסביר זה לצד זה שני מקורות על מחבר הזוהר ותאריכו?','Zoharın müəllifliyi və tarixi barədə iki mənbəni yanaşı necə izah etmək lazımdır?'],
+    choices:[
+      ['Geleneksel atıf Shimon bar Yohay’ı işaret eder; akademik metin tarihi ise temel katmanların 13. yüzyıl Kastilya’sında ortaya çıkışını inceler. Bunlar farklı soru ve kanıt çerçeveleridir.','Traditional attribution points to Shimon bar Yohai; academic textual history studies the emergence of core layers in 13th-century Castile. These are different questions and evidence frameworks.','הייחוס המסורתי מצביע על שמעון בר יוחאי; חקר הטקסט האקדמי בוחן את הופעת השכבות המרכזיות בקסטיליה במאה ה־13. אלה שאלות ומסגרות ראייתיות שונות.','Ənənəvi atribusiya Şimon bar Yohayı göstərir; akademik mətn tarixi əsas qatların XIII əsr Kastiliyasında meydana gəlməsini araşdırır. Bunlar fərqli suallar və sübut çərçivələridir.'],
+      ['Bir kaynak doğruysa diğer kaynak yalan söylüyordur; bu konularda geleneksel görüşten söz edilmez.','If one source is correct, the other must be lying; traditional views should not be mentioned.','אם מקור אחד נכון, האחר משקר; אין להזכיר את הדעה המסורתית.','Mənbələrdən biri doğrudursa, digəri yalan deyir; ənənəvi baxışlardan danışmaq olmaz.'],
+      ['Zohar tartışmasız biçimde 2. yüzyıla ait eksiksiz bir kitaptır.','The Zohar is indisputably a complete book from the 2nd century.','הזוהר הוא ללא מחלוקת ספר שלם מן המאה ה־2.','Zohar şübhəsiz II əsrdən qalmış bütöv kitabdır.']
+    ], correct:0,
+    feedback:['Geleneksel atıf dini bir aktarım çerçevesidir; akademik tarihlendirme yazılı izleri ve metin katmanlarını inceler. İkisini “kimin inancı” ve “hangi kanıt” diye etiketle.','Traditional attribution is a religious transmission framework; academic dating examines written traces and textual layers. Label both by whose account and what evidence they use.','הייחוס המסורתי הוא מסגרת של מסירה דתית; התיארוך האקדמי בוחן עקבות כתובים ושכבות טקסט. יש לתייג כל מקור לפי נקודת המבט והראיות שלו.','Ənənəvi atribusiya dini ötürmə çərçivəsidir; akademik tarixləndirmə yazılı izləri və mətn qatlarını araşdırır. Hər ikisini baxış və sübut növünə görə işarələ.'],
+    transfer:['Her iki açıklamayı kaynağına atfet; birini ötekini silmek için kullanma.','Attribute each explanation to its source; do not use one to erase the other.','יש לייחס כל הסבר למקורו; אין להשתמש באחד כדי למחוק את האחר.','Hər izahı öz mənbəyinə aid et; birini digərini silmək üçün işlətmə.']
+  },
+  {
+    id:'luria-vital', lessonId:'luria-vital-transmission',
+    question:['“Etz Hayim Luria’nın kitabıdır” cümlesini tarihsel açıdan nasıl düzeltirsin?','How would you revise the sentence “Etz Hayim is Luria’s book” historically?','כיצד תתקן מבחינה היסטורית את המשפט ״עץ חיים הוא ספרו של לוריא״?','“Etz Hayim Luriyanın kitabıdır” cümləsini tarixi baxımdan necə düzəldərsən?'],
+    choices:[
+      ['Luria’nın görüşleri, başlıca olarak öğrencisi Hayim Vital’in kayıtları ve sonraki düzenlemeler yoluyla aktarıldı; Etz Hayim bu aktarım tarihinin parçasıdır.','Luria’s teachings were transmitted chiefly through his student Hayyim Vital’s records and later arrangements; Etz Hayim belongs to that transmission history.','לימודי לוריא נמסרו בעיקר דרך רשימות תלמידו חיים ויטאל ועריכות מאוחרות; עץ חיים הוא חלק מתולדות המסירה הללו.','Luriyanın təlimləri əsasən şagirdi Hayim Vitalin qeydləri və sonrakı tərtiblərlə ötürülüb; Etz Hayim bu ötürmə tarixinin bir hissəsidir.'],
+      ['Vital, Luria’nın çağdaşı olmadığı için eserin tarihsel değeri yoktur.','Because Vital was not Luria’s contemporary, the text has no historical value.','מכיוון שוויטאל לא היה בן זמנו של לוריא, אין לטקסט ערך היסטורי.','Vital Luriyanın müasiri olmadığı üçün mətnin tarixi dəyəri yoxdur.'],
+      ['Luria bütün öğretilerini basılmış tek bir kitap halinde yayımladı.','Luria published all of his teachings in one printed book.','לוריא פרסם את כל לימודיו בספר מודפס אחד.','Luria bütün təlimlərini bir çap kitabında nəşr edib.']
+    ], correct:0,
+    feedback:['Öğretinin kaynağı, öğrencinin kaydı ve sonraki derleme/elyazması tarihini ayır. Aracılı aktarım değersizlik değil, metin tarihinin bir parçasıdır.','Separate the teacher’s teaching, the student’s record, and later compilation/manuscript history. Mediated transmission is not invalid; it is part of textual history.','יש להבחין בין תורת הרב, רישומי התלמיד והיסטוריית העריכה וכתבי היד המאוחרים. מסירה מתווכת אינה חסרת ערך; היא חלק מתולדות הטקסט.','Ustadın təlimini, şagirdin qeydini və sonrakı tərtib/əlyazma tarixini ayır. Vasitəli ötürmə dəyərsizlik deyil, mətn tarixinin bir hissəsidir.'],
+    transfer:['Bir dini metin başka bir kişinin öğretisini aktarıyorsa, yazar, kaynak kişi, derleyici ve kopyacı rollerini ayrı kaydet.','When a religious text transmits another person’s teaching, record author, source teacher, compiler, and copyist separately.','כאשר טקסט דתי מוסר את תורתו של אדם אחר, יש לרשום בנפרד מחבר, רב מקור, עורך ומעתיק.','Dini mətn başqa şəxsin təlimini ötürürsə, müəllif, mənbə müəllim, tərtibçi və köçürəni ayrı qeyd et.']
+  },
+  {
+    id:'tzimtzum-and-map', lessonId:'tzimtzum-partzufim-abya',
+    question:['Tsimtsum, ABiYA ve partzufim kavramlarını birlikte açıklayan en doğru özet hangisi?','Which summary best explains tzimtzum, ABiYA, and partzufim together?','איזה סיכום מסביר בצורה הטובה ביותר צמצום, אבי״ע ופרצופים יחד?','Tsimtsum, ABiYA və partzufim anlayışlarını birlikdə ən düzgün hansı xülasə izah edir?'],
+    choices:[
+      ['ABiYA dört dünyayı adlandırır; partzufim sefirot konfigürasyonlarıdır. Tsimtsum’un nasıl anlaşılacağı sonraki geleneklerde tartışılır; örneğin Tanya’daki harfi olmayan yorum.','ABiYA names four worlds; partzufim are configurations of sefirot. How tzimtzum is understood is discussed in later traditions, including the non-literal reading in Tanya.','אבי״ע מציין ארבעה עולמות; פרצופים הם תצורות של ספירות. מסורות מאוחרות דנות באופן הבנת הצמצום, ובהן הפרשנות הלא־מילולית בתניא.','ABiYA dörd dünyanı adlandırır; partzufim sefirot konfiqurasiyalarıdır. Tsimtsumun necə anlaşılması sonrakı ənənələrdə, o cümlədən Tanyadakı qeyri-hərfi yozumda müzakirə olunur.'],
+      ['Üç kelime de aynı dört göksel yeri gösterir ve her Kabalist bunları aynı şekilde öğretir.','All three terms mean the same four heavenly places and every Kabbalist teaches them identically.','שלושת המונחים מציינים אותם ארבעה מקומות שמימיים וכל המקובלים מלמדים אותם באותו אופן.','Hər üç termin eyni dörd səmavi yeri bildirir və bütün Kabbalistlər bunları eyni öyrədir.'],
+      ['Tzimtsum fiziksel bir hareketi kanıtlar; diğer açıklamalar yanlıştır.','Tzimtzum proves a physical movement; all other explanations are wrong.','הצמצום מוכיח תנועה פיזית; כל ההסברים האחרים שגויים.','Tsimtsum fiziki hərəkəti sübut edir; başqa izahların hamısı yanlışdır.']
+    ], correct:0,
+    feedback:['Dört dünya, konfigürasyonlar ve yaratılış anlatısı ilişkili ama farklı kavramlardır. Tanya 7’nin yorumu belirli bir geleneksel metin içindeki açık örnektir; evrensel uzlaşı değildir.','The four worlds, configurations, and creation narrative are related but distinct concepts. Tanya 7 is a clear example within one interpretive tradition, not a universal consensus.','ארבעת העולמות, התצורות וסיפור הבריאה קשורים אך אינם מושגים זהים. תניא ז׳ הוא דוגמה ברורה במסורת פרשנית אחת, ולא הסכמה אוניברסלית.','Dörd dünya, konfiqurasiyalar və yaradılış rəvayəti əlaqəlidir, lakin ayrı anlayışlardır. Tanya 7 konkret şərh ənənəsində nümunədir, ümumi razılıq deyil.'],
+    transfer:['Bir kavram haritasında her terimi ayrı düğüm yap; aralarındaki bağı okla göster ve hangi kaynağın ilişkiyi kurduğunu yaz.','In a concept map, give each term its own node; show relations with arrows and note which source makes each connection.','במפת מושגים נותנים לכל מונח צומת נפרד; מציגים קשרים בחצים ומציינים איזה מקור יוצר כל קשר.','Anlayış xəritəsində hər terminə ayrıca düyün ver; əlaqələri oxlarla göstər və bu əlaqəni hansı mənbənin qurduğunu qeyd et.']
+  },
+  {
+    id:'rabash-group-application', lessonId:'rabash-purpose-of-society',
+    question:['Bir çalışma grubu, Rabaş’ın 1984 “Toplumun Amacı” yazısından ne tür bir uygulama çıkarabilir?','What kind of application can a study group draw from Rabash’s 1984 “Purpose of Society”?','איזו יישום יכולה קבוצת לימוד להסיק ממאמרו של רב״ש מ־1984 ״מטרת החברה״?','Öyrənmə qrupu Rabaşın 1984-cü il “Cəmiyyətin məqsədi” məqaləsindən hansı tətbiqi çıxara bilər?'],
+    choices:[
+      ['Metni bir normatif rehber olarak okuyup, grup üyelerinin birbirine destek olmasını sağlayan gönüllü bir çalışma hedefi belirlemek; bunu bütün Yahudiler için evrensel davranış kuralı saymamak.','Read it as a normative guide and choose a voluntary group goal for mutual support; do not treat it as a universal behavioral rule for all Jews.','לקרוא אותו כמדריך נורמטיבי ולקבוע יעד התנדבותי לתמיכה הדדית; לא להתייחס אליו ככלל התנהגות אוניברסלי לכל היהודים.','Mətni normativ bələdçi kimi oxuyub qarşılıqlı dəstək üçün könüllü qrup məqsədi seçmək; bunu bütün yəhudilər üçün universal davranış qaydası saymamaq.'],
+      ['Makaleyi, her Yahudi cemaatının aynı şekilde işlediğini kanıtlayan istatistik araştırma saymak.','Treat the article as statistical evidence that every Jewish community functions in the same way.','להתייחס למאמר כאל מחקר סטטיסטי המוכיח שכל קהילה יהודית פועלת באותה דרך.','Məqaləni hər yəhudi icmasının eyni işlədiyini sübut edən statistik araşdırma saymaq.'],
+      ['Rabaş’ın 1984 yazısını doğrudan çağdaş Laitman ders dökümüyle değiştirmek.','Replace Rabash’s 1984 writing with a contemporary Laitman lesson transcript.','להחליף את כתיבתו של רב״ש מ־1984 בתמליל שיעור עכשווי של לייטמן.','Rabaşın 1984-cü il yazısını birbaşa müasir Laitman dərsinin stenoqramı ilə əvəz etmək.']
+    ], correct:0,
+    feedback:['Rabaş’ın metni grubun kendi pratiğine dair normatif bir amaç sunar. Çağdaş Bnei Baruch uygulaması ve akademik çalışmalar ayrı kaynak katmanlarıdır.','Rabash’s text gives a normative purpose for a group’s own practice. Contemporary Bnei Baruch practice and academic studies are separate source layers.','הטקסט של רב״ש מציע מטרה נורמטיבית לתרגול הקבוצה. התרגול העכשווי של בני ברוך והמחקר האקדמי הם שכבות מקור נפרדות.','Rabaşın mətni qrupun öz praktikası üçün normativ məqsəd verir. Müasir Bnei Baruch praktikası və akademik araşdırmalar ayrı mənbə qatlarıdır.'],
+    transfer:['Bir tarihsel veya dini metinden güncel uygulama tasarlarken önce kaynağın kime hitap ettiğini, sonra kendi grubunun gönüllü hedefini belirt.','When adapting a historical or religious text into current practice, first state whom the source addresses, then name the voluntary goal for your own group.','כאשר מתאימים טקסט היסטורי או דתי לתרגול כיום, מציינים תחילה למי פונה המקור ואז מגדירים יעד התנדבותי לקבוצה.','Tarixi və ya dini mətni müasir praktikaya uyğunlaşdırarkən əvvəlcə mənbənin kimə müraciət etdiyini, sonra öz qrupunuzun könüllü məqsədini göstər.']
+  }
+];
