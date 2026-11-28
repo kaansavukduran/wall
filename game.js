@@ -229,14 +229,20 @@ export async function start(initialLanguage) {
   const unlocked = index => index >= 0 && (index === 0 || index === firstIncomplete() || completed.has(episodeId(index)));
   const locale = () => languages.indexOf(language);
 
-  function save(placement = world.placement()) {
-    store(progressKey,encodeCampaign(episodeId(active),completed,placement));
+  function placementUnchanged(placement) {
+    return placement[0] === lastPlacement[0] && placement[1] === lastPlacement[1];
+  }
+
+  function save(placement = world.placement(), latest) {
+    const id = episodeId(active);
+    const sharedPlacement = latest?.active === id && placementUnchanged(placement) ? latest.placement : undefined;
+    store(progressKey,encodeCampaign(id,completed,sharedPlacement ?? placement));
     lastPlacement = placement;
   }
 
   function saveMovement() {
     const placement = world.placement();
-    if (placement[0] === lastPlacement[0] && placement[1] === lastPlacement[1]) return;
+    if (placementUnchanged(placement)) return;
     synchronizeProgress();
     save(placement);
   }
@@ -364,7 +370,7 @@ export async function start(initialLanguage) {
       result.textContent = ui[language][10];
       return;
     }
-    synchronizeProgress();
+    const latest = synchronizeProgress();
     const id = episodeId(active);
     if (!completed.has(id)) {
       completed.add(id);
@@ -375,7 +381,7 @@ export async function start(initialLanguage) {
     next.textContent = firstIncomplete() < 0 ? ui[language][13] : ui[language][3];
     offerTransfer(true);
     renderTour();
-    save();
+    save(world.placement(),latest);
   }
 
   function renderLanguage() {
@@ -469,9 +475,10 @@ export async function start(initialLanguage) {
     const latest = synchronizeProgress();
     if (!episodes[index] || !unlocked(index)) return;
     const entering = campaign.hidden;
+    const moved = !placementUnchanged(world.placement());
     stop();
+    if (!moved && latest.active === episodeId(index) && latest.placement) world.restorePlacement(latest.placement);
     if (entering) {
-      if (latest.active === episodeId(index) && latest.placement) world.restorePlacement(latest.placement);
       arrival.hidden = true;
       campaign.hidden = false;
       for (const link of campaignLinks) link.hidden = false;

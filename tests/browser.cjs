@@ -1179,6 +1179,8 @@ async function main() {
     await source.tap('[data-transfer-choice="' + transferLessons[0].correct + '"]');
     await source.fill('#transfer-draft','בדיקת שמירה');
     await source.click('#next');
+    await source.locator('[data-move="-1"]').press('Enter');
+    const exportedFrame = await source.locator('#world').evaluate(canvas => canvas.toDataURL());
     await source.tap('#settings-button');
     await source.tap('#save-transfer summary');
     await source.tap('#save-export');
@@ -1202,6 +1204,7 @@ async function main() {
     await restore.tap('#save-confirm');
     await restore.locator('#restore-notice').waitFor();
     assert.equal(await restore.locator('#chapter').textContent(),'2');
+    assert.equal(await restore.locator('#world').evaluate(canvas => canvas.toDataURL()),exportedFrame);
     assert.equal(await restore.locator('html').getAttribute('dir'),'rtl');
     await restore.click('#episodes-button');
     await restore.locator('#chapters button').nth(1).click();
@@ -1280,6 +1283,20 @@ async function main() {
     });
     await olderTab.goto(target);
     await enterCampaign(olderTab);
+    const savedCampaign = page => page.evaluate(() => JSON.parse(localStorage.getItem('wall.progress.v1')));
+    await firstTab.bringToFront();
+    await firstTab.locator('[data-move="1"]').press('Enter');
+    const placement = (await savedCampaign(firstTab)).placement;
+    assert.deepEqual(placement,[86,1]);
+    await olderTab.click('#episodes-button');
+    await olderTab.locator('#chapters ol li').nth(1).getByRole('button').click();
+    assert.deepEqual((await savedCampaign(olderTab)).placement,placement);
+    assert.equal(await olderTab.locator('#world').evaluate(canvas => canvas.toDataURL()),
+      await firstTab.locator('#world').evaluate(canvas => canvas.toDataURL()));
+    await firstTab.bringToFront();
+    await firstTab.locator('[data-move="1"]').press('Enter');
+    await olderTab.click('[data-choice="' + chapters[0].correct + '"]');
+    assert.deepEqual((await savedCampaign(olderTab)).placement,[92,1]);
     await olderTab.click('#episodes-button');
     const waitingTab = await shared.newPage();
     await waitingTab.goto(target);
@@ -1291,7 +1308,6 @@ async function main() {
       .getByText('You last visited “' + chapters[1].text[1][0] + '”.',{exact:true}).waitFor();
     await olderTab.locator('#chapters ol li').nth(1).getByRole('button').click();
     assert.equal(await olderTab.locator('#next').isVisible(),true);
-    const savedCampaign = page => page.evaluate(() => JSON.parse(localStorage.getItem('wall.progress.v1')));
     assert.deepEqual((await savedCampaign(olderTab)).completed,['plaza','1']);
 
     await olderTab.evaluate(() => { window.blockSaveWrites = true; });
