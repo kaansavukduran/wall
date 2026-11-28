@@ -1,8 +1,8 @@
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, relative } from 'node:path';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ashlagCopy, ashlagPhases, ashlagScreen } from '../ashlag-lessons.js';
@@ -629,12 +629,13 @@ test('each exported HTML document references its own release files', () => {
   const directory = mkdtempSync(join(tmpdir(), 'wall-release-check-'));
   try {
     const runtimes = [];
+    const engineRevisions = [];
     for (const digit of ['a','b']) {
       const output = join(directory, digit);
       const commit = digit.repeat(40);
       execFileSync(process.execPath, ['scripts/build.mjs', output], {
         cwd:new URL('..', import.meta.url),
-        env:{...process.env,GITHUB_SHA:commit},
+        env:{...process.env,WALL_BUILD_COMMIT:commit},
       });
       const html = readFileSync(join(output, 'index.html'), 'utf8');
       const manifest = JSON.parse(readFileSync(join(output, 'build.json'), 'utf8'));
@@ -643,12 +644,22 @@ test('each exported HTML document references its own release files', () => {
       assert.equal(manifest.saveSchema,saveSchemaVersion);
       assert.match(manifest.contentRevision,/^[0-9a-f]{64}$/);
       assert.equal(manifest.engine.name,'WALL Canvas 2D');
-      assert.match(manifest.engine.revision,/^[0-9a-f]{64}$/);
       assert.equal(manifest.planRevision,createHash('sha256').update(readFileSync('docs/PLAN.md')).digest('hex'));
       assert.equal(manifest.sourceCatalogueRevision,
         createHash('sha256').update(readFileSync('docs/SOURCES.tsv')).digest('hex'));
       const runtime = manifest.runtime;
       runtimes.push(runtime);
+      engineRevisions.push(manifest.engine.revision);
+      const root = join(output, runtime);
+      const runtimeFiles = readdirSync(root, {recursive:true,withFileTypes:true})
+        .filter(file => file.isFile())
+        .map(file => relative(root, join(file.parentPath,file.name)).replaceAll('\\', '/'))
+        .filter(name => name !== 'docs/SOURCES.tsv');
+      const inputs = ['index.html', ...runtimeFiles].sort().map(name => {
+        const source = name === 'index.html' ? name : join(root,name);
+        return [name,createHash('sha256').update(readFileSync(source)).digest('hex')];
+      });
+      assert.equal(manifest.engine.revision,createHash('sha256').update(JSON.stringify(inputs)).digest('hex'));
       for (const file of ['start.js','style.css','assets/fragaria-strawberry.png','assets/matpc-14762.jpg']) {
         assert.ok(html.includes('"./' + runtime + '/' + file + '"'));
         assert.ok(readFileSync(join(output, runtime, file)).length > 0);
@@ -656,6 +667,7 @@ test('each exported HTML document references its own release files', () => {
       assert.ok(readFileSync(join(output, runtime, 'docs/SOURCES.tsv')).length > 0);
     }
     assert.notEqual(runtimes[0], runtimes[1]);
+    assert.equal(engineRevisions[0], engineRevisions[1]);
   } finally {
     rmSync(directory, {recursive:true,force:true});
   }

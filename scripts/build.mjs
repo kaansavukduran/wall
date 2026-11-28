@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
-import { cp, mkdir, readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { cp, mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { posix, resolve } from 'node:path';
 import { languages } from '../content.js';
 import { saveSchemaVersion } from '../save-data.js';
 
@@ -35,7 +35,6 @@ const files = [
 const catalogue = 'docs/SOURCES.tsv';
 const contentFiles = files.filter(name => name.endsWith('-lessons.js') || name.startsWith('chapters-'));
 contentFiles.push('content.js','library.js','scenes.js','sequences.js','hebrew-labs.js','tour-evidence.js');
-const engineFiles = ['start.js','game.js','world.js','controller.js','object-sprite.js','style.css','index.html'];
 
 async function fileRevision(file) {
   return createHash('sha256').update(await readFile(file)).digest('hex');
@@ -48,8 +47,13 @@ async function groupRevision(files) {
   return createHash('sha256').update(JSON.stringify(ordered)).digest('hex');
 }
 
+const artwork = (await readdir('assets', {recursive:true, withFileTypes:true}))
+  .filter(asset => asset.isFile())
+  .map(asset => posix.join(asset.parentPath.replaceAll('\\', '/'), asset.name));
+const runtimeInputs = ['index.html', ...files.filter(file => file !== 'assets'), ...artwork];
 const [planRevision,contentRevision,sourceCatalogueRevision,engineRevision] = await Promise.all([
-  fileRevision('docs/PLAN.md'),groupRevision(contentFiles),fileRevision(catalogue),groupRevision(engineFiles),
+  fileRevision('docs/PLAN.md'),groupRevision(contentFiles),fileRevision(catalogue),
+  groupRevision(runtimeInputs),
 ]);
 const manifest = {
   version, commit, runtime, planRevision, contentRevision, sourceCatalogueRevision,
