@@ -248,6 +248,26 @@ async function main() {
             previous = current;
           }
         }
+        if (episode.id === 7) {
+          const frame = () => page.locator('#world').evaluate(canvas => canvas.toDataURL());
+          const market = page.locator('[data-layer="market-measure"]');
+          await market.press('Enter');
+          const initial = await frame();
+          const step = id => page.locator('[data-sequence="' + id + '"]');
+          await step(0).press('Enter');
+          assert.equal(await frame(),initial);
+          assert.equal(await page.locator('#sequence li').count(),0);
+          const frames = new Set([initial]);
+          for (const id of [1,2,0]) {
+            await step(id).press('Enter');
+            frames.add(await frame());
+          }
+          assert.equal(frames.size,4);
+          assert.equal(await page.locator('#sequence li').count(),3);
+          assert.ok(await page.locator('#sequence-reset').evaluate(button => document.activeElement === button));
+          await page.locator('#sequence-reset').press('Enter');
+          assert.equal(await frame(),initial);
+        }
         if (episode.id === 4) {
           for (const card of [2,0,1]) await page.click('[data-sequence="' + card + '"]');
           const dates = await page.locator('#sequence li').allTextContents();
