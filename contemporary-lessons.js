@@ -19,6 +19,7 @@ export const contemporaryLessons = {
         'Məhkəmə İsrailə Konvensiyada göstərilən əməllərin qarşısını almaq üçün əlindən gələn bütün tədbirləri görməyi və təcili əsas xidmətlərlə humanitar yardımın göstərilməsinə imkan yaratmağı əmr etdi. Qərar iş davam edərkən hüquqları qoruyur və işin mahiyyəti üzrə hökmü açıq saxlayır.',
       ],
       source:{title:['UAD · 26 Ocak kararı, §86','ICJ · 26 January order, §86','בית הדין · צו 26 בינואר, סעיף 86','Beynəlxalq Ədalət Məhkəməsi · 26 yanvar qərarı, §86'],url:'https://lagen.nu/icj/192-20240126-ORD-01-00#P86'},
+      relatedSource:{title:['UAD’nin özgün dava dosyası','Official ICJ case record','התיק הרשמי של בית הדין','Məhkəmənin rəsmi iş qeydi'],url:'https://www.icj-cij.org/case/192'},
     },
     {
       id:'commission-findings-2024',
