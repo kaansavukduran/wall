@@ -83,10 +83,17 @@ export const displacementRecords = [
     steps:[
       ['9–13 Temmuz. PalQuest, harekâtı ve Lydda sakinlerinin çıkarılmasını tarihlendirir. Kayıt, 12 Temmuz’da Yitshak Rabin’in imzaladığı emri aktarır.','9–13 July. PalQuest dates the fighting and removal of Lydda’s residents. It describes the order signed by Yitzhak Rabin on 12 July.','9–13 ביולי. PalQuest מתארך את הלחימה ואת גירוש תושבי לוד. הרשומה מתארת את הפקודה שעליה חתם יצחק רבין ב־12 ביולי.','9–13 iyul. PalQuest döyüşü və Lidda sakinlərinin çıxarılmasını tarixləndirir. Qeyd İshaq Rabinin 12 iyulda imzaladığı əmri təsvir edir.'],
       ['Tarihçi Benny Morris, aynı harekâtta Lydda ve Ramle’deki çıkarılmaları birlikte inceler. Olayı araştırırken askerî emir ile uygulamadaki eylemleri ayrı kaydet.','Historian Benny Morris examines the expulsions from Lydda and Ramle within the same operation. Record the military order and the actions that carried it out separately.','ההיסטוריון בני מוריס בוחן יחד את הגירושים מלוד ומרמלה במבצע. בתיעוד האירוע, הפרידו בין הפקודה הצבאית לפעולות שביצעו אותה.','Tarixçi Benni Morris eyni əməliyyatda Lidda və Rəmlədən zorla çıxarılmaları birlikdə araşdırır. Hadisəni qeydə alarkən hərbi əmri və onun icra olunduğu hərəkətləri ayır.'],
+      [
+        'Lydda doğumlu ressam İsmail Şemmut, 1948’deki çıkarılmayı 11 Ekim 2003’te kaydedilen Arapça görüşmede anlatıyor. Beyrut Amerikan Üniversitesi arşivinde 00:52:40 ve 01:12:35’te çıkarılmaya ilişkin bölümler var. Askerî emir kararın, görüşme bir sakinin deneyiminin kaydı.',
+        'The artist Ismail Shammout, born in Lydda, recalls the 1948 expulsion in an Arabic interview recorded on 11 October 2003. The American University of Beirut archive marks two sections on that experience at 00:52:40 and 01:12:35. The military order records a decision. The interview records a resident’s experience.',
+        'הצייר אסמאעיל שמוט, יליד לוד, מספר על גירוש 1948 בריאיון בערבית שהוקלט ב־11 באוקטובר 2003. הארכיון של האוניברסיטה האמריקאית בביירות מסמן שני קטעים בנושא ב־00:52:40 וב־01:12:35. הפקודה הצבאית מתעדת החלטה. הריאיון מתעד את החוויה של אחד התושבים.',
+        'Liddada doğulan rəssam İsmayıl Şəmmut 1948-ci ildə zorla çıxarılmanı 11 oktyabr 2003-cü ildə qeydə alınmış ərəb dilli müsahibədə xatırlayır. Beyrut Amerika Universitetinin arxivində bu barədə iki hissə 00:52:40 və 01:12:35-də göstərilir. Hərbi əmr qərarı, müsahibə isə bir sakinin yaşadıqlarını sənədləşdirir.',
+      ],
     ],
     sources:[
       {title:'PalQuest · Lydda, 9–13 July 1948',url:'https://www.palquest.org/en/highlight/24073/lydda-9-13-july-1948'},
       {title:'Middle East Journal · Benny Morris, Operation Dani and the Palestinian Exodus',url:'https://www.jstor.org/stable/4327250'},
+      {title:'AUB / Palestinian Oral History Archive · Ismāʻīl Shammūṭ',url:'https://libraries.aub.edu.lb/poha/Record/4522'},
     ],
     prompt:['Lydda dosyasında doğrudan zorla çıkarılmayı hangi kanıt destekler?','What evidence supports direct expulsion in the Lydda case?','איזו ראיה תומכת בגירוש ישיר במקרה של לוד?','Lidda hadisəsində birbaşa zorla çıxarılmanı hansı dəlil dəstəkləyir?'],
     options:[
