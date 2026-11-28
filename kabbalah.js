@@ -7,6 +7,7 @@ const exercises = new Map([...feynmanCases, ...comparisonCases].map(sample => [s
 const copy = {
   tr: {
     choose:'Okuma durağı', sources:'Kaynaklar ve bağlam', apply:'Kendi sözlerinle açıkla',
+    commentaries:'Aynı pasaja üç yorum',
     groups:['Tarih ve temel kavramlar','İleri karşılaştırmalar'],
     retry:'Bu örnek için kaynak ve bağlamı tekrar incele.',
     local:'Taslak bu tarayıcıda saklanır.',
@@ -16,6 +17,7 @@ const copy = {
   },
   en: {
     choose:'Reading stop', sources:'Sources and context', apply:'Explain it in your own words',
+    commentaries:'Three commentaries on the same passage',
     groups:['History and foundations','Advanced comparisons'],
     retry:'Read the source and context again for this example.',
     local:'The draft stays in this browser.',
@@ -25,6 +27,7 @@ const copy = {
   },
   he: {
     choose:'תחנת קריאה', sources:'מקורות והקשר', apply:'הסבירו במילים שלכם',
+    commentaries:'שלושה פירושים לאותו קטע',
     groups:['היסטוריה ומושגי יסוד','השוואות למתקדמים'],
     retry:'קראו שוב את המקור ואת ההקשר לדוגמה הזאת.',
     local:'הטיוטה נשמרת בדפדפן הזה.',
@@ -34,6 +37,7 @@ const copy = {
   },
   az: {
     choose:'Oxu dayanacağı', sources:'Mənbələr və kontekst', apply:'Öz sözlərinlə izah et',
+    commentaries:'Eyni parçaya üç şərh',
     groups:['Tarix və əsas anlayışlar','İrəli səviyyə müqayisələri'],
     retry:'Bu nümunə üçün mənbəni və konteksti yenidən oxu.',
     local:'Qaralama bu brauzerdə saxlanılır.',
@@ -43,11 +47,22 @@ const copy = {
   },
 };
 
+function sourceLink(title, url) {
+  const link = document.createElement('a');
+  link.textContent = title;
+  link.href = url;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.dir = 'auto';
+  return link;
+}
+
 export function mountKabbalah(panel, language, locale, memory, view) {
   const fragment = document.getElementById('kabbalah-template').content.cloneNode(true);
   const select = fragment.querySelector('#kabbalah-lesson');
-  const [heading, period, genre, study, sourcePanel] = fragment.querySelector('.kabbalah-reading').children;
+  const [heading, period, genre, study, excerpt, sourcePanel, commentaryPanel] = fragment.querySelector('.kabbalah-reading').children;
   const [sourceLabel, limit, links] = sourcePanel.children;
+  const [commentaryLabel, commentaryCards] = commentaryPanel.children;
   const exercise = fragment.querySelector('.kabbalah-exercise');
   const [exerciseLabel, question, choices, feedback, transfer] = exercise.children;
   const [draftLabel, draft, help] = transfer.children;
@@ -94,25 +109,36 @@ export function mountKabbalah(panel, language, locale, memory, view) {
     period.textContent = lesson.period[locale];
     genre.textContent = lesson.genre[locale];
     study.textContent = lesson.study[locale];
+    excerpt.hidden = !lesson.excerpt;
+    excerpt.firstElementChild.textContent = lesson.excerpt ?? '';
     limit.textContent = lesson.limit[locale];
     links.replaceChildren(...lesson.sources.map(source => {
       const item = document.createElement('li');
-      const link = document.createElement('a');
-      link.textContent = source.title;
-      link.href = source.url;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.dir = 'auto';
       const kind = document.createElement('small');
       kind.textContent = labels.kinds[source.kind];
-      item.append(link, kind);
+      item.append(sourceLink(source.title, source.url), kind);
       return item;
+    }));
+    const commentaries = lesson.commentaries ?? [];
+    commentaryPanel.hidden = commentaries.length === 0;
+    commentaryCards.replaceChildren(...commentaries.map(commentary => {
+      const card = document.createElement('details');
+      const speaker = document.createElement('summary');
+      const date = document.createElement('p');
+      const reading = document.createElement('p');
+      speaker.textContent = commentary.title[locale];
+      date.className = 'kabbalah-period';
+      date.textContent = commentary.period[locale];
+      reading.textContent = commentary.study[locale];
+      card.append(speaker, date, reading, sourceLink(commentary.reference, commentary.url));
+      return card;
     }));
     showCase(exercises.get(lesson.id), select.selectedIndex + 1);
   }
 
   fragment.querySelector('[for="kabbalah-lesson"]').textContent = labels.choose;
   sourceLabel.textContent = labels.sources;
+  commentaryLabel.textContent = labels.commentaries;
   exerciseLabel.textContent = labels.apply;
   help.textContent = labels.local;
   for (const [index, group] of [kabbalahLessons,advancedReadings].entries()) {

@@ -189,6 +189,10 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .kabbalah-period,#kabbalah-note-help{color:var(--muted)}
 .kabbalah-sources ul{padding-inline-start:1.4rem}
 .kabbalah-sources small{display:block;color:var(--muted)}
+.kabbalah-commentaries{overflow-wrap:anywhere}
+.kabbalah-commentaries h4{margin-block:1rem .25rem}
+.kabbalah-commentaries details{border-block-start:1px solid var(--edge)}
+.kabbalah-commentaries details[open]{padding-block-end:.6rem}
 .kabbalah-choices{display:grid;gap:.35rem}
 .kabbalah-choices button{text-align:start;overflow-wrap:anywhere}
 .kabbalah-choices button[aria-pressed=true]{background:var(--selected-bg);border-color:var(--accent)}

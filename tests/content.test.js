@@ -180,7 +180,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 410);
+  assert.equal(entries.length, 415);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -418,8 +418,8 @@ test('Kabbalah source stops and explanation cases have matched references and fo
   const urls = new Set(parseCatalogue(readFileSync('docs/SOURCES.tsv', 'utf8')).map(item => item.url));
   assert.equal(kabbalahLessons.length, 9);
   assert.equal(feynmanCases.length, 6);
-  assert.equal(advancedReadings.length, 11);
-  assert.equal(comparisonCases.length, 8);
+  assert.equal(advancedReadings.length, 12);
+  assert.equal(comparisonCases.length, 9);
   const readings = [...kabbalahLessons,...advancedReadings];
   const cases = [...feynmanCases,...comparisonCases];
   const ids = new Set(readings.map(lesson => lesson.id));
@@ -447,6 +447,18 @@ test('Kabbalah source stops and explanation cases have matched references and fo
   assert.deepEqual(community.sources.map(source => source.kind), ['self','research','metadata']);
   assert.equal(entries.find(entry => entry.id === 'B07A').url, community.sources[1].url);
   assert.ok(community.period.every(value => /1984.*1991/.test(value)));
+  const rose = advancedReadings.find(lesson => lesson.id === 'zohar-rose-commentaries');
+  assert.deepEqual(rose.sources.slice(0, 2).map(source => source.url),
+    ['ZOH02','ZOH03'].map(id => entries.find(entry => entry.id === id).url));
+  assert.deepEqual(rose.commentaries.map(commentary => commentary.url),
+    ['ZOH04','ZOH05','ZOH06'].map(id => entries.find(entry => entry.id === id).url));
+  for (const {title, period, study} of rose.commentaries) {
+    for (const values of [title, period, study]) {
+      assert.equal(values.length, languages.length);
+      assert.ok(values.every(value => value.trim()));
+      assert.match(values[2], /\p{Script=Hebrew}/u);
+    }
+  }
 });
 
 test('Kotel visit observations and scenarios match their four-language sources', () => {

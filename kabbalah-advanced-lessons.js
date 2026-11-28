@@ -1,4 +1,88 @@
+const roseCommentaries = [
+  {
+    title:['Hayim Vital · Or ha-Hama','Hayyim Vital · Ohr HaChammah','חיים ויטאל · אור החמה','Hayim Vital · Or ha-Hama'],
+    period:[
+      '16–17. yüzyıl · Avraham Azulay’ın 17. yüzyıldaki derlemesinde',
+      'Sixteenth–seventeenth centuries · preserved in Abraham Azulai’s seventeenth-century anthology',
+      'המאות ה־16 וה־17 · נשמר בקובץ שערך אברהם אזולאי במאה ה־17',
+      'XVI–XVII əsrlər · Avraham Azulayın XVII əsrdə tərtib etdiyi topluda',
+    ],
+    study:[
+      'Vital, Zohar’ın bir yerde on üç, hemen ardından beş yapraktan söz etmesini ele alır. Olası açıklamalarından birinde on iki yaprak on iki kabileyi simgeler. Gül onları bir araya getirir ve on üçüncü öğe olur.',
+      'Vital takes up the Zohar’s mention of thirteen leaves and then five. In one possible reading, twelve leaves represent the twelve tribes. The rose gathers them and becomes the thirteenth element.',
+      'ויטאל דן בכך שהזוהר מזכיר שלושה עשר עלים ומיד אחר כך חמישה. באחד ההסברים האפשריים, שנים עשר עלים מסמלים את שנים עשר השבטים. השושנה כוללת אותם והיא המרכיב השלושה עשר.',
+      'Vital Zoharda əvvəl on üç, dərhal sonra beş yarpaqdan söz açılmasını izah edir. Mümkün izahlardan birinə görə, on iki yarpaq on iki qəbiləni təmsil edir. Gül onları birləşdirir və on üçüncü ünsür olur.',
+    ],
+    url:'https://www.sefaria.org/Ohr_HaChammah_on_Zohar.1.1a.1',
+    reference:'Ohr HaChammah 1:1a:1 · Sefaria',
+  },
+  {
+    title:['Vilna Gaonu · Yahel Or','Vilna Gaon · Yahel Ohr','הגאון מווילנה · יהל אור','Vilna Qaonu · Yahel Or'],
+    period:[
+      '18. yüzyıl · Eliyahu ben Şlomo Zalman’ın yazılarından',
+      'Eighteenth century · from the writings of Elijah ben Solomon Zalman',
+      'המאה ה־18 · מתוך כתבי אליהו בן שלמה זלמן',
+      'XVIII əsr · Eliyahu ben Şlomo Zalmanın yazılarından',
+    ],
+    study:[
+      'Vilna Gaonu, başka bir Zohar pasajıyla bağlantı kurar. Kapalı, kırmızı çiçek açıldığında kırmızı ve beyaz bir güle dönüşür. Yorum bu değişimi hesedin, yani iyiliğin, alınışıyla ilişkilendirir.',
+      'The Vilna Gaon connects the opening to another passage in the Zohar. A closed red flower opens into a red-and-white rose. His reading links that change with receiving chesed, or lovingkindness.',
+      'הגאון מווילנה קושר את הפתיחה לקטע אחר בזוהר. פרח אדום סגור נפתח ונעשה שושנה אדומה ולבנה. הפירוש קושר את השינוי לקבלת חסד.',
+      'Vilna Qaonu bu başlanğıcı Zoharın başqa parçası ilə əlaqələndirir. Qapalı qırmızı çiçək açılıb qırmızı-ağ gülə çevrilir. Şərh bu dəyişimi hesedin, yəni xeyirxahlığın qəbul edilməsi ilə bağlayır.',
+    ],
+    url:'https://www.sefaria.org/Yahel_Ohr_on_Zohar.1.1a.1',
+    reference:'Yahel Ohr 1:1a:1 · Sefaria',
+  },
+  {
+    title:['Yehuda Aşlag · Sulam','Yehuda Ashlag · Sulam','יהודה אשלג · הסולם','Yehuda Aşlaq · Sulam'],
+    period:['20. yüzyıl','Twentieth century','המאה ה־20','XX əsr'],
+    study:[
+      'Aşlag, güle benzetilen İsrail topluluğunu Malkut, yani on sefirottan biri, olarak açıklar. Zohar’ın merhametle ilişkilendirdiği on üç sözcüğü Yaratılış’ın ilk iki ayetinde tek tek gösterir.',
+      'Ashlag identifies the Assembly of Israel, compared to the rose, with Malkhut, one of the ten sefirot. He spells out the thirteen words in the first two verses of Genesis that the Zohar associates with mercy.',
+      'אשלג מזהה את כנסת ישראל, שנמשלה לשושנה, עם מלכות, אחת מעשר הספירות. הוא מונה את שלוש עשרה המילים בשני הפסוקים הראשונים של בראשית שהזוהר מקשר לרחמים.',
+      'Aşlaq güllə müqayisə olunan İsrail icmasını on sefirotdan biri olan Malkutla eyniləşdirir. Zoharın mərhəmətlə əlaqələndirdiyi on üç sözü Yaradılışın ilk iki ayəsində bir-bir göstərir.',
+    ],
+    url:'https://www.sefaria.org/Sulam_on_Zohar%2C_Introduction.1.1',
+    reference:'Sulam on Zohar, Introduction 1:1 · Sefaria',
+  },
+];
+
 export const advancedReadings = [
+  {
+    id:'zohar-rose-commentaries',
+    title:['Zohar: Dikenler arasındaki gül','Zohar: The rose among thorns','הזוהר: שושנה בין החוחים','Zohar: Tikanlar arasındakı gül'],
+    period:[
+      'Zohar, Giriş 1:1 · 13. yüzyıl sonlarında Kastilya’da dolaşıma giren metin',
+      'Zohar, Introduction 1:1 · circulated in late thirteenth-century Castile',
+      'הזוהר, הקדמה א:א · הטקסט נפוץ בקסטיליה בסוף המאה ה־13',
+      'Zohar, Giriş 1:1 · XIII əsrin sonlarında Kastiliyada yayılmış mətn',
+    ],
+    genre:[
+      'Ezgiler Ezgisi 2:2, sevgiliyi dikenler arasındaki bir çiçeğe benzetir. İbranice şoşana sözcüğü bazı çevirilerde gül, bazılarında zambak diye geçer.',
+      'Song of Songs 2:2 compares the beloved to a flower among thorns. Translations render the Hebrew word shoshanah as either rose or lily.',
+      'שיר השירים ב:ב משווה את הרעיה לפרח בין החוחים. את המילה שושנה מתרגמים לפעמים כוורד ולפעמים כשושן.',
+      'Nəğmələr Nəğməsi 2:2-də sevgili tikanlar arasındakı çiçəyə bənzədilir. İbranicə şoşana sözü bəzi tərcümələrdə gül, bəzilərində zanbaq kimi verilir.',
+    ],
+    study:[
+      'Zohar’da söze Rabbi Hizkiya başlar. Çiçeği İsrail topluluğuna benzetir. Kırmızı ve beyaz, yargı ile merhameti çağrıştırır. On üç yaprak, topluluğu kuşatan on üç merhamet niteliğini anlatır.',
+      'Rabbi Hizkiyah speaks in the Zohar. He reads the flower as the Assembly of Israel. Red and white evoke judgment and mercy. Thirteen leaves stand for the thirteen qualities of mercy surrounding the assembly.',
+      'רבי חזקיה פותח את הדרשה בזוהר. הוא מדמה את הפרח לכנסת ישראל. האדום והלבן רומזים לדין ולרחמים. שלושה עשר העלים מסמלים את שלוש עשרה מידות הרחמים המקיפות אותה.',
+      'Zoharda sözü Rabbi Hizkiya açır. Çiçəyi İsrail icmasına bənzədir. Qırmızı və ağ hökmü və mərhəməti xatırladır. On üç yarpaq icmanı əhatə edən on üç mərhəmət keyfiyyətini bildirir.',
+    ],
+    excerpt:'מאן שושנה, דא כנסת ישראל.',
+    limit:[
+      'Zohar’daki konuşmacıyı, metnin dolaşıma girdiği dönemi ve yorumların yazıldığı dönemleri ayrı ayrı izle.',
+      'Keep track of the speaker in the Zohar, when the text circulated, and when each commentary was written.',
+      'עקבו אחר הדובר בזוהר, אחר התקופה שבה נפוץ הטקסט ואחר התקופות שבהן נכתבו הפירושים.',
+      'Zohardakı danışanı, mətnin yayıldığı dövrü və şərhlərin yazıldığı dövrləri ayrı-ayrılıqda izləyin.',
+    ],
+    sources:[
+      {title:'Sefaria · Song of Songs 2:2',url:'https://www.sefaria.org/Song_of_Songs.2.2',kind:'text'},
+      {title:'Sefaria · Zohar, Introduction 1:1',url:'https://www.sefaria.org/Zohar%2C_Introduction.1.1',kind:'text'},
+      {title:'Stanford University Press · The Zohar: Pritzker Edition, introduction',url:'https://www.sup.org/books/pages/4810/Front_Matter.pdf',kind:'research'},
+    ],
+    commentaries:roseCommentaries,
+  },
   {
     id:"prayer-intention-cleaving",
     title:["Niyet ve Tanrı’ya bağlılık","Intention and attachment to God","כוונה ודבקות באל","Niyyət və Allaha bağlılıq"],
@@ -101,6 +185,34 @@ export const advancedReadings = [
 ];
 
 export const comparisonCases = [
+  {
+    id:'zohar-rose-voices',
+    lessonId:'zohar-rose-commentaries',
+    question:[
+      'Gülün on iki kabileyi bir araya getiren on üçüncü öğe olabileceğini kim öne sürer?',
+      'Who suggests that the rose might be the thirteenth element, gathering the twelve tribes?',
+      'מי מציע שהשושנה היא אולי המרכיב השלושה עשר, הכולל את שנים עשר השבטים?',
+      'Gülün on iki qəbiləni birləşdirən on üçüncü ünsür ola biləcəyini kim irəli sürür?',
+    ],
+    choices:[
+      ['Zohar’daki Rabbi Hizkiya','Rabbi Hizkiyah in the Zohar','רבי חזקיה בזוהר','Zohardakı Rabbi Hizkiya'],
+      ['Or ha-Hama’da aktarılan Hayim Vital','Hayyim Vital, quoted in Ohr HaChammah','חיים ויטאל, המצוטט באור החמה','Or ha-Hamada sitat gətirilən Hayim Vital'],
+      ['Sulam’ın yazarı Yehuda Aşlag','Yehuda Ashlag, author of Sulam','יהודה אשלג, מחבר הסולם','Sulamın müəllifi Yehuda Aşlaq'],
+    ],
+    correct:1,
+    feedback:[
+      'Girişte Rabbi Hizkiya on üç yaprağı merhamet nitelikleriyle ilişkilendirir. Vital’in yorumunda on iki kabile ve onları bir araya getiren gül yeni bir açıklama sunar.',
+      'Rabbi Hizkiyah links the thirteen leaves to qualities of mercy. Vital adds a possible reading in which the twelve tribes are gathered by the rose.',
+      'רבי חזקיה קושר את שלושה עשר העלים למידות הרחמים. ויטאל מוסיף אפשרות לקרוא אותם כשנים עשר השבטים והשושנה הכוללת אותם.',
+      'Rabbi Hizkiya on üç yarpağı mərhəmət keyfiyyətləri ilə əlaqələndirir. Vital on iki qəbiləni gülün birləşdirdiyi başqa bir izah irəli sürür.',
+    ],
+    transfer:[
+      'Bir arkadaşına anlatır gibi yaz. Zohar gülü kime benzetiyor? Seçtiğin bir yorumcu bu benzetmeye ne katıyor?',
+      'Write as if you were telling a friend. Whom does the Zohar compare to the rose? What does one commentator add to that image?',
+      'כתבו כאילו אתם מסבירים לחבר. למי הזוהר מדמה את השושנה? מה מוסיף אחד הפרשנים לדימוי הזה?',
+      'Dostuna danışırmış kimi yaz. Zohar gülü kimə bənzədir? Seçdiyin şərhçi bu bənzətməyə nə əlavə edir?',
+    ],
+  },
   {
     id:"abulafia-and-cordovero",
     question:["Abulafia’nın Hayyei ha-Olam ha-Ba’sı ile Cordovero’nun Pardes Rimmonim’i, Kabala’yı nasıl farklı odaklarla ele alır?", "How do Abulafia’s Hayyei ha-Olam ha-Ba and Cordovero’s Pardes Rimmonim approach Kabbalah with different emphases?", "כיצד חיי העולם הבא של אבולעפיה ופרדס רימונים של קורדובירו ניגשים לקבלה בדגשים שונים?", "Abulafianın Hayyei ha-Olam ha-Ba və Kordoveronun Pardes Rimmonim əsərləri Kabbalaya hansı fərqli vurğularla yanaşır?"],

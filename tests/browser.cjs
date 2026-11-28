@@ -30,7 +30,7 @@ async function main() {
   const { earlyModernLessons } = await import('../early-modern-lessons.js');
   const { modernLessons } = await import('../modern-lessons.js');
   const { feynmanCases } = await import('../kabbalah-lessons.js');
-  const { comparisonCases } = await import('../kabbalah-advanced-lessons.js');
+  const { advancedReadings, comparisonCases } = await import('../kabbalah-advanced-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
   const { dailyCases } = await import('../daily-life.js');
   const { ashlagPhases, ashlagScreen } = await import('../ashlag-lessons.js');
@@ -917,9 +917,28 @@ async function main() {
       await page.click('#kabbalah summary');
       assert.ok((await workshopRequest).ok());
       await page.locator('#kabbalah-lesson').waitFor();
-      assert.equal(await page.locator('#kabbalah-lesson option').count(), 20);
+      assert.equal(await page.locator('#kabbalah-lesson option').count(), 21);
       assert.equal(await page.locator('#kabbalah-lesson optgroup').count(), 2);
       assert.ok(loadedLessons.has('kabbalah-advanced-lessons.js'));
+      const rose = advancedReadings.find(lesson => lesson.id === 'zohar-rose-commentaries');
+      const localeIndex = ['tr','en','he','az'].indexOf(locale);
+      const roseCards = page.locator('.kabbalah-commentaries details');
+      await page.selectOption('#kabbalah-lesson', rose.id);
+      assert.equal(await page.locator('.kabbalah-excerpt bdi[lang="arc"][dir="rtl"]').innerText(), rose.excerpt);
+      assert.equal(await roseCards.count(), 3);
+      for (const [index, commentary] of rose.commentaries.entries()) {
+        const summary = roseCards.nth(index).locator('summary');
+        assert.equal(await summary.textContent(), commentary.title[localeIndex]);
+        if (width === 320) await summary.tap();
+        else await summary.press('Enter');
+        assert.equal(await roseCards.nth(index).locator('p').first().innerText(), commentary.period[localeIndex]);
+        assert.equal(await roseCards.nth(index).locator('p').last().innerText(), commentary.study[localeIndex]);
+        assert.equal(await roseCards.nth(index).locator('a').getAttribute('href'), commentary.url);
+      }
+      assert.equal(await page.locator('.kabbalah-commentaries details[open]').count(), 3);
+      await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+      assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
+      await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
       await page.click('.kabbalah-exercise summary');
       for (const sample of [...feynmanCases,...comparisonCases]) {
         await page.selectOption('#kabbalah-lesson', sample.lessonId);
@@ -931,6 +950,7 @@ async function main() {
         await page.fill('#kabbalah-draft', 'WALL ' + sample.id);
       }
       await page.selectOption('#kabbalah-lesson', 'laitman-bnei-baruch');
+      assert.equal(await page.locator('.kabbalah-commentaries').isVisible(), false);
       await page.click('.kabbalah-sources summary');
       assert.equal(await page.locator('.kabbalah-sources li').count(), 3);
       assert.equal(await page.locator('.kabbalah-sources a').nth(1).getAttribute('href'), 'https://www.academia.edu/18676960');
@@ -950,6 +970,8 @@ async function main() {
       await page.locator('.kabbalah-reading h3').waitFor();
       assert.equal(await page.locator('#kabbalah-lesson').inputValue(), 'nefesh-hachaim-gate3');
       assert.equal(await page.locator('#kabbalah-draft').inputValue(), 'WALL tzimtzum-tanya-nefesh');
+      await page.selectOption('#kabbalah-lesson', rose.id);
+      assert.equal(await page.locator('#kabbalah-draft').inputValue(), 'WALL zohar-rose-voices');
       await page.keyboard.press('Escape');
       await page.selectOption('#lang', locale);
       await page.click('#library-button');
@@ -1193,6 +1215,23 @@ async function main() {
     await padPage.locator('[data-event="sigd"]').waitFor();
     await native('back');
     assert.equal(await padPage.locator('#library[open]').count(), 0);
+    await native('library');
+    await padPage.locator('#kabbalah > summary').focus();
+    await native('activate');
+    const rosePicker = padPage.locator('#kabbalah-lesson');
+    await rosePicker.waitFor();
+    await rosePicker.selectOption('laitman-bnei-baruch');
+    await rosePicker.focus();
+    await native('activate');
+    assert.equal(await rosePicker.inputValue(), 'zohar-rose-commentaries');
+    await native('next');
+    assert.equal(await padPage.evaluate(() => document.activeElement.parentElement.className), 'kabbalah-sources');
+    await native('next');
+    assert.equal(await padPage.evaluate(() => document.activeElement.closest('.kabbalah-commentaries')?.className),
+      'kabbalah-commentaries');
+    await native('activate');
+    assert.equal(await padPage.locator('.kabbalah-commentaries details[open]').count(), 1);
+    await native('back');
     await padPage.close();
     console.log('Gamepad browser mapping and native event path (simulated): PASS');
 
