@@ -99,7 +99,7 @@ Epizot numaraları kaynak kataloğuyla bağlantı kurar. Her epizot, tarihlenmi�
 |---|---|---|
 | Prolog | Bugünkü Kotel. Tefillin, tallit, Şema, Amida ve dua notları. Fotoğrafı meydana hizala. | S12, S21, H08 |
 | 1 | Olay tarihi belirsiz. Mısır, Musa, Çıkış, Sina, Pesah ve Merneptah Yazıtı. Anlatı ve bağımsız kanıtı karşılaştır. | S01, S07, H01 |
-| 2 | Yaklaşık MÖ 1000–722/720. Davud, Süleyman, İsrail ve Yehuda, Birinci Tapınak ve Asur. Metne dayalı Tapınak kesitini incele. | S02, H01 |
+| 2 | Yaklaşık MÖ 1000–722/720. Davud, Süleyman, İsrail ve Yehuda, Birinci Tapınak ve Asur. Tapınak kesitini incele. Samiriye ve Kudüs’ü MÖ 8. yüzyılın sonlarında ait oldukları krallıklarla eşleştir. | S02, H01, D48–D50 |
 | 3 | MÖ 722/720–539. MÖ 597 sürgünü, 587/586 yıkımı ve Babil. Sürgün dalgalarını ve Yehuda'da kalmayı izle. | S03, H01 |
 | 4 | MÖ 539–332. Pers dönemi, dönüş, yaklaşık MÖ 516/515'te İkinci Tapınak. Ezra ile Babil ve Mısır kayıtlarının bağlamını karşılaştır. | S04 |
 | 5 | MÖ 332–63. Helenistik Akdeniz, Makabiler, Haşmonaylar. Tapınak'ın yeniden adanması ve Hanuka'yı iki metinle izle. | S05, S08 |
