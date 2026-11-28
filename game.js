@@ -465,7 +465,12 @@ export async function start(initialLanguage) {
       button.type = 'button';
       button.textContent = label;
       button.dataset.choice = String(selected);
-      button.addEventListener('click', () => choose(selected));
+      button.addEventListener('click', event => {
+        choose(selected);
+        if (selected === episode.correct && event.pointerType === 'touch') {
+          next.scrollIntoView({block:'nearest',inline:'nearest'});
+        }
+      });
       return button;
     }));
     result.textContent = finished ? text[5] : '';

@@ -1158,6 +1158,23 @@ async function main() {
       await context.close();
       console.log(locale, width, '25 checkpoints, workshops and saved evidence exhibition: PASS');
     }
+    const landscape = await browser.newPage({locale:'en',viewport:{width:320,height:640},hasTouch:true});
+    await landscape.goto(target);
+    await enterCampaign(landscape,'tap');
+    await landscape.tap('[data-choice="' + plaza.correct + '"]');
+    await landscape.tap('#next');
+    await landscape.setViewportSize({width:640,height:320});
+    await landscape.tap('[data-choice="' + chapters[0].correct + '"]');
+    await landscape.waitForFunction(() => {
+      const next = document.getElementById('next');
+      const {top,bottom} = next.getBoundingClientRect();
+      return !next.hidden && top >= 0 && bottom <= innerHeight;
+    });
+    await landscape.tap('#next');
+    assert.equal(await landscape.locator('#chapter').textContent(),'2');
+    await landscape.close();
+    console.log('Landscape touch reveals Continue inside the viewport: PASS');
+
     const chapterStudy = await browser.newPage({locale:'en',viewport:{width:320,height:750},hasTouch:true});
     await chapterStudy.addInitScript(() => localStorage.setItem('wall.progress.v1',JSON.stringify({
       active:'16', completed:['plaza',...Array.from({length:20},(_,index) => String(index + 1))],
