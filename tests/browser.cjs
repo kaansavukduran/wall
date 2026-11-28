@@ -541,6 +541,18 @@ async function main() {
           await page.locator('#compare-history').waitFor();
           assert.match(await page.locator('#compare-history').textContent(), /1967/);
           assert.equal(await page.locator('#compare-history-source').getAttribute('href'), 'https://whc.unesco.org/document/8721');
+          const passage = page.locator('#compare-passage');
+          await passage.waitFor();
+          const comparisonCanvas = page.locator('#compare-canvas');
+          const unmarked = await comparisonCanvas.evaluate(canvas => canvas.toDataURL());
+          await passage.locator('button').first().press('Enter');
+          assert.equal(await comparisonCanvas.evaluate(canvas => canvas.toDataURL()),unmarked);
+          const correctPlace = passage.locator('button').last();
+          if (width === 320) await correctPlace.tap();
+          else await correctPlace.press('Enter');
+          assert.equal(await correctPlace.getAttribute('aria-pressed'),'true');
+          assert.notEqual(await comparisonCanvas.evaluate(canvas => canvas.toDataURL()),unmarked);
+          assert.ok((await passage.locator('[role="status"]').textContent()).trim());
           await page.locator('#photo form button').click();
         }
         if (episode.id === 17) {

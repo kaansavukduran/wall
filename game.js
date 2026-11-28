@@ -186,6 +186,7 @@ export async function start(initialLanguage) {
   const photoPanel = find('photo');
   const photoButton = find('photo-button');
   const comparison = find('compare-view');
+  const comparePassage = find('compare-passage');
   const journal = find('journal');
   const selector = find('lang');
   const cataloguePanel = find('catalogue');
@@ -233,6 +234,7 @@ export async function start(initialLanguage) {
   let direction = 0;
   let lastPlacement = world.placement();
   let selectedLayer = '';
+  let passageAnswer = null;
   let studyOption = null;
   let evidenceCard = null;
   const sequenceSteps = [];
@@ -1036,16 +1038,36 @@ export async function start(initialLanguage) {
   function comparePhoto() {
     const index = locale();
     const view = comparison.valueAsNumber;
-    world.comparePlaza(find('compare-canvas'), view, language === 'he');
+    const markPassage = episodes[active].id === 23 && passageAnswer === 1;
+    world.comparePlaza(find('compare-canvas'), view, language === 'he', markPassage);
     comparison.setAttribute('aria-valuetext', photo.views[view][index]);
     find('compare-caption').textContent = photo.captions[view][index];
   }
+
+  const passagePlaces = [...comparePassage.querySelectorAll('button')];
+  function showPassage() {
+    const index = locale();
+    comparePassage.querySelector('legend').textContent = photo.passage.question[index];
+    passagePlaces.forEach((button, position) => {
+      button.textContent = photo.passage.places[position][index];
+      button.setAttribute('aria-pressed', String(passageAnswer === position));
+    });
+    comparePassage.querySelector('[role="status"]').textContent = passageAnswer === null ? ''
+      : photo.passage[passageAnswer === 1 ? 'matched' : 'retry'][index];
+  }
+  passagePlaces.forEach((button, position) => button.addEventListener('click', () => {
+    passageAnswer = position;
+    showPassage();
+    comparePhoto();
+  }));
 
   comparison.addEventListener('input', comparePhoto);
   photoButton.addEventListener('click', () => {
     stop();
     const index = locale();
     const modernHistory = episodes[active].id === 23;
+    comparePassage.hidden = !modernHistory;
+    if (modernHistory) showPassage();
     photoPanel.querySelector('h2').textContent = photo.title[index];
     photoPanel.querySelector('img').alt = photo.alt[index];
     photoPanel.querySelector('figcaption').textContent = photo.note[index];
@@ -1063,7 +1085,7 @@ export async function start(initialLanguage) {
     historySource.hidden = !modernHistory;
     historySource.href = photo.historyUrl;
     historySource.textContent = photo.historySource[index];
-    photoPanel.querySelector('button').textContent = ui[language][4];
+    photoPanel.querySelector('form button').textContent = ui[language][4];
     comparePhoto();
     photoPanel.showModal();
   });

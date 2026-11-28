@@ -354,6 +354,30 @@ export const photo = {
     'התצלום מראה את השטח הצר. דוח אונסק״ו מתעד את השינוי המאוחר. לאחר מלחמת יוני 1967 הרסה ישראל את שכונת המוגרבים. תושבי השכונה איבדו את בתיהם. השטח לפני הכותל הפך לרחבת תפילה גדולה.',
     'Arxiv fotosu dar sahəni göstərir. UNESCO hesabatı sonrakı dəyişikliyi sənədləşdirir. 1967-ci ilin iyun müharibəsindən sonra İsrail Məğrib məhəlləsini sökdü. Sakinlər evlərini itirdilər. Divarın qarşısındakı sahə geniş ibadət meydanına çevrildi.',
   ],
+  passage: {
+    question:[
+      'Fotoğraftaki dar geçit, bugünkü meydanın neresindeydi?',
+      'Where was the narrow passage in the photo in relation to today’s plaza?',
+      'היכן היה המעבר הצר שבתצלום ביחס לרחבה של היום?',
+      'Fotodakı dar keçid bugünkü meydanın harasında idi?',
+    ],
+    places:[
+      ['Platformun üstünde','On top of the platform','על גבי המתחם המוגבה','Platformanın üstündə'],
+      ['Batı Duvarı’nın dibinde','At the foot of the Western Wall','למרגלות הכותל המערבי','Qərb Divarının dibində'],
+    ],
+    retry:[
+      'Fotoğrafta insanların durduğu yere bak. Geçidi duvara göre yeniden konumlandır.',
+      'Look at where people stand in the photograph. Try placing the passage again.',
+      'התבוננו במקום שבו עומדים האנשים בתצלום. נסו למקם שוב את המעבר.',
+      'Fotoda insanların dayandığı yerə bax. Keçidin yerini yenidən seç.',
+    ],
+    matched:[
+      'Dar geçit duvarın dibindeydi. İşaret, bu konumu eski sokakta ve bugünkü meydanda şematik olarak gösteriyor.',
+      'The narrow passage was at the foot of the wall. The marker shows that position schematically in the old street and today’s plaza.',
+      'המעבר הצר היה למרגלות הכותל. הסימון מציג את מקומו באופן סכמטי בסמטה הישנה וברחבה של היום.',
+      'Dar keçid divarın dibində idi. İşarə həmin yeri köhnə küçədə və bugünkü meydanda şərti olaraq göstərir.',
+    ],
+  },
   historySource:['UNESCO saha raporu','UNESCO field report','דוח השטח של אונסק״ו','UNESCO-nun sahə hesabatı'],
   historyUrl:'https://whc.unesco.org/document/8721',
 };

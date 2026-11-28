@@ -138,7 +138,7 @@ export async function makeWorld(canvas, reducedMotion) {
     }
   }
 
-  function comparePlaza(canvas, view, rtl) {
+  function comparePlaza(canvas, view, rtl, markPassage) {
     if (!plazaViews) {
       plazaViews = ['quarter', 'plaza'].map(layer => {
         const image = document.createElement('canvas');
@@ -157,6 +157,12 @@ export async function makeWorld(canvas, reducedMotion) {
       const start = rtl ? 0 : half;
       context.drawImage(plaza, start, 0, half, height, start, 0, half, height);
       rect(context, '#201b18', half - 1, 0, 2, height);
+    }
+    if (markPassage) {
+      for (let x = 170; x < width-14; x += 28) {
+        rect(context, '#49351e', x, 201, 18, 7);
+        rect(context, '#ffe1a0', x+1, 202, 16, 3);
+      }
     }
   }
   function drawSetting(background, index, stone, mortar, layer) {
