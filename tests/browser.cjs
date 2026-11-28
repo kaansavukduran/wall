@@ -671,6 +671,8 @@ async function main() {
             const question = reservoir.locator('.reservoir-question');
             const progress = () => page.evaluate(() => localStorage.getItem('wall.progress.v1'));
             const saved = await progress();
+            const sizeBefore = await page.evaluate(() => document.documentElement.style.fontSize);
+            if (width === 320) await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
             const load = page.waitForResponse(response => response.url().endsWith('/reservoir.js'));
             await reservoir.locator('summary').press('Enter');
             assert.ok((await load).ok());
@@ -701,6 +703,20 @@ async function main() {
             await question.locator('button').first().waitFor();
             assert.match(await reservoir.locator('a').getAttribute('href'),/id=25662$/);
             assert.equal(await progress(),saved);
+            if (width === 320) {
+              assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+              if (locale === 'he') {
+                const finalWordLines = await phase(1).evaluate(button => {
+                  const text = button.firstChild;
+                  const word = document.createRange();
+                  word.setStart(text,text.textContent.lastIndexOf(' ') + 1);
+                  word.setEnd(text,text.textContent.length);
+                  return word.getClientRects().length;
+                });
+                assert.equal(finalWordLines,1);
+              }
+              await page.evaluate(size => { document.documentElement.style.fontSize = size; },sizeBefore);
+            }
             await reservoir.locator('summary').press('Enter');
             const photo = page.locator('#evidence-photo');
             assert.equal(await photo.isHidden(),true);
