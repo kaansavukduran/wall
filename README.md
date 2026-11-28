@@ -14,7 +14,7 @@ For the static ZIP or a source checkout:
 
 1. Extract the web ZIP, or open this checkout in a terminal.
 2. Run `python3 -m http.server 8000` in the directory containing `index.html`.
-3. Open http://localhost:8000/. Select Türkçe, English, עברית or Azərbaycanca. Choose **New game** for the plaza or **Continue** for your last visited chapter. Use the onscreen arrows or the keyboard. Inspect the scene, open a source and choose an answer to proceed. In each chapter, try a new example after answering. Progress and your explanation drafts are saved in the browser.
+3. Open http://localhost:8000/. Select Türkçe, English, עברית or Azərbaycanca. Choose **New game** for the plaza or **Continue** to return to the visitor’s last position in the chapter. Use the onscreen arrows or the keyboard. Inspect the scene, open a source and choose an answer to proceed. In each chapter, try a new example after answering. Progress and your explanation drafts are saved in the browser.
 
 ## Build and verify
 

@@ -1,3 +1,5 @@
+export const visitorBounds = [16,464];
+
 export async function makeWorld(canvas, reducedMotion) {
   const sprite = new Image();
   sprite.src = new URL('./assets/visitor.png', import.meta.url).href;
@@ -14,8 +16,7 @@ export async function makeWorld(canvas, reducedMotion) {
     ['#6a8190','#8b9c93','#99887f','#68554e','#c8a786','#54474a'],
     ['#776983','#a399a1','#a68f8c','#705b65','#d9b6a1','#685667'],
   ];
-  const leftEdge = 16;
-  const rightEdge = 464;
+  const [leftEdge, rightEdge] = visitorBounds;
   let position = 80;
   let facing = 1;
   let lastDraw = '';
@@ -690,6 +691,12 @@ export async function makeWorld(canvas, reducedMotion) {
   return {
     scene,
     comparePlaza,
+    placement() { return [Math.round(position), facing]; },
+    restorePlacement([x, direction]) {
+      position = x;
+      facing = direction;
+      walked = 0;
+    },
     move(direction, distance) {
       facing = direction;
       const next = Math.max(leftEdge, Math.min(rightEdge, position + direction * distance));

@@ -85,7 +85,7 @@ test('portable saves merge valid progress without replacing local drafts or touc
     };
   }
   const draft = 'wall.transfer.1.draft';
-  const importedProgress = JSON.stringify({active:'2',completed:['plaza','1']});
+  const importedProgress = JSON.stringify({active:'2',completed:['plaza','1'],placement:[121,-1]});
   const source = mockStorage({
     [progressKey]:importedProgress, [draft]:'עברית • Türkçe', 'wall.journal':'Açıq sual',
     'wall.language':'he', 'unrelated.preferences':'private', 'wall.unknown-scope':'ignored',
@@ -95,6 +95,9 @@ test('portable saves merge valid progress without replacing local drafts or touc
   assert.doesNotMatch(encoded,/unrelated|unknown-scope/);
   const incoming = parseSave(encoded);
   assert.deepEqual(saveSummary(incoming),{chapters:1,drafts:2});
+  const fresh = mockStorage({});
+  mergeSave(fresh,encoded);
+  assert.deepEqual(JSON.parse(fresh.getItem(progressKey)),JSON.parse(importedProgress));
   const existingProgress = JSON.stringify({active:'3',completed:['plaza','2']});
   const destination = mockStorage({[progressKey]:existingProgress,[draft]:'Existing note','wall.language':'az'});
   mergeSave(destination,encoded);
@@ -106,6 +109,11 @@ test('portable saves merge valid progress without replacing local drafts or touc
   assert.throws(() => parseSave('{"format":"WALL save","version":1,"values":{"__proto__":"bad"}}'),/Save data/);
   assert.throws(() => parseSave(encoded.replace('"version":1','"version":2')),/Save version/);
   assert.throws(() => parseSave(encoded.replace('wall.transfer.1.draft','wall.transfer.25.draft')),/Save data/);
+  for (const invalid of [[465,1],[80,0],[90.5,1]]) {
+    const values = {...incoming,[progressKey]:JSON.stringify({...JSON.parse(importedProgress),placement:invalid})};
+    assert.throws(() => parseSave(JSON.stringify({format:'WALL save',version:1,values})),/Save data/);
+    assert.equal(readCampaign(() => values[progressKey]).placement,undefined);
+  }
   const unavailable = mockStorage({[progressKey]:existingProgress},'wall.journal');
   assert.throws(() => mergeSave(unavailable,encoded),/Test storage limit/);
   assert.equal(unavailable.getItem(progressKey),existingProgress);
@@ -117,22 +125,23 @@ test('portable saves merge valid progress without replacing local drafts or touc
   assert.deepEqual(parseSave(exportSave(null,pending)),{[draft]:'Current session draft'});
 
   const competing = mockStorage({
-    [progressKey]:JSON.stringify({active:'3',completed:['plaza']}),
+    [progressKey]:JSON.stringify({active:'3',completed:['plaza'],placement:[150,1]}),
     [completionKey('1')]:'1',
   });
   const waiting = new Map([
-    [progressKey,JSON.stringify({active:'2',completed:['plaza']})],
+    [progressKey,JSON.stringify({active:'2',completed:['plaza'],placement:[192,-1]})],
     [completionKey('2'),'1'],
   ]);
   assert.deepEqual(readCampaign(key => competing.getItem(key),waiting),{
-    active:'2',completed:new Set(['plaza','1','2']),
+    active:'2',completed:new Set(['plaza','1','2']),placement:[192,-1],
   });
   const shared = parseSave(exportSave(competing,waiting));
   assert.deepEqual(Object.keys(shared),[progressKey]);
-  assert.deepEqual(JSON.parse(shared[progressKey]),{active:'2',completed:['plaza','1','2']});
+  assert.deepEqual(JSON.parse(shared[progressKey]),{active:'2',completed:['plaza','1','2'],placement:[192,-1]});
   mergeSave(competing,encoded);
   assert.equal(competing.getItem(completionKey('1')),'1');
   assert.ok(readCampaign(key => competing.getItem(key)).completed.has('1'));
+  assert.deepEqual(JSON.parse(competing.getItem(progressKey)).placement,[150,1]);
 });
 
 test('reading preferences reject invalid themes, sizes and motion options', () => {

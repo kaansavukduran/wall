@@ -1,5 +1,6 @@
 import { chapters, languages } from './content.js';
 import { appearanceKey, parseAppearance } from './appearance.js';
+import { visitorBounds } from './world.js';
 
 export const progressKey = 'wall.progress.v1';
 const completionPrefix = 'wall.completed.v1.';
@@ -25,11 +26,19 @@ function parseProgress(raw) {
   }
 }
 
+function validPlacement(value) {
+  if (!Array.isArray(value) || value.length !== 2) return false;
+  const [x, direction] = value;
+  const [left, right] = visitorBounds;
+  return Number.isInteger(x) && x >= left && x <= right && (direction === -1 || direction === 1);
+}
+
 function validProgress(raw) {
-  const {active,completed} = parseProgress(raw) ?? {};
+  const {active,completed,placement} = parseProgress(raw) ?? {};
   if (!chapterIds.has(active) || !Array.isArray(completed)
-    || completed.length > episodeIds.length || completed.some(id => !chapterIds.has(id))) return null;
-  return {active,completed:[...new Set(completed)]};
+    || completed.length > episodeIds.length || completed.some(id => !chapterIds.has(id))
+    || (placement !== undefined && !validPlacement(placement))) return null;
+  return {active,completed:[...new Set(completed)],placement};
 }
 
 export function readCampaign(read, pending) {
@@ -47,13 +56,15 @@ export function readCampaign(read, pending) {
     const key = completionKey(id);
     if (pending?.get(key) === '1' || read(key) === '1') completed.add(id);
   }
-  const active = [waiting?.active,stored?.active].find(id => chapterIds.has(id))
+  const latest = [waiting,stored].find(record => chapterIds.has(record?.active));
+  const active = latest?.active
     ?? (completed.size ? episodeIds.find(id => !completed.has(id)) ?? episodeIds.at(-1) : null);
-  return {active,completed};
+  const placement = validPlacement(latest?.placement) ? latest.placement : undefined;
+  return {active,completed,placement};
 }
 
-export function encodeCampaign(active, completed) {
-  return JSON.stringify({active,completed:episodeIds.filter(id => completed.has(id))});
+export function encodeCampaign(active, completed, placement) {
+  return JSON.stringify({active,completed:episodeIds.filter(id => completed.has(id)),placement});
 }
 
 function validValue(key, value) {
@@ -88,7 +99,7 @@ function snapshot(storage, pending) {
   for (const [key,value] of pending ?? []) {
     if (key !== progressKey && validValue(key,value)) values[key] = value;
   }
-  if (progress.active) values[progressKey] = encodeCampaign(progress.active,progress.completed);
+  if (progress.active) values[progressKey] = encodeCampaign(progress.active,progress.completed,progress.placement);
   else delete values[progressKey];
   return values;
 }
@@ -133,7 +144,8 @@ export function mergeSave(storage, text) {
   if (incomingProgress) {
     const local = validProgress(current[progressKey]);
     const completed = new Set([...(local?.completed ?? []),...incomingProgress.completed]);
-    merged[progressKey] = encodeCampaign(local?.completed.length ? local.active : incomingProgress.active,completed);
+    const resume = local?.completed.length ? local : incomingProgress;
+    merged[progressKey] = encodeCampaign(resume.active,completed,resume.placement);
   }
 
   const changed = Object.entries(merged).filter(([key,value]) => current[key] !== value);

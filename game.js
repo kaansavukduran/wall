@@ -206,6 +206,7 @@ export async function start(initialLanguage) {
   let active = 0;
   let movement = null;
   let direction = 0;
+  let lastPlacement = world.placement();
   let selectedLayer = '';
   let studyOption = null;
   let evidenceCard = null;
@@ -226,16 +227,27 @@ export async function start(initialLanguage) {
   const episodeId = index => String(episodes[index].id ?? 'plaza');
   const firstIncomplete = () => episodes.findIndex((_, index) => !completed.has(episodeId(index)));
   const unlocked = index => index >= 0 && (index === 0 || index === firstIncomplete() || completed.has(episodeId(index)));
-  const save = () => store(progressKey,encodeCampaign(episodeId(active),completed));
   const locale = () => languages.indexOf(language);
+
+  function save(placement = world.placement()) {
+    store(progressKey,encodeCampaign(episodeId(active),completed,placement));
+    lastPlacement = placement;
+  }
+
+  function saveMovement() {
+    const placement = world.placement();
+    if (placement[0] === lastPlacement[0] && placement[1] === lastPlacement[1]) return;
+    synchronizeProgress();
+    save(placement);
+  }
 
   function synchronizeProgress() {
     const latest = readCampaign(readStored,pending);
     for (const id of latest.completed) completed.add(id);
-    return latest.active;
+    return latest;
   }
 
-  function resumeIndex(last = synchronizeProgress()) {
+  function resumeIndex(last = synchronizeProgress().active) {
     const index = episodes.findIndex((_, index) => episodeId(index) === last);
     return unlocked(index) ? index : -1;
   }
@@ -454,10 +466,12 @@ export async function start(initialLanguage) {
   }
 
   function go(index, updateHash = true) {
-    synchronizeProgress();
+    const latest = synchronizeProgress();
     if (!episodes[index] || !unlocked(index)) return;
     const entering = campaign.hidden;
+    stop();
     if (entering) {
+      if (latest.active === episodeId(index) && latest.placement) world.restorePlacement(latest.placement);
       arrival.hidden = true;
       campaign.hidden = false;
       for (const link of campaignLinks) link.hidden = false;
@@ -467,7 +481,6 @@ export async function start(initialLanguage) {
       }
     }
     active = index;
-    stop();
     selectedLayer = '';
     studyOption = null;
     evidenceCard = null;
@@ -899,18 +912,25 @@ export async function start(initialLanguage) {
     cancelAnimationFrame(movement);
     movement = null;
     direction = 0;
-    if (!campaign.hidden) world.idle();
+    if (!campaign.hidden) {
+      world.idle();
+      saveMovement();
+    }
   }
   function walk(value) {
     if (campaign.hidden || direction === value) return;
     stop();
     direction = value;
-    if (!world.move(value, 2)) return;
+    if (!world.move(value, 2)) {
+      saveMovement();
+      return;
+    }
     let previous = performance.now();
     function animate(now) {
       const elapsed = Math.min(34, Math.max(0, now - previous));
       previous = now;
       movement = world.move(value, elapsed * .063) ? requestAnimationFrame(animate) : null;
+      if (movement === null) saveMovement();
     }
     movement = requestAnimationFrame(animate);
   }
@@ -925,7 +945,7 @@ export async function start(initialLanguage) {
     button.addEventListener('click', event => {
       if (event.detail === 0) {
         world.move(Number(button.dataset.move), 6);
-        world.idle();
+        stop();
       }
     });
   }
@@ -945,6 +965,7 @@ export async function start(initialLanguage) {
     if (event.key === (direction < 0 ? 'ArrowLeft' : 'ArrowRight')) stop();
   });
   window.addEventListener('blur', stop);
+  window.addEventListener('pagehide', stop);
   document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
 
   function comparePhoto() {

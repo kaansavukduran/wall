@@ -122,6 +122,9 @@ async function main() {
       await page.keyboard.up('ArrowRight');
       const walkedFrame = await page.locator('#world').evaluate(el => el.toDataURL());
       assert.notEqual(walkedFrame, frameBefore);
+      await page.goto(target);
+      await enterCampaign(page,width === 320 ? 'tap' : 'keyboard');
+      assert.equal(await page.locator('#world').evaluate(el => el.toDataURL()),walkedFrame);
       await page.click('#photo-button');
       await page.locator('#photo[open]').waitFor();
       await page.waitForFunction(() => document.querySelector('#photo img').naturalWidth > 0);
@@ -1223,6 +1226,8 @@ async function main() {
     assert.match(await notice.textContent(), /Some changes could not be saved/);
     await blocked.tap('#next');
     await blocked.tap('[data-choice="' + chapters[0].correct + '"]');
+    await blocked.locator('[data-move="-1"]').press('Enter');
+    const blockedFrame = await blocked.locator('#world').evaluate(canvas => canvas.toDataURL());
     await blocked.tap('#transfer summary');
     await blocked.tap('[data-transfer-choice="' + transferLessons[0].correct + '"]');
     await blocked.fill('#transfer-draft','בדיקת התאוששות');
@@ -1239,10 +1244,10 @@ async function main() {
     await blocked.tap('#save-transfer summary');
     await blocked.tap('#save-export');
     const pending = JSON.parse(await blocked.locator('#save-output').inputValue()).values;
-    assert.deepEqual(JSON.parse(pending['wall.progress.v1']),{active:'1',completed:['plaza','1']});
+    assert.deepEqual(JSON.parse(pending['wall.progress.v1']),{active:'1',completed:['plaza','1'],placement:[74,-1]});
     assert.equal(pending['wall.language'],'he');
     assert.equal(pending['wall.transfer.1.draft'],'בדיקת התאוששות');
-    assert.deepEqual(await blocked.evaluate(() => JSON.parse(localStorage.getItem('wall.progress.v1'))),{active:'plaza',completed:[]});
+    assert.deepEqual(await blocked.evaluate(() => JSON.parse(localStorage.getItem('wall.progress.v1'))),{active:'plaza',completed:[],placement:[80,1]});
     await blocked.evaluate(() => { window.blockSaveWrites = false; });
     await blocked.tap('#retry-storage');
     assert.equal(await notice.textContent(),'');
@@ -1252,6 +1257,7 @@ async function main() {
     await blocked.locator('#app').waitFor();
     assert.equal(await blocked.locator('html').getAttribute('lang'),'he');
     assert.equal(await blocked.locator('#chapter').textContent(),'1');
+    assert.equal(await blocked.locator('#world').evaluate(canvas => canvas.toDataURL()),blockedFrame);
     await blocked.tap('#transfer summary');
     assert.equal(await blocked.locator('#transfer-draft').inputValue(),'בדיקת התאוששות');
     await blocked.close();
