@@ -43,6 +43,14 @@ export const models = [
     ['ritual',['Sukot simgeleri','Sukkot symbols','סמלי סוכות','Sukkot rəmzləri'],
       ['Bazı büyük gümüş sikkelerin öbür yüzünde, Sukot’la ilişkili lulav ve etrog görünür. Lulav, hurma dalının da yer aldığı bir bitki demetidir. Etrog, bir turunçgil meyvesidir.','Some large silver coins show a lulav and etrog on the other side. For Sukkot, a palm branch is held with other plants, alongside the citron.','על צדו השני של חלק ממטבעות הכסף הגדולים נראים לולב ואתרוג. בחג הסוכות נוטלים את הלולב עם צמחים נוספים, ואת האתרוג לצדם.','Bəzi iri gümüş sikkələrin digər üzündə Sukkotla bağlı lulav və etroq görünür. Lulav xurma budağı ilə başqa bitkilərin dəstəsidir. Etroq sitrus meyvəsidir.']],
   ]),
+  scene(13, ['Bugünkü kutsal alandan üç yapı','Three structures at the site today','שלושה מבנים באתר כיום','Bugünkü müqəddəs məkanda üç tikili'], [
+    ['dome-rock',['Kubbetü’s-Sahra','Dome of the Rock','כיפת הסלע','Qübbət əs-Səxra'],
+      ['Sekizgen yapı ve kubbe, platformun üzerinde durur. Mozaik yazıt yapının Emevi dönemi tarihine tanıklık eder.','The octagonal building and its dome stand on the platform. A mosaic inscription attests to its Umayyad date.','המבנה המתומן והכיפה עומדים על המתחם. כתובת פסיפס מעידה על זמנו האומיי.','Səkkizguşəli tikili və qübbə platformanın üstündədir. Mozaika kitabəsi onun Əməvilər dövrünə aid olduğunu göstərir.']],
+    ['qibli',['Güneydeki Kıble Camii','The Qibli Mosque to the south','מסגד אל־קיבלי בדרום','Cənubdakı Qiblə məscidi'],
+      ['Güneydeki cemaat namazı yapısıdır. Mescid-i Aksa adı, kullanıma göre bu yapıyı ya da daha geniş kutsal alanı ifade edebilir.','This is the congregational prayer hall to the south. In different usage, al-Aqsa can name this building or the wider sanctuary.','זהו אולם התפילה בדרום. השם אל־אקצא יכול לציין את המבנה או את המתחם המקודש הרחב יותר.','Bu, cənubdakı camaat namazı binasıdır. Əl-Əqsa adı işlənmə yerindən asılı olaraq binanı və ya daha geniş müqəddəs ərazini bildirə bilər.']],
+    ['western-wall',['Batı Duvarı','Western Wall','הכותל המערבי','Qərb Divarı'],
+      ['Platformun batı kenarındaki istinat yapısının görünen bölümüdür. Meydana bakan alt seviyededir.','This visible section of the platform’s western retaining wall faces the plaza at a lower level.','חלק זה של קיר התמך המערבי פונה לרחבה במפלס נמוך יותר.','Platformanın qərb istinad divarının görünən bu hissəsi aşağı səviyyədə meydanla üzbəüzdür.']],
+  ]),
   scene(23, ['Mahalle ve meydan','Neighborhood and plaza','שכונה ורחבה','Məhəllə və meydan'], [
     ['quarter',['Mağribi Mahallesi','Maghrebi Quarter','שכונת המוגרבים','Məğrib məhəlləsi'],
       ['Temsili çizimde evlerin ve geçidin duvara yakınlığına bak.','Look at the homes and passage near the wall in this schematic.','שימו לב לבתים ולמעבר שליד הכותל בתרשים.','Şərti təsvirdə evlərin və keçidin divara yaxınlığına bax.']],

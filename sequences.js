@@ -32,6 +32,11 @@ export const sequences = [
     ['Şimon ve Elazar mağaraya sığınır','Shimon and Elazar take shelter in the cave','שמעון ואלעזר מסתתרים במערה','Şimon və Elazar mağaraya sığınırlar'],
     ['İlk çıkıştan sonra mağaraya geri dönerler','After their first departure, they return to the cave','לאחר היציאה הראשונה הם חוזרים למערה','İlk çıxışdan sonra mağaraya qayıdırlar'],
   ]),
+  make(14, ['Orta Çağ Kudüs’ünde üç tarih','Three dates in medieval Jerusalem','שלושה תאריכים בירושלים בימי הביניים','Orta əsr Yerusəlimində üç tarix'], [1,2,0], [
+    ['Mağribi Mahallesi’nin erken vakıf tarihi · yaklaşık 1193','Early endowment of the Maghrebi Quarter · around 1193','הקדש מוקדם של רובע המגרבים · סביב 1193','Məğribi məhəlləsinin ilk vəqf tarixi · təxminən 1193'],
+    ['Haçlılar kenti aldı · 1099','Crusaders captured the city · 1099','הצלבנים כבשו את העיר · 1099','Səlibçilər şəhəri aldı · 1099'],
+    ['Selahaddin kenti geri aldı · 1187','Saladin retook the city · 1187','צלאח א־דין כבש מחדש את העיר · 1187','Səlahəddin şəhəri geri aldı · 1187'],
+  ]),
   make(16, ['Zohar’ın zamanlarını ayır','Separate the Zohar’s dates','הבחינו בין זמני הזוהר','Zoharın tarixlərini ayır'], [2,0,1], [
     ['Zohar’ın tarihsel dolaşımı, Kastilya','Historical circulation in Castile','תפוצת הזוהר בקסטיליה','Kastiliyada Zoharın tarixi yayılması'],
     ['Modern edisyon ve inceleme','Modern edition and study','מהדורה ומחקר מודרניים','Müasir nəşr və araşdırma'],

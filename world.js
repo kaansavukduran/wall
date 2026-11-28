@@ -65,6 +65,19 @@ export async function makeWorld(canvas, reducedMotion) {
     } else {
       drawSetting(background, index, stone, mortar, layer);
     }
+    if (index === 13) {
+      rect(background, '#537487', 213, 66, 64, 20);
+      rect(background, '#467181', 219, 63, 52, 6);
+      for (const [x, y, width] of [[224,57,42],[228,51,34],[235,46,20]]) {
+        rect(background, '#dabc68', x, y, width, 6);
+      }
+      rect(background, '#d9b58c', 346, 68, 99, 18);
+      rect(background, '#6c6e69', 342, 64, 106, 6);
+      rect(background, '#595c5a', 395, 55, 25, 10);
+      for (const [position, x, y, width] of [['dome-rock',213,84,64],['qibli',346,84,99],['western-wall',180,179,280]]) {
+        if (layer === position) rect(background, '#ffe1a0', x, y, width, 3);
+      }
+    }
     if (layer === 'quarter' || (index === 23 && layer !== 'plaza')) {
       for (let x = 197; x < 430; x += 57) {
         rect(background, '#70594d', x, 143, 41, 58);

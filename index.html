@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.4.6</small>
+  <small dir="ltr">v0.4.7</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -43,6 +43,27 @@
       <div id="sequence" hidden><p></p><small></small><div></div><ol></ol><output aria-live="polite"></output><button id="sequence-reset" type="button"></button></div>
       <div id="workbench" hidden><p></p><div></div><output aria-live="polite"></output><small></small></div>
       <div id="models" hidden><p></p><div></div><output></output><button id="photo-button" type="button" hidden></button></div>
+      <p id="language-lab-message" role="status" hidden></p>
+      <div id="language-labs" hidden>
+        <details id="aleph-lab" name="hebrew-workbench">
+          <summary id="aleph-summary"></summary>
+          <p id="aleph-instructions"></p>
+          <div id="letter-grid" role="group" aria-labelledby="aleph-summary"></div>
+          <p class="lab-result" role="status" aria-atomic="true"><bdi id="aleph-word" lang="he" dir="rtl"></bdi> <bdi id="aleph-total" dir="ltr"></bdi></p>
+          <div class="lab-actions"><button id="undo-letter" type="button"></button><button id="clear-letters" type="button"></button></div>
+          <p id="aleph-meaning"></p>
+          <p id="aramaic-note"></p>
+          <a id="letter-values" href="https://www.jewishencyclopedia.com/articles/6571-gematria" target="_blank" rel="noopener noreferrer"></a>
+        </details>
+        <details id="sefirot-lab" name="hebrew-workbench">
+          <summary id="sefirot-summary"></summary>
+          <p id="sefirot-intro"></p>
+          <button id="count-daat" type="button"></button>
+          <div id="sefirot-grid" dir="ltr" role="group" aria-labelledby="sefirot-summary"></div>
+          <p class="lab-result" role="status" aria-atomic="true"><bdi id="sefirah-name" lang="he" dir="rtl"></bdi> <span id="sefirah-detail"></span></p>
+          <a id="sefirot-source" href="https://www.chabad.org/kabbalah/article_cdo/aid/380536/jewish/Two-Systems-of-Ten-Sefirot.htm" target="_blank" rel="noopener noreferrer"></a>
+        </details>
+      </div>
     </section>
     <section class="story">
       <div>
@@ -71,7 +92,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.4.6</span></footer>
+  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.4.7</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>

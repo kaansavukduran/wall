@@ -11,8 +11,9 @@ async function main() {
   const { ancientLessons } = await import('../ancient-lessons.js');
   const { secondTempleLessons } = await import('../second-temple-lessons.js');
   const { romanLessons } = await import('../roman-lessons.js');
-  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons};
-  const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js'];
+  const { medievalLessons } = await import('../medieval-lessons.js');
+  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons};
+  const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js'];
   const browser = await chromium.launch(browserOptions);
   try {
     for (const [locale, width] of [['tr',1100],['en',320],['he',320],['az',740]]) {
@@ -154,10 +155,44 @@ async function main() {
           for (const card of [1,2,0]) await page.click('[data-sequence="' + card + '"]');
           assert.equal(await page.locator('#sequence li').count(), 3);
         }
+        if (episode.id === 13) {
+          const first = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
+          await page.click('[data-layer="qibli"]');
+          assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), first);
+        }
+        if (episode.id === 14) {
+          for (const card of [1,2,0]) await page.click('[data-sequence="' + card + '"]');
+          const dates = await page.locator('#sequence li').allTextContents();
+          assert.deepEqual(dates.map(item => item.match(/\d+/)[0]), ['1099','1187','1193']);
+        }
         if (episode.id === 16) {
           await page.click('[data-study="0"]');
           await page.click('[data-study="1"]');
           assert.equal(await page.locator('#workbench output').textContent(), '8 + 10 = 18');
+          await page.click('#aleph-summary');
+          assert.equal(await page.locator('#letter-grid button').count(), 27);
+          await page.click('[data-hebrew-letter="ח"]');
+          await page.click('[data-hebrew-letter="י"]');
+          assert.equal(await page.locator('#aleph-word').textContent(), 'חי');
+          assert.equal(await page.locator('#aleph-total').textContent(), '8 + 10 = 18');
+          await page.click('#undo-letter');
+          await page.click('[data-hebrew-letter="ך"]');
+          assert.equal(await page.locator('#aleph-total').textContent(), '8 + 20 = 28');
+          await page.click('#clear-letters');
+          assert.equal(await page.locator('#aleph-total').textContent(), '0');
+          await page.click('#sefirot-summary');
+          await page.click('[data-sefirah="5"]');
+          assert.equal(await page.locator('#sefirah-name').textContent(), 'תפארת');
+          await page.click('#count-daat');
+          assert.equal(await page.locator('#sefirot-grid button').count(), 10);
+          assert.equal(await page.locator('#count-daat').getAttribute('aria-pressed'), 'true');
+          assert.equal(await page.locator('#sefirah-name').textContent(), 'דעת');
+          await page.selectOption('#lang', locale === 'he' ? 'en' : 'he');
+          assert.equal(await page.locator('#sefirah-name').textContent(), 'דעת');
+          await page.selectOption('#lang', locale);
+          await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
+          await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
         }
         if (episode.id === 18) {
           await page.click('[data-study="3"]');

@@ -80,6 +80,20 @@ dialog a{overflow-wrap:anywhere}
 #workbench output{font-weight:650}
 #workbench small{color:var(--muted)}
 
+#language-labs{display:grid;gap:.4rem;padding:.55rem;background:#1b242c}
+#language-labs details{border-block-start:1px solid var(--edge);padding:.2rem .4rem .4rem}
+#language-labs summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
+#language-labs summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#letter-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,3.75rem),1fr));gap:.3rem}
+#letter-grid button{padding:.3rem}
+.lab-result{color:var(--accent);font-weight:650}
+.lab-actions{display:flex;flex-wrap:wrap;gap:.4rem}
+#sefirot-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.4rem;
+  grid-template-areas:". s0 ." "s2 . s1" "s4 . s3" ". s5 ." "s7 . s6" ". s8 ." ". s9 .";margin-block-start:.5rem}
+#sefirot-grid[data-daat]{grid-template-areas:"s2 . s1" ". s0 ." "s4 . s3" ". s5 ." "s7 . s6" ". s8 ." ". s9 ."}
+#sefirot-grid button{grid-area:var(--position);overflow-wrap:anywhere;padding:.3rem}
+#sefirot-grid button[aria-pressed=true],#count-daat[aria-pressed=true]{background:#47351e;border-color:var(--accent)}
+
 #photo-button{justify-self:start}
 #photo{inline-size:min(58rem,100% - 2rem)}
 .photo-layout{display:grid;gap:1rem;margin-block-start:.75rem}

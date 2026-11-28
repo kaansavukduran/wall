@@ -13,8 +13,8 @@ const runtimeRoot = resolve(output, runtime);
 await mkdir(runtimeRoot);
 const files = [
   'style.css', 'start.js', 'game.js', 'world.js', 'content.js',
-  'chapters-early.js', 'chapters-modern.js', 'ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js',
-  'library.js', 'scenes.js', 'catalogue.js', 'sequences.js', 'controller.js', 'assets',
+  'chapters-early.js', 'chapters-modern.js', 'ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js',
+  'library.js', 'scenes.js', 'catalogue.js', 'sequences.js', 'hebrew-labs.js', 'controller.js', 'assets',
 ];
 for (const file of files) await cp(file, resolve(runtimeRoot, file), { recursive:true });
 await mkdir(resolve(runtimeRoot, 'docs'));

@@ -19,6 +19,7 @@ const lessonDecks = [
   () => import('./ancient-lessons.js').then(module => module.ancientLessons),
   () => import('./second-temple-lessons.js').then(module => module.secondTempleLessons),
   () => import('./roman-lessons.js').then(module => module.romanLessons),
+  () => import('./medieval-lessons.js').then(module => module.medievalLessons),
 ];
 
 function read(keyName) {
@@ -61,6 +62,9 @@ export async function start(initialLanguage) {
   const sequenceSurface = find('sequence');
   const evidence = find('evidence');
   const evidenceChoices = find('evidence-choices');
+  const labRoot = find('language-labs');
+  const labs = labRoot.querySelectorAll('details');
+  const labState = {word:[], sefirah:0, daat:false};
   const progress = readProgress();
   let language = initialLanguage;
   let active = 0;
@@ -73,6 +77,7 @@ export async function start(initialLanguage) {
   let attempt = '';
   let sourceToken = 0;
   let evidenceToken = 0;
+  let labToken = 0;
   const letters = new Set();
 
   const episodeId = index => String(episodes[index].id ?? 'plaza');
@@ -144,6 +149,7 @@ export async function start(initialLanguage) {
     renderStudy();
     renderSequence();
     renderEvidence();
+    renderLanguageLabs();
     if (focus) find('title').focus();
   }
 
@@ -155,6 +161,10 @@ export async function start(initialLanguage) {
     studyOption = null;
     evidenceCard = null;
     evidence.open = false;
+    labState.word.length = 0;
+    labState.sefirah = 0;
+    labState.daat = false;
+    for (const lab of labs) lab.open = false;
     sequenceSteps.length = 0;
     attempt = '';
     letters.clear();
@@ -220,6 +230,28 @@ export async function start(initialLanguage) {
     if (card) {
       source.href = card.url;
       source.textContent = ui[language][5];
+    }
+  }
+
+  async function renderLanguageLabs() {
+    const request = ++labToken;
+    const message = find('language-lab-message');
+    message.hidden = labRoot.hidden = true;
+    if (episodes[active].id !== 16) return;
+    try {
+      const {renderHebrewLabs} = await import('./hebrew-labs.js');
+      if (request !== labToken) return;
+      renderHebrewLabs(labRoot, locale(), labState);
+      labRoot.hidden = false;
+    } catch {
+      if (request !== labToken) return;
+      message.textContent = {
+        tr:'Atölyeler açılamadı. Sayfayı yenileyip tekrar dene.',
+        en:'The workbenches could not open. Reload the page and try again.',
+        he:'הסדנאות לא נפתחו. רעננו את הדף ונסו שוב.',
+        az:'Emalatxanalar açılmadı. Səhifəni yeniləyib yenidən cəhd et.',
+      }[language];
+      message.hidden = false;
     }
   }
 

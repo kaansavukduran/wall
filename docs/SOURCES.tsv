@@ -13,7 +13,7 @@ S11	Geç Antik Çağ	12	Bavli Şabat 33b	Birincil metin	Şimon ve Elazar mağara
 S12	Geç Antik Çağ	Prolog,11	Bavli Berakhot 2a	Birincil metin	Şema ve okuma zamanı	https://www.sefaria.org/Berakhot.2a	Referans; edisyon seçilecek
 S13	Geç Antik Çağ	11	Pirke Avot 1:6	Birincil metin	Öğretmen ve arkadaş edinme	https://www.sefaria.org/Pirkei_Avot.1.6	Referans; edisyon seçilecek
 S14	Tarihleme tartışmalı	16	Sefer Yetsira 1	Birincil metin	On sefirot ve yirmi iki harf	https://www.sefaria.org/Sefer_Yetzirah.1	İçerik eşleşti; nüsha farkları incelenecek
-S15	Orta Çağ dolaşımı	16	Bahir	Birincil metin	Erken Kabala ve sembolik yorum	https://www.sefaria.org/Sefer_HaBahir	Referans; URL ve edisyon doğrulanacak
+S15	Orta Çağ dolaşımı	16	Bahir – Posen Library metin kaydı	Birincil metin ve bağlam	Erken Kabala, atıf ve Provence dolaşımı	https://www.posenlibrary.com/entry/sefer-ha-bahir-book-brilliance	Katalog ve bağlam eşleşti; oyunda özgün özet
 S16	12. yüzyıl	15	Mişne Tora	Birincil metin	Maimonides ve hukuk derlemesi	https://www.sefaria.org/Mishneh_Torah	Referans; pasaj seçilecek
 S17	13. yüzyıl sonu	16	Zohar	Birincil metin	Kastilya dolaşımı ve Celile anlatı ortamı	https://www.sefaria.org/Zohar	Referans; edisyon seçilecek
 S18	Modern akademik edisyon	16	Pritzker Zohar girişi	Araştırma	Kastilya, Moşe de Leon ve külliyat kronolojisi	https://www.sup.org/books/pages/4810/Front_Matter.pdf	Açık giriş eşleşti
@@ -112,3 +112,12 @@ D29	Çağdaş araştırma	12	HUJI – Peqi’in mağarası ve tarihsel anlamı	A
 S30	Yaklaşık MS 200 derlemesi	11	Mişna Berakhot 1:1	Birincil metin	Akşam Şema’sının zamanına ilişkin görüşler	https://www.sefaria.org/Mishnah_Berakhot.1.1	Pasaj eşleşti; iki Gemara ile karşılaştırılır
 S31	Yaklaşık MS 4.–5. yüzyıl	11	Yeruşalmi Berakhot 1:1	Birincil metin	Mişna’nın İsrail diyarındaki Gemara geleneğinde okunması	https://www.sefaria.org/Jerusalem_Talmud_Berakhot.1.1	Pasaj eşleşti; oyunda özgün özet
 S32	Yaklaşık MS 200 derlemesi	12	Mişna Avot 4:13	Birincil metin	Şimon bar Yohai’ye atfedilen öğreti	https://www.sefaria.org/Pirkei_Avot.4.13	Pasaj eşleşti; mağara anlatısından ayrı
+S33	MS 7. yüzyıl	13	Kur’an İsra 17:1	Birincil kutsal metin	Gece yolculuğu ve el-Mescidü’l-Aksâ ifadesi	https://quran.com/17/1	Ayet ile sonraki Kudüs yorumu ayrı
+D30	Hicrî 72 / MS 691–692	13	Kubbetü’s-Sahra mozaik yazıtı	Birincil yazıt	Abdülmelik döneminde kamusal İslami yazıt	https://www.islam.museum/en/object/dome-of-the-rock-inscription/	Nesne kaydı eşleşti; oyunda özgün şema
+D31	MS 634	13	Sophronios’un Noel vaazı üzerine De Gruyter çalışması	Araştırma	Doğu Roma yönetiminin son yıllarında Kudüs çevresi	https://www.degruyterbrill.com/de/document/doi/10.1515/9783111695426-005/html	Vaaz tarihi ve bağlam araştırması
+D32	15. yüzyıl anlatısı ve modern çalışma	14	Dalachanis ve Lemire derlemesinde Mağribi vakfı	Akademik kitap	Mujir al-Din’in el-Efdal atfı ve daha geç Osmanlı kayıtları	https://tile.loc.gov/storage-services/master/gdc/gdcebookspublic/20/18/01/99/32/2018019932/2018019932.pdf	Orta Çağ vakfı sonraki kronikten aktarılır
+D33	Osmanlı dönemi	14,19	OpenJerusalem Mağribi vakfı atama kayıtları	Arşiv dosyası	Vakıf görevlileri ve atama kayıtları	https://www.archives.openjerusalem.org/index.php/selection-of-appointment-registers-from-the-records-of-the-awqaf-of-the-maghariba-neighborhood?sf_culture=en	Arşiv dosyası eşleşti; kuruluş tarihinden sonra
+S34	Orta Çağ mistik metni	16	Tikkunei Zohar 17a	Birincil mistik metin	On sefirot ve Pataḥ Eliyahu	https://www.sefaria.org/Tikkunei_Zohar.17a	Pasaj eşleşti; oyunda özgün özet
+H11	Güncel başvuru	16	Jewish Encyclopedia – Gemaṭria	Ansiklopedi	Harfleri sayısal değerle okuma	https://www.jewishencyclopedia.com/articles/6571-gematria	Hesap yöntemi ve farklı yorumlar
+H12	Kabala öğretim geleneği	16	Chabad – Two Systems of Ten Sefirot	Gelenek içi açıklama	Keter ve Daat kullanılan iki sayım	https://www.chabad.org/kabbalah/article_cdo/aid/380536/jewish/Two-Systems-of-Ten-Sefirot.htm	İki sayım açıklaması eşleşti
+H13	Güncel başvuru	16	Unicode – Hebrew	Karakter standardı	İbrani harfleri ve beş son biçim	https://www.unicode.org/charts/nameslist/c_0590.html	Karakter adları ve biçimler eşleşti
