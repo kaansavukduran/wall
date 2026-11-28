@@ -81,6 +81,12 @@ const platformLabels = {
   he:['הרכבת החתך','החלקים נטענים…','טעינת החלקים נכשלה. סגרו ופתחו מחדש.'],
   az:['Memarlıq kəsiyini qur','Hissələr yüklənir…','Hissələr açılmadı. Bağla və yenidən aç.'],
 };
+const quarterMapLabels = {
+  tr:['Eski mahallede üç yer','Harita yükleniyor…','Harita açılamadı. Yeniden açmayı dene.'],
+  en:['Three places in the old quarter','Loading the map…','The map could not open. Try opening it again.'],
+  he:['שלושה מקומות בשכונה הישנה','המפה נטענת…','המפה לא נפתחה. נסו לפתוח אותה שוב.'],
+  az:['Köhnə məhəllədə üç yer','Xəritə yüklənir…','Xəritə açıla bilmədi. Yenidən açmağa çalış.'],
+};
 const firstFruitsLabels = {
   tr:['İlk ürün sepeti','Sahne yükleniyor…','Sahne açılamadı. Yeniden açmayı dene.'],
   en:['The first-fruits basket','Loading the scene…','The scene could not open. Try opening it again.'],
@@ -221,6 +227,7 @@ export async function start(initialLanguage) {
   const kingdomMap = find('kingdom-map');
   const platform = find('platform-assembly');
   const firstFruits = find('first-fruits');
+  const quarterMap = find('quarter-map');
   const talmud = find('talmud-page');
   const geniza = find('geniza-desk');
   const circle = find('study-circle');
@@ -242,6 +249,7 @@ export async function start(initialLanguage) {
   const accountabilityView = {record:null};
   const genizaView = {};
   const firstFruitsView = {};
+  const quarterMapView = {};
   const messianicView = {};
   const mandateView = {};
   const pressView = {};
@@ -405,6 +413,9 @@ export async function start(initialLanguage) {
   const refreshFirstFruits = connectDisclosure('first-fruits', firstFruitsLabels, () =>
     import('./first-fruits.js').then(({mountFirstFruits}) =>
       (panel, current, index) => mountFirstFruits(panel,index,firstFruitsView,appearance.reducedMotion)));
+  const refreshQuarterMap = connectDisclosure('quarter-map', quarterMapLabels, () =>
+    import('./quarter-map-lessons.js').then(({mountQuarterMap}) =>
+      (panel, current, index) => mountQuarterMap(panel,index,quarterMapView)));
   const refreshKingdomMap = connectDisclosure('kingdom-map', kingdomMapLabels, () =>
     import('./kingdom-map-lessons.js').then(({mountKingdomMap}) =>
       (panel, current, index) => mountKingdomMap(panel,index,kingdomAnswers)));
@@ -566,6 +577,8 @@ export async function start(initialLanguage) {
     if (!platform.hidden) refreshPlatform();
     firstFruits.hidden = episode.id !== 7;
     if (!firstFruits.hidden) refreshFirstFruits();
+    quarterMap.hidden = episode.id !== 23;
+    if (!quarterMap.hidden) refreshQuarterMap();
     talmud.hidden = episode.id !== 11;
     if (!talmud.hidden) refreshTalmud();
     geniza.hidden = episode.id !== 15;

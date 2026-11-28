@@ -610,6 +610,20 @@ async function main() {
           }
         }
         if (episode.id === 23) {
+          const quarter = page.locator('#quarter-map');
+          const quarterFrame = () => quarter.locator('canvas').evaluate(canvas => canvas.toDataURL());
+          await quarter.locator(':scope > summary').press('Enter');
+          await quarter.locator('canvas').waitFor();
+          const wall = await quarterFrame();
+          const home = quarter.locator('[data-quarter-place="dar-abu-saud"]');
+          await home.press('Enter');
+          assert.equal(await home.getAttribute('aria-pressed'),'true');
+          assert.match(await quarter.locator('div p[role=status]').textContent(), /1967.*1969/);
+          assert.notEqual(await quarterFrame(),wall);
+          assert.equal(await quarter.locator('a').last().getAttribute('href'),'https://doi.org/10.5334/johd.169');
+          await quarter.locator('[data-quarter-place="south-gate"]').press('Enter');
+          assert.notEqual(await quarterFrame(),wall);
+          await quarter.locator(':scope > summary').press('Enter');
           await page.click('#photo-button');
           await page.locator('#compare-history').waitFor();
           assert.match(await page.locator('#compare-history').textContent(), /1967/);

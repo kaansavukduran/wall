@@ -227,13 +227,17 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .visit-exercise [role=status],.daily-exercise [role=status]{color:var(--accent)}
 @media(max-width:25rem){.visit-object{flex-direction:column}.visit-object canvas{inline-size:6rem;max-inline-size:100%}}
 #kingdom-map,#messianic-timeline,#mandate-timeline,#press-timeline,#displacement{padding:.65rem;background:var(--panel-bg)}
-#platform-assembly,#first-fruits{padding:.65rem;background:var(--panel-bg)}
-:is(#platform-assembly,#first-fruits) summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
-:is(#platform-assembly,#first-fruits) summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#platform-assembly,#first-fruits,#quarter-map{padding:.65rem;background:var(--panel-bg)}
+:is(#platform-assembly,#first-fruits,#quarter-map) summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
+:is(#platform-assembly,#first-fruits,#quarter-map) summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 #platform-assembly canvas{inline-size:min(100%,30rem);block-size:auto;image-rendering:pixelated}
 #first-fruits canvas{display:block;inline-size:min(100%,18rem);block-size:auto;image-rendering:pixelated}
 #first-fruits button{max-inline-size:100%;overflow-wrap:anywhere}
 #first-fruits a{display:block;margin-block-start:.65rem}
+#quarter-map canvas{display:block;inline-size:min(100%,16rem);block-size:auto;image-rendering:pixelated;margin-block-end:.65rem}
+#quarter-map button{max-inline-size:100%;overflow-wrap:anywhere}
+#quarter-map button[aria-pressed=true]{background:var(--selected-bg);border-color:var(--accent)}
+#quarter-map a{display:block;margin-block-start:.4rem;overflow-wrap:anywhere}
 .platform-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:.45rem;margin-block:.55rem}
 .platform-groups fieldset{min-inline-size:0;display:grid;align-content:start;gap:.35rem;margin:0;padding:.45rem;border:1px solid var(--edge)}
 .platform-groups legend{max-inline-size:100%;overflow-wrap:anywhere}
