@@ -20,8 +20,9 @@ async function main() {
   const { dailyCases } = await import('../daily-life.js');
   const { transferLessons:earlyTransfers } = await import('../transfer-early-lessons.js');
   const { transferLessons:middleTransfers } = await import('../transfer-middle-lessons.js');
-  const transferLessons = [...earlyTransfers,...middleTransfers];
-  const transferDecks = ['transfer-early-lessons.js','transfer-middle-lessons.js'];
+  const { transferLessons:lateTransfers } = await import('../transfer-late-lessons.js');
+  const transferLessons = [...earlyTransfers,...middleTransfers,...lateTransfers];
+  const transferDecks = ['transfer-early-lessons.js','transfer-middle-lessons.js','transfer-late-lessons.js'];
   const { languageLessons } = await import('../language-lessons.js');
   const { archiveCases } = await import('../diaspora-archive.js');
   const { diasporaRecords } = await import('../diaspora-lessons.js');

@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified release: v0.6.0, 7be94ddcc7a7016d14ffaf0d78d9ff184ed1d176.
-Pages: run 46117534886. Opened the mason’s section on the live site, completed the new masonry example and saw the direct download link.
-Packages: v0.6.0 web run 46117556504 passed. Platform run 46117556501. Chromium, Firefox and WebKit passed (46117557743). The v0.5.9 installed checks passed on Linux, Windows and the Android API 35 emulator (46117496459). The integration receives HTTP 403 from Actions secrets; APK uses preview signing. Physical devices and controllers are open.
-Candidate v0.6.1: eight additional transfer cases for E9–16. Includes the inferred date, possible signature and probable recipient of Princeton Geniza Project T-S 12.203. The 33,043-byte middle deck is fetched only when a middle example is opened. 19 unit tests and four Chromium campaigns passed. The standalone Geniza example passed at 320 CSS px, using touch, a Hebrew language switch, 200% text and a preserved Azerbaijani draft.
-Next: verify v0.6.1 live and installed, then extend transfer practice to E17–24.
+Verified release: v0.6.1, 03037a47037c09a624249b2fc39f9f9a2682fe9c.
+Pages: run 46117849586. Opened The letter’s address on the live site and identified the inferred date and signature of T-S 12.203.
+Packages: v0.6.1 web run 46117871522 passed. Platform run 46117871575. Chromium, Firefox and WebKit passed (46117873624). v0.6.0 has six artifacts, and its installed checks are run 46118045368. The integration receives HTTP 403 from Actions secrets; APK uses preview signing. Physical devices and controllers are open.
+Candidate v0.6.2: all 24 chapters now have source-linked Feynman transfer exercises. The last eight link the 1492 decree, Safed sources, Ottoman masonry, 1666 correspondence, the 1930 ruling, 1948-era records, the 1967 demolition plan record and the Kahan report. Catalogue has 267 records. 19 unit tests and four Chromium campaigns passed. The standalone Wall Commission exercise passed at 320 CSS px with Turkish touch, Hebrew RTL, 200% text and a preserved draft. The last deck loads on demand.
+Next: verify v0.6.2 live and installed, then expand advanced Kabbalah close readings and scholarly comparisons.

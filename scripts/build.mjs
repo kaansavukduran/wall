@@ -19,7 +19,7 @@ const files = [
   'kabbalah.js', 'kabbalah-lessons.js', 'kotel.js', 'kotel-lessons.js',
   'language-study.js', 'language-lessons.js', 'diaspora-archive.js', 'diaspora-lessons.js',
   'daily-life.js', 'daily-lessons.js', 'object-sprite.js',
-  'transfer.js', 'transfer-early-lessons.js', 'transfer-middle-lessons.js',
+  'transfer.js', 'transfer-early-lessons.js', 'transfer-middle-lessons.js', 'transfer-late-lessons.js',
   'scenes.js', 'catalogue.js', 'sequences.js', 'hebrew-labs.js', 'controller.js', 'tour.js', 'tour-evidence.js', 'assets',
 ];
 for (const file of files) await cp(file, resolve(runtimeRoot, file), { recursive:true });

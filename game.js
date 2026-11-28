@@ -36,6 +36,7 @@ const transferLabels = {
 const transferDecks = [
   () => import('./transfer-early-lessons.js'),
   () => import('./transfer-middle-lessons.js'),
+  () => import('./transfer-late-lessons.js'),
 ];
 const lessonDecks = [
   () => import('./ancient-lessons.js').then(module => module.ancientLessons),
