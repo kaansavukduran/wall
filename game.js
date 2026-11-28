@@ -40,6 +40,7 @@ export async function start(initialLanguage) {
   const chooser = find('chapters');
   const studyRoom = find('library');
   const photoPanel = find('photo');
+  const comparison = find('compare-view');
   const journal = find('journal');
   const note = find('journal-text');
   note.value = read('wall.journal') ?? '';
@@ -154,7 +155,7 @@ export async function start(initialLanguage) {
     const index = locale();
     surface.querySelector('p').textContent = model.name[index];
     const photoButton = find('photo-button');
-    photoButton.hidden = id !== 0;
+    photoButton.hidden = id !== 0 && id !== 23;
     photoButton.textContent = photo.title[index];
     const activeOption = model.options.find(option => option[0] === selectedLayer);
     surface.querySelector('output').textContent = activeOption?.[2][index] ?? '';
@@ -493,16 +494,39 @@ export async function start(initialLanguage) {
   });
   window.addEventListener('blur', stop);
   document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
+
+  function comparePhoto() {
+    const index = locale();
+    const view = comparison.valueAsNumber;
+    world.comparePlaza(find('compare-canvas'), view, language === 'he');
+    comparison.setAttribute('aria-valuetext', photo.views[view][index]);
+    find('compare-caption').textContent = photo.captions[view][index];
+  }
+
+  comparison.addEventListener('input', comparePhoto);
   find('photo-button').addEventListener('click', () => {
     stop();
     const index = locale();
+    const modernHistory = episodes[active].id === 23;
     photoPanel.querySelector('h2').textContent = photo.title[index];
     photoPanel.querySelector('img').alt = photo.alt[index];
     photoPanel.querySelector('figcaption').textContent = photo.note[index];
-    const source = photoPanel.querySelector('a');
+    const source = find('photo-source');
     source.href = photo.url;
-    source.textContent = ui[language][5];
+    source.textContent = photo.source[index];
+    find('compare-label').textContent = photo.compare[index];
+    const [earlier, today] = photoPanel.querySelectorAll('.compare-endpoints span');
+    earlier.textContent = photo.views[0][index];
+    today.textContent = photo.views[2][index];
+    const history = find('compare-history');
+    history.hidden = !modernHistory;
+    history.textContent = photo.history[index];
+    const historySource = find('compare-history-source');
+    historySource.hidden = !modernHistory;
+    historySource.href = photo.historyUrl;
+    historySource.textContent = photo.historySource[index];
     photoPanel.querySelector('button').textContent = ui[language][4];
+    comparePhoto();
     photoPanel.showModal();
   });
   find('source').addEventListener('click', openSource);

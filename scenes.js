@@ -54,15 +54,35 @@ export const worldNote = [
 ];
 
 export const photo = {
-  title:['Eski fotoğraf','Historic photograph','תצלום היסטורי','Tarixi foto'],
+  title:['Fotoğraf ve meydan','Photo and plaza','התצלום והרחבה','Foto və meydan'],
   note:[
-    'Negatif yaklaşık 1900–1920. Fotoğrafta taş duvara yaklaşan insanlara ve duvarın önündeki dar alana bak. Oyun sahnesi şematik bir karşılaştırmadır.',
-    'Negative dated about 1900–1920. Look at the people next to the stone wall and the narrow space in front of it. The game scene is a schematic comparison.',
-    'התשליל מתוארך בקירוב ל־1900–1920. שימו לב לאנשים ליד הכותל ולשטח הצר שלפניו. הסצנה במשחק היא השוואה סכמטית.',
-    'Neqativ təxminən 1900–1920-ci illərə aiddir. Daş divarın yanındakı insanlara və qarşısındakı dar sahəyə bax. Oyun səhnəsi şərti müqayisədir.',
+    'Negatif yaklaşık 1900–1920. Duvarın dibindeki insanlara ve dar geçide bak.',
+    'Negative dated about 1900–1920. Look at the people next to the wall and the narrow passage.',
+    'התשליל מתוארך בקירוב ל־1900–1920. שימו לב לאנשים שליד הכותל ולסמטה הצרה.',
+    'Neqativ təxminən 1900–1920-ci illərə aiddir. Divarın dibindəki insanlara və dar keçidə bax.',
   ],
   alt:['Dar bir alanda Batı Duvarı’na yakın duran insanlar','People standing close to the Western Wall in a narrow area','אנשים עומדים ליד הכותל בשטח צר','Dar sahədə Qərb Divarının yanında dayanan insanlar'],
   url:'https://www.loc.gov/pictures/item/2019704965/',
+  source:['Kongre Kütüphanesi kaydı','Library of Congress record','רשומת ספריית הקונגרס','Konqres Kitabxanasının qeydi'],
+  compare:['Sokağı ve meydanı karşılaştır','Compare the alley and plaza','השוו בין הסמטה לרחבה','Küçə ilə meydanı müqayisə et'],
+  views:[
+    ['1967 öncesi','Before 1967','לפני 1967','1967-dən əvvəl'],
+    ['Yan yana','Side by side','זה לצד זה','Yan-yana'],
+    ['Bugün','Today','כיום','Bu gün'],
+  ],
+  captions:[
+    ['Temsili çizimde dar geçit, duvar ile evlerin arasındadır.','In this schematic, the narrow passage lies between the wall and the homes.','בתרשים הסמטה הצרה עוברת בין הכותל לבתים.','Şərti təsvirdə dar keçid divarla evlərin arasındadır.'],
+    ['İki çizimde de aynı taş duvarı izle. Değişen şey, duvarın önündeki alan.','Follow the same stone wall across the two views. The space in front changes.','עקבו אחר אותו קיר אבן בשני המבטים. השטח שלפניו משתנה.','Hər iki təsvirdə eyni daş divarı izlə. Dəyişən onun qarşısındakı sahədir.'],
+    ['Temsili çizimde duvarın önünde geniş bir meydan var.','In this schematic, a broad plaza stands in front of the wall.','בתרשים יש רחבה גדולה לפני הכותל.','Şərti təsvirdə divarın qarşısında geniş meydan var.'],
+  ],
+  history:[
+    'Arşiv fotoğrafı dar alanı gösterir. UNESCO raporu sonraki değişimi belgeler. Haziran 1967 savaşının ardından İsrail, Mağribi Mahallesi’ni yıktı. Mahalle sakinleri evlerini kaybetti. Duvarın önü geniş bir ibadet meydanına dönüştü.',
+    'The photograph shows the narrow space. A UNESCO report documents the later change. After the June 1967 war, Israel demolished the Maghrebi Quarter. Residents lost their homes. The space in front of the wall became a broad prayer plaza.',
+    'התצלום מראה את השטח הצר. דוח אונסק״ו מתעד את השינוי המאוחר. לאחר מלחמת יוני 1967 הרסה ישראל את שכונת המוגרבים. תושבי השכונה איבדו את בתיהם. השטח לפני הכותל הפך לרחבת תפילה גדולה.',
+    'Arxiv fotosu dar sahəni göstərir. UNESCO hesabatı sonrakı dəyişikliyi sənədləşdirir. 1967-ci ilin iyun müharibəsindən sonra İsrail Məğrib məhəlləsini sökdü. Sakinlər evlərini itirdilər. Divarın qarşısındakı sahə geniş ibadət meydanına çevrildi.',
+  ],
+  historySource:['UNESCO saha raporu','UNESCO field report','דוח השטח של אונסק״ו','UNESCO-nun sahə hesabatı'],
+  historyUrl:'https://whc.unesco.org/document/8721',
 };
 
 export const tour = [
