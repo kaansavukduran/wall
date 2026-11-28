@@ -31,6 +31,7 @@ import { messianicLessons } from '../messianic-lessons.js';
 import { modernLessons } from '../modern-lessons.js';
 import { romanLessons } from '../roman-lessons.js';
 import { models, photo } from '../scenes.js';
+import { circleCopy, circleTurns } from '../study-circle-lessons.js';
 import { secondTempleLessons } from '../second-temple-lessons.js';
 import { tour } from '../tour.js';
 import { tourEvidence } from '../tour-evidence.js';
@@ -142,7 +143,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 315);
+  assert.equal(entries.length, 320);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -150,6 +151,24 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
   assert.ok(Array.from({length:24}, (_, index) => index + 1).every(id => entries.some(entry => belongsTo(entry, id))));
   assert.ok(belongsTo({chapters:'1–4,6'}, 3));
   assert.equal(belongsTo({chapters:'Prolog,1'}, 10), false);
+});
+
+test('the closing study circle has three separate localized prompts and catalogue sources', () => {
+  assert.deepEqual(circleTurns.map(turn => turn.id),['listen','purpose','mutual-support']);
+  const byUrl = new Map(entries.filter(entry => belongsTo(entry,24)).map(entry => [entry.url,entry]));
+  for (const copy of circleCopy) {
+    assert.equal(copy.length,languages.length);
+    assert.ok(copy.every(text => text.trim()));
+  }
+  for (const turn of circleTurns) {
+    assert.equal(turn.choices.length,2);
+    assert.ok(turn.choices[turn.correct]);
+    for (const text of [turn.name,turn.speech,turn.retry,turn.response,...turn.choices]) {
+      assert.equal(text.length,languages.length);
+      assert.ok(text.every(value => value.trim()));
+    }
+    assert.ok(turn.sources.every(([,url]) => byUrl.has(url)));
+  }
 });
 
 test('Geniza desk distinguishes two chronological records, with sources and localized sides', () => {
@@ -409,7 +428,7 @@ test('language workshop indexes original spellings and all four localized explan
 });
 
 test('inspectable scenes link localized objects or views to chapter sources', () => {
-  for (const id of [1,3,4,12,16]) {
+  for (const id of [1,3,4,12,16,18]) {
     const model = models.find(entry => entry.id === id);
     assert.equal(model.options.length, 3);
     assert.equal(new Set(model.options.map(([key]) => key)).size, 3);

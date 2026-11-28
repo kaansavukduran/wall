@@ -132,6 +132,26 @@ export const models = [
     ['salonika',['Osmanlı limanları','Ottoman ports','נמלים עות׳מאניים','Osmanlı limanları'],
       ['Selanik ve İstanbul önemli varış yerleri oldu. Bazı aileler buralara İtalya veya başka bir liman üzerinden ulaştı.','Salonika and Istanbul became important destinations. Some families reached them through Italy or another port.','סלוניקי ואיסטנבול היו יעדים חשובים. משפחות מסוימות הגיעו דרך איטליה או נמל אחר.','Saloniki və İstanbul mühüm dayanacaqlar oldu. Bəzi ailələr bu şəhərlərə İtaliya və ya başqa liman vasitəsilə gəlib çatdı.']],
   ]),
+  scene(18, ['Safed’de üç okuma masası','Three reading tables in Safed','שלושה שולחנות לימוד בצפת','Səfəddə üç oxu masası'], [
+    ['safed-law',['Karo · Pesah sofrası','Karo · Passover table','קארו · שולחן הסדר','Karo · Pesax süfrəsi'], [
+      'Henüz gündüzken sofrayı hazırla. Yosef Karo, çocuklar uykuya dalmadan Seder’e başlanabilmesi için böyle öğüt verir. Kiduş, şarap üzerine söylenen kutsama, gece olunca okunur. Kaynak Şulhan Aruh, Orah Hayim 472:1.',
+      'Set the table while it is still light. Joseph Karo directs households to prepare ahead so the Seder can start before children fall asleep. The Kiddush blessing over wine waits until nightfall. See Shulchan Arukh, Orach Chayim 472:1.',
+      'ערכו את השולחן בעוד יום. יוסף קארו מנחה להכין אותו מראש כדי שאפשר יהיה להתחיל את הסדר לפני שהילדים נרדמים. את הקידוש על היין אומרים אחרי רדת הלילה. ראו שולחן ערוך, אורח חיים תע״ב, א׳.',
+      'Hava işıqlı ikən süfrəni hazırla. Yosef Karo uşaqlar yatmadan Sederə başlamaq üçün süfrəni qabaqcadan hazırlamağı bildirir. Şərab üzərində deyilən Kiduş gecə düşəndə oxunur. Bax: Şulhan Aruh, Orah Hayim 472:1.',
+    ],'https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.472.1'],
+    ['safed-ethics',['Cordovero · Merhamet','Cordovero · Compassion','קורדובירו · רחמים','Kordovero · Mərhəmət'], [
+      'Moşe Cordovero, Tomer Devora’nın ilk bölümünde ilahî merhametin davranışla örnek alınmasını önerir. Örneğin incindiğin bir konuşmada karşındaki kişiye yeniden söz vermeyi düşün. Bu örnek, metnin ahlâk sorusunu gündelik bir duruma taşır.',
+      'In the first chapter of Tomer Devorah, Moses Cordovero asks how human conduct can imitate divine compassion. Imagine giving someone another chance to speak after a conversation that hurt you. The example brings the ethical question into an everyday setting.',
+      'בפרק הראשון של תומר דבורה משה קורדובירו שואל איך המעשים שלנו יכולים לחקות את מידת הרחמים האלוהית. דמיינו שאתם נותנים לאדם הזדמנות נוספת לדבר אחרי שיחה שפגעה בכם. הדוגמה מעבירה את השאלה המוסרית למצב יומיומי.',
+      'Moşe Kordovero Tomer Devoranın birinci fəslində insanın davranışında ilahi mərhəməti necə nümunə götürə biləcəyini soruşur. Səni incidən söhbətdən sonra qarşıdakı adama yenidən danışmaq imkanı verməyi düşün. Bu nümunə etik sualı gündəlik həyata gətirir.',
+    ],'https://www.sefaria.org/Tomer_Devorah.1.1'],
+    ['safed-vital',['Vital · Boşluk ve çizgi','Vital · Space and line','ויטאל · חלל וקו','Vital · Boşluq və xətt'], [
+      'Ets Hayim, tsimtsumdan sonra kalan boşluğa sonsuz ışıktan bir çizginin, kav’ın, uzandığını anlatır. Hayim Vital’in aktardığı Luria öğretisini şemada izle. Bu, dünyaların nasıl ortaya çıktığını anlatan mistik bir modeldir.',
+      'Etz Chaim describes a line, the kav, extending from the infinite light into the space left by tzimtzum. Follow Hayyim Vital’s transmission of Luria’s teaching in the diagram. It is a mystical account of how the worlds emerge.',
+      'עץ חיים מתאר קו הנמשך מאור אין סוף אל החלל שנותר אחרי הצמצום. עקבו בתרשים אחר תורת האר״י כפי שנמסרה בידי חיים ויטאל. זהו תיאור מיסטי של התהוות העולמות.',
+      'Etz Hayim tsimtsumdan sonra qalan boşluğa sonsuz nurdan kav adlı xəttin uzandığını təsvir edir. Hayim Vitalin ötürdüyü Luriya təlimini sxemdə izlə. Bu, dünyaların yaranmasını izah edən mistik modeldir.',
+    ],'https://www.sefaria.org/Sefer_Etz_Chaim.1.2.2'],
+  ]),
   scene(19, ['Kudüs suru ve Batı Duvarı','City walls and the Western Wall','חומות העיר והכותל המערבי','Şəhər divarları və Qərb Divarı'], [
     ['city-walls',['Osmanlı şehir suru','Ottoman city wall','חומת העיר העות׳מאנית','Osmanlı şəhər divarı'],
       ['Kanûnî devrindeki kitabe, Eski Şehir çevre surunun inşasını belgeler. Bu duvar şehri çevreler.','The inscription from Süleyman’s reign documents construction of the city wall that surrounds the Old City.','הכתובת מימי סולימאן מתעדת בנייה של חומת העיר המקיפה את העיר העתיקה.','Süleyman dövrünün kitabəsi İçərişəhəri əhatə edən şəhər divarının tikintisini sənədləşdirir.']],

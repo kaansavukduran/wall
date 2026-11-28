@@ -430,6 +430,56 @@ export async function makeWorld(canvas, reducedMotion) {
       rect(background, '#674b43', 160, 103, 8, 8);
       return;
     }
+    if (index === 18) {
+      rect(background, '#493942', 120, 65, 360, 133);
+      rect(background, '#866354', 125, 70, 355, 126);
+      for (const x of [146,396]) {
+        rect(background, '#ad8d68', x, 85, 55, 56);
+        rect(background, '#654d4a', x + 4, 89, 47, 48);
+        rect(background, '#d6a274', x + 6, 94, 43, 30);
+        rect(background, '#8d6b53', x + 24, 91, 4, 43);
+      }
+      rect(background, '#553e3b', 172, 163, 270, 18);
+      rect(background, '#bb926c', 166, 157, 282, 9);
+      rect(background, '#5c443e', 181, 180, 9, 18);
+      rect(background, '#5c443e', 420, 180, 9, 18);
+      switch (layer) {
+        case 'safed-law':
+          rect(background, '#d2bd97', 186, 151, 215, 14);
+          for (const x of [219,313,371]) {
+            rect(background, '#957e68', x, 150, 21, 10);
+            rect(background, '#e1d1a7', x + 2, 150, 16, 6);
+          }
+          rect(background, '#e9c674', 261, 149, 36, 5);
+          rect(background, '#776056', 340, 136, 11, 13);
+          rect(background, '#98758c', 342, 137, 7, 5);
+          break;
+        case 'safed-ethics':
+          for (const [x, coat] of [[213,'#526967'],[376,'#77627b']]) {
+            rect(background, coat, x, 135, 25, 30);
+            rect(background, '#c89573', x + 6, 123, 13, 14);
+            rect(background, '#513c3b', x + 3, 119, 19, 5);
+          }
+          rect(background, '#e5c593', 273, 142, 63, 15);
+          rect(background, '#897059', 279, 148, 49, 2);
+          rect(background, '#897059', 279, 152, 35, 1);
+          break;
+        case 'safed-vital':
+          rect(background, '#493c45', 255, 80, 110, 75);
+          rect(background, '#e4c58c', 258, 83, 104, 69);
+          for (const [x,y,w,h] of [[300,94,22,2],[291,102,9,2],[322,102,9,2],
+            [285,109,2,18],[335,109,2,18],[291,132,9,2],[322,132,9,2],[300,140,22,2]]) {
+            rect(background, '#78504d', x, y, w, h);
+          }
+          rect(background, '#a5584b', 310, 90, 3, 36);
+          rect(background, '#a5584b', 309, 124, 5, 5);
+          break;
+        default:
+          rect(background, '#e1c495', 274, 145, 66, 12);
+          rect(background, '#8b6b54', 280, 149, 49, 1);
+      }
+      return;
+    }
     if (index === 19) {
       rect(background, '#6f5e51', 108, 103, 372, 95);
       for (const x of [120,170,220,330,380,430]) {

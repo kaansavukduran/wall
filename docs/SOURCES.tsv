@@ -11,7 +11,7 @@ S09	Geç Antik Çağ	8,11	Bavli Gittin 55b–56b	Birincil metin	Yıkımı hatır
 S10	Geç Antik Çağ	10,11	Yeruşalmi Taanit 4	Birincil metin	Yas, Betar ve felaket hafızası	https://www.sefaria.org/Jerusalem_Talmud_Taanit.4.1-58	Referans; bölüm numarası sürümde eşleştirilecek
 S11	Geç Antik Çağ	12,24	Bavli Şabat 33b	Birincil metin	Şimon ve Elazar mağara anlatısı	https://www.sefaria.org/Shabbat.33b	İçerik eşleşti; edisyon seçilecek
 S12	Geç Antik Çağ	Prolog,11	Bavli Berakhot 2a	Birincil metin	Şema ve okuma zamanı	https://www.sefaria.org/Berakhot.2a	Referans; edisyon seçilecek
-S13	Geç Antik Çağ	11	Pirke Avot 1:6	Birincil metin	Öğretmen ve arkadaş edinme	https://www.sefaria.org/Pirkei_Avot.1.6	Referans; edisyon seçilecek
+S13	Geç Antik Çağ	11,24	Pirke Avot 1:6	Birincil metin	Öğretmen ve arkadaş edinme	https://www.sefaria.org/Pirkei_Avot.1.6	Referans; edisyon seçilecek
 S14	Tarihleme tartışmalı	16	Sefer Yetsira 1	Birincil metin	On sefirot ve yirmi iki harf	https://www.sefaria.org/Sefer_Yetzirah.1	İçerik eşleşti; nüsha farkları incelenecek
 S15	Orta Çağ dolaşımı	16	Bahir – Posen Library metin kaydı	Birincil metin ve bağlam	Erken Kabala, atıf ve Provence dolaşımı	https://www.posenlibrary.com/entry/sefer-ha-bahir-book-brilliance	Katalog ve bağlam eşleşti; oyunda özgün özet
 S16	12. yüzyıl	15	Mişne Tora	Birincil metin	Maimonides ve hukuk derlemesi	https://www.sefaria.org/Mishneh_Torah	Referans; pasaj seçilecek
@@ -203,7 +203,7 @@ M14	Kabala okuma atölyesi	18,24	Nefesh HaChayim, Gate I 5:12, Sefaria	Açıklam
 M15	Kabala okuma atölyesi	24	Sefaria Library: Baal HaSulam	Katalog veya dizin	Baal HaSulam ve Sulam	https://www.sefaria.org/texts/Kabbalah/Baal%20HaSulam	Atölye kaynağı ve özgün özet
 M16	Kabala okuma atölyesi	24	Bnei Baruch Kabbalah Academy: Rabbi Yehuda Ashlag	Kurumsal öz tanım	Baal HaSulam ve Sulam	https://www.kabbalah.info/en/rabbi-yehuda-leib-halevi-ashlag-baal-hasulam/	Atölye kaynağı ve özgün özet
 M17	Kabala okuma atölyesi	24	Sulam commentary publication context	Tarihsel özet	Baal HaSulam ve Sulam	https://seder-olam.com/en/n/hasulam/	Atölye kaynağı ve özgün özet
-M18	Kabala okuma atölyesi	24	Rabash, Purpose of Society – 1 (1984), Kabbalah Media	Kurum arşivindeki birincil metin	Rabaş, 1984: “Toplumun Amacı”	https://kabbalah.academy/en/library/sources/articles/834/	Atölye kaynağı ve özgün özet
+M18	1984	24	Rabash, Purpose of Society – 1 (1984), Kabbalah Media	Kurum arşivindeki birincil metin	Rabaş, 1984: “Toplumun Amacı”	https://kabbalah.academy/en/library/sources/articles/834/	Atölye kaynağı ve özgün özet
 M19	Kabala okuma atölyesi	24	Bnei Baruch Kabbalah Academy: The Ten as a Requisite for Adhesion	Kurumsal öz tanım	Rabaş, 1984: “Toplumun Amacı”	https://kabbalah.academy/en/library/sources/articles/3454/	Atölye kaynağı ve özgün özet
 M20	Kabala okuma atölyesi	24	Bnei Baruch Kabbalah Academy: About	Kurumsal öz tanım	Michael Laitman ve Bnei Baruch	https://kabbalah.academy/en/about/	Atölye kaynağı ve özgün özet
 P01	Kotel ziyaret atölyesi	Prolog,24	Western Wall Heritage Foundation: Visitor Information	Kurumsal veya arkeolojik kayıt	Duvarın adları	https://thekotel.org/en/visitor.info/	Ziyaret atölyesi kaynağı ve özgün özet
@@ -314,3 +314,8 @@ GEN01	15 Haziran 1158	15	Princeton Geniza Project · ENA 2558.10	Arşiv belgesi 
 GAL01	2025	12	The Rashbi Cave at Peqi’in: Finds and Historical Meaning	Arkeolojik saha araştırması	Mağara geleneği ve maddi buluntu	https://doi.org/10.26351/IHD/14-1/4	Antik olabilecek seramik ve daha geç kalıntılar kişi atfını doğrulamaz
 GAL02	16. yüzyıl kayıtları ve sonraki pratik	12,24	Doron Bar · Lag BaOmer at Meron	Uzman tarih yazısı	Meron ziyaretinin yazılı izleri	https://schechter.edu/a-historical-treatise-on-the-lag-bomer-celebration-at-mt-meron/	Peqi’in mağarası ve Meron anması ayrı mekânlarda
 ZOH01	16. yüzyıl başı–ortası, tahmini	16,18	Merton College · Zohar manuscript digitised	Nüsha ve küratör açıklaması	Kâğıt tarihi, 111v kâtip notu ve nüsha tarihi	https://www.merton.ox.ac.uk/news/merton-zohar-manuscript-digitised	Nüsha ve dolaşım tarihi ayrı; arşiv görselleri dağıtılmıyor
+SAF01	16. yüzyıl	18	Şulhan Aruh, Orah Hayim 472:1	Yahudi hukuk metni	Seder sofrasını gündüz hazırlama ve Kiduşu gece okuma	https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.472.1	Sefaria pasajı eşleşti; oyunda özgün özet
+SAF02	16. yüzyıl	18	Moşe Cordovero · Tomer Devora 1:1	Etik ve mistik metin	Merhamet niteliklerinin davranışla örnek alınması	https://www.sefaria.org/Tomer_Devorah.1.1	Pasaj eşleşti; gündelik örnek oyuna özgü
+SAF03	16. yüzyıl Safed öğretisinin sonraki aktarımı	18	Hayim Vital · Sefer Ets Hayim 1:2:2	Mistik metin	Tsimtsumdan sonra kav ve boşluk	https://www.sefaria.org/Sefer_Etz_Chaim.1.2.2	Sefaria pasajı eşleşti; oyun çizimi şematik
+CIR01	8 Eylül 2020 kayıt, 16 Kasım 2025 yeniden gösterim	24	Michael Laitman · Work with Faith Above Reason, 41:31	Kurum ders kaydı ve çeviri dökümü	Onlu çalışma grubunda ortak arzu ve ilişki	https://kabbalahmedia.info/en/lessons/cu/WNsMjHro?mediaType=video&send=01h19m51s&shareLang=en&sstart=41m31s	Konuşmacı, kayıt tarihi ve döküm işareti eşleşti
+CIR02	20. yüzyıl	24	Baal HaSulam · The Arvut	Gelenek içi metin	Dinî öğretide karşılıklı sorumluluk	https://kabbalahmedia.info/en/sources/itcVAcFn	Yazar ve eser eşleşti; oyun özgün diyalog kullanır

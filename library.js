@@ -127,3 +127,10 @@ export const genizaLabels = {
   he:['שולחן המכתבים מן הגניזה','המכתבים נטענים…','המכתבים לא נפתחו. סגרו את האזור ופתחו אותו שוב.'],
   az:['Geniza məktub masası','Məktublar açılır…','Məktublar açılmadı. Bölməni bağlayıb yenidən aç.'],
 };
+
+export const studyCircleLabels = {
+  tr:['Dostlarla okuma grubu','Sohbet hazırlanıyor…','Sohbet açılamadı. Kapatıp yeniden aç.'],
+  en:['A study circle with friends','Loading the conversation…','The conversation could not open. Close this section and reopen it.'],
+  he:['חוג לימוד עם חברים','השיחה נטענת…','השיחה לא נפתחה. סגרו את האזור ופתחו אותו שוב.'],
+  az:['Dostlarla oxu qrupu','Söhbət yüklənir…','Söhbət açılmadı. Bölməni bağlayıb yenidən aç.'],
+};

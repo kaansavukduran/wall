@@ -1,7 +1,7 @@
 import { controllerHelp, mountController } from './controller.js';
 import { connectAppearance } from './appearance.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { accountabilityLabels, atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, genizaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
+import { accountabilityLabels, atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, genizaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, studyCircleLabels, visitLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -101,6 +101,7 @@ export async function start(initialLanguage) {
   const timeline = find('messianic-timeline');
   const talmud = find('talmud-page');
   const geniza = find('geniza-desk');
+  const circle = find('study-circle');
   const transfer = find('transfer');
   const evidenceChoices = find('evidence-choices');
   const labRoot = find('language-labs');
@@ -110,6 +111,7 @@ export async function start(initialLanguage) {
   const cultureView = {record:null};
   const accountabilityView = {record:null};
   const genizaView = {};
+  const circleView = {};
   const talmudView = {reading:null,side:0,position:0,answers:[['','',''],['','','']]};
   const progress = readProgress();
   let language = initialLanguage;
@@ -195,6 +197,9 @@ export async function start(initialLanguage) {
   const refreshGeniza = connectDisclosure('geniza-desk', genizaLabels, () =>
     import('./geniza-desk.js').then(({mountGenizaDesk}) =>
       (panel, current, index) => mountGenizaDesk(panel,index,genizaView)));
+  const refreshCircle = connectDisclosure('study-circle', studyCircleLabels, () =>
+    import('./study-circle.js').then(({mountStudyCircle}) =>
+      (panel, current, index) => mountStudyCircle(panel,index,circleView)));
   const refreshSave = connectDisclosure('save-transfer', saveLabels, () =>
     import('./portable-save.js').then(module => module.mountPortableSave));
   const refreshTransfer = connectDisclosure('transfer', transferLabels, async chapter => {
@@ -289,6 +294,8 @@ export async function start(initialLanguage) {
     if (!talmud.hidden) refreshTalmud();
     geniza.hidden = episode.id !== 15;
     if (!geniza.hidden) refreshGeniza();
+    circle.hidden = episode.id !== 24;
+    if (!circle.hidden) refreshCircle();
     renderEvidence();
     renderLanguageLabs();
     if (focus) find('title').focus();

@@ -10,3 +10,4 @@
 
 - `culture-objects.png` is a WALL-original 256×96 sprite sheet of eight 64×48 cells. Its stone, books, memoir, forms, and recording icons represent object types. They are illustrations, with no transcribed signatures, census details, archival photographs or original audio.
 - `geniza-letters.png` is a WALL-original 192×96 teaching sprite sheet. Each row has a front, a back and a schematic evidence view. The illustrated paper and handwriting marks do not reproduce scans or letter text. Chapter 15 links to the Princeton Geniza Project records for the original documents.
+- `study-circle.png` contains six original 64×48 portraits of fictional participants. The second row depicts responses within the conversation. The characters are not portraits of the authors whose works are linked.

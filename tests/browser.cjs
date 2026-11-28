@@ -19,6 +19,7 @@ async function main() {
   const { comparisonCases } = await import('../kabbalah-advanced-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
   const { dailyCases } = await import('../daily-life.js');
+  const { circleTurns } = await import('../study-circle-lessons.js');
   const { genizaLetters } = await import('../geniza-lessons.js');
   const { cultureCases, cultureRecords } = await import('../culture-lessons.js');
   const { accountabilityCases, accountabilityRecords } = await import('../accountability-lessons.js');
@@ -166,7 +167,7 @@ async function main() {
           await page.click('[data-layer="sanctuary"]');
           assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), before);
         }
-        if ([1,3,4,12,16].includes(episode.id)) {
+        if ([1,3,4,12,16,18].includes(episode.id)) {
           const model = models.find(entry => entry.id === episode.id);
           let previous = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
           for (const [layer, , readings, source] of model.options) {
@@ -442,6 +443,36 @@ async function main() {
           assert.notEqual(await page.locator('#models output').textContent(), firstNote);
         }
         if (episode.id === 24) {
+          assert.equal(loadedLessons.has('study-circle-lessons.js'),false);
+          const circle = page.locator('#study-circle');
+          await circle.locator(':scope > summary').press('Enter');
+          const portrait = circle.locator('canvas');
+          await portrait.waitFor();
+          const index = ['tr','en','he','az'].indexOf(locale);
+          for (const turn of circleTurns) {
+            assert.equal(await circle.locator('figcaption b').textContent(),turn.name[index]);
+            const idle = await portrait.evaluate(canvas => canvas.toDataURL());
+            const respond = choice => circle.locator('[data-circle-choice="' + choice + '"]');
+            await respond(1 - turn.correct).press('Enter');
+            assert.equal(await circle.locator('#circle-response').textContent(),turn.retry[index]);
+            assert.equal(await circle.locator('#circle-next').isVisible(),false);
+            if (width === 320) await respond(turn.correct).tap();
+            else await respond(turn.correct).press('Enter');
+            assert.equal(await circle.locator('#circle-response').textContent(),turn.response[index]);
+            assert.notEqual(await portrait.evaluate(canvas => canvas.toDataURL()),idle);
+            await circle.locator('.daily-sources summary').press('Enter');
+            assert.deepEqual(await circle.locator('a').evaluateAll(links => links.map(link => link.href)),
+              turn.sources.map(([,url]) => url));
+            if (width === 320) {
+              await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+              assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+              await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+            }
+            await circle.locator('#circle-next').press('Enter');
+            assert.ok(await respond(0).evaluate(button => document.activeElement === button));
+          }
+          assert.equal(await circle.locator('figcaption b').textContent(),circleTurns[0].name[index]);
+          await circle.locator(':scope > summary').press('Enter');
           await page.click('[data-evidence="4"]');
           assert.match(await page.locator('#evidence-date').textContent(), /2025/);
           assert.equal(await page.locator('#evidence-source').getAttribute('href'),

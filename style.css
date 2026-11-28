@@ -198,9 +198,9 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .visit-exercise [role=status],.daily-exercise [role=status]{color:var(--accent)}
 @media(max-width:25rem){.visit-object{flex-direction:column}.visit-object canvas{inline-size:6rem;max-inline-size:100%}}
 #messianic-timeline{padding:.65rem;background:var(--panel-bg)}
-#talmud-page,#geniza-desk{padding:.65rem;background:var(--panel-bg)}
-#talmud-page summary,#geniza-desk summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
-#talmud-page summary:focus-visible,#geniza-desk summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#talmud-page,#geniza-desk,#study-circle{padding:.65rem;background:var(--panel-bg)}
+#talmud-page summary,#geniza-desk summary,#study-circle summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
+#talmud-page summary:focus-visible,#geniza-desk summary:focus-visible,#study-circle summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 #talmud-reading{display:block;inline-size:100%;min-inline-size:0;max-inline-size:100%;margin-block:.2rem .55rem;overflow:hidden;text-overflow:ellipsis}
 .talmud-reading{padding:.65rem;background:var(--reading-bg)}
 .talmud-reading p,.talmud-reading ul{margin-block:.3rem .55rem}
@@ -303,9 +303,15 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 
 html[data-controller-input] :is(button,select,summary,a,input[type="range"]):focus{outline:3px solid var(--accent);outline-offset:3px}
 
-#geniza-desk{min-inline-size:0;overflow-wrap:anywhere}
+#geniza-desk,#study-circle{min-inline-size:0;overflow-wrap:anywhere}
 .geniza-letters{margin-block-end:.6rem}
 .geniza-letter figure{margin-inline:0;margin-block-start:0}
 .geniza-letter figcaption{min-inline-size:0}
 .geniza-letter a{display:inline-block;margin-inline-start:.3rem}
 .geniza-exercise [role=status]{color:var(--accent)}
+
+.circle-speaker{margin-inline:0;margin-block-start:0}
+.circle-speaker figcaption{min-inline-size:0}
+.circle-speaker b{display:block;margin-block-end:.3rem}
+#circle-response{color:var(--accent)}
+#circle-next{margin-block-start:.55rem}
