@@ -85,10 +85,10 @@ export const kotelLessons = [
     id: "kotel-shema",
     title: ["Şema duası", "Shema", "שמע ישראל", "Şema"],
     practice: [
-      "İlk ayeti okuyabilir, dinleyebilir ya da sessiz kalabilirsin. Dua okuman istenmiyor; oyun bir ibadeti kaydetmez veya canlandırmaz.",
-      "You may read or listen to the opening verse, or choose quiet. You are not asked to recite a prayer; the game does not record or simulate a ritual.",
-      "אפשר לקרוא או להאזין לפסוק הראשון, או לבחור בשקט. אינך נדרש לומר תפילה; אין במשחק הקלטה או הדמיה של טקס.",
-      "İlk ayəni oxuya və ya dinləyə, yaxud səssizliyi seçə bilərsiniz. Dua etməyiniz tələb olunmur; oyun ayini yazmır və canlandırmır."
+      "İlk ayeti aşağıdaki kaynakta okuyabilirsin. Ziyarette sessizce gözlemlemek de bir seçenek.",
+      "Read the opening verse in the source below. During a visit, you can also observe quietly.",
+      "אפשר לקרוא את הפסוק הראשון במקור שלהלן. בביקור אפשר גם להתבונן בשקט.",
+      "İlk ayəni aşağıdakı mənbədə oxuya bilərsən. Ziyarət zamanı sakitcə müşahidə etmək də olar."
     ],
     history: [
       "Şema, Yahudi duasının temel metinlerinden biridir. İlk bölümü Tesniye 6:4–9’dur; litürjik okumada Sayılar 15 ve Tesniye 11’den bölümler de yer alır.",
@@ -105,10 +105,10 @@ export const kotelLessons = [
     id: "kotel-amidah",
     title: ["Amida duası", "The Amidah", "תפילת העמידה", "Amida duası"],
     practice: [
-      "Geleneksel Amida duasında ibadet edenler ayakta durup dua yönüne döner; Şulhan Aruh, Orah Hayim 95’te duruş da ele alınır. Burada yalnızca okuyabilir veya dinleyebilirsin.",
-      "In the traditional Amidah, worshippers stand facing the prayer direction; Shulchan Aruch, Orach Chayim 95, also discusses posture. Here you can simply read or listen.",
-      "בתפילת העמידה המסורתית עומדים ופונים לכיוון התפילה; בשולחן ערוך, אורח חיים צ״ה, מתוארות גם תנוחות הגוף. כאן מספיק לקרוא על כך או לבחור להקשיב.",
-      "Ənənəvi Amida duasında ibadət edənlər dayanıb dua istiqamətinə yönəlirlər; Şulxan Arux, Orax Xayim 95 bədən duruşunu da müzakirə edir. Burada sadəcə oxuya və ya dinləyə bilərsiniz."
+      "Geleneksel Amida duasında ibadet edenler ayakta durup dua yönüne döner. Şulhan Aruh’un Orah Hayim bölümünün 95. kısmı ayakta duruşu anlatır.",
+      "In the traditional Amidah, worshippers stand facing the prayer direction. Shulchan Arukh, Orach Chayim 95, describes the standing posture.",
+      "בתפילת העמידה המסורתית עומדים ופונים לכיוון התפילה. בשולחן ערוך, אורח חיים סימן צ״ה, מתוארת תנוחת העמידה.",
+      "Ənənəvi Amida duasında ibadət edənlər ayaq üstə durub dua istiqamətinə yönəlirlər. Şulxan Aruxun Orax Xayim bölməsinin 95-ci hissəsi ayaq üstə duruşu təsvir edir."
     ],
     history: [
       "On Sekiz Dua olarak da bilinen Amida, temel bir duadır. Metinler, eklemeler ve gelenekler topluluklara ve günlere göre değişir; cemaatle ve bireysel duanın bazı ayrıntıları farklıdır.",
@@ -183,22 +183,24 @@ export const kotelLessons = [
   },
   {
     id: "kotel-customs",
-    title: ["Topluluklar ve gelenekler", "Communities and customs", "קהילות ומנהגים", "İcmalar və adətlər"],
+    title: ["İki dua alanı", "Two prayer areas", "שתי רחבות תפילה", "İki dua sahəsi"],
     practice: [
-      "Meydanda kadınlar ve erkekler için ayrılmış bölümler dâhil dua alanları ve yerel yönergeler bulunur. Ayrıntılar değişebilir; güncel tabelaları kontrol et ve herkese saygı göster.",
-      "The plaza has prayer areas and local guidance, including the commonly designated women’s and men’s sections. Details may change; check current signs and treat everyone with respect.",
-      "בכיכר יש אזורי תפילה והנחיות מקומיות, לרבות חלוקה מקובלת בין אזורי נשים וגברים. פרטים עשויים להשתנות; בדקו שילוט עדכני וכבדו כל אדם.",
-      "Meydanda qadın və kişi bölmələri də daxil olmaqla dua sahələri və yerli qaydalar var. Təfərrüatlar dəyişə bilər; cari nişanları yoxlayın və hər kəsə hörmət edin."
+      "Batı Duvarı Miras Vakfı’nın çekim kurallarının 5.7. maddesi, ana dua meydanındaki kadın ve erkek bölümlerinden ayrı ayrı söz eder. Şubat 2026 tarihli araştırma, güneyde Robinson Kemeri yakınındaki Ezrat Yisrael’i kadınların ve erkeklerin birlikte dua edebildiği ayrı bir alan olarak tanımlar. Ziyarette güncel tabelalara bak.",
+      "Section 5.7 of the Western Wall Heritage Foundation’s filming rules identifies separate women’s and men’s sections in the main prayer plaza. A February 2026 analysis describes Ezrat Yisrael, near Robinson’s Arch to the south, as a separate area for women and men to pray together. Check current signs when visiting.",
+      "סעיף 5.7 בנוהל הצילום של הקרן למורשת הכותל מציין את עזרת הנשים ואת עזרת הגברים ברחבת התפילה הראשית. סקירה מפברואר 2026 מתארת את עזרת ישראל ליד קשת רובינסון מדרום כרחבה נפרדת שבה נשים וגברים יכולים להתפלל יחד. בביקור כדאי לבדוק את השילוט העדכני.",
+      "Qərb Divarı İrs Fondunun çəkiliş qaydalarının 5.7-ci bəndi əsas dua meydanında qadınlar və kişilər üçün ayrı bölmələri qeyd edir. 2026-cı ilin fevralında dərc olunan təhlil cənubda, Robinson tağının yaxınlığındakı Ezrat Yisraeli qadın və kişilərin birgə dua edə bildiyi ayrıca sahə kimi təsvir edir. Ziyarət zamanı ərazidəki göstərişlərə bax."
     ],
     history: [
-      "Yahudilikte farklı akımlar ve gelenekler vardır; tek tip bir dua uygulaması yoktur. Meydanın düzeni alana özgü bir yönetim kuralıdır; dua ve eşitlik konusundaki tüm Yahudi görüşlerini tek başına temsil etmez.",
-      "Jewish prayer includes diverse movements and traditions, with no single uniform custom. Plaza arrangements are local site policy; they do not by themselves represent every Jewish discussion about prayer and equality.",
-      "יהודים מתפללים לפי מסורות וזרמים מגוונים, והמנהגים אינם אחידים. סידורי הרחבה הם מדיניות מקומית של האתר; הם אינם מסכמים לבדם את כל הדיונים היהודיים על תפילה ושוויון.",
-      "Yəhudilər müxtəlif cərəyan və ənənələrə uyğun dua edir; adətlər vahid deyil. Meydanın düzəni yerli idarəetmə qaydasıdır və dua ilə bərabərlik barədə bütün yəhudi müzakirələrini əhatə etmir."
+      "İsrail hükümeti 2016’da güneydeki alanı genişletmeyi ve ortak giriş düzenlemeyi öngören planı kabul etti. Hükümet 2017’de planın uygulanmasını askıya aldı. Bu kararlar, farklı Yahudi cemaatlerinin kamusal dua alanını nasıl paylaşacağına ilişkin bir tartışmanın parçasıydı.",
+      "In 2016 the Israeli government adopted a plan to expand the southern prayer area and arrange a shared entrance. In 2017 it froze implementation of the plan. The decisions were part of a debate about how different Jewish communities should share a public place of prayer.",
+      "ב־2016 אימצה ממשלת ישראל מתווה להרחבת רחבת התפילה הדרומית ולהסדרת כניסה משותפת. ב־2017 הקפיאה הממשלה את יישום המתווה. ההחלטות היו חלק מדיון על שיתוף מרחב תפילה ציבורי בין קהילות יהודיות שונות.",
+      "İsrail hökuməti 2016-cı ildə cənubdakı dua sahəsini genişləndirmək və ortaq giriş yaratmaq planını qəbul etdi. Hökumət 2017-ci ildə planın icrasını dayandırdı. Bu qərarlar müxtəlif yəhudi icmalarının ictimai dua məkanından necə birgə istifadə edə biləcəyi barədə müzakirənin bir hissəsi idi."
     ],
     sources: [
-      { title: "Western Wall Heritage Foundation: Visitor Information", url: "https://thekotel.org/en/visitor_information/guidelines-for-behavior-at-the-western-wall/" },
-      { title: "Western Wall Heritage Foundation: Procedures", url: "https://thekotel.org/en/visitor_information/prayers-and-ceremonies-at-the-western-wall-plaza-procedures-2/" }
+      { title: "Western Wall Heritage Foundation · Site guidelines", url: "https://thekotel.org/en/visitor_information/guidelines-for-behavior-at-the-western-wall/" },
+      { title: "Western Wall Heritage Foundation · Filming rules, §5.7", url: "https://thekotel.org/en/visitor_information/filming-regulations/" },
+      { title: "Advisory team · Prayer arrangements proposal (2016)", url: "https://www.gov.il/BlobFolder/reports/govmes310116/en/english_mediacenter_secretaryannouncements_documents_n1.pdf" },
+      { title: "Israel Democracy Institute · Western Wall explainer (25 February 2026)", url: "https://en.idi.org.il/articles/63581" }
     ]
   }
 ];

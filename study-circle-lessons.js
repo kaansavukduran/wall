@@ -33,7 +33,7 @@ export const circleTurns = [{
     'Miryam başını tərpədib öz nümunəsini düşünür. Pirkey Avot 1:6 dost qazanmağı tövsiyə edir. Rabaşın 1984-cü il məqaləsi müəyyən mənəvi öyrənmə qrupunun məqsədini izah edir.'],
   sources:[
     ['Pirkei Avot 1:6 · Sefaria','https://www.sefaria.org/Pirkei_Avot.1.6'],
-    ['Rabash · Purpose of Society 1 (1984)','https://kabbalah.academy/en/library/sources/articles/834/'],
+    ['Rabash · Purpose of Society 1 (1984)','https://kabbalah.academy/en/library/sources/articles/835/'],
   ],
 }, {
   id:'purpose',

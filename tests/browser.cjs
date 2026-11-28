@@ -135,6 +135,14 @@ async function main() {
         assert.equal(await page.locator('.visit-exercise [role="status"]').innerText(), sample.feedback[sample.correct][index]);
       }
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+      await page.selectOption('#visit-topic', 'kotel-customs');
+      const prayerAreas = page.locator('#library .visit-reading');
+      const prayerHistory = await prayerAreas.locator(':scope > p').innerText();
+      assert.match(prayerHistory, /2016.*2017/);
+      assert.match(await prayerAreas.locator('.visit-object p').innerText(), /5\.7.*2026/);
+      assert.equal(await prayerAreas.getByRole('link', {name: /Filming rules/}).getAttribute('href'),
+        'https://thekotel.org/en/visitor_information/filming-regulations/');
+      assert.ok(await prayerAreas.getByRole('link', {name: /Western Wall explainer/}).isVisible());
       assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
       await page.keyboard.press('Escape');
       assert.ok(await page.locator('#visit-button').evaluate(button => button === document.activeElement));
