@@ -21,6 +21,13 @@ function visitorFootprint(page) {
     Array.from(canvas.getContext('2d').getImageData(0,209,canvas.width,1).data));
 }
 
+function hasIntrinsicCanvasRatio(canvas) {
+  return canvas.evaluate(element => {
+    const {width,height} = element.getBoundingClientRect();
+    return width > 0 && Math.abs(height - width * element.height / element.width) <= 1;
+  });
+}
+
 async function main() {
   const { chapters, languages, plaza, ui } = await import('../content.js');
   const { ancientLessons } = await import('../ancient-lessons.js');
@@ -307,6 +314,7 @@ async function main() {
           await page.emulateMedia({reducedMotion:'reduce'});
           await ritual.locator('summary').press('Enter');
           await ritualCanvas.waitFor();
+          assert.ok(await hasIntrinsicCanvasRatio(ritualCanvas));
           const shoulder = await ritualFrame();
           await ritual.getByRole('button').press('Enter');
           const held = await ritualFrame();
@@ -614,6 +622,7 @@ async function main() {
           const quarterFrame = () => quarter.locator('canvas').evaluate(canvas => canvas.toDataURL());
           await quarter.locator(':scope > summary').press('Enter');
           await quarter.locator('canvas').waitFor();
+          assert.ok(await hasIntrinsicCanvasRatio(quarter.locator('canvas')));
           const wall = await quarterFrame();
           const home = quarter.locator('[data-quarter-place="dar-abu-saud"]');
           await home.press('Enter');

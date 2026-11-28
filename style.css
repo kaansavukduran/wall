@@ -55,7 +55,7 @@ button:disabled{opacity:.52;cursor:default}
 #arrival-actions{display:flex;flex-wrap:wrap;gap:.5rem}
 #arrival button{max-inline-size:100%}
 .stage{position:relative;border:1px solid var(--edge);background:var(--stage-bg);min-inline-size:0}
-canvas{display:block;inline-size:100%;height:auto;aspect-ratio:2;image-rendering:pixelated}
+canvas{display:block;inline-size:100%;height:auto;image-rendering:pixelated}
 .era,.controls{background:var(--field-bg);border:1px solid var(--edge);border-radius:.3rem}
 .era{display:block;border:0;border-radius:0;padding:.35rem .6rem;font-size:.83rem}
 .controls{display:flex;justify-content:center;gap:.35rem;flex-wrap:wrap;padding:.35rem}
