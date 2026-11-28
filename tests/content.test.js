@@ -149,7 +149,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 405);
+  assert.equal(entries.length, 408);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -227,7 +227,7 @@ test('Geniza desk distinguishes two chronological records, with sources and loca
 test('responsibility records stay chronological with sources and localized exercises', () => {
   assert.deepEqual(accountabilityRecords.map(record => record.id), [
     'hasmonean-idumea', 'rhine-1096', 'thrace-1934', 'baghdad-farhud-1941',
-    'king-david-hotel-1946', 'kafr-qasim-1956', 'amia-1994',
+    'king-david-hotel-1946', 'kafr-qasim-1956', 'amia-1994', 'rabin-1995',
   ]);
   for (const record of accountabilityRecords) {
     for (const field of ['label','title','datePlace','actor','affected','account','evidenceLimit']) {

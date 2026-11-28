@@ -99,6 +99,21 @@ export const accountabilityRecords = [
       {"id":"ACC07C","title":"Chequeado · Qué decidió la Cámara de Casación","url":"https://chequeado.com/el-explicador/amia-5-claves-para-entender-el-fallo-de-casacion-en-la-causa-por-el-encubrimiento-del-atentado/"},
     ],
   },
+  {
+    id: "rabin-1995",
+    label: ["Rabin suikastı, 1995","Rabin assassination, 1995","רצח רבין, 1995","Rabin sui-qəsdi, 1995"],
+    title: ["Rabin suikastı ve meydandaki yas","Rabin’s assassination and mourning in the square","רצח רבין והאבל בכיכר","Rabinə sui-qəsd və meydandakı matəm"],
+    datePlace: ["4 Kasım 1995, İsrail Kralları Meydanı, Tel Aviv.","4 November 1995, Kings of Israel Square, Tel Aviv.","4 בנובמבר 1995, כיכר מלכי ישראל, תל אביב.","4 noyabr 1995, İsrail Kralları meydanı, Təl-Əviv."],
+    actor: ["İsrail-Filistin Oslo barış sürecine karşı çıkan İsrailli aşırı sağcı Yigal Amir.","Yigal Amir, an Israeli far-right extremist who opposed the Israeli–Palestinian Oslo peace process.","יגאל עמיר, פעיל ימין קיצוני ישראלי שהתנגד לתהליך השלום הישראלי־פלסטיני של אוסלו.","İsrail–Fələstin Oslo sülh prosesinə qarşı çıxan israilli ifrat sağçı Yiqal Əmir."],
+    affected: ["İsrail Başbakanı Yitshak Rabin öldürüldü. Mitingin yapıldığı meydanda insanlar yas tutmak için toplandı.","Israeli Prime Minister Yitzhak Rabin was killed. People gathered to mourn in the square where the rally had taken place.","ראש ממשלת ישראל יצחק רבין נרצח. אנשים התאספו להתאבל בכיכר שבה נערכה העצרת.","İsrailin baş naziri İshaq Rabin öldürüldü. İnsanlar mitinqin keçirildiyi meydana matəm üçün toplaşdılar."],
+    account: ["Rabin, barış görüşmelerine destek için düzenlenen mitingde konuştu. Mitingin sonunda Amir onu öldürdü. Tel Aviv Belediyesi daha sonra meydanın adını Rabin Meydanı olarak değiştirdi.","Rabin spoke at a rally in support of the peace talks. Amir killed him at the end of the rally. Tel Aviv’s municipality later renamed the site Rabin Square.","רבין נאם בעצרת תמיכה בשיחות השלום. בסיום העצרת עמיר רצח אותו. עיריית תל אביב שינתה בהמשך את שם המקום לכיכר רבין.","Rabin sülh danışıqlarına dəstək mitinqində çıxış etdi. Mitinqin sonunda Əmir onu öldürdü. Təl-Əviv bələdiyyəsi sonradan meydanın adını Rabin meydanı olaraq dəyişdirdi."],
+    evidenceLimit: ["Rabin Merkezi mitingin ve yasın meydandaki izlerini anlatır. ECF kronolojisi Amir’i ve Oslo görüşmelerine karşı çıkışını kaydeder. Clinton’ın aynı günkü ses kaydı ABD Başkanı’nın tepkisini belgeler.","The Rabin Center traces the rally and mourning in the square. The ECF chronology identifies Amir and his opposition to the Oslo talks. Clinton’s same-day recording documents the US president’s response.","מרכז רבין מתאר את העצרת ואת האבל בכיכר. הכרונולוגיה של ECF מזהה את עמיר ומתארת את התנגדותו לשיחות אוסלו. ההקלטה של קלינטון מאותו היום מתעדת את תגובת נשיא ארצות הברית.","Rabin Mərkəzi mitinqi və meydandakı matəmi təsvir edir. ECF xronologiyası Əmiri və onun Oslo danışıqlarına qarşı çıxmasını qeyd edir. Klintonun həmin günə aid səs yazısı ABŞ prezidentinin reaksiyasını sənədləşdirir."],
+    sources: [
+      {"id":"ACC08A","title":"Yitzhak Rabin Center · 1995","url":"https://www.rabincenter.org.il/en/years/1995/"},
+      {"id":"ACC08B","title":"Economic Cooperation Foundation · Assassination of Israeli PM Rabin","url":"https://ecf.org.il/issues/issue/242"},
+      {"id":"ACC08C","title":"Clinton Presidential Library · 4 November 1995 audio record","url":"https://clinton.presidentiallibraries.us/items/show/115671"},
+    ],
+  },
 ];
 
 export const accountabilityCases = {
@@ -157,6 +172,25 @@ export const accountabilityCases = {
       'This judgment addressed Argentina’s obligations to victims and their relatives. For attribution of the attack, look at the separate criminal-court record.',
       'פסק הדין עסק בחובותיה של ארגנטינה כלפי הנפגעים ובני משפחותיהם. לייחוס הפיגוע ראו את ההליך הפלילי הנפרד.',
       'Bu qərar Argentinanın qurbanlar və onların yaxınları qarşısındakı öhdəliklərinə baxdı. Hücumun kimə aid edildiyini ayrıca cinayət məhkəməsinin sənədində araşdıra bilərsən.',
+    ],
+  },
+  'rabin-1995': {
+    question: [
+      'Clinton’ın aynı gün kaydedilen açıklaması sergide hangi başlığı destekler?',
+      'Which exhibit heading can Clinton’s same-day recording support?',
+      'לאיזו כותרת בתערוכה מתאימה ההקלטה של קלינטון מאותו יום?',
+      'Klintonun həmin günə aid səs yazısı sərgidə hansı başlığı dəstəkləyir?',
+    ],
+    choices: [
+      ['Tel Aviv Belediyesi’nin meydanın adını değiştirme kararı','Tel Aviv’s municipal decision to rename the square','החלטת עיריית תל אביב לשנות את שם הכיכר','Təl-Əviv bələdiyyəsinin meydanın adını dəyişdirmək qərarı'],
+      ['ABD Başkanı’nın suikasta verdiği tepki','The US president’s response to the assassination','תגובת נשיא ארצות הברית לרצח','ABŞ prezidentinin sui-qəsdə reaksiyası'],
+    ],
+    correct:1,
+    result: [
+      'Ses kaydı Clinton’ın tepkisini belgeler. Meydanın yeniden adlandırılmasını Rabin Merkezi’nin kaydından incele.',
+      'The recording documents Clinton’s response. Read about the renaming of the square in the Rabin Center’s account.',
+      'ההקלטה מתעדת את תגובתו של קלינטון. על שינוי שם הכיכר אפשר לקרוא בתיאור של מרכז רבין.',
+      'Səs yazısı Klintonun reaksiyasını sənədləşdirir. Meydanın adının dəyişdirilməsi barədə Rabin Mərkəzinin qeydində oxu.',
     ],
   },
 };
