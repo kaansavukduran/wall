@@ -1005,7 +1005,7 @@ async function main() {
           await page.click('[data-evidence="4"]');
           assert.match(await page.locator('#evidence-date').textContent(), /2025/);
           assert.equal(await page.locator('#evidence-source').getAttribute('href'),
-            'https://www.un.org/unispal/document/commission-of-inquiry-report-genocide-in-gaza-a-hrc-60-crp-3/');
+            'https://digitallibrary.un.org/record/4089577/files/A_HRC_60_CRP.3-EN.pdf#page=71');
           await page.click('[data-evidence="5"]');
           assert.equal(await page.locator('#evidence-source').getAttribute('href'),
             'https://embassies.gov.il/ungeneva/en/news/16-09-2025');
