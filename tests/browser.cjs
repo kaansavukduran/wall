@@ -136,6 +136,16 @@ async function main() {
       }
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       await page.selectOption('#visit-topic', 'kotel-customs');
+      const labelFits = await page.locator('#visit-topic').evaluate(select => {
+        const style = getComputedStyle(select);
+        const context = document.createElement('canvas').getContext('2d');
+        context.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+        const label = context.measureText(select.selectedOptions[0].label).width;
+        // Keep space for the native select indicator at large text sizes.
+        const available = select.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight) - 24;
+        return label <= available;
+      });
+      assert.ok(labelFits, 'The selected prayer-area label fits at 200% text');
       const prayerAreas = page.locator('#library .visit-reading');
       const prayerHistory = await prayerAreas.locator(':scope > p').innerText();
       assert.match(prayerHistory, /2016.*2017/);

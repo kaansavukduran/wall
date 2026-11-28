@@ -100,12 +100,20 @@ jobs:
           GITHUB_SHA="$(git rev-parse HEAD)" node scripts/build.mjs
       - name: Build signed APK
         env:
+          GH_TOKEN: ${{ github.token }}
           WALL_ANDROID_KEYSTORE_BASE64: ${{ secrets.WALL_ANDROID_KEYSTORE_BASE64 }}
           WALL_ANDROID_STORE_PASSWORD: ${{ secrets.WALL_ANDROID_STORE_PASSWORD }}
           WALL_ANDROID_KEY_ALIAS: ${{ secrets.WALL_ANDROID_KEY_ALIAS }}
           WALL_ANDROID_KEY_PASSWORD: ${{ secrets.WALL_ANDROID_KEY_PASSWORD }}
         run: |
           set -euo pipefail
+          if [[ -z "$WALL_ANDROID_KEYSTORE_BASE64" ]]; then
+            preview=$(gh release view "$WALL_TAG" --repo "$GITHUB_REPOSITORY" --json isPrerelease --jq .isPrerelease)
+            if [[ "$preview" != true ]]; then
+              echo '::error::Configure the Android release signing key before building a stable APK.'
+              exit 1
+            fi
+          fi
           sdk="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
           export ANDROID_HOME="$sdk"
           test -d "$sdk"
@@ -121,10 +129,10 @@ jobs:
           if [[ -n "$WALL_ANDROID_KEYSTORE_BASE64" ]]; then
             export WALL_ANDROID_KEYSTORE="$RUNNER_TEMP/wall-android.p12"
             umask 077
+            trap 'rm -f -- "$WALL_ANDROID_KEYSTORE"' EXIT
             printf '%s' "$WALL_ANDROID_KEYSTORE_BASE64" | base64 --decode > "$WALL_ANDROID_KEYSTORE"
             gradle -p android :app:assembleRelease
             cp android/app/build/outputs/apk/release/app-release.apk "WALL-${WALL_TAG#v}-android.apk"
-            rm -f "$WALL_ANDROID_KEYSTORE"
           else
             gradle -p android :app:assembleDebug
             cp android/app/build/outputs/apk/debug/app-debug.apk "WALL-${WALL_TAG#v}-android-preview.apk"

@@ -183,7 +183,7 @@ export const kotelLessons = [
   },
   {
     id: "kotel-customs",
-    title: ["İki dua alanı", "Two prayer areas", "שתי רחבות תפילה", "İki dua sahəsi"],
+    title: ["Dua alanları", "Prayer areas", "רחבות תפילה", "Dua sahələri"],
     practice: [
       "Batı Duvarı Miras Vakfı’nın çekim kurallarının 5.7. maddesi, ana dua meydanındaki kadın ve erkek bölümlerinden ayrı ayrı söz eder. Şubat 2026 tarihli araştırma, güneyde Robinson Kemeri yakınındaki Ezrat Yisrael’i kadınların ve erkeklerin birlikte dua edebildiği ayrı bir alan olarak tanımlar. Ziyarette güncel tabelalara bak.",
       "Section 5.7 of the Western Wall Heritage Foundation’s filming rules identifies separate women’s and men’s sections in the main prayer plaza. A February 2026 analysis describes Ezrat Yisrael, near Robinson’s Arch to the south, as a separate area for women and men to pray together. Check current signs when visiting.",
