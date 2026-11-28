@@ -198,13 +198,19 @@ export const models = [
     ['kotel-courses',['Batı Duvarı taş sıraları','Western Wall stone courses','נדבכי האבנים בכותל','Qərb Divarının daş sıraları'],
       ['İri alt taşları ve küçük üst taşları karşılaştır. Kazılar daha eski istinat yapısını gösterir. Üstte farklı dönemlerde eklenen ve onarılan sıralar var.','Compare the large lower blocks and smaller upper ones. Excavations document the older retaining structure. The upper courses include work from later periods.','השוו בין האבנים הגדולות למטה לקטנות למעלה. החפירות מתעדות את קיר התמך הקדום. הנדבכים העליונים כוללים עבודות מתקופות מאוחרות.','Aşağıdakı iri daşları yuxarıdakı kiçik daşlarla müqayisə et. Qazıntılar daha qədim istinad quruluşunu göstərir. Yuxarı sıralarda sonrakı dövrlərin işləri var.']],
   ]),
-  scene(20, ['Sabatay Sevi haberinin üç durağı','Three stops in the Sabbatai Sevi news','שלוש תחנות בחדשות על שבתאי צבי','Sabatay Sevi xəbərinin üç dayanacağı'], [
+  scene(20, ['Sabatay Sevi haberinin izinde','Following news of Sabbatai Sevi','בעקבות הבשורות על שבתאי צבי','Sabatay Sevi xəbərinin izi ilə'], [
     ['news-cairo',['1665/1666 · Kahire’ye mektup','1665/1666 · Letter to Cairo','1665/1666 · מכתב לקהיר','1665/1666 · Qahirəyə məktub'], [
       'Gazzeli Natan, Sabatay Sevi’yi destekleyen bir mektubu Kahire cemaatinin önderlerinden Rafael Yusif’e yazdı. Jonatan Meir’in edisyonu mektubu 1665’e, Posen Library kaydı 1666’ya tarihler. Çizim muhatabın yerini gösterir.',
       'Nathan of Gaza wrote in support of Sabbatai Sevi to Raphael Joseph, a leader of Cairo’s Jewish community. Jonatan Meir’s edition dates the letter to 1665 and the Posen Library records it as 1666. The illustration marks the recipient’s city.',
       'נתן העזתי כתב בזכות שבתאי צבי לרפאל יוסף, ממנהיגי הקהילה היהודית בקהיר. מהדורת יונתן מאיר מתארכת את המכתב ל־1665, ובספריית פוזן הוא מתוארך ל־1666. האיור מסמן את עיר הנמען.',
       'Qəzzalı Natan Sabatay Sevini dəstəkləyən məktubu Qahirə yəhudi icmasının rəhbərlərindən Rafael Yusifə yazdı. Yonatan Meirin nəşri məktubu 1665-ci ilə, Posen Kitabxanası isə 1666-cı ilə aid edir. Şəkil məktubu alanın şəhərini göstərir.',
     ],'https://old-digitalcollections.nypl.org/collections/collection-of-texts-on-shabbethai-tzevi-and-the-sabbatean-movement'],
+    ['news-glikl',['1666 başları · Hamburg','Early 1666 · Hamburg','תחילת 1666 · המבורג','1666-cı ilin əvvəli · Hamburq'], [
+      'Mektup simgesi Hamburg’u gösteriyor. Glikl von Hameln, Sabatay Sevi hakkında gelen mektupların Sefarad sinagogunda sesli okunduğunu hatırlıyordu. Aşkenaz dinleyiciler de gelirdi. Bu olayı yıllar sonra ailesine Yidişçe anlattı.',
+      'The letter marks Hamburg. Glikl von Hameln recalled letters about Sabbatai Sevi being read aloud at the Sephardic synagogue. Ashkenazi listeners also came. Years later, she told her family about it in her Yiddish memoir.',
+      'ציור המכתב מסמן את המבורג. גליקל מהמלן זכרה שהקריאו בבית הכנסת הספרדי מכתבים על שבתאי צבי. גם מאזינים אשכנזים באו לשמוע. כעבור שנים היא סיפרה על כך למשפחתה בזיכרונותיה ביידיש.',
+      'Məktub işarəsi Hamburqu göstərir. Glikl von Hameln Sabatay Sevi barədə gələn məktubların Sefarad sinaqoqunda ucadan oxunduğunu xatırlayırdı. Aşkenaz dinləyicilər də gəlirdi. Glikl illər sonra bu hadisəni ailəsinə yidiş dilində yazdığı xatirələrdə danışdı.',
+    ],'https://keydocuments.net/source/jgo%3Asource-165'],
     ['news-edirne',['1666 · Edirne','1666 · Edirne','1666 · אדירנה','1666 · Ədirnə'], [
       'Sabatay Sevi 1666’da Osmanlı saray kenti Edirne’de İslam’a geçti. Kimi takipçiler bunu yeniden yorumladı, kimileri beklentilerinden vazgeçti. Sonraki tarihçiler farklı çevrelerin kayıtlarını karşılaştırır.',
       'Sabbatai Sevi converted to Islam in the Ottoman court city of Edirne in 1666. Some followers reinterpreted the change and others gave up their hopes. Later historians compare accounts from different circles.',

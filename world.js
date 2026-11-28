@@ -590,6 +590,13 @@ export async function makeWorld(canvas, reducedMotion) {
         rect(background, '#f6d48b', cairo[0] - 3, cairo[1] - 3, 7, 7);
         rect(background, '#e7c18a', 370, 151, 21, 12);
         rect(background, '#806651', 372, 155, 16, 1);
+      } else if (layer === 'news-glikl') {
+        rect(background, '#f6d48b', hamburg[0] - 3, hamburg[1] - 3, 7, 7);
+        rect(background, '#654f44', 216, 76, 26, 18);
+        rect(background, '#efcf92', 218, 74, 22, 18);
+        for (const [y, width] of [[78,12],[82,14],[86,9]]) {
+          rect(background, '#958061', 221, y, width, 1);
+        }
       } else if (layer === 'news-edirne') {
         rect(background, '#f6d48b', edirne[0] - 3, edirne[1] - 3, 7, 7);
         rect(background, '#d9ad79', 333, 102, 19, 12);
