@@ -305,7 +305,7 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 #sefirot-grid button{grid-area:var(--position);overflow-wrap:anywhere;padding:.3rem}
 #sefirot-grid button[aria-pressed=true],#count-daat[aria-pressed=true]{background:var(--selected-bg);border-color:var(--accent)}
 
-#photo-button{justify-self:start}
+#photo-button{max-inline-size:100%;overflow-wrap:anywhere;scroll-margin-block:.65rem}
 #photo{inline-size:min(58rem,100% - 2rem)}
 .photo-layout{display:grid;gap:1rem;margin-block-start:.75rem}
 .photo-layout>*{min-inline-size:0}
