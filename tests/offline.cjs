@@ -68,6 +68,22 @@ async function main() {
     assert.deepEqual(model.errors,[]);
     await model.page.close();
 
+    const ritual = await openOffline(browser,'#chapter-7',() => {
+      localStorage.setItem('wall.progress.v1',JSON.stringify({
+        active:'7',completed:['plaza','1','2','3','4','5','6'],
+      }));
+    });
+    const firstFruits = ritual.page.locator('#first-fruits');
+    const basket = firstFruits.locator('canvas');
+    await firstFruits.locator('summary').tap();
+    await basket.waitFor();
+    const shoulder = await basket.evaluate(el => el.toDataURL());
+    await firstFruits.getByRole('button').tap();
+    assert.notEqual(await basket.evaluate(el => el.toDataURL()),shoulder);
+    assert.deepEqual(ritual.requests,[]);
+    assert.deepEqual(ritual.errors,[]);
+    await ritual.page.close();
+
     const archive = await openOffline(browser,'#chapter-24',() => {
       localStorage.setItem('wall.progress.v1',JSON.stringify({
         active:'24',

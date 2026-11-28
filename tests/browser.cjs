@@ -301,6 +301,25 @@ async function main() {
           assert.ok(await page.locator('#sequence-reset').evaluate(button => document.activeElement === button));
           await page.locator('#sequence-reset').press('Enter');
           assert.equal(await frame(),initial);
+          const ritual = page.locator('#first-fruits');
+          const ritualCanvas = ritual.locator('canvas');
+          const ritualFrame = () => ritualCanvas.evaluate(canvas => canvas.toDataURL());
+          await page.emulateMedia({reducedMotion:'reduce'});
+          await ritual.locator('summary').press('Enter');
+          await ritualCanvas.waitFor();
+          const shoulder = await ritualFrame();
+          await ritual.getByRole('button').press('Enter');
+          const held = await ritualFrame();
+          assert.notEqual(held,shoulder);
+          await ritual.getByRole('button').press('Enter');
+          const beside = await ritualFrame();
+          assert.notEqual(beside,held);
+          assert.notEqual(beside,shoulder);
+          assert.equal(await ritual.locator('a').getAttribute('href'),'https://www.sefaria.org/Mishnah_Bikkurim.3.6');
+          await ritual.getByRole('button').press('Enter');
+          assert.equal(await ritualFrame(),shoulder);
+          await ritual.locator('summary').press('Enter');
+          await page.emulateMedia({reducedMotion:'no-preference'});
         }
         if (episode.id === 4) {
           for (const card of [2,0,1]) await page.click('[data-sequence="' + card + '"]');

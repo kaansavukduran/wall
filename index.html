@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.8.36</small>
+  <small dir="ltr">v0.8.37</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -56,6 +56,7 @@
       <div id="models" hidden><p></p><div></div><output></output><a id="model-reference" target="_blank" rel="noopener noreferrer" hidden></a></div>
       <details id="kingdom-map" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="platform-assembly" hidden><summary></summary><p role="status" hidden></p><div></div></details>
+      <details id="first-fruits" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="talmud-page" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="ashlag-workbench" name="chapter-24-workshop" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="study-circle" name="chapter-24-workshop" hidden><summary></summary><p role="status" hidden></p><div></div></details>
@@ -138,7 +139,7 @@
     </section>
     </div>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.36</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.37</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -419,6 +420,14 @@
   <div class="platform-groups"><fieldset><legend></legend></fieldset><fieldset><legend></legend></fieldset></div>
   <p class="platform-feedback" role="status"></p>
   <div class="lab-actions"><button type="button" data-platform-reset></button><a href="https://hadashot.iaa.org.il/Report_Detail_Eng.aspx?id=25662" target="_blank" rel="noopener noreferrer"></a></div>
+</template>
+
+<template id="first-fruits-template">
+  <p></p>
+  <canvas width="96" height="64" aria-hidden="true" hidden></canvas>
+  <p role="status"></p>
+  <button type="button"></button>
+  <a href="https://www.sefaria.org/Mishnah_Bikkurim.3.6" target="_blank" rel="noopener noreferrer"></a>
 </template>
 
 <template id="kingdom-map-template">

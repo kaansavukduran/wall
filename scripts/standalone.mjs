@@ -34,6 +34,7 @@ try {
     ['geniza-desk.js','assets/geniza-letters.png','image/png'],
     ['study-circle.js','assets/study-circle.png','image/png'],
     ['baku-archive.js','assets/baku-archive.png','image/png'],
+    ['first-fruits.js','assets/first-fruits.png','image/png'],
     ['catalogue.js','docs/SOURCES.tsv','text/tab-separated-values;charset=utf-8'],
   ]) {
     if (!files.includes(entry)) continue;

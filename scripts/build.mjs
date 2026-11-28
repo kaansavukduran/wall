@@ -30,11 +30,11 @@ const files = [
   'word-methods.js', 'word-method-lessons.js',
   'ashlag-workbench.js', 'ashlag-lessons.js', 'baku-archive.js', 'baku-lessons.js',
   'transfer.js', 'transfer-early-lessons.js', 'transfer-middle-lessons.js', 'transfer-late-lessons.js',
-  'scenes.js', 'platform-assembly.js', 'kingdom-map-lessons.js', 'catalogue.js', 'sequences.js', 'hebrew-labs.js', 'controller.js', 'tour.js', 'tour-evidence.js', 'tour-followup-lessons.js', 'assets',
+  'scenes.js', 'platform-assembly.js', 'first-fruits.js', 'kingdom-map-lessons.js', 'catalogue.js', 'sequences.js', 'hebrew-labs.js', 'controller.js', 'tour.js', 'tour-evidence.js', 'tour-followup-lessons.js', 'assets',
 ];
 const catalogue = 'docs/SOURCES.tsv';
 const contentFiles = files.filter(name => name.endsWith('-lessons.js') || name.startsWith('chapters-'));
-contentFiles.push('content.js','library.js','scenes.js','platform-assembly.js','sequences.js','hebrew-labs.js','tour-evidence.js');
+contentFiles.push('content.js','library.js','scenes.js','platform-assembly.js','first-fruits.js','sequences.js','hebrew-labs.js','tour-evidence.js');
 
 async function fileRevision(file) {
   return createHash('sha256').update(await readFile(file)).digest('hex');
