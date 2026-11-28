@@ -32,6 +32,32 @@ jobs:
           target: google_apis
           disable-animations: true
           script: bash tests/android-smoke.sh
+  linux:
+    runs-on: ubuntu-24.04
+    env:
+      WALL_TAG: ${{ inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Launch the released AppImage
+        env:
+          GH_TOKEN: ${{ github.token }}
+          APPIMAGE_EXTRACT_AND_RUN: '1'
+        run: |
+          set -euo pipefail
+          gh release download "$WALL_TAG" --repo "$GITHUB_REPOSITORY" --pattern '*.AppImage'
+          packages=(*.AppImage)
+          test "${#packages[@]}" -eq 1
+          chmod +x "${packages[0]}"
+          timeout 100s xvfb-run -a "./${packages[0]}" --no-sandbox --remote-debugging-port=9248 > "$RUNNER_TEMP/wall-linux.log" 2>&1 &
+          wall_pid=$!
+          trap 'kill "$wall_pid" 2>/dev/null || true' EXIT
+          if ! node tests/desktop-smoke.mjs 9248; then
+            tail -40 "$RUNNER_TEMP/wall-linux.log"
+            exit 1
+          fi
   windows:
     runs-on: windows-latest
     env:

@@ -1,6 +1,6 @@
 export async function makeWorld(canvas, reducedMotion) {
   const sprite = new Image();
-  sprite.src = './assets/visitor.png';
+  sprite.src = new URL('./assets/visitor.png', import.meta.url).href;
   await sprite.decode();
   const context = canvas.getContext('2d', { alpha: false });
   const scenery = document.createElement('canvas');

@@ -18,8 +18,12 @@ repository=$(git rev-parse --absolute-git-dir)
 staging=$(mktemp -d)
 trap 'rm -rf -- "$staging"' EXIT
 WALL_BUILD_COMMIT="$source_commit" node scripts/build.mjs "$staging/site"
+mkdir "$staging/published"
+# Old HTML can remain cached. Keep the resource URLs it references available.
+git archive "$previous" | tar -xf - -C "$staging/published"
+cp -a "$staging/site/." "$staging/published/"
 export GIT_INDEX_FILE="$staging/index"
-git --git-dir="$repository" --work-tree="$staging/site" -C "$staging/site" add --all --force .
+git --git-dir="$repository" --work-tree="$staging/published" -C "$staging/published" add --all --force .
 tree=$(git write-tree)
 if [[ "$tree" == "$(git rev-parse "$previous^{tree}")" ]]; then
   printf 'gh-pages already contains %s\n' "$source_commit"

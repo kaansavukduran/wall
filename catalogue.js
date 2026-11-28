@@ -21,7 +21,7 @@ export function belongsTo(entry, chapter) {
 }
 
 export async function catalogue() {
-  load ??= fetch('./docs/SOURCES.tsv').then(response => {
+  load ??= fetch(new URL('./docs/SOURCES.tsv', import.meta.url)).then(response => {
     if (!response.ok) throw new Error('Source catalogue unavailable');
     return response.text();
   }).then(parseCatalogue).catch(error => {

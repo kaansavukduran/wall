@@ -1,4 +1,7 @@
-import { readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { ancientLessons } from '../ancient-lessons.js';
@@ -84,5 +87,33 @@ test('ancient source exercises contain four versions of each card and matched ca
       assert.equal(text.length, languages.length);
       assert.ok(text.every(translation => translation.trim()));
     }
+  }
+});
+
+test('each exported HTML document references its own release files', () => {
+  const directory = mkdtempSync(join(tmpdir(), 'wall-release-check-'));
+  try {
+    const runtimes = [];
+    for (const digit of ['a','b']) {
+      const output = join(directory, digit);
+      const commit = digit.repeat(40);
+      execFileSync(process.execPath, ['scripts/build.mjs', output], {
+        cwd:new URL('..', import.meta.url),
+        env:{...process.env,GITHUB_SHA:commit},
+      });
+      const html = readFileSync(join(output, 'index.html'), 'utf8');
+      const manifest = JSON.parse(readFileSync(join(output, 'build.json'), 'utf8'));
+      assert.equal(manifest.commit, commit);
+      const runtime = manifest.runtime;
+      runtimes.push(runtime);
+      for (const file of ['start.js','style.css','assets/fragaria-strawberry.png','assets/matpc-14762.jpg']) {
+        assert.ok(html.includes('"./' + runtime + '/' + file + '"'));
+        assert.ok(readFileSync(join(output, runtime, file)).length > 0);
+      }
+      assert.ok(readFileSync(join(output, runtime, 'docs/SOURCES.tsv')).length > 0);
+    }
+    assert.notEqual(runtimes[0], runtimes[1]);
+  } finally {
+    rmSync(directory, {recursive:true,force:true});
   }
 });
