@@ -73,10 +73,14 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
-          gh release download $env:WALL_TAG --repo $env:GITHUB_REPOSITORY --pattern '*windows*x64*.exe'
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          foreach ($attempt in 1..5) {
+            gh release download $env:WALL_TAG --repo $env:GITHUB_REPOSITORY --pattern '*windows*x64*.exe' --clobber
+            if ($LASTEXITCODE -eq 0 -and @(Get-ChildItem -Filter '*windows*x64*.exe').Count -eq 2) { break }
+            if ($attempt -lt 5) { Start-Sleep -Seconds 8 }
+          }
           $setup = (Get-ChildItem -Filter '*-Setup.exe').FullName
           $portable = (Get-ChildItem -Filter '*-Portable.exe').FullName
+          if (!$setup -or !$portable) { throw 'Setup and Portable release assets did not become available' }
           $install = Join-Path $env:RUNNER_TEMP 'wall-smoke-install'
           $installed = Start-Process -FilePath $setup -ArgumentList "/S /D=$install" -Wait -PassThru
           if ($installed.ExitCode -ne 0) { throw "Installer returned $($installed.ExitCode)" }

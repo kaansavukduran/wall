@@ -1,0 +1,43 @@
+name: WALL browser compatibility
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing WALL tag
+        type: string
+        required: true
+permissions:
+  contents: read
+jobs:
+  route:
+    name: Four-language route in ${{ matrix.engine }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chromium, firefox, webkit]
+    env:
+      WALL_BROWSER_ENGINE: ${{ matrix.engine }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ inputs.tag }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run the game as a static site
+        run: |
+          set -euo pipefail
+          tools="$RUNNER_TEMP/wall-browser-tools"
+          npm install --prefix "$tools" --no-package-lock --no-audit --no-fund playwright@1.62.1
+          export NODE_PATH="$tools/node_modules"
+          "$tools/node_modules/.bin/playwright" install --with-deps "$WALL_BROWSER_ENGINE"
+          node --test tests/content.test.js
+          site="$RUNNER_TEMP/wall-browser-site"
+          mkdir "$site"
+          GITHUB_SHA="$(git rev-parse HEAD)" node scripts/build.mjs "$site/wall"
+          python3 -m http.server 8765 --bind 127.0.0.1 --directory "$site" > "$RUNNER_TEMP/wall-browser.log" 2>&1 &
+          server=$!
+          trap 'kill "$server" 2>/dev/null || true' EXIT
+          curl -fsS --retry 5 --retry-connrefused http://127.0.0.1:8765/wall/build.json
+          node tests/browser.cjs http://127.0.0.1:8765/wall/

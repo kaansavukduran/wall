@@ -1,9 +1,10 @@
 // Run via NODE_PATH pointing to an installation of playwright, or install it locally.
 // WALL_BROWSER can select a local Chromium binary.
 const assert = require('node:assert/strict');
-const { chromium } = require('playwright');
+const playwright = require('playwright');
+const engine = process.env.WALL_BROWSER_ENGINE || 'chromium';
 const target = process.argv[2] || 'http://127.0.0.1:8765/';
-const browserOptions = { args:['--no-sandbox', '--disable-dev-shm-usage'] };
+const browserOptions = engine === 'chromium' ? { args:['--no-sandbox', '--disable-dev-shm-usage'] } : {};
 if (process.env.WALL_BROWSER) browserOptions.executablePath = process.env.WALL_BROWSER;
 
 async function main() {
@@ -16,9 +17,10 @@ async function main() {
   const { modernLessons } = await import('../modern-lessons.js');
   const { feynmanCases } = await import('../kabbalah-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
+  const { messianicLessons } = await import('../messianic-lessons.js');
   const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
   const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js', 'modern-lessons.js'];
-  const browser = await chromium.launch(browserOptions);
+  const browser = await playwright[engine].launch(browserOptions);
   try {
     for (const [locale, width] of [['tr',1100],['en',320],['he',320],['az',740]]) {
       const page = await browser.newPage({ viewport:{ width, height:750 },locale,hasTouch:width === 320 });
@@ -254,6 +256,24 @@ async function main() {
           assert.match(await page.locator('#compare-history').textContent(), /1967/);
           assert.equal(await page.locator('#compare-history-source').getAttribute('href'), 'https://whc.unesco.org/document/8721');
           await page.locator('#photo form button').click();
+        }
+        if (episode.id === 20) {
+          assert.equal(loadedLessons.has('messianic-lessons.js'), false);
+          const timelineRequest = page.waitForResponse(response => response.url().endsWith('/messianic-lessons.js'));
+          await page.click('#messianic-timeline summary');
+          assert.ok((await timelineRequest).ok());
+          await page.click('[data-timeline-card="messianic-frank-lwow"]');
+          assert.equal(await page.locator('.timeline-order li').count(), 0);
+          assert.match(await page.locator('.timeline-reading a').first().getAttribute('href'), /yivo/);
+          for (const id of messianicLessons.activity.correctOrder) {
+            await page.click('[data-timeline-card="' + id + '"]');
+          }
+          assert.equal(await page.locator('.timeline-order li').count(), 5);
+          const textIndex = ['tr','en','he','az'].indexOf(locale);
+          assert.equal(await page.locator('.timeline-status').innerText(), messianicLessons.activity.feedback[textIndex]);
+          await page.click('.timeline-reset');
+          assert.equal(await page.locator('.timeline-order li').count(), 0);
+          await page.click('#messianic-timeline summary');
         }
         if (episode.id === 21) {
           for (const card of [1,2,0]) await page.click('[data-sequence="' + card + '"]');

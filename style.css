@@ -108,6 +108,18 @@ dialog a{overflow-wrap:anywhere}
 .visit-choices button[aria-pressed=true]{background:#47351e;border-color:var(--accent)}
 .visit-exercise [role=status]{color:var(--accent)}
 @media(max-width:25rem){.visit-object{flex-direction:column}.visit-object canvas{inline-size:6rem;max-inline-size:100%}}
+#messianic-timeline{padding:.65rem;background:#1b242c}
+#messianic-timeline summary{cursor:pointer;min-block-size:var(--hit);align-content:center;font-weight:650}
+#messianic-timeline summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.timeline-choices{display:grid;gap:.35rem}
+.timeline-choices button{text-align:start;overflow-wrap:anywhere}
+.timeline-choices button small{display:block;color:var(--muted)}
+.timeline-order:empty,.timeline-status:empty{display:none}
+.timeline-status{color:var(--accent)}
+.timeline-reading{margin-block-start:.7rem;padding:.65rem;background:#28343e}
+.timeline-reading :is(h3,p){margin-block:0 .55rem}
+.timeline-reading ul,.timeline-order{padding-inline-start:1.4rem}
+.timeline-source-kind{color:var(--muted)}
 
 #models{display:grid;gap:.45rem;padding:.65rem;background:#1b242c}
 #models p{margin:0;font-weight:650}

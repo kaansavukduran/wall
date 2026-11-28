@@ -15,6 +15,12 @@ const evidenceLabels = {
   he: ['השוו בין המקורות', 'בדקו איזה מן הכרטיסים האחרים עונה על השאלה הזאת.', 'כרטיסי המקורות נטענים…', 'הכרטיסים לא נפתחו. רעננו את הדף ונסו שוב.'],
   az: ['Mənbələri müqayisə et', 'Bu suala cavab verən mənbəni tapmaq üçün digər kartlara bax.', 'Mənbə kartları yüklənir…', 'Kartlar açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
+const timelineLabels = {
+  tr:['1665–1759 belgelerini tarihe koy','Belgeler yükleniyor…','Belgeler açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en:['Put the 1665–1759 sources in order','Loading the documents…','The documents could not open. Reload the page and try again.'],
+  he:['סדרו את המקורות מ־1665 עד 1759','המסמכים נטענים…','המסמכים לא נפתחו. רעננו את הדף ונסו שוב.'],
+  az:['1665–1759-cu illərin mənbələrini sırala','Sənədlər yüklənir…','Sənədlər açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
+};
 const lessonDecks = [
   () => import('./ancient-lessons.js').then(module => module.ancientLessons),
   () => import('./second-temple-lessons.js').then(module => module.secondTempleLessons),
@@ -63,6 +69,7 @@ export async function start(initialLanguage) {
   const cataloguePanel = find('catalogue');
   const sequenceSurface = find('sequence');
   const evidence = find('evidence');
+  const timeline = find('messianic-timeline');
   const evidenceChoices = find('evidence-choices');
   const labRoot = find('language-labs');
   const labs = labRoot.querySelectorAll('details');
@@ -87,20 +94,15 @@ export async function start(initialLanguage) {
   const unlocked = index => index >= 0 && (index === 0 || index === firstIncomplete() || progress.completed.has(episodeId(index)));
   const save = () => store(key, JSON.stringify({active:episodeId(active),completed:[...progress.completed]}));
   const locale = () => languages.indexOf(language);
-  const workshops = [
-    ['calendar', calendarLabels, () => import('./calendar.js').then(module => module.mountCalendar)],
-    ['atlas', atlasLabels, () => import('./atlas.js').then(module => module.mountAtlas)],
-    ['kabbalah', kabbalahLabels, () => import('./kabbalah.js').then(({mountKabbalah}) =>
-      (panel, current, index) => mountKabbalah(panel, current, index, {read,store}))],
-    ['visit', visitLabels, () => import('./kotel.js').then(module => module.mountKotel)],
-  ].map(([id, translations, load]) => {
-    const [summary, status, panel] = find(id).children;
+  function connectDisclosure(id, translations, load) {
+    const detail = find(id);
+    const [summary, status, panel] = detail.children;
     let loadedLanguage;
     async function refresh() {
       const current = language;
       const labels = translations[current];
       summary.textContent = labels[0];
-      if (!summary.parentElement.open || loadedLanguage === current) return;
+      if (detail.hidden || !detail.open || loadedLanguage === current) return;
       loadedLanguage = current;
       panel.replaceChildren();
       status.hidden = false;
@@ -118,9 +120,18 @@ export async function start(initialLanguage) {
         }
       }
     }
-    summary.parentElement.addEventListener('toggle', refresh);
+    detail.addEventListener('toggle', refresh);
     return refresh;
-  });
+  }
+  const workshops = [
+    ['calendar', calendarLabels, () => import('./calendar.js').then(module => module.mountCalendar)],
+    ['atlas', atlasLabels, () => import('./atlas.js').then(module => module.mountAtlas)],
+    ['kabbalah', kabbalahLabels, () => import('./kabbalah.js').then(({mountKabbalah}) =>
+      (panel, current, index) => mountKabbalah(panel, current, index, {read,store}))],
+    ['visit', visitLabels, () => import('./kotel.js').then(module => module.mountKotel)],
+  ].map(([id, labels, load]) => connectDisclosure(id, labels, load));
+  const refreshTimeline = connectDisclosure('messianic-timeline', timelineLabels, () =>
+    import('./messianic-timeline.js').then(module => module.mountMessianicTimeline));
 
   function choose(selected) {
     const episode = episodes[active];
@@ -187,6 +198,8 @@ export async function start(initialLanguage) {
     renderModel();
     renderStudy();
     renderSequence();
+    timeline.hidden = episode.id !== 20;
+    if (!timeline.hidden) refreshTimeline();
     renderEvidence();
     renderLanguageLabs();
     if (focus) find('title').focus();
@@ -200,6 +213,7 @@ export async function start(initialLanguage) {
     studyOption = null;
     evidenceCard = null;
     evidence.open = false;
+    timeline.open = false;
     labState.word.length = 0;
     labState.sefirah = 0;
     labState.daat = false;

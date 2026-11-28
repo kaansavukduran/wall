@@ -15,6 +15,7 @@ import { feynmanCases, kabbalahLessons } from '../kabbalah-lessons.js';
 import { kotelLessons, kotelScenarios } from '../kotel-lessons.js';
 import { library, libraryLabels } from '../library.js';
 import { medievalLessons } from '../medieval-lessons.js';
+import { messianicLessons } from '../messianic-lessons.js';
 import { modernLessons } from '../modern-lessons.js';
 import { romanLessons } from '../roman-lessons.js';
 import { models, photo } from '../scenes.js';
@@ -73,7 +74,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 222);
+  assert.equal(entries.length, 228);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -163,6 +164,24 @@ test('Kotel visit observations and scenarios match their four-language sources',
       assert.doesNotMatch(values[0], /\p{Script=Hebrew}/u);
     }
   }
+});
+
+test('the chapter 20 timeline orders five distinct sources with four equivalent locales', () => {
+  const urls = new Set(parseCatalogue(readFileSync('docs/SOURCES.tsv', 'utf8')).map(item => item.url));
+  const {cards,activity} = messianicLessons;
+  assert.equal(cards.length, 5);
+  assert.deepEqual(new Set(cards.map(card => card.id)), new Set(activity.correctOrder));
+  assert.equal(activity.correctOrder.length, cards.length);
+  for (const card of cards) {
+    assert.ok(urls.has(card.source.url));
+    if (card.relatedSource) assert.ok(urls.has(card.relatedSource.url));
+    for (const field of ['date','sourceClass','title','placeActor','explanation']) {
+      assert.equal(card[field].length, languages.length);
+      assert.ok(card[field].every(value => value.trim()));
+      assert.doesNotMatch(card[field][0], /\p{Script=Hebrew}/u);
+    }
+  }
+  assert.equal(activity.correctOrder.at(-1), 'messianic-frank-lwow');
 });
 
 test('all 24 source exercises contain four versions of each card and matched catalogue entries', () => {

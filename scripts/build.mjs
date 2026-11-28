@@ -14,7 +14,7 @@ await mkdir(runtimeRoot);
 const files = [
   'style.css', 'start.js', 'game.js', 'world.js', 'content.js',
   'chapters-early.js', 'chapters-modern.js', 'ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js',
-  'early-modern-lessons.js', 'modern-lessons.js',
+  'early-modern-lessons.js', 'modern-lessons.js', 'messianic-timeline.js', 'messianic-lessons.js',
   'library.js', 'calendar.js', 'calendar-lessons.js', 'atlas.js', 'atlas-lessons.js',
   'kabbalah.js', 'kabbalah-lessons.js', 'kotel.js', 'kotel-lessons.js',
   'scenes.js', 'catalogue.js', 'sequences.js', 'hebrew-labs.js', 'controller.js', 'assets',

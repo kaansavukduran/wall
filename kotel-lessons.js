@@ -50,10 +50,10 @@ export const kotelLessons = [
       "Meydanda sakitcə dua edən, müqəddəs mətn oxuyan və ya dua zamanı əyilən adamları görə bilərsən. Ziyarətçi kimi kənarda dayanıb sakitcə müşahidə edə bilərsən."
     ],
     history: [
-      "Şulhan Aruh, Kudüs’te dua ederken Tapınak alanına yönelmeyi ve Amida’nın belirli yerlerinde eğilmeyi anlatır. Haç çıkarma Hristiyan duasında kullanılan bir harekettir.",
-      "Shulchan Arukh describes facing the Temple site while praying in Jerusalem and bowing at specific points in the Amidah. The Sign of the Cross is a gesture used in Christian prayer.",
-      "השולחן ערוך מתאר פנייה למקום המקדש בתפילה בירושלים וכריעה במקומות מסוימים בעמידה. סימן הצלב הוא מחווה המשמשת בתפילה נוצרית.",
-      "Şulxan Arux Qüdsdə dua edərkən Məbəd məkanına yönəlməyi və Amida duasının müəyyən yerlərində əyilməyi təsvir edir. Xaç işarəsi xristian duasında işlədilən hərəkətdir."
+      "Şulhan Aruh, Kudüs’te dua ederken Tapınak alanına yönelmeyi ve Amida’nın belirli yerlerinde eğilmeyi anlatır. Haç çıkarma Katolik dua geleneğinde kullanılan bir harekettir.",
+      "Shulchan Arukh describes facing the Temple site while praying in Jerusalem and bowing at specific points in the Amidah. The Sign of the Cross is a gesture used in Catholic prayer.",
+      "השולחן ערוך מתאר פנייה למקום המקדש בתפילה בירושלים וכריעה במקומות מסוימים בעמידה. סימן הצלב הוא מחווה המשמשת בתפילה קתולית.",
+      "Şulxan Arux Qüdsdə dua edərkən Məbəd məkanına yönəlməyi və Amida duasının müəyyən yerlərində əyilməyi təsvir edir. Xaç işarəsi katolik duasında işlədilən hərəkətdir."
     ],
     sources: [
       { title: "Shulchan Arukh, Orach Chayim 94:1", url: "https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.94.1" },

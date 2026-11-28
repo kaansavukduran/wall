@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified release: v0.5.2, c24b96845f55a383d8d109e708c7216ec0150389.
-Pages: run 46113025172. Played the Rabash 1984 source exercise and opened the explanation draft from the live study room.
-Packages: v0.5.2 platform and web runs 46113027714 and 46113027716 attached six files. v0.5.1 installed checks (46112778601) passed. v0.5.2 smoke adds an installed desktop test of the Kabbalah workshop. Physical devices/controllers and stable Android signing are open.
-Candidate v0.5.3: Kotel visit and prayer workshop reachable from the prologue, the finale, and the study room. Ten inspectable topics, two scenario questions, and a 2 KB original object sprite sheet load only when opened. The catalogue has 222 entries. Verified four full campaign runs, 320px touch, 200% text, controller simulation, and the standalone workshop with external network blocked.
-Next: verify v0.5.3 live and installed. Deepen the 1665–1759 source chronology and the final exhibition.
+Verified release: v0.5.3, 8db4975c278320355014df97baa4a154d843aa5f.
+Pages: run 46113495911. Opened the Kotel workshop from the live prologue and checked the prayer-posture reading.
+Packages: v0.5.3 platform and web runs 46113499467 and 46113499515 attached six files. Android and Linux passed installed checks (46113772009). Windows initially saw no assets at download; failed job rerun requested after both executables became available. v0.5.2 passed all installed checks with the Rabash workshop exercised in desktop packages (46113398831). Actions secrets API returns HTTP 403 for this integration. The Android preview currently uses per-run debug signing.
+Candidate v0.5.4: chapter 20 has five source-backed dates in a supplementary chronology from Nathan of Gaza to Frank and early Hasidic circles. All four Chromium routes passed, including incorrect order, reading the linked evidence, completing the sequence, and resetting it. Local Firefox launch timed out with a read-only uid_map; the repository compatibility job gives Firefox and WebKit a hosted test. The catalogue has 228 entries.
+Next: verify chronology on Pages and in the compatibility workflow. Turn the final three-stop tour into an evidence-based explanation with a saved open question. Continue source review and platform verification.
