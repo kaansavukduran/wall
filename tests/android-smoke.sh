@@ -21,42 +21,53 @@ wait_for_screen() {
 }
 
 tap_label() {
-  local label="$1" after="${2:-}" point x y height width portrait_width
-  for attempt in {1..5}; do
-    if read_screen; then
-      if [[ -n "$after" ]] && grep -Eq "$after" "$screen_file"; then return 0; fi
-      point=$(python3 - "$screen_file" "$label" <<'PY'
+  local label="$1" after="${2:-}" point action x y end
+  for attempt in {1..8}; do
+    if ! read_screen; then continue; fi
+    if [[ -n "$after" ]] && grep -Eq "$after" "$screen_file"; then return 0; fi
+    point=$(python3 - "$screen_file" "$label" <<'PY'
 import re
 import sys
 from xml.etree import ElementTree
 
 screen, pattern = sys.argv[1:]
-for node in ElementTree.parse(screen).iter("node"):
+nodes = list(ElementTree.parse(screen).iter("node"))
+
+def bounds(node):
+    return tuple(map(int, re.findall(r"[0-9]+", node.get("bounds", ""))))
+
+webview = next(node for node in nodes if node.get("class") == "android.webkit.WebView")
+left, top, right, bottom = bounds(webview)
+center = (left + right) // 2
+upper = top + (bottom - top) // 6
+lower = bottom - (bottom - top) // 6
+for node in nodes:
     if any(re.fullmatch(pattern, node.get(key, "")) for key in ("text", "content-desc")):
-        x1, y1, x2, y2 = map(int, re.findall(r"[0-9]+", node.get("bounds", "")))
+        x1, y1, x2, y2 = bounds(node)
         if x2 > x1 and y2 > y1:
-            print((x1 + x2) // 2, (y1 + y2) // 2)
+            x, y = (x1 + x2) // 2, (y1 + y2) // 2
+            if y > lower:
+                print("swipe", center, lower, upper)
+            elif y < upper:
+                print("swipe", center, upper, lower)
+            else:
+                print("tap", x, y, 0)
             break
+else:
+    print("swipe", center, lower, upper)
 PY
-)
-      if [[ -n "$point" ]]; then
-        read -r x y <<< "$point"
-        echo "Tap $label at $x,$y"
-        adb shell input tap "$x" "$y"
-        if [[ -z "$after" ]]; then return 0; fi
-        continue
-      fi
+    )
+    read -r action x y end <<< "$point"
+    if [[ "$action" == tap ]]; then
+      echo "Tap $label at $x,$y"
+      adb shell input tap "$x" "$y"
+      if [[ -z "$after" ]]; then return 0; fi
+    else
+      adb shell input swipe "$x" "$y" "$x" "$end" 400
     fi
-    # Scroll the document above the navigation bar to reveal the next control.
-    read -r width height < <(adb shell wm size | tail -1 | sed -E 's/.* ([0-9]+)x([0-9]+)/\1 \2/')
-    if grep -Eq 'rotation="[13]"' "$screen_file"; then
-      portrait_width="$width"
-      width="$height"
-      height="$portrait_width"
-    fi
-    adb shell input swipe "$((width / 2))" "$((height * 4 / 5))" "$((width / 2))" "$((height / 3))" 400
   done
   if read_screen; then
+    if [[ -n "$after" ]] && grep -Eq "$after" "$screen_file"; then return 0; fi
     python3 - "$screen_file" <<'PYDIAG'
 import sys
 from xml.etree import ElementTree
