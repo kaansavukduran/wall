@@ -467,7 +467,7 @@ export async function start(initialLanguage) {
       button.dataset.choice = String(selected);
       button.addEventListener('click', event => {
         choose(selected);
-        if (selected === episode.correct && event.pointerType === 'touch') {
+        if (selected === episode.correct && event.detail > 0) {
           next.scrollIntoView({block:'nearest',inline:'nearest'});
         }
       });
