@@ -613,25 +613,44 @@ async function main() {
           if (episode.id === 19) {
             const model = models.find(entry => entry.id === episode.id);
             const views = new Set();
-            for (const [key,,copy,source] of model.options) {
+            for (const [key,titles,copy,source] of model.options) {
               const layer = page.locator('[data-layer="' + key + '"]');
               if (width === 320) await layer.tap();
               else await layer.press('Enter');
+              const language = ['tr','en','he','az'].indexOf(locale);
               assert.equal(await layer.getAttribute('aria-pressed'),'true');
-              assert.equal(await page.locator('#models output').textContent(),copy[['tr','en','he','az'].indexOf(locale)]);
-              assert.equal(await page.locator('#model-reference').getAttribute('href'),source);
+              assert.equal(await page.locator('#models output').textContent(),copy[language]);
+              const reference = page.locator('#model-reference');
+              assert.equal(await reference.getAttribute('href'),source);
+              assert.ok((await reference.getAttribute('aria-label')).endsWith(titles[language]));
               views.add(await page.locator('#world').evaluate(canvas => canvas.toDataURL()));
             }
-            assert.equal(views.size,3);
-            const awning = page.locator('[data-evidence="3"]');
+            assert.equal(views.size,4);
+            const photo = page.locator('#evidence-photo');
+            assert.equal(await photo.isHidden(),true);
+            assert.equal(await photo.locator('img').getAttribute('src'),null);
+            await page.click('[data-evidence="3"]');
+            await photo.waitFor();
+            await photo.locator('img').evaluate(image => image.decode());
+            assert.match(await page.locator('#evidence-date').textContent(), /1864–1865/);
+            assert.equal(await page.locator('#evidence-source').getAttribute('href'), 'https://searcharchives.bl.uk/catalog/040-003237471');
+            assert.equal(await photo.locator('img').evaluate(image => image.naturalWidth),640);
+            assert.ok((await photo.locator('img').getAttribute('alt')).length > 30);
+            if (width === 320) {
+              await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+              assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+              await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+            }
+            const awning = page.locator('[data-evidence="4"]');
             if (width === 320) await awning.tap();
             else await awning.press('Enter');
+            assert.equal(await photo.isHidden(),true);
             assert.match(await page.locator('#evidence-date').textContent(), /1866.*1875/);
             assert.match(await page.locator('#evidence-source').getAttribute('href'), /openletteraddres00auer\)\.pdf#page=138$/);
-            await page.click('[data-evidence="4"]');
+            await page.click('[data-evidence="5"]');
             assert.match(await page.locator('#evidence-date').textContent(), /1884/);
             assert.match(await page.locator('#evidence-source').getAttribute('href'), /PEFSurveyOfWesternPalestineJerusalem1884English[.]pdf#page=203$/);
-            await page.click('[data-evidence="5"]');
+            await page.click('[data-evidence="6"]');
             assert.match(await page.locator('#evidence-date').textContent(), /1920.*1929/);
             assert.match(await page.locator('#evidence-source').getAttribute('href'), /CustReport1929English[.]pdf#page=54$/);
           }

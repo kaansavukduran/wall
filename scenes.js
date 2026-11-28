@@ -244,6 +244,12 @@ export const models = [
     ['mughrabi-quarter',['Mağribi Mahallesi','Maghrebi Quarter','שכונת המוגרבים','Məğribi məhəlləsi'],
       ['Batı Duvarı’nın önündeki dar geçide bak. Mağribi Mahallesi’nin evleri bu alana komşuydu. Çizim, mahalle ile dua yerinin birbirine yakınlığını gösteren bir şemadır.','Look at the narrow passage in front of the Western Wall. Homes in the Maghrebi Quarter stood next to it. The drawing shows the proximity of the neighborhood and the prayer area.','שימו לב למעבר הצר שלפני הכותל. בתי שכונת המוגרבים עמדו בצמוד אליו. האיור הסכמטי מראה את הקרבה בין השכונה למקום התפילה.','Qərb divarının önündəki dar keçidə bax. Məğribi məhəlləsinin evləri bu yerə bitişik idi. Şəkil məhəllə ilə dua yerinin bir-birinə yaxınlığını göstərən sxemdir.'],
       'https://archives.openjerusalem.org/index.php/mughrabi-quarter'],
+    ['paving-request',['1840 · Geçit döşemesi','1840 · Passage paving','1840 · ריצוף המעבר','1840 · Keçidin döşənməsi'], [
+      'İşaret, Duvar’ın dibindeki dar geçidi gösteriyor. 1930 Duvar Komisyonu’nun yayımladığı 1840 tarihli mektup çevirisine göre Mısır idaresi, Yahudi cemaatinin geçidi döşeme isteğini geri çevirdi ve öteden beri yapılan ziyaretlere izin verdi.',
+      'The marker shows the narrow passage at the foot of the Wall. According to an 1840 letter translated in the 1930 Wall Commission report, the Egyptian administration rejected the Jewish community’s request to pave the passage and allowed customary visits to continue.',
+      'הסימון מראה את המעבר הצר שלמרגלות הכותל. לפי תרגום מכתב משנת 1840 בדו״ח ועדת הכותל מ־1930, השלטון המצרי דחה את בקשת הקהילה היהודית לרצף את המעבר והתיר להמשיך בביקורים כמנהג המקום.',
+      'İşarə divarın dibindəki dar keçidi göstərir. 1930-cu il Divar Komissiyasının hesabatındakı 1840-cı il məktubunun tərcüməsinə görə, Misir idarəçiliyi yəhudi icmasının keçidi döşəmək istəyini rədd etdi və əvvəlki qaydada ziyarətə icazə verdi.',
+    ],'https://unispal.un.org/pdfs/59A92104ED00DC468525625B00527FEA.pdf#page=30'],
   ]),
   scene(20, ['Sabatay Sevi haberinin izinde','Following news of Sabbatai Sevi','בעקבות הבשורות על שבתאי צבי','Sabatay Sevi xəbərinin izi ilə'], [
     ['news-cairo',['1665/1666 · Kahire’ye mektup','1665/1666 · Letter to Cairo','1665/1666 · מכתב לקהיר','1665/1666 · Qahirəyə məktub'], [

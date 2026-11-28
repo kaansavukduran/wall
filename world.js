@@ -90,7 +90,7 @@ export async function makeWorld(canvas, reducedMotion) {
     if (index === 19 && layer === 'kotel-courses') {
       rect(background, '#ffe1a0', 168, 128, 312, 2);
     }
-    if (layer === 'quarter' || layer === 'mughrabi-quarter' || (index === 23 && layer !== 'plaza')) {
+    if (layer === 'quarter' || layer === 'mughrabi-quarter' || layer === 'paving-request' || (index === 23 && layer !== 'plaza')) {
       for (let x = 197; x < 430; x += 57) {
         rect(background, '#70594d', x, 143, 41, 58);
         rect(background, '#e2bb89', x + 2, 146, 37, 53);
@@ -104,6 +104,11 @@ export async function makeWorld(canvas, reducedMotion) {
       rect(background, i % 2 ? '#9f8270' : '#4d4140', x, y, 3 + i % 8, 1);
     }
     rect(background, '#b79b78', 0, 198, 480, 2);
+    if (layer === 'paving-request') {
+      rect(background, '#ffe1a0', 192, 205, 244, 2);
+      rect(background, '#ffe1a0', 192, 202, 2, 5);
+      rect(background, '#ffe1a0', 434, 202, 2, 5);
+    }
     if (site) {
       for (const x of [175, 239, 410]) {
         rect(background, '#695447', x, 194, 14, 7);

@@ -233,6 +233,44 @@ export const earlyModernLessons = {
       },
       {
         "title": [
+          "Bergheim’ın taş fotoğrafı",
+          "Bergheim’s stonework photograph",
+          "תצלום האבנים של ברגהיים",
+          "Berqhaymın daş sıraları fotosu"
+        ],
+        "date": [
+          "Fotoğraf 1864–1865, araştırma yayını 1865",
+          "Photograph dated 1864–1865, survey published in 1865",
+          "התצלום מתוארך ל־1864–1865, הסקר פורסם ב־1865",
+          "Fotoşəkil 1864–1865-ci illərə aiddir, tədqiqat 1865-ci ildə nəşr olunub"
+        ],
+        "description": [
+          "İri taş bloklarının birleşim yerlerine bak. Fotoğraf bu blokların 1865’teki yayından önce görünür olduğunu gösterir. Onları kimin, ne zaman onardığını belirlemek için ayrı bir kayıt gerekir.",
+          "Look at the joints between the large stone blocks. The photograph shows these blocks were visible before its publication in 1865. A separate record is needed to establish when and by whom they were repaired.",
+          "התבוננו בחיבורים שבין גושי האבן הגדולים. התצלום מראה שהאבנים היו גלויות לפני פרסומו ב־1865. כדי לקבוע מתי ומי תיקן אותן נדרש תיעוד אחר.",
+          "İri daş blokların birləşdiyi yerlərə bax. Fotoşəkil blokların 1865-ci ildəki nəşrdən əvvəl göründüyünü göstərir. Onları kimin və nə vaxt təmir etdiyini öyrənmək üçün ayrıca sənəd lazımdır."
+        ],
+        "photo": {
+          "url": new URL('./assets/bergheim-1865.jpg',import.meta.url).href,
+          "width": 640,
+          "height": 509,
+          "alt": [
+            "İri taş bloklarının dibinde iki kişi. Biri oturuyor, diğeri ayakta.",
+            "Two people at the foot of large stone blocks. One sits and the other stands.",
+            "שתי דמויות למרגלות גושי אבן גדולים. אחת יושבת והשנייה עומדת.",
+            "İri daş blokların dibində iki nəfər. Biri oturub, digəri ayaq üstədir."
+          ],
+          "credit": [
+            "Peter Bergheim · ABD Kongre Kütüphanesi",
+            "Peter Bergheim · Library of Congress",
+            "פיטר ברגהיים · ספריית הקונגרס",
+            "Piter Berqhaym · ABŞ Konqres Kitabxanası"
+          ]
+        },
+        "url": "https://searcharchives.bl.uk/catalog/040-003237471"
+      },
+      {
+        "title": [
           "Montefiore’un tente girişimi",
           "Montefiore’s awning proposal",
           "ניסיון הקמת הסוכך של מונטיפיורי",

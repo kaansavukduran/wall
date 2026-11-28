@@ -99,6 +99,23 @@ async function main() {
     assert.deepEqual(wall.errors,[]);
     await wall.page.close();
 
+    const ottoman = await openOffline(browser,'#chapter-19',() => {
+      localStorage.setItem('wall.progress.v1',JSON.stringify({
+        active:'19',completed:['plaza',...Array.from({length:18},(_,index)=>String(index+1))],
+      }));
+    });
+    await ottoman.page.tap('[data-layer="paving-request"]');
+    assert.match(await ottoman.page.locator('#model-reference').getAttribute('href'), /#page=30$/);
+    await ottoman.page.tap('#evidence > summary');
+    await ottoman.page.tap('[data-evidence="3"]');
+    const bergheim = ottoman.page.locator('#evidence-photo img');
+    await bergheim.waitFor();
+    await bergheim.evaluate(image => image.decode());
+    assert.equal(await bergheim.evaluate(image => image.naturalWidth),640);
+    assert.deepEqual(ottoman.requests,[]);
+    assert.deepEqual(ottoman.errors,[]);
+    await ottoman.page.close();
+
     const archive = await openOffline(browser,'#chapter-24',() => {
       localStorage.setItem('wall.progress.v1',JSON.stringify({
         active:'24',

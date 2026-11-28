@@ -80,6 +80,9 @@ h1,h2{line-height:1.2;text-wrap:balance;margin:.25em 0}
 #transfer-sources a{overflow-wrap:anywhere}
 .evidence-reading p{margin-block:.6rem}
 .evidence-reading p:empty{margin:0}
+#evidence-photo{margin:.75rem 0}
+#evidence-photo img{display:block;max-inline-size:100%;block-size:auto}
+#evidence-photo figcaption{margin-block-start:.35rem}
 #evidence-date{color:var(--muted);font-size:.86rem}
 #evidence-feedback{font-weight:600}
 #choices{display:flex;flex-wrap:wrap;gap:.5rem}

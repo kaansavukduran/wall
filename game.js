@@ -702,11 +702,23 @@ export async function start(initialLanguage) {
     find('evidence-detail').textContent = card?.description[index] ?? '';
     find('evidence-feedback').textContent = !card ? ''
       : evidenceCard === lesson.correct ? lesson.feedback[index] : evidenceLabels[language][1];
+    const figure = find('evidence-photo');
+    figure.hidden = !card?.photo;
+    if (card?.photo) {
+      const {url,width,height,alt,credit} = card.photo;
+      const [image,caption] = figure.children;
+      image.width = width;
+      image.height = height;
+      image.alt = alt[index];
+      image.src = url;
+      caption.textContent = credit[index];
+    }
     const source = find('evidence-source');
     source.hidden = !card;
     if (card) {
       source.href = card.url;
       source.textContent = ui[language][5];
+      source.setAttribute('aria-label', `${source.textContent} · ${card.title[index]}`);
     }
   }
 
@@ -756,7 +768,10 @@ export async function start(initialLanguage) {
       const activeOption = model.options.find(option => option[0] === selectedLayer);
       output.textContent = activeOption?.[2][index] ?? '';
       reference.hidden = !activeOption?.[3];
-      if (activeOption?.[3]) reference.href = activeOption[3];
+      if (activeOption?.[3]) {
+        reference.href = activeOption[3];
+        reference.setAttribute('aria-label', `${reference.textContent} · ${activeOption[1][index]}`);
+      }
       for (const button of controls.children) button.setAttribute('aria-pressed', String(button.dataset.layer === selectedLayer));
       if (selectedLayer === 'market-measure') drawMarketMeasure();
       else world.scene(id, selectedLayer);
