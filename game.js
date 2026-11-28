@@ -1018,7 +1018,10 @@ export async function start(initialLanguage) {
   }
   mountController({
     walk, stop, inspect, timeline:openChapters, library:openLibrary,
-    showHint() { find('controller-hint').hidden = false; },
+    showHint() {
+      find('controller-hint').hidden = false;
+      if (!arrival.hidden && document.activeElement === find('arrival-title')) startCampaign.focus();
+    },
   });
   return arrival.hidden ? null : startCampaign;
 }

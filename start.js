@@ -32,5 +32,8 @@ if (failed) {
 } else {
   document.querySelector('#app').hidden = false;
   document.querySelector('#boot').hidden = true;
-  initialControl?.focus();
+  if (initialControl) {
+    const fits = initialControl.getBoundingClientRect().bottom <= window.innerHeight;
+    (fits ? initialControl : document.getElementById('arrival-title')).focus();
+  }
 }

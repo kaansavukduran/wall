@@ -1042,12 +1042,22 @@ async function main() {
       assert.equal(await page.locator('#kabbalah-draft').inputValue(), 'WALL rabash-group-application');
       await page.keyboard.press('Escape');
       const returning = await context.newPage();
+      if (locale === 'he') {
+        await returning.setViewportSize({width:320,height:590});
+        await returning.addInitScript(() => localStorage.setItem('wall.appearance.v1',JSON.stringify({
+          size:200,theme:'contrast',motion:'reduce',
+        })));
+      }
       await returning.goto(target);
       await returning.locator('#arrival').waitFor();
       const chapterTitle = chapters.at(-1).text[languages.indexOf(locale)][0];
       assert.ok((await returning.locator('#arrival-description').textContent()).includes(chapterTitle));
       assert.equal(await returning.locator('#start-campaign').textContent(),ui[locale][3]);
       assert.equal(await returning.evaluate(() => JSON.parse(localStorage.getItem('wall.progress.v1')).active),'24');
+      if (locale === 'he') {
+        assert.equal(await returning.locator('#arrival-title').evaluate(title => document.activeElement === title),true);
+        assert.equal(await returning.evaluate(() => scrollY),0);
+      }
       await enterCampaign(returning);
       assert.equal(await returning.locator('#chapter').textContent(),'24');
       await returning.close();
