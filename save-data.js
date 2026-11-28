@@ -2,6 +2,9 @@ import { chapters, languages } from './content.js';
 import { appearanceKey, parseAppearance } from './appearance.js';
 
 export const progressKey = 'wall.progress.v1';
+const completionPrefix = 'wall.completed.v1.';
+export const completionKey = id => completionPrefix + id;
+export const isCampaignKey = key => key === progressKey || key?.startsWith(completionPrefix);
 export const saveSchemaVersion = 1;
 export const maxSaveLength = 500_000;
 const format = 'WALL save';
@@ -13,16 +16,44 @@ const tourChoiceKey = /^wall\.tour\.(?:[0-2]|question)$/u;
 const tourSolvedKey = /^wall\.tour\.solved\.[a-z0-9-]{1,60}$/u;
 const choiceValue = /^[a-z0-9-]{0,60}$/u;
 
-function validProgress(raw) {
+function parseProgress(raw) {
+  if (typeof raw !== 'string') return null;
   try {
-    const progress = JSON.parse(raw);
-    const {active,completed} = progress;
-    if (!chapterIds.has(active) || !Array.isArray(completed)
-      || completed.length > episodeIds.length || completed.some(id => !chapterIds.has(id))) return null;
-    return { active, completed:[...new Set(completed)] };
+    return JSON.parse(raw);
   } catch {
     return null;
   }
+}
+
+function validProgress(raw) {
+  const {active,completed} = parseProgress(raw) ?? {};
+  if (!chapterIds.has(active) || !Array.isArray(completed)
+    || completed.length > episodeIds.length || completed.some(id => !chapterIds.has(id))) return null;
+  return {active,completed:[...new Set(completed)]};
+}
+
+export function readCampaign(read, pending) {
+  const stored = parseProgress(read(progressKey));
+  const waiting = parseProgress(pending?.get(progressKey));
+  const completed = new Set();
+  for (const record of [stored,waiting]) {
+    if (!Array.isArray(record?.completed)) continue;
+    for (const id of record.completed) if (chapterIds.has(id)) completed.add(id);
+  }
+  // Set each completed episode independently so competing writes to the old
+  // snapshot cannot erase a completion from another tab.
+  for (const id of episodeIds) {
+    if (completed.has(id)) continue;
+    const key = completionKey(id);
+    if (pending?.get(key) === '1' || read(key) === '1') completed.add(id);
+  }
+  const active = [waiting?.active,stored?.active].find(id => chapterIds.has(id))
+    ?? (completed.size ? episodeIds.find(id => !completed.has(id)) ?? episodeIds.at(-1) : null);
+  return {active,completed};
+}
+
+export function encodeCampaign(active, completed) {
+  return JSON.stringify({active,completed:episodeIds.filter(id => completed.has(id))});
 }
 
 function validValue(key, value) {
@@ -39,28 +70,31 @@ function validValue(key, value) {
   return transfer?.[1] === 'solved' && value === 'true';
 }
 
-function snapshot(storage) {
+function snapshot(storage, pending) {
   const values = Object.create(null);
-  for (let index = 0; index < storage.length; index++) {
-    const key = storage.key(index);
-    if (!key?.startsWith('wall.')) continue;
-    const value = storage.getItem(key);
-    if (validValue(key,value)) values[key] = value;
+  const markers = Object.create(null);
+  try {
+    for (let index = 0; index < storage.length; index++) {
+      const key = storage.key(index);
+      if (!key?.startsWith('wall.')) continue;
+      const value = storage.getItem(key);
+      if (key.startsWith(completionPrefix)) markers[key] = value;
+      else if (key === progressKey || validValue(key,value)) values[key] = value;
+    }
+  } catch (error) {
+    if (!pending?.size) throw error;
   }
+  const progress = readCampaign(key => key === progressKey ? values[key] : markers[key],pending);
+  for (const [key,value] of pending ?? []) {
+    if (key !== progressKey && validValue(key,value)) values[key] = value;
+  }
+  if (progress.active) values[progressKey] = encodeCampaign(progress.active,progress.completed);
+  else delete values[progressKey];
   return values;
 }
 
 export function exportSave(storage, pending) {
-  let values;
-  try {
-    values = snapshot(storage);
-  } catch (error) {
-    if (!pending?.size) throw error;
-    values = Object.create(null);
-  }
-  for (const [key,value] of pending ?? []) {
-    if (validValue(key,value)) values[key] = value;
-  }
+  const values = snapshot(storage,pending);
   const encoded = JSON.stringify({format,version:saveSchemaVersion,values});
   if (encoded.length > maxSaveLength || Object.keys(values).length > 100) throw new Error('Save size');
   return encoded;
@@ -99,13 +133,14 @@ export function mergeSave(storage, text) {
   if (incomingProgress) {
     const local = validProgress(current[progressKey]);
     const completed = new Set([...(local?.completed ?? []),...incomingProgress.completed]);
-    merged[progressKey] = JSON.stringify({
-      active:local?.completed.length ? local.active : incomingProgress.active,
-      completed:episodeIds.filter(id => completed.has(id)),
-    });
+    merged[progressKey] = encodeCampaign(local?.completed.length ? local.active : incomingProgress.active,completed);
   }
 
   const changed = Object.entries(merged).filter(([key,value]) => current[key] !== value);
+  for (const id of incomingProgress?.completed ?? []) {
+    const key = completionKey(id);
+    if (storage.getItem(key) !== '1') changed.push([key,'1']);
+  }
   const written = [];
   try {
     for (const [key,value] of changed) {

@@ -5,10 +5,10 @@ import { accountabilityLabels, ashlagLabels, atlasLabels, bakuLabels, calendarLa
 import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
+import { completionKey, encodeCampaign, isCampaignKey, progressKey, readCampaign } from './save-data.js';
 import { makeWorld } from './world.js';
 
 const episodes = [plaza, ...chapters];
-const key = 'wall.progress.v1';
 const find = id => document.getElementById(id);
 const evidenceLabels = {
   tr: ['Kaynakları karşılaştır', 'Bu soruya yanıt veren kaynağı bulmak için diğer kartlara da bak.', 'Kaynak kartları yükleniyor…', 'Kaynak kartları açılamadı. Sayfayı yenileyip tekrar dene.'],
@@ -105,17 +105,6 @@ function readStored(keyName) {
   try { return localStorage.getItem(keyName); } catch { return null; }
 }
 
-function readProgress(read) {
-  try {
-    const value = JSON.parse(read(key) ?? '{}');
-    const ids = ['plaza', ...chapters.map(episode => String(episode.id))];
-    const completed = new Set(Array.isArray(value.completed) ? value.completed.filter(id => ids.includes(id)) : []);
-    return { completed, active: value.active };
-  } catch {
-    return { completed:new Set(), active:null };
-  }
-}
-
 export async function start(initialLanguage) {
   let language = initialLanguage;
   const pending = new Map();
@@ -149,7 +138,14 @@ export async function start(initialLanguage) {
   }
 
   function retryPending() {
-    for (const [keyName,value] of [...pending]) store(keyName,value);
+    for (const [keyName,value] of [...pending]) {
+      if (keyName === progressKey) {
+        synchronizeProgress();
+        save();
+      } else {
+        store(keyName,value);
+      }
+    }
     showStorageStatus(pending.size === 0);
     return pending.size === 0;
   }
@@ -201,7 +197,8 @@ export async function start(initialLanguage) {
   const ashlagView = {};
   const bakuView = {};
   const talmudView = {reading:null,side:0,position:0,answers:[['','',''],['','','']]};
-  const progress = readProgress(read);
+  const initialProgress = readCampaign(readStored,pending);
+  const {completed} = initialProgress;
   const arrival = find('arrival');
   const campaign = find('campaign');
   const startCampaign = find('start-campaign');
@@ -227,10 +224,21 @@ export async function start(initialLanguage) {
   }
 
   const episodeId = index => String(episodes[index].id ?? 'plaza');
-  const firstIncomplete = () => episodes.findIndex((_, index) => !progress.completed.has(episodeId(index)));
-  const unlocked = index => index >= 0 && (index === 0 || index === firstIncomplete() || progress.completed.has(episodeId(index)));
-  const save = () => store(key, JSON.stringify({active:episodeId(active),completed:[...progress.completed]}));
+  const firstIncomplete = () => episodes.findIndex((_, index) => !completed.has(episodeId(index)));
+  const unlocked = index => index >= 0 && (index === 0 || index === firstIncomplete() || completed.has(episodeId(index)));
+  const save = () => store(progressKey,encodeCampaign(episodeId(active),completed));
   const locale = () => languages.indexOf(language);
+
+  function synchronizeProgress() {
+    const latest = readCampaign(readStored,pending);
+    for (const id of latest.completed) completed.add(id);
+    return latest.active;
+  }
+
+  function resumeIndex(last = synchronizeProgress()) {
+    const index = episodes.findIndex((_, index) => episodeId(index) === last);
+    return unlocked(index) ? index : -1;
+  }
   function connectDisclosure(id, translations, load, scope = () => null) {
     const detail = find(id);
     const [summary, status, panel] = detail.children;
@@ -344,7 +352,12 @@ export async function start(initialLanguage) {
       result.textContent = ui[language][10];
       return;
     }
-    progress.completed.add(episodeId(active));
+    synchronizeProgress();
+    const id = episodeId(active);
+    if (!completed.has(id)) {
+      completed.add(id);
+      store(completionKey(id),'1');
+    }
     result.textContent = text[5];
     next.hidden = false;
     next.textContent = firstIncomplete() < 0 ? ui[language][13] : ui[language][3];
@@ -366,8 +379,8 @@ export async function start(initialLanguage) {
     find('download').textContent = transferLabels[language][3];
   }
 
-  function renderArrival(savedIndex) {
-    renderLanguage();
+  function renderArrival(last) {
+    const savedIndex = resumeIndex(last);
     const [startLabel, intro, resume] = arrivalCopy[language];
     startCampaign.textContent = savedIndex >= 0 ? ui[language][3] : startLabel;
     find('arrival-description').textContent = savedIndex >= 0
@@ -380,7 +393,7 @@ export async function start(initialLanguage) {
     const index = locale();
     const text = episode.text[index];
     const labels = ui[language];
-    const completed = progress.completed.has(episodeId(active));
+    const finished = completed.has(episodeId(active));
     renderLanguage();
     const visit = find('visit-button');
     visit.textContent = visitLabels[language][0];
@@ -412,10 +425,10 @@ export async function start(initialLanguage) {
       button.addEventListener('click', () => choose(selected));
       return button;
     }));
-    result.textContent = completed ? text[5] : '';
+    result.textContent = finished ? text[5] : '';
     next.textContent = firstIncomplete() < 0 ? labels[13] : labels[3];
-    next.hidden = !completed;
-    offerTransfer(completed);
+    next.hidden = !finished;
+    offerTransfer(finished);
     renderModel();
     renderStudy();
     renderSequence();
@@ -441,12 +454,17 @@ export async function start(initialLanguage) {
   }
 
   function go(index, updateHash = true) {
+    synchronizeProgress();
     if (!episodes[index] || !unlocked(index)) return;
     const entering = campaign.hidden;
     if (entering) {
       arrival.hidden = true;
       campaign.hidden = false;
       for (const link of campaignLinks) link.hidden = false;
+      for (const id of completed) {
+        const marker = completionKey(id);
+        if (read(marker) !== '1') store(marker,'1');
+      }
     }
     active = index;
     stop();
@@ -782,7 +800,7 @@ export async function start(initialLanguage) {
   });
 
   async function renderTour() {
-    journal.hidden = active !== episodes.length - 1 || !progress.completed.has(episodeId(active));
+    journal.hidden = active !== episodes.length - 1 || !completed.has(episodeId(active));
     if (journal.hidden || tourLanguage === language) return;
     const current = language;
     const labels = tourLoadLabels[current];
@@ -825,6 +843,7 @@ export async function start(initialLanguage) {
   function openChapters() {
     if (campaign.hidden) return;
     stop();
+    synchronizeProgress();
     chooser.querySelector('h2').textContent = ui[language][11];
     chooser.querySelector('button').textContent = ui[language][4];
     chooser.querySelector('ol').replaceChildren(...episodes.map((episode, index) => {
@@ -843,6 +862,7 @@ export async function start(initialLanguage) {
   function openLibrary() {
     if (campaign.hidden) return;
     stop();
+    synchronizeProgress();
     const index = locale();
     studyRoom.querySelector('h2').textContent = libraryLabels[language][0];
     for (const refresh of workshops) refresh();
@@ -988,6 +1008,7 @@ export async function start(initialLanguage) {
   find('visit-button').addEventListener('click', () => openWorkshop('visit'));
   find('diaspora-button').addEventListener('click', () => openWorkshop('diaspora-archive'));
   next.addEventListener('click', () => {
+    synchronizeProgress();
     const upcoming = firstIncomplete();
     go(upcoming < 0 ? 0 : upcoming);
   });
@@ -995,7 +1016,10 @@ export async function start(initialLanguage) {
     if (!languages.includes(selector.value)) return;
     language = selector.value;
     store('wall.language', language);
-    if (campaign.hidden) renderArrival(savedIndex);
+    if (campaign.hidden) {
+      renderLanguage();
+      renderArrival();
+    }
     else render();
   });
 
@@ -1004,16 +1028,23 @@ export async function start(initialLanguage) {
     return hash === '#game' ? 0 : episodes.findIndex((_, index) => '#chapter-' + episodeId(index) === hash);
   }
   window.addEventListener('hashchange', () => go(fromHash(), false));
+  let arrivalUpdate = 0;
+  window.addEventListener('storage', event => {
+    if (!campaign.hidden || !isCampaignKey(event.key) || arrivalUpdate) return;
+    arrivalUpdate = requestAnimationFrame(() => {
+      arrivalUpdate = 0;
+      if (campaign.hidden) renderArrival();
+    });
+  });
   const requested = fromHash();
-  const saved = episodes.findIndex((_, index) => episodeId(index) === progress.active);
-  const savedIndex = unlocked(saved) ? saved : -1;
-  startCampaign.addEventListener('click', () => go(Math.max(0,savedIndex)));
+  startCampaign.addEventListener('click', () => go(Math.max(0,resumeIndex())));
   if (unlocked(requested)) {
     go(requested, false);
   } else if (restored) {
-    go(Math.max(0,savedIndex));
+    go(Math.max(0,resumeIndex(initialProgress.active)));
   } else {
-    renderArrival(savedIndex);
+    renderLanguage();
+    renderArrival(initialProgress.active);
     arrival.hidden = false;
   }
   mountController({

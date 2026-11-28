@@ -1251,6 +1251,61 @@ async function main() {
     await blocked.close();
     console.log('Storage failure warning, session save export and retry with preserved progress: PASS');
 
+    const shared = await browser.newContext({locale:'en',viewport:{width:1100,height:750}});
+    const firstTab = await shared.newPage();
+    await firstTab.goto(target);
+    await enterCampaign(firstTab);
+    await firstTab.click('[data-choice="' + plaza.correct + '"]');
+    await firstTab.click('#next');
+
+    const olderTab = await shared.newPage();
+    await olderTab.addInitScript(() => {
+      const write = Storage.prototype.setItem;
+      Storage.prototype.setItem = function(key,value) {
+        if (window.blockSaveWrites) throw new DOMException('Storage quota','QuotaExceededError');
+        return write.call(this,key,value);
+      };
+    });
+    await olderTab.goto(target);
+    await enterCampaign(olderTab);
+    await olderTab.click('#episodes-button');
+    const waitingTab = await shared.newPage();
+    await waitingTab.goto(target);
+    await waitingTab.locator('#arrival').waitFor();
+    await firstTab.click('[data-choice="' + chapters[0].correct + '"]');
+    await firstTab.click('#next');
+    await waitingTab.bringToFront();
+    await waitingTab.locator('#arrival-description')
+      .getByText('You last visited “' + chapters[1].text[1][0] + '”.',{exact:true}).waitFor();
+    await olderTab.locator('#chapters ol li').nth(1).getByRole('button').click();
+    assert.equal(await olderTab.locator('#next').isVisible(),true);
+    const savedCampaign = page => page.evaluate(() => JSON.parse(localStorage.getItem('wall.progress.v1')));
+    assert.deepEqual((await savedCampaign(olderTab)).completed,['plaza','1']);
+
+    await olderTab.evaluate(() => { window.blockSaveWrites = true; });
+    await olderTab.click('#next');
+    await olderTab.locator('#storage-notice').getByText(/Some changes could not be saved/).waitFor();
+    await firstTab.click('[data-choice="' + chapters[1].correct + '"]');
+    await olderTab.click('#settings-button');
+    await olderTab.click('#save-transfer summary');
+    await olderTab.click('#save-export');
+    const sharedBackup = JSON.parse(await olderTab.locator('#save-output').inputValue());
+    assert.equal(sharedBackup.version,1);
+    assert.deepEqual(JSON.parse(sharedBackup.values['wall.progress.v1']).completed,['plaza','1','2']);
+    await olderTab.evaluate(() => { window.blockSaveWrites = false; });
+    await olderTab.click('#retry-storage');
+    assert.deepEqual((await savedCampaign(olderTab)).completed,['plaza','1','2']);
+    await olderTab.evaluate(() => {
+      localStorage.setItem('wall.progress.v1',JSON.stringify({active:'2',completed:['plaza']}));
+    });
+    await olderTab.reload();
+    await olderTab.locator('#campaign').waitFor();
+    assert.equal(await olderTab.locator('#chapter').textContent(),'2');
+    assert.equal(await olderTab.locator('#next').isVisible(),true);
+    assert.deepEqual((await savedCampaign(olderTab)).completed,['plaza','1','2']);
+    await shared.close();
+    console.log('Shared campaign keeps unlocks through stale navigation, save export and a failed write retry: PASS');
+
     const reading = await browser.newPage({locale:'az',viewport:{width:320,height:700},hasTouch:true,colorScheme:'dark'});
     await reading.goto(target);
     await enterCampaign(reading,'tap');

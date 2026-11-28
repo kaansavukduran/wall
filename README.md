@@ -33,6 +33,8 @@ In versions that include **Settings → Transfer a save**, create save text and 
 
 If the browser refuses a write, WALL keeps the changes in the open session and shows a warning. Before closing the game, copy the save text from Settings or select **Try saving again** once storage is available.
 
+Tabs sharing the same browser profile keep all completed chapters. On the opening screen, **Continue** uses the last scene saved in that profile.
+
 **Settings → Appearance and motion** offers dark, light, system and high-contrast palettes, an 80–200% scale and reduced animation. Each preference is saved separately and can travel in a save from this version.
 
 This repository publishes Pages from `gh-pages`. To publish a tested release, push it to `main` and run `bash scripts/publish-pages.sh` from that clean checkout. Check the published `build.json` for the version, commit, four locales, save schema and plan, content, catalogue and engine fingerprints. The single-file HTML includes the same build record.

@@ -15,7 +15,7 @@ import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
 import { cultureCases, cultureRecords } from '../culture-lessons.js';
 import { pageFeedback, pageNote, talmudCards } from '../talmud-lessons.js';
-import { exportSave, mergeSave, parseSave, progressKey, saveSchemaVersion, saveSummary } from '../save-data.js';
+import { completionKey, exportSave, mergeSave, parseSave, progressKey, readCampaign, saveSchemaVersion, saveSummary } from '../save-data.js';
 import { appearanceKey, parseAppearance } from '../appearance.js';
 import { dailyCards } from '../daily-lessons.js';
 import { archiveCopy as displacementCopy, displacementRecords } from '../displacement-lessons.js';
@@ -115,6 +115,24 @@ test('portable saves merge valid progress without replacing local drafts or touc
   const pending = new Map([[draft,'Current session draft'],['wall.unknown-scope','ignored']]);
   assert.equal(parseSave(exportSave(source,pending))[draft],'Current session draft');
   assert.deepEqual(parseSave(exportSave(null,pending)),{[draft]:'Current session draft'});
+
+  const competing = mockStorage({
+    [progressKey]:JSON.stringify({active:'3',completed:['plaza']}),
+    [completionKey('1')]:'1',
+  });
+  const waiting = new Map([
+    [progressKey,JSON.stringify({active:'2',completed:['plaza']})],
+    [completionKey('2'),'1'],
+  ]);
+  assert.deepEqual(readCampaign(key => competing.getItem(key),waiting),{
+    active:'2',completed:new Set(['plaza','1','2']),
+  });
+  const shared = parseSave(exportSave(competing,waiting));
+  assert.deepEqual(Object.keys(shared),[progressKey]);
+  assert.deepEqual(JSON.parse(shared[progressKey]),{active:'2',completed:['plaza','1','2']});
+  mergeSave(competing,encoded);
+  assert.equal(competing.getItem(completionKey('1')),'1');
+  assert.ok(readCampaign(key => competing.getItem(key)).completed.has('1'));
 });
 
 test('reading preferences reject invalid themes, sizes and motion options', () => {
