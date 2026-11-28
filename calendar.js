@@ -59,11 +59,23 @@ function sourceLink({url, title}) {
   return link;
 }
 
-function prepareShabbat(panel, locale) {
+function prepareShabbat(panel, locale, view) {
   const [title, introduction, cards, prompt, answers, status] = panel.children;
+  function showAnswer() {
+    for (const button of answers.children) {
+      button.setAttribute('aria-pressed', String(button.dataset.shabbatPlace === view.answer));
+    }
+    const result = view.answer === shabbatStudy.answer ? shabbatStudy.feedback : shabbatStudy.retry;
+    status.textContent = view.answer ? result[locale] : '';
+  }
+
   title.textContent = shabbatStudy.heading[locale];
   introduction.textContent = shabbatStudy.introduction[locale];
   introduction.append(' ', sourceLink(shabbatStudy.text));
+  panel.open = view.open;
+  panel.addEventListener('toggle', () => {
+    if (panel.isConnected) view.open = panel.open;
+  });
   for (const place of shabbatStudy.places) {
     const card = document.createElement('details');
     const summary = document.createElement('summary');
@@ -71,23 +83,26 @@ function prepareShabbat(panel, locale) {
     summary.textContent = place.title[locale];
     practice.textContent = place.practice[locale];
     card.append(summary, practice, sourceLink(place.source));
+    card.open = view.cards.has(place.id);
+    card.addEventListener('toggle', () => {
+      if (!card.isConnected) return;
+      if (card.open) view.cards.add(place.id);
+      else view.cards.delete(place.id);
+    });
     cards.append(card);
 
     const button = document.createElement('button');
     button.type = 'button';
     button.dataset.shabbatPlace = place.id;
     button.textContent = place.title[locale];
-    button.setAttribute('aria-pressed', 'false');
     button.addEventListener('click', () => {
-      for (const sibling of answers.children) {
-        sibling.setAttribute('aria-pressed', String(sibling === button));
-      }
-      const result = place.id === shabbatStudy.answer ? shabbatStudy.feedback : shabbatStudy.retry;
-      status.textContent = result[locale];
+      view.answer = place.id;
+      showAnswer();
     });
     answers.append(button);
   }
   prompt.textContent = shabbatStudy.question[locale];
+  showAnswer();
 }
 
 export function mountCalendar(panel, language, locale, view) {
@@ -219,7 +234,7 @@ export function mountCalendar(panel, language, locale, view) {
       status.textContent = labels.retry;
     }
   });
-  prepareShabbat(shabbat, locale);
+  prepareShabbat(shabbat, locale, view.shabbat);
   updatePeriods();
   showExample();
   panel.replaceChildren(fragment);
