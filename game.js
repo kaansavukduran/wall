@@ -202,6 +202,7 @@ export async function start(initialLanguage) {
   const arrival = find('arrival');
   const campaign = find('campaign');
   const startCampaign = find('start-campaign');
+  const returnPlaza = find('return-plaza');
   const campaignLinks = ['game-mark','episodes-button','library-button'].map(find);
   let active = 0;
   let movement = null;
@@ -260,6 +261,13 @@ export async function start(initialLanguage) {
   function resumeIndex(last = synchronizeProgress().active) {
     const index = episodes.findIndex((_, index) => episodeId(index) === last);
     return unlocked(index) ? index : -1;
+  }
+
+  function upcomingIndex() {
+    const incomplete = firstIncomplete();
+    const following = active + 1;
+    if (episodes[following] && (following === incomplete || completed.has(episodeId(following)))) return following;
+    return Math.max(0,incomplete);
   }
   function connectDisclosure(id, translations, load, scope = () => null) {
     const detail = find(id);
@@ -383,7 +391,7 @@ export async function start(initialLanguage) {
     }
     result.textContent = text[5];
     next.hidden = false;
-    next.textContent = firstIncomplete() < 0 ? ui[language][13] : ui[language][3];
+    next.textContent = ui[language][upcomingIndex() === 0 ? 13 : 3];
     offerTransfer(true);
     renderTour();
     save();
@@ -406,6 +414,9 @@ export async function start(initialLanguage) {
     const savedIndex = resumeIndex(last);
     const [startLabel, intro, resume] = arrivalCopy[language];
     startCampaign.textContent = savedIndex >= 0 ? ui[language][3] : startLabel;
+    if (savedIndex > 0) returnPlaza.textContent = ui[language][13];
+    else if (document.activeElement === returnPlaza) startCampaign.focus();
+    returnPlaza.hidden = savedIndex <= 0;
     find('arrival-description').textContent = savedIndex >= 0
       ? resume(episodes[savedIndex].text[locale()][0])
       : intro;
@@ -449,7 +460,7 @@ export async function start(initialLanguage) {
       return button;
     }));
     result.textContent = finished ? text[5] : '';
-    next.textContent = firstIncomplete() < 0 ? labels[13] : labels[3];
+    next.textContent = labels[upcomingIndex() === 0 ? 13 : 3];
     next.hidden = !finished;
     offerTransfer(finished);
     renderModel();
@@ -1042,8 +1053,7 @@ export async function start(initialLanguage) {
   find('diaspora-button').addEventListener('click', () => openWorkshop('diaspora-archive'));
   next.addEventListener('click', () => {
     synchronizeProgress();
-    const upcoming = firstIncomplete();
-    go(upcoming < 0 ? 0 : upcoming);
+    go(upcomingIndex());
   });
   selector.addEventListener('change', () => {
     if (!languages.includes(selector.value)) return;
@@ -1071,6 +1081,7 @@ export async function start(initialLanguage) {
   });
   const requested = fromHash();
   startCampaign.addEventListener('click', () => go(Math.max(0,resumeIndex())));
+  returnPlaza.addEventListener('click', () => go(0));
   if (unlocked(requested)) {
     go(requested, false);
   } else if (restored) {

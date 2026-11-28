@@ -75,6 +75,7 @@ async function main() {
       const newGame = {tr:'Yeni oyun',en:'New game',he:'משחק חדש',az:'Yeni oyun'};
       assert.equal(await page.locator('#start-campaign').textContent(),newGame[locale]);
       assert.equal(await page.locator('#campaign').isHidden(),true);
+      assert.equal(await page.locator('#return-plaza').isHidden(),true);
       assert.equal(await page.evaluate(() => localStorage.getItem('wall.progress.v1')),null);
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
@@ -1075,6 +1076,27 @@ async function main() {
       }
       await enterCampaign(returning);
       assert.equal(await returning.locator('#chapter').textContent(),'24');
+      const progressBeforeReplay = await returning.evaluate(() => JSON.parse(localStorage.getItem('wall.progress.v1')).completed);
+      await returning.goto(target);
+      const returnPlaza = returning.locator('#return-plaza');
+      await returnPlaza.waitFor();
+      assert.equal(await returnPlaza.textContent(),ui[locale][13]);
+      assert.equal(await returning.evaluate(() => document.documentElement.scrollWidth > innerWidth),false);
+      if (locale === 'he') {
+        const controller = action => returning.evaluate(action => window.dispatchEvent(new CustomEvent('wall-controller',{
+          detail:{action,pressed:true},
+        })),action);
+        await controller('next');
+        assert.ok(await returnPlaza.evaluate(button => button === document.activeElement));
+        await controller('activate');
+      } else if (width === 320) await returnPlaza.tap();
+      else await returnPlaza.press('Enter');
+      await returning.waitForURL('**/#game');
+      assert.equal(await returning.locator('#next').textContent(),ui[locale][3]);
+      await returning.click('#next');
+      await returning.waitForURL('**/#chapter-1');
+      assert.deepEqual(await returning.evaluate(() => JSON.parse(localStorage.getItem('wall.progress.v1')).completed),
+        progressBeforeReplay);
       await returning.close();
       await page.click('#next');
       await page.waitForURL('**/#game');
@@ -1345,6 +1367,14 @@ async function main() {
     assert.equal(await olderTab.locator('#chapter').textContent(),'2');
     assert.equal(await olderTab.locator('#next').isVisible(),true);
     assert.deepEqual((await savedCampaign(olderTab)).completed,['plaza','1','2']);
+    await waitingTab.bringToFront();
+    const returnPlaza = waitingTab.locator('#return-plaza');
+    await returnPlaza.focus();
+    await olderTab.click('#episodes-button');
+    await olderTab.locator('#chapters ol li:first-child button').click();
+    await waitingTab.bringToFront();
+    await returnPlaza.waitFor({state:'hidden'});
+    assert.equal(await waitingTab.locator('#start-campaign').evaluate(button => button === document.activeElement),true);
     await shared.close();
     console.log('Shared campaign keeps unlocks through stale navigation, save export and a failed write retry: PASS');
 
