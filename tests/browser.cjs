@@ -1395,9 +1395,9 @@ async function main() {
     await resourcesShortcut.waitFor();
     await libraryButton.press('Enter');
     await chapterResources.locator('#library[open]').waitFor();
-    await chapterResources.locator('#language-study summary').press('Enter');
+    await chapterResources.locator('#language-study > summary').press('Enter');
     await languageCard.selectOption('lang-malka');
-    await chapterResources.locator('#atlas summary').press('Enter');
+    await chapterResources.locator('#atlas > summary').press('Enter');
     await atlasSearch.fill('Qumran');
     await chapterResources.locator('#library .dialog-heading form button').press('Enter');
     await chapterResources.evaluate(() => {document.documentElement.style.fontSize='200%';});
@@ -1421,7 +1421,7 @@ async function main() {
     await libraryButton.press('Enter');
     await atlasSearch.waitFor();
     assert.equal(await atlasSearch.inputValue(),'Qumran');
-    await chapterResources.locator('#language-study summary').press('Enter');
+    await chapterResources.locator('#language-study > summary').press('Enter');
     await languageCard.waitFor();
     assert.equal(await languageCard.inputValue(),'lang-malka');
     await chapterResources.close();
