@@ -4,12 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#121a22">
 <title>WALL</title>
-<link rel="stylesheet" href="./runtime-0.5.9-e83eb1e3c9a8/style.css">
+<link rel="stylesheet" href="./runtime-0.6.0-7be94ddcc7a7/style.css">
 <body>
 <section id="boot" aria-label="Fragaria Interactive">
   <div class="boot-shell">
     <div class="boot-brand">
-      <img src="./runtime-0.5.9-e83eb1e3c9a8/assets/fragaria-strawberry.png" alt="" width="116" height="130">
+      <img src="./runtime-0.6.0-7be94ddcc7a7/assets/fragaria-strawberry.png" alt="" width="116" height="130">
       <h1>Fragaria<br>Interactive</h1>
     </div>
     <div class="boot-load">
@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.5.9</small>
+  <small dir="ltr">v0.6.0</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -91,6 +91,7 @@
         <button id="visit-button" type="button" hidden></button>
         <button id="diaspora-button" type="button" hidden></button>
         <button id="next" class="primary" type="button" hidden></button>
+        <details id="transfer" hidden><summary></summary><p role="status" hidden></p><div></div></details>
         <section id="journal" aria-labelledby="tour-title" hidden>
           <h2 id="tour-title"></h2>
           <p id="tour-load" role="status" hidden></p>
@@ -111,7 +112,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.9</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.6.0</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -125,7 +126,7 @@
   <h2 id="photo-title" tabindex="-1" autofocus></h2>
   <div class="photo-layout">
     <figure>
-      <img loading="lazy" src="./runtime-0.5.9-e83eb1e3c9a8/assets/matpc-14762.jpg" width="433" height="640" alt="">
+      <img loading="lazy" src="./runtime-0.6.0-7be94ddcc7a7/assets/matpc-14762.jpg" width="433" height="640" alt="">
       <figcaption></figcaption>
       <a id="photo-source" target="_blank" rel="noopener noreferrer"></a>
     </figure>
@@ -255,6 +256,18 @@
     <a target="_blank" rel="noopener noreferrer" hidden></a>
   </details>
 </template>
+<template id="transfer-template">
+  <p id="transfer-scenario"></p>
+  <div id="transfer-options" role="group" aria-labelledby="transfer-scenario"></div>
+  <p id="transfer-feedback" role="status"></p>
+  <div id="transfer-explanation" hidden>
+    <p></p>
+    <label for="transfer-draft"></label>
+    <textarea id="transfer-draft" dir="auto" rows="3" maxlength="1200" aria-describedby="transfer-storage"></textarea>
+    <p id="transfer-storage"></p>
+  </div>
+  <div id="transfer-sources"><p></p><ul></ul></div>
+</template>
 <template id="kabbalah-template">
   <label for="kabbalah-lesson"></label><select id="kabbalah-lesson"></select>
   <article class="kabbalah-reading">
@@ -292,6 +305,6 @@
     <a target="_blank" rel="noopener noreferrer" dir="auto"></a>
   </article>
 </template>
-<script type="module" src="./runtime-0.5.9-e83eb1e3c9a8/start.js"></script>
+<script type="module" src="./runtime-0.6.0-7be94ddcc7a7/start.js"></script>
 </body>
 </html>
