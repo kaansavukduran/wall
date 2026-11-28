@@ -327,10 +327,10 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 #compare-view:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .compare-endpoints{display:flex;justify-content:space-between;gap:.5rem;color:var(--muted);font-size:.86rem}
 .photo-comparison p{margin:0}
-#compare-passage{min-inline-size:0;margin:.35rem 0 0;padding:.5rem;border:1px solid var(--edge)}
-#compare-passage legend{max-inline-size:100%;overflow-wrap:anywhere}
-#compare-passage [role=status]{margin-block-start:.4rem}
-#compare-passage [role=status]:empty{margin:0}
+#compare-observation{min-inline-size:0;margin:.35rem 0 0;padding:.5rem;border:1px solid var(--edge)}
+#compare-observation legend{max-inline-size:100%;overflow-wrap:anywhere}
+#compare-observation [role=status]{margin-block-start:.4rem}
+#compare-observation [role=status]:empty{margin:0}
 #compare-history{border-block-start:1px solid var(--edge);padding-block-start:.6rem;margin-block-start:.3rem}
 @media(min-width:45rem){.photo-layout{grid-template-columns:minmax(0,2fr) minmax(0,3fr)}#photo img{max-block-size:45vh}}
 

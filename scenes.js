@@ -356,7 +356,7 @@ export const worldNote = [
 ];
 
 export const photo = {
-  task:['Eski fotoğrafı aç','Open the old photo','פתחו את התצלום הישן','Köhnə fotonu aç'],
+  task:['Fotoğraftaki yeri bul','Find the place in the photo','מצאו את המקום שבתצלום','Fotodakı yeri tap'],
   title:['Fotoğraf ve meydan','Photo and plaza','התצלום והרחבה','Foto və meydan'],
   note:[
     'Negatif yaklaşık 1900–1920. Duvarın dibindeki insanlara ve dar geçide bak.',
@@ -384,6 +384,30 @@ export const photo = {
     'התצלום מראה את השטח הצר. דוח אונסק״ו מתעד את השינוי המאוחר. לאחר מלחמת יוני 1967 הרסה ישראל את שכונת המוגרבים. תושבי השכונה איבדו את בתיהם. השטח לפני הכותל הפך לרחבת תפילה גדולה.',
     'Arxiv fotosu dar sahəni göstərir. UNESCO hesabatı sonrakı dəyişikliyi sənədləşdirir. 1967-ci ilin iyun müharibəsindən sonra İsrail Məğrib məhəlləsini sökdü. Sakinlər evlərini itirdilər. Divarın qarşısındakı sahə geniş ibadət meydanına çevrildi.',
   ],
+  wall: {
+    question:[
+      'Fotoğrafta ve bugünkü meydan çiziminde hangi yapı var?',
+      'Which structure appears in both the photo and the drawing of today’s plaza?',
+      'איזה מבנה מופיע גם בתצלום וגם באיור של הרחבה כיום?',
+      'Həm fotoda, həm də bugünkü meydanın təsvirində hansı tikili görünür?',
+    ],
+    places:[
+      ['Dar geçit','The narrow passage','המעבר הצר','Dar keçid'],
+      ['Batı Duvarı','The Western Wall','הכותל המערבי','Qərb Divarı'],
+    ],
+    retry:[
+      'Fotoğrafta insanların yanındaki taş sıralarına bak. Meydan çiziminde taş sıraları nerede?',
+      'Look at the rows of stones beside the people in the photo. Where are the rows of stones in the plaza drawing?',
+      'התבוננו בשורות האבנים לצד האנשים בתצלום. איפה נמצאות שורות האבנים באיור הרחבה?',
+      'Fotoda insanların yanındakı daş sıralarına bax. Meydanın təsvirində daş sıraları haradadır?',
+    ],
+    matched:[
+      'Her ikisinde de Batı Duvarı var. Çizimde aynı duvar vurgulanıyor. Önündeki alan eski görüntüde dar bir geçit, bugünkü görüntüde ise geniş bir meydan.',
+      'Both show the Western Wall. The drawing highlights it. In the old view, a narrow passage lies in front of it. Today there is a broad plaza.',
+      'בשניהם מופיע הכותל המערבי. האיור מדגיש אותו. במבט הישן נראה לפניו מעבר צר, ובמבט העכשווי נראית רחבה גדולה.',
+      'Hər ikisində Qərb Divarı görünür. Təsvirdə həmin divar işarələnib. Köhnə görünüşdə qarşısında dar keçid, bugünkü görünüşdə isə geniş meydan var.',
+    ],
+  },
   passage: {
     question:[
       'Fotoğraftaki dar geçit, bugünkü meydanın neresindeydi?',

@@ -202,7 +202,7 @@ export async function start(initialLanguage) {
   const photoPanel = find('photo');
   const photoButton = find('photo-button');
   const comparison = find('compare-view');
-  const comparePassage = find('compare-passage');
+  const compareObservation = find('compare-observation');
   const journal = find('journal');
   const selector = find('lang');
   const cataloguePanel = find('catalogue');
@@ -257,7 +257,7 @@ export async function start(initialLanguage) {
   let direction = 0;
   let lastPlacement = world.placement();
   let selectedLayer = '';
-  let passageAnswer = null;
+  const photoAnswers = {wall:null,passage:null};
   let studyOption = null;
   let evidenceCard = null;
   const sequenceSteps = [];
@@ -1091,29 +1091,35 @@ export async function start(initialLanguage) {
   window.addEventListener('pagehide', stop);
   document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); });
 
+  const photoExercise = () => episodes[active].id === 23 ? 'passage' : 'wall';
+
   function comparePhoto() {
     const index = locale();
     const view = comparison.valueAsNumber;
-    const markPassage = episodes[active].id === 23 && passageAnswer === 1;
-    world.comparePlaza(find('compare-canvas'), view, language === 'he', markPassage);
+    const exercise = photoExercise();
+    const mark = photoAnswers[exercise] === 1 ? exercise : null;
+    world.comparePlaza(find('compare-canvas'), view, language === 'he', mark);
     comparison.setAttribute('aria-valuetext', photo.views[view][index]);
     find('compare-caption').textContent = photo.captions[view][index];
   }
 
-  const passagePlaces = [...comparePassage.querySelectorAll('button')];
-  function showPassage() {
+  const observationChoices = [...compareObservation.querySelectorAll('button')];
+  function showPhotoObservation() {
     const index = locale();
-    comparePassage.querySelector('legend').textContent = photo.passage.question[index];
-    passagePlaces.forEach((button, position) => {
-      button.textContent = photo.passage.places[position][index];
-      button.setAttribute('aria-pressed', String(passageAnswer === position));
+    const exercise = photoExercise();
+    const content = photo[exercise];
+    const answer = photoAnswers[exercise];
+    compareObservation.querySelector('legend').textContent = content.question[index];
+    observationChoices.forEach((button, position) => {
+      button.textContent = content.places[position][index];
+      button.setAttribute('aria-pressed', String(answer === position));
     });
-    comparePassage.querySelector('[role="status"]').textContent = passageAnswer === null ? ''
-      : photo.passage[passageAnswer === 1 ? 'matched' : 'retry'][index];
+    compareObservation.querySelector('[role="status"]').textContent = answer === null ? ''
+      : content[answer === 1 ? 'matched' : 'retry'][index];
   }
-  passagePlaces.forEach((button, position) => button.addEventListener('click', () => {
-    passageAnswer = position;
-    showPassage();
+  observationChoices.forEach((button, position) => button.addEventListener('click', () => {
+    photoAnswers[photoExercise()] = position;
+    showPhotoObservation();
     comparePhoto();
   }));
 
@@ -1122,8 +1128,7 @@ export async function start(initialLanguage) {
     stop();
     const index = locale();
     const modernHistory = episodes[active].id === 23;
-    comparePassage.hidden = !modernHistory;
-    if (modernHistory) showPassage();
+    showPhotoObservation();
     photoPanel.querySelector('h2').textContent = photo.title[index];
     photoPanel.querySelector('img').alt = photo.alt[index];
     photoPanel.querySelector('figcaption').textContent = photo.note[index];
@@ -1143,6 +1148,7 @@ export async function start(initialLanguage) {
     historySource.textContent = photo.historySource[index];
     photoPanel.querySelector('form button').textContent = ui[language][4];
     comparePhoto();
+    photoButton.focus({preventScroll:true});
     photoPanel.showModal();
   });
   find('source').addEventListener('click', openSource);

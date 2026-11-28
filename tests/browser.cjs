@@ -164,6 +164,19 @@ async function main() {
       assert.notEqual(await comparison.getAttribute('aria-valuetext'), oldLabel);
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       assert.equal(await page.locator('#photo').evaluate(panel => panel.scrollWidth > panel.clientWidth), false);
+      const observation = page.locator('#compare-observation');
+      const choices = observation.getByRole('button');
+      const today = await picture.evaluate(canvas => canvas.toDataURL());
+      await choices.first().press('Enter');
+      const retry = await observation.getByRole('status').innerText();
+      assert.ok(retry);
+      assert.equal(await picture.evaluate(canvas => canvas.toDataURL()), today);
+      if (width === 320) await choices.last().tap();
+      else await choices.last().press('Enter');
+      assert.notEqual(await observation.getByRole('status').innerText(),retry);
+      assert.equal(await choices.last().getAttribute('aria-pressed'),'true');
+      assert.notEqual(await picture.evaluate(canvas => canvas.toDataURL()),today);
+      assert.equal(await page.locator('#compare-history-source').isVisible(),false);
       await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
       await page.keyboard.press('Escape');
       assert.equal(await page.locator('#photo-button').evaluate(button => button === document.activeElement), true);
@@ -582,7 +595,7 @@ async function main() {
           await page.locator('#compare-history').waitFor();
           assert.match(await page.locator('#compare-history').textContent(), /1967/);
           assert.equal(await page.locator('#compare-history-source').getAttribute('href'), 'https://whc.unesco.org/document/8721');
-          const passage = page.locator('#compare-passage');
+          const passage = page.locator('#compare-observation');
           await passage.waitFor();
           const comparisonCanvas = page.locator('#compare-canvas');
           const unmarked = await comparisonCanvas.evaluate(canvas => canvas.toDataURL());
@@ -1508,6 +1521,9 @@ async function main() {
     await press(13, () => document.activeElement.id === 'compare-view');
     await press(14, () => document.getElementById('compare-view').value === '2');
     await press(0, () => document.getElementById('compare-view').value === '0');
+    await press(13, () => document.activeElement === document.querySelector('#compare-observation button'));
+    await press(13, () => document.activeElement === document.querySelector('#compare-observation button:last-child'));
+    await press(0, () => document.activeElement.getAttribute('aria-pressed') === 'true');
     await press(1, () => !document.getElementById('photo').open);
     const oldFrame = await padPage.locator('#world').evaluate(canvas => canvas.toDataURL());
     await padPage.evaluate(() => { window.fixtureController.axes[0] = 1; });
