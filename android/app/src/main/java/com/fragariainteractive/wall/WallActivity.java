@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
+import android.hardware.input.InputManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,16 +19,16 @@ import android.webkit.WebViewClient;
 
 import androidx.webkit.WebViewAssetLoader;
 
-public final class WallActivity extends Activity {
+public final class WallActivity extends Activity implements InputManager.InputDeviceListener {
     private static final String HOST = "appassets.androidplatform.net";
+    private final JoystickInput joystick = new JoystickInput(this::send);
+    private InputManager inputManager;
     private WebView game;
-    private int direction;
-    private int hatHorizontal;
-    private int hatVertical;
 
     @Override
     protected void onCreate(Bundle state) {
         super.onCreate(state);
+        inputManager = getSystemService(InputManager.class);
         game = new WebView(this);
         game.setBackgroundColor(Color.BLACK);
         game.getSettings().setJavaScriptEnabled(true);
@@ -107,33 +108,26 @@ public final class WallActivity extends Activity {
         if (!event.isFromSource(InputDevice.SOURCE_JOYSTICK) || event.getAction() != MotionEvent.ACTION_MOVE) {
             return super.dispatchGenericMotionEvent(event);
         }
-        int nextDirection = axis(event.getAxisValue(MotionEvent.AXIS_X));
-        if (direction != nextDirection) {
-            if (direction != 0) send(direction < 0 ? "move-left" : "move-right", false);
-            direction = nextDirection;
-            if (direction != 0) send(direction < 0 ? "move-left" : "move-right", true);
-        }
-        int nextHorizontal = axis(event.getAxisValue(MotionEvent.AXIS_HAT_X));
-        int nextVertical = axis(event.getAxisValue(MotionEvent.AXIS_HAT_Y));
-        if (nextHorizontal != 0 && nextHorizontal != hatHorizontal) {
-            send(nextHorizontal < 0 ? "left" : "right", true);
-        }
-        if (nextVertical != 0 && nextVertical != hatVertical) {
-            send(nextVertical < 0 ? "previous" : "next", true);
-        }
-        hatHorizontal = nextHorizontal;
-        hatVertical = nextVertical;
+        joystick.update(event.getDeviceId(), event.getAxisValue(MotionEvent.AXIS_X),
+            event.getAxisValue(MotionEvent.AXIS_HAT_X), event.getAxisValue(MotionEvent.AXIS_HAT_Y));
         return true;
     }
 
-    private static int axis(float value) {
-        return Math.abs(value) > 0.35f ? (value < 0 ? -1 : 1) : 0;
+    @Override
+    public void onInputDeviceAdded(int deviceId) {}
+
+    @Override
+    public void onInputDeviceChanged(int deviceId) {}
+
+    @Override
+    public void onInputDeviceRemoved(int deviceId) {
+        joystick.remove(deviceId);
     }
 
     @Override
     protected void onPause() {
-        if (direction != 0) send(direction < 0 ? "move-left" : "move-right", false);
-        direction = hatHorizontal = hatVertical = 0;
+        inputManager.unregisterInputDeviceListener(this);
+        joystick.reset();
         game.onPause();
         super.onPause();
     }
@@ -141,6 +135,7 @@ public final class WallActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        inputManager.registerInputDeviceListener(this, null);
         game.onResume();
     }
 }

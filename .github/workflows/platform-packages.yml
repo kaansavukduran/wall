@@ -91,6 +91,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Test joystick device removal
+        run: |
+          output="$RUNNER_TEMP/wall-joystick-test"
+          javac -d "$output" android/app/src/main/java/com/fragariainteractive/wall/JoystickInput.java tests/JoystickInputTest.java
+          java -cp "$output" com.fragariainteractive.wall.JoystickInputTest
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.11.1'
