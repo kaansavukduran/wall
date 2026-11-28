@@ -135,11 +135,11 @@ dialog a{overflow-wrap:anywhere}
 .visit-object{display:flex;align-items:flex-start;gap:.65rem;margin-block-end:.6rem}
 .visit-object canvas{inline-size:8rem;max-inline-size:35%;block-size:auto;aspect-ratio:4/3;background:#a58d72;border:1px solid var(--edge)}
 .visit-object p{min-inline-size:0;margin:0}
-.visit-sources ul{padding-inline-start:1.4rem}
+.visit-sources ul,.daily-sources ul{padding-inline-start:1.4rem}
 .visit-choices{display:grid;gap:.35rem}
 .visit-choices button{text-align:start;overflow-wrap:anywhere}
 .visit-choices button[aria-pressed=true]{background:#47351e;border-color:var(--accent)}
-.visit-exercise [role=status]{color:var(--accent)}
+.visit-exercise [role=status],.daily-exercise [role=status]{color:var(--accent)}
 @media(max-width:25rem){.visit-object{flex-direction:column}.visit-object canvas{inline-size:6rem;max-inline-size:100%}}
 #messianic-timeline{padding:.65rem;background:#1b242c}
 #messianic-timeline summary{cursor:pointer;min-block-size:var(--hit);align-content:center;font-weight:650}

@@ -6,3 +6,4 @@
 - Historical photograph, Library of Congress Matson Photograph Collection, LC-DIG-matpc-14762. The catalogue records no known restrictions on publication and dates the original negative to approximately 1900–1920. https://www.loc.gov/pictures/item/2019704965/
 - Atlas land backdrop rendered for WALL from Natural Earth's public-domain 1:110m land polygons, vector release v5.1.2. The plate covers longitude −88° to 100° and latitude −1° to 69°. It depicts physical coastline, with teaching reference points added by the game. https://www.naturalearthdata.com/downloads/110m-physical-vectors/110m-land/
 - Kotel objects, 5 by 2 sprite sheet with 64 × 48 cells. Original pixel drawings created for WALL as educational representations of the objects and setting.
+- Everyday life objects, 4 by 2 sprite sheet with 64 × 48 cells. Original pixel drawings created for WALL as educational representations.

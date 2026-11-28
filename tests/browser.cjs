@@ -17,6 +17,7 @@ async function main() {
   const { modernLessons } = await import('../modern-lessons.js');
   const { feynmanCases } = await import('../kabbalah-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
+  const { dailyCases } = await import('../daily-life.js');
   const { languageLessons } = await import('../language-lessons.js');
   const { archiveCases } = await import('../diaspora-archive.js');
   const { diasporaRecords } = await import('../diaspora-lessons.js');
@@ -474,6 +475,27 @@ async function main() {
         assert.notEqual(await message.innerText(), text);
         await page.click('[data-language-choice="' + sample.correct + '"]');
         assert.equal(await message.innerText(), text);
+      }
+      assert.equal(loadedLessons.has('daily-lessons.js'),false);
+      const dailyRequest = page.waitForResponse(response => response.url().endsWith('/daily-lessons.js'));
+      await page.click('#daily-life summary');
+      assert.ok((await dailyRequest).ok());
+      const dailyObject = page.locator('#daily-life canvas');
+      await dailyObject.waitFor();
+      const market = await dailyObject.evaluate(canvas => canvas.toDataURL());
+      await page.selectOption('#daily-topic','ketubah-marriage');
+      assert.notEqual(await dailyObject.evaluate(canvas => canvas.toDataURL()),market);
+      await page.click('.daily-sources summary');
+      assert.match(await page.locator('.daily-sources a').first().getAttribute('href'),/Mishnah_Ketubot/);
+      await page.click('.daily-exercise summary');
+      for (const sample of dailyCases) {
+        await page.selectOption('#daily-example',sample.id);
+        await page.click('[data-daily-choice="' + sample.alternatives[0] + '"]');
+        const status = page.locator('.daily-exercise [role="status"]');
+        const text = sample.feedback[['tr','en','he','az'].indexOf(locale)];
+        assert.notEqual(await status.innerText(),text);
+        await page.click('[data-daily-choice="' + sample.answer + '"]');
+        assert.equal(await status.innerText(),text);
       }
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);

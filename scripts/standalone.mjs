@@ -28,6 +28,7 @@ try {
     ['world.js','assets/visitor.png','image/png'],
     ['atlas.js','assets/atlas-land.png','image/png'],
     ['kotel.js','assets/kotel-props.png','image/png'],
+    ['daily-life.js','assets/daily-props.png','image/png'],
     ['catalogue.js','docs/SOURCES.tsv','text/tab-separated-values;charset=utf-8'],
   ]) {
     if (!files.includes(entry)) continue;

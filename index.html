@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.5.8</small>
+  <small dir="ltr">v0.5.9</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -111,7 +111,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.8</span></footer>
+  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.9</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -149,6 +149,7 @@
   <details id="visit" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <details id="language-study" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <details id="diaspora-archive" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
+  <details id="daily-life" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <div id="library-readings" role="group"></div>
 </dialog>
 <template id="calendar-template">
@@ -171,6 +172,22 @@
     <label for="calendar-answer"></label>
     <select id="calendar-answer" aria-describedby="calendar-clue"></select>
     <button type="button"></button>
+    <p role="status"></p>
+  </details>
+</template>
+<template id="daily-template">
+  <label for="daily-topic"></label><select id="daily-topic"></select>
+  <article class="visit-reading">
+    <h3></h3>
+    <div class="visit-object"><canvas width="64" height="48" aria-hidden="true" hidden></canvas><p></p></div>
+    <p></p>
+    <details class="daily-sources"><summary></summary><ul></ul></details>
+  </article>
+  <details class="daily-exercise">
+    <summary></summary>
+    <label for="daily-example"></label><select id="daily-example"></select>
+    <p id="daily-question"></p>
+    <div class="visit-choices" role="group" aria-labelledby="daily-question"></div>
     <p role="status"></p>
   </details>
 </template>

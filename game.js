@@ -1,6 +1,6 @@
 import { controllerHelp, mountController } from './controller.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { atlasLabels, calendarLabels, diasporaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
+import { atlasLabels, calendarLabels, dailyLabels, diasporaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -135,6 +135,7 @@ export async function start(initialLanguage) {
     ['visit', visitLabels, () => import('./kotel.js').then(module => module.mountKotel)],
     ['language-study', languageStudyLabels, () => import('./language-study.js').then(module => module.mountLanguageStudy)],
     ['diaspora-archive', diasporaLabels, () => import('./diaspora-archive.js').then(module => module.mountDiasporaArchive)],
+    ['daily-life', dailyLabels, () => import('./daily-life.js').then(module => module.mountDailyLife)],
   ].map(([id, labels, load]) => connectDisclosure(id, labels, load));
   const refreshTimeline = connectDisclosure('messianic-timeline', timelineLabels, () =>
     import('./messianic-timeline.js').then(module => module.mountMessianicTimeline));

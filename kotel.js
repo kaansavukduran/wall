@@ -1,4 +1,5 @@
 import { kotelLessons, kotelScenarios } from './kotel-lessons.js';
+import { objectSprite } from './object-sprite.js';
 
 const sheet = new URL('./assets/kotel-props.png', import.meta.url);
 const frames = {
@@ -32,18 +33,8 @@ export function mountKotel(panel, language, locale) {
   const [sourceLabel, links] = sources.children;
   const exercise = fragment.querySelector('.visit-exercise');
   const [exerciseLabel, scenarioLabel, scenario, question, choices, feedback, link] = exercise.children;
-  const sprite = new Image();
-  const context = canvas.getContext('2d');
+  const showObject = objectSprite(canvas, sheet, 5);
   const labels = copy[language];
-
-  function drawObject() {
-    if (!sprite.naturalWidth || !context) return;
-    const index = frames[select.value];
-    const {width, height} = canvas;
-    context.clearRect(0, 0, width, height);
-    context.drawImage(sprite, index % 5 * width, Math.floor(index / 5) * height, width, height, 0, 0, width, height);
-    canvas.hidden = false;
-  }
 
   function showTopic() {
     const lesson = kotelLessons[select.selectedIndex];
@@ -61,7 +52,7 @@ export function mountKotel(panel, language, locale) {
       item.append(anchor);
       return item;
     }));
-    drawObject();
+    showObject(frames[lesson.id]);
   }
 
   function showScenario() {
@@ -95,8 +86,6 @@ export function mountKotel(panel, language, locale) {
   scenario.replaceChildren(...kotelScenarios.map((example, index) => new Option(labels.names[index], example.id)));
   select.addEventListener('change', showTopic);
   scenario.addEventListener('change', showScenario);
-  sprite.addEventListener('load', drawObject, {once:true});
-  sprite.src = sheet.href;
   showTopic();
   showScenario();
   panel.replaceChildren(fragment);

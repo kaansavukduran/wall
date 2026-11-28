@@ -9,6 +9,8 @@ import { atlasEntries } from '../atlas-lessons.js';
 import { calendarEvents } from '../calendar-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
+import { dailyCards } from '../daily-lessons.js';
+import { dailyCases } from '../daily-life.js';
 import { archiveCases } from '../diaspora-archive.js';
 import { diasporaRecords } from '../diaspora-lessons.js';
 import { earlyModernLessons } from '../early-modern-lessons.js';
@@ -79,7 +81,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 253);
+  assert.equal(entries.length, 265);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -266,6 +268,27 @@ test('diaspora records and exercises preserve four-language dates, sources and s
   }
   assert.equal(records.get('alice-kindertransport-1939').type, 'testimony');
   assert.equal(records.get('iraq-emigration-1950').type, 'law');
+});
+
+test('daily life topics cite living-practice context and legal texts in four locales', () => {
+  const cards = new Map(dailyCards.map(card => [card.id,card]));
+  assert.equal(cards.size,8);
+  assert.equal(dailyCases.length,3);
+  for (const card of cards.values()) {
+    for (const source of [card.source,card.relatedSource].filter(Boolean)) {
+      assert.ok(entries.some(entry => entry.url === source.url && belongsTo(entry,24)));
+    }
+    for (const field of ['topic','meaning','variation']) {
+      assert.ok(languages.every(language => card[field][language].trim()));
+      assert.match(card[field].he, /\p{Script=Hebrew}/u);
+      assert.doesNotMatch(card[field].tr, /\p{Script=Hebrew}/u);
+    }
+  }
+  for (const sample of dailyCases) {
+    assert.ok([sample.answer,...sample.alternatives].every(id => cards.has(id)));
+    assert.equal(sample.question.length,languages.length);
+    assert.equal(sample.feedback.length,languages.length);
+  }
 });
 
 test('all 24 source exercises contain four versions of each card and matched catalogue entries', () => {

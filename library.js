@@ -99,3 +99,10 @@ export const diasporaLabels = {
   he: ['מסמכי גירוש והגירה', 'המסמכים נטענים…', 'הארכיון לא נפתח. רעננו את הדף ונסו שוב.'],
   az: ['Sürgün və köç sənədləri', 'Sənədlər yüklənir…', 'Arxiv açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
+
+export const dailyLabels = {
+  tr: ['Gündelik Yahudi hayatı', 'Konular yükleniyor…', 'Atölye açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en: ['Everyday Jewish life', 'Loading the topics…', 'The workshop could not open. Reload the page and try again.'],
+  he: ['חיי יום־יום יהודיים', 'הנושאים נטענים…', 'הסדנה לא נפתחה. רעננו את הדף ונסו שוב.'],
+  az: ['Yəhudilərin gündəlik həyatı', 'Mövzular yüklənir…', 'Emalatxana açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
+};
