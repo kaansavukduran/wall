@@ -423,6 +423,43 @@ async function main() {
           assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), sceneBefore);
           assert.notEqual(await page.locator('#models output').textContent(), '');
         }
+        if (episode.id === 10) {
+          const progress = () => page.evaluate(() => localStorage.getItem('wall.progress.v1'));
+          const before = await progress();
+          const letter = page.locator('#bar-kosiba-letter');
+          const route = (place, plants) => letter.locator('.letter-requests fieldset').nth(place).locator('button').nth(plants);
+          const basket = letter.locator('canvas');
+          const frame = () => basket.evaluate(canvas => canvas.toDataURL());
+          const check = letter.locator('fieldset').last();
+          const load = page.waitForResponse(response => response.url().endsWith('/bar-kosiba-letter.js'));
+          await letter.locator('summary').press('Enter');
+          assert.ok((await load).ok());
+          await basket.waitFor();
+          const empty = await frame();
+          await route(0,1).press('Enter');
+          assert.equal(await frame(),empty);
+          await route(1,1).press('Enter');
+          const partlyMatched = await frame();
+          assert.notEqual(partlyMatched,empty);
+          assert.equal(await check.isHidden(),true);
+          if (width === 320) await route(0,0).tap();
+          else await route(0,0).press('Enter');
+          const matched = await frame();
+          assert.notEqual(matched,partlyMatched);
+          await check.locator('button').last().press('Enter');
+          const wrong = await check.getByRole('status').textContent();
+          await check.locator('button').first().press('Enter');
+          assert.notEqual(await check.getByRole('status').textContent(),wrong);
+          await page.selectOption('#lang',locale === 'he' ? 'az' : 'he');
+          await basket.waitFor();
+          assert.equal(await frame(),matched);
+          assert.equal(await check.locator('button').first().getAttribute('aria-pressed'),'true');
+          await page.selectOption('#lang',locale);
+          await check.locator('button').first().waitFor();
+          assert.match(await letter.locator('a').nth(2).getAttribute('href'),/Taanit\.4\.5\.13/);
+          assert.equal(await progress(),before);
+          await letter.locator('summary').press('Enter');
+        }
         if (episode.id === 11) {
           await page.click('[data-sequence="0"]');
           assert.equal(await page.locator('#sequence li').count(), 0);

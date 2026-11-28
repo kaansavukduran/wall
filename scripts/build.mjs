@@ -16,7 +16,7 @@ const runtimeRoot = resolve(output, runtime);
 await mkdir(runtimeRoot);
 const files = [
   'style.css', 'start.js', 'game.js', 'world.js', 'content.js',
-  'chapters-early.js', 'chapters-modern.js', 'ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js',
+  'chapters-early.js', 'chapters-modern.js', 'ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'bar-kosiba-letter.js', 'medieval-lessons.js',
   'early-modern-lessons.js', 'modern-lessons.js', 'source-timeline.js', 'messianic-lessons.js', 'mandate-lessons.js', 'press-lessons.js', 'contemporary-lessons.js', 'displacement.js', 'displacement-lessons.js',
   'library.js', 'calendar.js', 'calendar-lessons.js', 'atlas.js', 'atlas-lessons.js',
   'kabbalah.js', 'kabbalah-lessons.js', 'kabbalah-advanced-lessons.js', 'kotel.js', 'kotel-lessons.js',
@@ -34,7 +34,7 @@ const files = [
 ];
 const catalogue = 'docs/SOURCES.tsv';
 const contentFiles = files.filter(name => name.endsWith('-lessons.js') || name.startsWith('chapters-'));
-contentFiles.push('content.js','library.js','scenes.js','platform-assembly.js','first-fruits.js','sequences.js','hebrew-labs.js','tour-evidence.js');
+contentFiles.push('content.js','library.js','scenes.js','platform-assembly.js','first-fruits.js','bar-kosiba-letter.js','sequences.js','hebrew-labs.js','tour-evidence.js');
 
 async function fileRevision(file) {
   return createHash('sha256').update(await readFile(file)).digest('hex');

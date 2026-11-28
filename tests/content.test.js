@@ -10,6 +10,7 @@ import { accountabilityCases, accountabilityRecords } from '../accountability-le
 import { ancientLessons } from '../ancient-lessons.js';
 import { atlasEntries } from '../atlas-lessons.js';
 import { bakuCopy, bakuStops } from '../baku-lessons.js';
+import { letterSources } from '../bar-kosiba-letter.js';
 import { calendarEvents, shabbatStudy } from '../calendar-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
@@ -191,7 +192,7 @@ test('browser and desktop versions follow VERSION and scene options localize', (
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 461);
+  assert.equal(entries.length, 465);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -199,6 +200,15 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
   assert.ok(Array.from({length:24}, (_, index) => index + 1).every(id => entries.some(entry => belongsTo(entry, id))));
   assert.ok(belongsTo({chapters:'1–4,6'}, 3));
   assert.equal(belongsTo({chapters:'Prolog,1'}, 10), false);
+});
+
+test('the Bar Kosiba letter activity links four source types with four-language labels', () => {
+  for (const [index,id] of ['D06A','D27','S10A','S10B'].entries()) {
+    const [url,labels] = letterSources[index];
+    assert.ok(entries.some(entry => entry.id === id && entry.url === url && belongsTo(entry,10)),url);
+    assert.equal(labels.length,languages.length);
+    assert.equal(new Set(labels).size,languages.length);
+  }
 });
 
 test('the late Mandate exercise orders the strike, commission and policy with chapter sources', () => {

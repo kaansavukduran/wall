@@ -105,6 +105,12 @@ const firstFruitsLabels = {
   he:['סל הביכורים','הסצנה נטענת…','הסצנה לא נפתחה. נסו לפתוח אותה שוב.'],
   az:['İlk məhsul səbəti','Səhnə yüklənir…','Səhnə açıla bilmədi. Yenidən açmağa çalış.'],
 };
+const barKosibaLabels = {
+  tr:['Bar Kosiba’nın mektubu','Mektup açılıyor…','Mektup açılamadı. Kapatıp yeniden aç.'],
+  en:['Bar Kosiba’s letter','Opening the letter…','The letter could not open. Close and reopen it.'],
+  he:['האיגרת של בר כוסבה','האיגרת נטענת…','האיגרת לא נפתחה. סגרו אותה ופתחו שוב.'],
+  az:['Bar Kosibanın məktubu','Məktub açılır…','Məktub açıla bilmədi. Bağla və yenidən aç.'],
+};
 const kingdomMapLabels = {
   tr:['İki krallığı haritada bul','Harita açılıyor…','Harita açılamadı. Kapatıp yeniden aç.'],
   en:['Find the two kingdoms on the map','Opening the map…','The map could not open. Close and reopen it.'],
@@ -240,6 +246,7 @@ export async function start(initialLanguage) {
   const kingdomMap = find('kingdom-map');
   const platform = find('platform-assembly');
   const firstFruits = find('first-fruits');
+  const barKosibaLetter = find('bar-kosiba-letter');
   const quarterMap = find('quarter-map');
   const wallTransfer = find('wall-transfer');
   const talmud = find('talmud-page');
@@ -263,6 +270,7 @@ export async function start(initialLanguage) {
   const accountabilityView = {record:null};
   const genizaView = {};
   const firstFruitsView = {};
+  const barKosibaView = {};
   const quarterMapView = {};
   const wallTransferView = {};
   const messianicView = {};
@@ -435,6 +443,9 @@ export async function start(initialLanguage) {
   const refreshFirstFruits = connectDisclosure('first-fruits', firstFruitsLabels, () =>
     import('./first-fruits.js').then(({mountFirstFruits}) =>
       (panel, current, index) => mountFirstFruits(panel,index,firstFruitsView,appearance.reducedMotion)));
+  const refreshBarKosibaLetter = connectDisclosure('bar-kosiba-letter', barKosibaLabels, () =>
+    import('./bar-kosiba-letter.js').then(({mountBarKosibaLetter}) =>
+      (panel, current, index) => mountBarKosibaLetter(panel,index,barKosibaView)));
   const refreshQuarterMap = connectDisclosure('quarter-map', quarterMapLabels, () =>
     import('./quarter-map-lessons.js').then(({mountQuarterMap}) =>
       (panel, current, index) => mountQuarterMap(panel,index,quarterMapView)));
@@ -606,6 +617,8 @@ export async function start(initialLanguage) {
     if (!platform.hidden) refreshPlatform();
     firstFruits.hidden = episode.id !== 7;
     if (!firstFruits.hidden) refreshFirstFruits();
+    barKosibaLetter.hidden = episode.id !== 10;
+    if (!barKosibaLetter.hidden) refreshBarKosibaLetter();
     quarterMap.hidden = episode.id !== 23;
     if (!quarterMap.hidden) refreshQuarterMap();
     talmud.hidden = episode.id !== 11;
@@ -652,6 +665,7 @@ export async function start(initialLanguage) {
     press.open = false;
     displacement.open = false;
     kingdomMap.open = false;
+    barKosibaLetter.open = false;
     talmud.open = false;
     transfer.open = false;
     labState.word.length = 0;

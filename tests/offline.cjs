@@ -99,6 +99,23 @@ async function main() {
     assert.deepEqual(wall.errors,[]);
     await wall.page.close();
 
+    const roman = await openOffline(browser,'#chapter-10',() => {
+      localStorage.setItem('wall.progress.v1',JSON.stringify({
+        active:'10',completed:['plaza',...Array.from({length:9},(_,index)=>String(index+1))],
+      }));
+    });
+    const letter = roman.page.locator('#bar-kosiba-letter');
+    await letter.locator('summary').tap();
+    const plants = letter.locator('canvas');
+    await plants.waitFor();
+    const empty = await plants.evaluate(canvas => canvas.toDataURL());
+    await letter.locator('.letter-requests fieldset').first().locator('button').first().tap();
+    await letter.locator('.letter-requests fieldset').last().locator('button').last().tap();
+    assert.notEqual(await plants.evaluate(canvas => canvas.toDataURL()),empty);
+    assert.deepEqual(roman.requests,[]);
+    assert.deepEqual(roman.errors,[]);
+    await roman.page.close();
+
     const ottoman = await openOffline(browser,'#chapter-19',() => {
       localStorage.setItem('wall.progress.v1',JSON.stringify({
         active:'19',completed:['plaza',...Array.from({length:18},(_,index)=>String(index+1))],

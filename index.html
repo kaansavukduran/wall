@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.8.46</small>
+  <small dir="ltr">v0.8.47</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -57,6 +57,7 @@
       <details id="kingdom-map" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="platform-assembly" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="first-fruits" hidden><summary></summary><p role="status" hidden></p><div></div></details>
+      <details id="bar-kosiba-letter" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="wall-transfer" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="quarter-map" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="talmud-page" hidden><summary></summary><p role="status" hidden></p><div></div></details>
@@ -146,7 +147,7 @@
     </section>
     </div>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.46</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.47</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -459,6 +460,17 @@
   <p role="status"></p>
   <button type="button"></button>
   <a href="https://www.sefaria.org/Mishnah_Bikkurim.3.6" target="_blank" rel="noopener noreferrer"></a>
+</template>
+
+<template id="bar-kosiba-letter-template">
+  <p></p><p></p>
+  <canvas width="96" height="44" aria-hidden="true" hidden></canvas>
+  <div class="letter-requests">
+    <fieldset><legend></legend><div></div><p role="status"></p></fieldset>
+    <fieldset><legend></legend><div></div><p role="status"></p></fieldset>
+  </div>
+  <fieldset hidden><legend></legend><div></div><p role="status"></p></fieldset>
+  <p></p><ul></ul>
 </template>
 
 <template id="kingdom-map-template">
