@@ -1,6 +1,8 @@
 # WALL
 
-A four-language 2D pixel-art learning game about the Western Wall, Jewish history and Jewish thought. Explore Wall visits and prayer in the prologue, follow the 24-chapter route, and build your own three-source exhibition at the end. Open three kinds of Qumran scrolls, turn a Talmud folio, compare two family letters in the Geniza workbench, and move between the Galilee cave tradition, Meron pilgrimage and the Merton Zohar copy. Three reading tables in Safed show how a Pesah rule, an ethical example and a mystical diagram answer different questions. In the Mandate chapter, compare the 1928 screen incident with the 1930 commission’s ownership, access and passage rules. Compare a waqf deed, a house description and a later access ruling in the Maghrebi Quarter, and follow the recipients and date evidence for letters about Sabbatai Sevi. The closing chapter includes a source-linked conversation about listening, the study group and the prayer minyan. The study room includes everyday Jewish life, the festival calendar, illustrated diaspora objects, community atlas, migration archive, Kabbalah workshop with advanced comparisons Hebrew–Aramaic readings and an interactive comparison of gematria, notarikon, Atbash and lexical context, and an archive comparing records of violence and responsibility from the Hasmonean period to 1994.
+WALL is a four-language 2D pixel-art game about the Western Wall, Jewish history, texts and thought. Follow 24 chronological chapters, compare evidence and build a three-source exhibition. The study room includes the Jewish calendar, communities, everyday life, diasporas, Hebrew and Aramaic, and Kabbalah.
+
+Activities include the Geniza letters, a turnable Talmud folio, the 1930 commission map, Safed’s three reading tables, and an interactive model of Yehuda Ashlag’s four phases, screen and returning light.
 
 ## Play locally
 

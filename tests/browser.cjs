@@ -19,6 +19,7 @@ async function main() {
   const { comparisonCases } = await import('../kabbalah-advanced-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
   const { dailyCases } = await import('../daily-life.js');
+  const { ashlagPhases, ashlagScreen } = await import('../ashlag-lessons.js');
   const { circleTurns } = await import('../study-circle-lessons.js');
   const { genizaLetters } = await import('../geniza-lessons.js');
   const { cultureCases, cultureRecords } = await import('../culture-lessons.js');
@@ -481,6 +482,41 @@ async function main() {
           assert.notEqual(await page.locator('#models output').textContent(), firstNote);
         }
         if (episode.id === 24) {
+          assert.equal(loadedLessons.has('ashlag-lessons.js'),false);
+          const ashlag = page.locator('#ashlag-workbench');
+          await ashlag.locator(':scope > summary').press('Enter');
+          const diagram = ashlag.locator('canvas');
+          await diagram.waitFor();
+          const localIndex = ['tr','en','he','az'].indexOf(locale);
+          const frames = new Set();
+          for (const phase of ashlagPhases) {
+            await ashlag.locator('[data-ashlag-phase="' + phase.id + '"]').press('Enter');
+            frames.add(await diagram.evaluate(canvas => canvas.toDataURL()));
+            assert.equal(await ashlag.locator('figcaption').textContent(),phase.text[localIndex]);
+            assert.equal(await ashlag.locator('#ashlag-phase-source').getAttribute('href'),phase.link);
+            assert.equal(await ashlag.locator('#ashlag-action').isVisible(),phase.id === 'dalet');
+          }
+          assert.equal(frames.size,ashlagPhases.length);
+          const action = ashlag.locator('#ashlag-action');
+          for (const [index, step] of ashlagScreen.entries()) {
+            assert.equal(await ashlag.locator('.ashlag-screen p').textContent(),step.text[localIndex]);
+            assert.equal(await ashlag.locator('#ashlag-step-source').getAttribute('href'),step.link);
+            frames.add(await diagram.evaluate(canvas => canvas.toDataURL()));
+            if (index === ashlagScreen.length - 1) break;
+            if (width === 320) await action.tap();
+            else await action.press('Enter');
+          }
+          assert.equal(frames.size,ashlagPhases.length + ashlagScreen.length - 1);
+          await ashlag.locator('.ashlag-comparison summary').press('Enter');
+          assert.match(await ashlag.locator('.ashlag-comparison a').first().getAttribute('href'),/Sefer_Etz_Chaim/);
+          assert.match(await ashlag.locator('.ashlag-comparison a').last().getAttribute('href'),/#section-6$/);
+          await page.selectOption('#lang', locale === 'he' ? 'az' : 'he');
+          assert.equal(await ashlag.locator('#ashlag-step-source').getAttribute('href'),ashlagScreen.at(-1).link);
+          await page.selectOption('#lang',locale);
+          await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+          await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+          await ashlag.locator(':scope > summary').press('Enter');
           assert.equal(loadedLessons.has('study-circle-lessons.js'),false);
           const circle = page.locator('#study-circle');
           await circle.locator(':scope > summary').press('Enter');

@@ -198,9 +198,9 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .visit-exercise [role=status],.daily-exercise [role=status]{color:var(--accent)}
 @media(max-width:25rem){.visit-object{flex-direction:column}.visit-object canvas{inline-size:6rem;max-inline-size:100%}}
 #messianic-timeline{padding:.65rem;background:var(--panel-bg)}
-#talmud-page,#geniza-desk,#study-circle{padding:.65rem;background:var(--panel-bg)}
-#talmud-page summary,#geniza-desk summary,#study-circle summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
-#talmud-page summary:focus-visible,#geniza-desk summary:focus-visible,#study-circle summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#talmud-page,#geniza-desk,#study-circle,#ashlag-workbench{padding:.65rem;background:var(--panel-bg)}
+#talmud-page summary,#geniza-desk summary,#study-circle summary,#ashlag-workbench summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
+#talmud-page summary:focus-visible,#geniza-desk summary:focus-visible,#study-circle summary:focus-visible,#ashlag-workbench summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 #talmud-reading{display:block;inline-size:100%;min-inline-size:0;max-inline-size:100%;margin-block:.2rem .55rem;overflow:hidden;text-overflow:ellipsis}
 .talmud-reading{padding:.65rem;background:var(--reading-bg)}
 .talmud-reading p,.talmud-reading ul{margin-block:.3rem .55rem}
@@ -326,3 +326,11 @@ html[data-controller-input] :is(button,select,summary,a,input[type="range"]):foc
 .method-result{display:block;color:var(--accent);margin-block:.45rem}
 .method-result:empty{display:none}
 .method-reset{margin-block-start:.55rem}
+
+#ashlag-workbench{min-inline-size:0;overflow-wrap:anywhere}
+.ashlag-figure{margin:0;margin-block:.65rem}
+.ashlag-figure canvas{inline-size:min(100%,20rem);margin-block-end:.45rem}
+.ashlag-figure figcaption{min-inline-size:0}
+.ashlag-screen,.ashlag-comparison{margin-block:.65rem}
+.ashlag-screen p{margin-block:.5rem}
+#ashlag-step-source{display:inline-block;margin-inline-start:.45rem}

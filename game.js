@@ -1,7 +1,7 @@
 import { controllerHelp, mountController } from './controller.js';
 import { connectAppearance } from './appearance.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { accountabilityLabels, atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, genizaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, studyCircleLabels, visitLabels, wordMethodLabels } from './library.js';
+import { accountabilityLabels, ashlagLabels, atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, genizaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, studyCircleLabels, visitLabels, wordMethodLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -102,6 +102,7 @@ export async function start(initialLanguage) {
   const talmud = find('talmud-page');
   const geniza = find('geniza-desk');
   const circle = find('study-circle');
+  const ashlag = find('ashlag-workbench');
   const transfer = find('transfer');
   const evidenceChoices = find('evidence-choices');
   const labRoot = find('language-labs');
@@ -113,6 +114,7 @@ export async function start(initialLanguage) {
   const genizaView = {};
   const circleView = {};
   const wordMethodView = {};
+  const ashlagView = {};
   const talmudView = {reading:null,side:0,position:0,answers:[['','',''],['','','']]};
   const progress = readProgress();
   let language = initialLanguage;
@@ -204,6 +206,9 @@ export async function start(initialLanguage) {
   const refreshWordMethods = connectDisclosure('word-methods', wordMethodLabels, () =>
     import('./word-methods.js').then(({mountWordMethods}) =>
       (panel, current, index) => mountWordMethods(panel,index,wordMethodView)));
+  const refreshAshlag = connectDisclosure('ashlag-workbench', ashlagLabels, () =>
+    import('./ashlag-workbench.js').then(({mountAshlagWorkbench}) =>
+      (panel, current, index) => mountAshlagWorkbench(panel,index,ashlagView)));
   const refreshSave = connectDisclosure('save-transfer', saveLabels, () =>
     import('./portable-save.js').then(module => module.mountPortableSave));
   const refreshTransfer = connectDisclosure('transfer', transferLabels, async chapter => {
@@ -300,6 +305,8 @@ export async function start(initialLanguage) {
     if (!geniza.hidden) refreshGeniza();
     circle.hidden = episode.id !== 24;
     if (!circle.hidden) refreshCircle();
+    ashlag.hidden = episode.id !== 24;
+    if (!ashlag.hidden) refreshAshlag();
     renderEvidence();
     renderLanguageLabs();
     if (focus) find('title').focus();

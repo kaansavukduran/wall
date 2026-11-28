@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified web release: v0.7.3, 745af07df86dd7c624548078360001979244af07.
-Pages: 46125495564 and exact public build manifest. The four-language Chromium, Firefox and WebKit matrix passed 46125200152. Chapters 14 and 20 add the 1320 endowment, 1613 house, later passage, and the 1665–1666 letters. Same-scene language switch in Chromium went from 411 scenery rectangle draws to zero. 324 catalogue records.
-Packages: v0.7.2 run 46125001243 completed all six assets and installed Windows, Linux and Android checks. v0.7.3 is building. Actions secrets return HTTP 403 to the integration, so Android uses preview signing. Physical device/controller testing and independent editorial review remain open.
-Candidate v0.7.4: four letter-reading methods in chapter 16. Standard and extended-final gematria, Shabbat 105a:3 notarikon, Jeremiah/Rashi Atbash, and a Genesis/BDB lexical example. 331 catalogue records. Only the selected workbench loads its explanatory data. Controls keep the selected sample through language changes. 27 content/build tests passed.
-Next: finish the v0.7.4 hosted matrix and publication, then add Ashlag's phases, screen and returning light as an interactive diagram.
+Verified web release: v0.7.4, 01aaa32d96a6364af764798875963841c91524e5.
+Pages: 46125834282 and exact public build manifest. Chromium, Firefox and WebKit passed 46125585051. The chapter 16 letter workbench distinguishes standard and extended-final gematria, notarikon, Atbash and root-based lexical reading. 331 catalogue records.
+Packages: v0.7.4 46125836359 is building. v0.7.3 released six files; Windows and Linux installed tests passed and the Android test is in progress (46125497824). Actions secrets still return HTTP 403, so Android uses preview signing. Physical device/controller testing and independent editorial review remain open.
+Candidate v0.7.5: chapter 24 adds Yehuda Ashlag’s root, four phases, screen, returning light and measured reception. A schematic responds to each selected phase and each action in Dalet. The side reading compares Ashlag's formulation with a specific Vital passage and links Ashlag's ABYA discussion. 337 catalogue records. All 28 content/build tests and four Chromium routes passed, including touch and 200% text.
+Next: finish the v0.7.5 exact hosted matrix and live and installed checks. Expand the community atlas with ancient groups and historic schools of study.

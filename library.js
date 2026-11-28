@@ -141,3 +141,10 @@ export const wordMethodLabels = {
   he:['ארבע דרכים לקרוא את האותיות','הדוגמאות נטענות…','הדוגמאות לא נפתחו. סגרו את האזור ופתחו אותו שוב.'],
   az:['Hərflərlə dörd oxu üsulu','Nümunələr yüklənir…','Nümunələr açılmadı. Bölməni bağlayıb yenidən aç.'],
 };
+
+export const ashlagLabels = {
+  tr:['Aşlag’da ışık ve perde','Şema açılıyor…','Şema açılamadı. Kapatıp yeniden aç.'],
+  en:['Light and screen in Ashlag','Opening the diagram…','The diagram could not open. Close this section and reopen it.'],
+  he:['אור ומסך אצל אשלג','התרשים נטען…','התרשים לא נפתח. סגרו את האזור ופתחו אותו שוב.'],
+  az:['Aşlaqda nur və pərdə','Sxem açılır…','Sxem açılmadı. Bölməni bağlayıb yenidən aç.'],
+};

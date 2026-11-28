@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.7.4</small>
+  <small dir="ltr">v0.7.5</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -45,6 +45,7 @@
       <div id="workbench" hidden><p></p><div></div><output aria-live="polite"></output><small></small></div>
       <div id="models" hidden><p></p><div></div><output></output><a id="model-reference" target="_blank" rel="noopener noreferrer" hidden></a><button id="photo-button" type="button" hidden></button></div>
       <details id="talmud-page" hidden><summary></summary><p role="status" hidden></p><div></div></details>
+      <details id="ashlag-workbench" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="study-circle" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="geniza-desk" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="messianic-timeline" hidden><summary></summary><p role="status" hidden></p><div></div></details>
@@ -118,7 +119,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.7.4</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.7.5</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -225,6 +226,25 @@
     <p id="culture-question"></p>
     <div class="visit-choices" role="group" aria-labelledby="culture-question"></div>
     <p role="status"></p>
+  </details>
+</template>
+<template id="ashlag-template">
+  <p></p>
+  <div class="visit-choices" role="group"></div>
+  <figure class="ashlag-figure">
+    <canvas width="160" height="80" aria-hidden="true"></canvas>
+    <figcaption aria-live="polite"></figcaption>
+  </figure>
+  <a id="ashlag-phase-source" target="_blank" rel="noopener noreferrer"></a>
+  <div class="ashlag-screen" hidden>
+    <p role="status"></p>
+    <button id="ashlag-action" type="button"></button>
+    <a id="ashlag-step-source" target="_blank" rel="noopener noreferrer"></a>
+  </div>
+  <details class="ashlag-comparison">
+    <summary></summary>
+    <p></p><a href="https://www.sefaria.org/Sefer_Etz_Chaim.1.2.2" target="_blank" rel="noopener noreferrer"></a>
+    <h3></h3><p></p><a href="https://ashlagarchive.com/en/library/introduction-wisdom-kabbalah#section-6" target="_blank" rel="noopener noreferrer"></a>
   </details>
 </template>
 <template id="word-method-template">

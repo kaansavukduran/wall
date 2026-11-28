@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { ashlagCopy, ashlagPhases, ashlagScreen } from '../ashlag-lessons.js';
 import { accountabilityCases, accountabilityRecords } from '../accountability-lessons.js';
 import { ancientLessons } from '../ancient-lessons.js';
 import { atlasEntries } from '../atlas-lessons.js';
@@ -144,7 +145,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 331);
+  assert.equal(entries.length, 337);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -152,6 +153,22 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
   assert.ok(Array.from({length:24}, (_, index) => index + 1).every(id => entries.some(entry => belongsTo(entry, id))));
   assert.ok(belongsTo({chapters:'1–4,6'}, 3));
   assert.equal(belongsTo({chapters:'Prolog,1'}, 10), false);
+});
+
+test('Ashlag workbench separates the root, four phases and four screen states with sources', () => {
+  assert.deepEqual(ashlagPhases.map(phase => phase.id),['root','alef','bet','gimel','dalet']);
+  assert.equal(ashlagScreen.length,4);
+  for (const copy of ashlagCopy) {
+    assert.equal(copy.length,languages.length);
+    assert.ok(copy.every(text => text.trim()));
+  }
+  for (const lesson of [...ashlagPhases,...ashlagScreen]) {
+    assert.ok(entries.some(entry => entry.url === lesson.link && belongsTo(entry,24)));
+    for (const line of [lesson.title ?? lesson.action,lesson.text]) {
+      assert.equal(line.length,languages.length);
+      assert.ok(line.every(text => text.trim()));
+    }
+  }
 });
 
 test('letter methods preserve two numeric conventions, text structure and exact references', () => {
