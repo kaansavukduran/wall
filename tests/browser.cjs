@@ -791,6 +791,14 @@ async function main() {
       await page.selectOption('#atlas-entry', 'reconstructionist');
       assert.match(await page.locator('#atlas-source').getAttribute('href'), /reconstructingjudaism.org/);
       await page.selectOption('#atlas-category', 'communities');
+      assert.equal(await page.locator('#atlas-entry option').count(),14);
+      await page.selectOption('#atlas-entry','iraqi-baghdadi-rite');
+      assert.equal(await page.locator('.atlas-marker').count(),2);
+      assert.match(await page.locator('#atlas-source').getAttribute('href'),/item\/10065$/);
+      await page.selectOption('#atlas-entry','iranian-judeo-persian');
+      assert.match(await page.locator('.atlas-reading p').first().textContent(),/1319/);
+      assert.match(await page.locator('#atlas-source').getAttribute('href'),/032-003384430$/);
+      assert.equal(await page.locator('.atlas-figure').isVisible(),false);
       await page.selectOption('#atlas-entry', 'mizrahim');
       assert.equal(await page.locator('.atlas-figure').isVisible(), false);
       await page.selectOption('#atlas-category', 'ancient');
@@ -1126,15 +1134,26 @@ async function main() {
     await reading.close();
     console.log('Reading appearance, system theme reactivity and independent saved input preferences: PASS');
 
-    const recovery = await browser.newPage();
-    await recovery.route('**/visitor.png', route => route.abort());
-    await recovery.goto(target);
-    await recovery.locator('#retry').waitFor();
-    await recovery.unroute('**/visitor.png');
-    await recovery.click('#retry');
-    await recovery.locator('#app').waitFor();
-    await recovery.close();
-    console.log('Loading error and retry: PASS');
+    for (const locale of ['tr','en','he','az']) {
+      const recovery = await browser.newPage({locale,viewport:{width:320,height:560}});
+      await recovery.route('**/visitor.png', route => route.abort());
+      await recovery.goto(target);
+      await recovery.locator('#retry').waitFor();
+      await recovery.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+      for (const [width,height] of [[320,560],[568,320],[800,260]]) {
+        await recovery.setViewportSize({width,height});
+        assert.ok(await recovery.locator('#boot').evaluate(boot => {
+          const shell = boot.querySelector('.boot-shell').getBoundingClientRect();
+          const version = boot.querySelector('small').getBoundingClientRect();
+          return version.top >= shell.bottom && document.documentElement.scrollWidth <= innerWidth;
+        }),locale + ' ' + width + '×' + height + ' loading screen');
+      }
+      await recovery.unroute('**/visitor.png');
+      await recovery.click('#retry');
+      await recovery.locator('#app').waitFor();
+      await recovery.close();
+    }
+    console.log('Loading error, readable version and retry in four locales: PASS');
   } finally {
     await browser.close();
   }
