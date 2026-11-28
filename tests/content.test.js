@@ -12,6 +12,7 @@ import { chapters, languages, plaza, ui } from '../content.js';
 import { cultureCases, cultureRecords } from '../culture-lessons.js';
 import { pageFeedback, pageNote, talmudCards } from '../talmud-lessons.js';
 import { exportSave, mergeSave, parseSave, progressKey, saveSummary } from '../save-data.js';
+import { appearanceKey, parseAppearance } from '../appearance.js';
 import { dailyCards } from '../daily-lessons.js';
 import { dailyCases } from '../daily-life.js';
 import { archiveCases } from '../diaspora-archive.js';
@@ -79,6 +80,7 @@ test('portable saves merge valid progress without replacing local drafts or touc
   const source = mockStorage({
     [progressKey]:importedProgress, [draft]:'עברית • Türkçe', 'wall.journal':'Açıq sual',
     'wall.language':'he', 'unrelated.preferences':'private', 'wall.unknown-scope':'ignored',
+    [appearanceKey]:JSON.stringify({theme:'contrast',motion:'reduce',size:175}),
   });
   const encoded = exportSave(source);
   assert.doesNotMatch(encoded,/unrelated|unknown-scope/);
@@ -91,6 +93,7 @@ test('portable saves merge valid progress without replacing local drafts or touc
   assert.equal(destination.getItem(draft),'Existing note');
   assert.equal(destination.getItem('wall.language'),'az');
   assert.equal(destination.getItem('wall.journal'),'Açıq sual');
+  assert.equal(parseAppearance(destination.getItem(appearanceKey)).size,175);
   assert.throws(() => parseSave('{"format":"WALL save","version":1,"values":{"__proto__":"bad"}}'),/Save data/);
   assert.throws(() => parseSave(encoded.replace('"version":1','"version":2')),/Save version/);
   assert.throws(() => parseSave(encoded.replace('wall.transfer.1.draft','wall.transfer.25.draft')),/Save data/);
@@ -99,6 +102,14 @@ test('portable saves merge valid progress without replacing local drafts or touc
   assert.equal(unavailable.getItem(progressKey),existingProgress);
   assert.equal(unavailable.getItem(draft),null);
   assert.equal(unavailable.length,1);
+});
+
+test('reading preferences reject invalid themes, sizes and motion options', () => {
+  const preferences = {theme:'light',motion:'system',size:125};
+  assert.deepEqual(parseAppearance(JSON.stringify(preferences)),preferences);
+  for (const setting of [{size:90.5},{size:205},{size:83},{theme:'any'},{motion:false}]) {
+    assert.equal(parseAppearance(JSON.stringify({...preferences,...setting})),null);
+  }
 });
 
 test('study-room readings point to chapters and have four complete translations', () => {

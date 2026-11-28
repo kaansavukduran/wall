@@ -22,6 +22,7 @@ const files = [
   'culture-archive.js', 'culture-lessons.js',
   'talmud-page.js', 'talmud-lessons.js',
   'portable-save.js', 'save-data.js',
+  'appearance.js',
   'transfer.js', 'transfer-early-lessons.js', 'transfer-middle-lessons.js', 'transfer-late-lessons.js',
   'scenes.js', 'catalogue.js', 'sequences.js', 'hebrew-labs.js', 'controller.js', 'tour.js', 'tour-evidence.js', 'assets',
 ];

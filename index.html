@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.6.6</small>
+  <small dir="ltr">v0.6.7</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -115,12 +115,20 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.6.6</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.6.7</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
 <dialog id="settings" aria-labelledby="settings-title">
   <div class="dialog-heading"><h2 id="settings-title"></h2><form method="dialog"><button></button></form></div>
+  <fieldset id="appearance">
+    <legend></legend>
+    <label for="theme"></label><select id="theme"></select>
+    <div class="scale-label"><label for="text-scale"></label><output for="text-scale" aria-live="off"></output></div>
+    <input type="range" id="text-scale" min="80" max="200" step="5" value="100">
+    <button id="scale-reset" type="button"></button>
+    <label for="motion"></label><select id="motion"></select>
+  </fieldset>
   <details id="save-transfer"><summary></summary><p role="status" hidden></p><div></div></details>
 </dialog>
 <dialog id="tour-presentation" aria-labelledby="tour-presentation-title">

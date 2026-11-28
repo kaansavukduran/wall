@@ -27,4 +27,6 @@ See [GitHub Releases](https://github.com/kaansavukduran/wall/releases) for the w
 
 In versions that include **Settings → Transfer a save**, create save text and keep a copy before changing installations. Paste it into the new copy of WALL, review the chapter and draft counts, and select **Merge saves**. Chapter progress is combined and existing drafts on the destination are kept. The transfer works offline. When an older preview lacks this screen, its save remains in that installation.
 
+**Settings → Appearance and motion** offers dark, light, system and high-contrast palettes, an 80–200% scale and reduced animation. Each preference is saved separately and can travel in a save from this version.
+
 [Play WALL on GitHub Pages](https://kaansavukduran.github.io/wall/). This repository publishes from `gh-pages`. To publish a tested release, push it to `main` and run `bash scripts/publish-pages.sh` from that clean checkout. Verify the live version in `build.json` and play the changed scene from the published site.

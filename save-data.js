@@ -1,4 +1,5 @@
 import { chapters, languages } from './content.js';
+import { appearanceKey, parseAppearance } from './appearance.js';
 
 export const progressKey = 'wall.progress.v1';
 export const maxSaveLength = 500_000;
@@ -27,6 +28,7 @@ function validValue(key, value) {
   if (typeof value !== 'string') return false;
   if (key === progressKey) return value.length <= 512 && !!validProgress(value);
   if (key === 'wall.language') return languages.includes(value);
+  if (key === appearanceKey) return value.length < 100 && parseAppearance(value) !== null;
   if (key === 'wall.journal') return value.length <= 2_000;
   if (kabbalahKey.test(key)) return value.length <= 1_200;
   if (tourChoiceKey.test(key)) return choiceValue.test(value);

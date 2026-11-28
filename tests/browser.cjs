@@ -740,6 +740,35 @@ async function main() {
     await restore.close();
     console.log('Export, invalid-save rejection, restore into a separate profile and Hebrew draft: PASS');
 
+    const reading = await browser.newPage({locale:'az',viewport:{width:320,height:700},hasTouch:true,colorScheme:'dark'});
+    await reading.goto(target);
+    await reading.locator('#app').waitFor();
+    await reading.tap('#settings-button');
+    await reading.selectOption('#theme','light');
+    assert.equal(await reading.locator('html').getAttribute('data-theme'),'light');
+    assert.equal(await reading.evaluate(() => getComputedStyle(document.documentElement).colorScheme),'light');
+    await reading.selectOption('#theme','system');
+    assert.equal(await reading.locator('html').getAttribute('data-theme'),'dark');
+    await reading.emulateMedia({colorScheme:'light'});
+    await reading.waitForFunction(() => document.documentElement.dataset.theme === 'light');
+    await reading.selectOption('#theme','contrast');
+    await reading.selectOption('#motion','reduce');
+    await reading.locator('#text-scale').press('End');
+    assert.equal(await reading.locator('#text-scale').getAttribute('aria-valuetext'),'200%');
+    assert.equal(await reading.locator('#settings').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth),false);
+    await reading.reload();
+    await reading.locator('#app').waitFor();
+    assert.equal(await reading.locator('html').getAttribute('data-theme'),'contrast');
+    assert.ok(await reading.locator('html').evaluate(root => root.hasAttribute('data-reduced-motion')));
+    assert.equal(await reading.evaluate(() => getComputedStyle(document.documentElement).fontSize),'32px');
+    await reading.tap('#settings-button');
+    await reading.tap('#scale-reset');
+    assert.equal(await reading.locator('#text-scale').inputValue(),'100');
+    assert.equal(await reading.locator('#theme').inputValue(),'contrast');
+    assert.equal(await reading.locator('#motion').inputValue(),'reduce');
+    await reading.close();
+    console.log('Reading appearance, system theme reactivity and independent saved input preferences: PASS');
+
     const recovery = await browser.newPage();
     await recovery.route('**/visitor.png', route => route.abort());
     await recovery.goto(target);

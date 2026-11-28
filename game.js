@@ -1,4 +1,5 @@
 import { controllerHelp, mountController } from './controller.js';
+import { connectAppearance } from './appearance.js';
 import { chapters, languages, plaza, ui } from './content.js';
 import { atlasLabels, calendarLabels, cultureLabels, dailyLabels, diasporaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
@@ -80,8 +81,8 @@ function readProgress() {
 }
 
 export async function start(initialLanguage) {
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const world = await makeWorld(find('world'), reducedMotion);
+  const appearance = connectAppearance(find('appearance'),read,store);
+  const world = await makeWorld(find('world'), appearance.reducedMotion);
   const controls = find('controls');
   const options = find('choices');
   const result = find('result');
@@ -804,8 +805,10 @@ export async function start(initialLanguage) {
   find('episodes-button').addEventListener('click', openChapters);
   find('library-button').addEventListener('click', openLibrary);
   find('settings-button').addEventListener('click', () => {
+    stop();
     find('settings-title').textContent = settingsLabels[language].title;
     settings.querySelector('form button').textContent = ui[language][4];
+    appearance.render(language);
     refreshSave();
     settings.showModal();
   });
