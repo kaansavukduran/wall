@@ -14,7 +14,7 @@ async function embed(text, path, mime) {
 
 try {
   for (const entry of ['start.js','game.js','world.js','content.js','controller.js','chapters-early.js',
-    'chapters-modern.js','library.js','scenes.js','catalogue.js','sequences.js']) {
+    'chapters-modern.js','ancient-lessons.js','library.js','scenes.js','catalogue.js','sequences.js']) {
     await cp(resolve(site, entry), resolve(temporary, entry));
   }
   for (const [entry, path, mime] of [
@@ -24,7 +24,7 @@ try {
     const source = resolve(temporary, entry);
     await writeFile(source, await embed(await readFile(source, 'utf8'), path, mime));
   }
-  execFileSync('npx', ['--yes','esbuild@0.25.12','start.js','--bundle','--format=esm','--minify',
+  execFileSync('npx', ['--yes','esbuild@0.25.12','start.js','--bundle','--format=esm','--minify','--charset=utf8',
     '--platform=browser','--target=es2022','--outfile=bundle.js'], { cwd:temporary,stdio:'inherit' });
   const bundle = (await readFile(resolve(temporary, 'bundle.js'), 'utf8')).replace(/<\/script/gi, '<\\/script');
   const css = await embed(await readFile(resolve(site, 'style.css'), 'utf8'), 'assets/PixelifySans.ttf', 'font/ttf');

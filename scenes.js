@@ -7,6 +7,14 @@ export const models = [
     ['quarter',['1967 öncesi sokak','Street before 1967','רחוב לפני 1967','1967-dən əvvəlki küçə'],
       ['Bu temsili kesit, meydandan önce duvara komşu konutları gösterir.','This schematic view shows homes near the wall before the plaza.','תרשים זה מציג בתי מגורים ליד הכותל לפני הקמת הרחבה.','Bu şərti görünüş meydandan əvvəl divara yaxın evləri göstərir.']],
   ]),
+  scene(2, ['Birinci Krallar 6’ya göre şematik kesit','Schematic from I Kings 6','חתך סכמטי על פי מלכים א׳ ו׳','I Padşahlar 6 əsasında şərti kəsik'], [
+    ['porch',['Giriş sundurması','Entrance porch','אולם הכניסה','Giriş eyvanı'],
+      ['Metin, ana salonun önünde bir giriş sundurması tarif eder.','The text describes a porch in front of the main hall.','הטקסט מתאר אולם כניסה לפני האולם הראשי.','Mətn əsas zalın önündə giriş eyvanını təsvir edir.']],
+    ['hall',['Ana salon','Main hall','ההיכל','Əsas zal'],
+      ['Ana salon, giriş ile iç oda arasında yer alır.','The main hall lies between the entrance and the inner room.','ההיכל נמצא בין הכניסה לחדר הפנימי.','Əsas zal girişlə daxili otaq arasında yerləşir.']],
+    ['sanctuary',['İç kutsal oda','Inner sanctuary','הדביר','Daxili müqəddəs otaq'],
+      ['Metin, yapının en iç bölümünü ayrı bir oda olarak betimler.','The text describes a separate room in the innermost part of the building.','הטקסט מתאר חדר נפרד בחלקו הפנימי ביותר של המבנה.','Mətn tikilinin ən iç hissəsini ayrıca otaq kimi təsvir edir.']],
+  ]),
   scene(6, ['Mimari kesit','Architectural section','חתך אדריכלי','Memarlıq kəsiyi'], [
     ['wall',['İstinat duvarı','Retaining wall','קיר תומך','İstinad divarı'],
       ['Yan yüz, dolgunun yerinde kalmasına yardım eder.','The side wall helps retain the fill.','הקיר הצדדי מסייע להחזיק את המילוי.','Yan divar dolğunu yerində saxlayır.']],

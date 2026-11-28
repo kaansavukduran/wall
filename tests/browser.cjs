@@ -8,6 +8,7 @@ if (process.env.WALL_BROWSER) browserOptions.executablePath = process.env.WALL_B
 
 async function main() {
   const { chapters, plaza } = await import('../content.js');
+  const { ancientLessons } = await import('../ancient-lessons.js');
   const browser = await chromium.launch(browserOptions);
   try {
     for (const [locale, width] of [['tr',1100],['en',320],['he',320],['az',740]]) {
@@ -69,9 +70,37 @@ async function main() {
       for (const episode of chapters) {
         await page.waitForURL('**/#chapter-' + episode.id);
         assert.equal(await page.locator('#chapter').textContent(), String(episode.id));
+        const evidence = ancientLessons[episode.id];
+        if (evidence) {
+          const panel = page.locator('#evidence');
+          assert.equal(await panel.getAttribute('open'), null);
+          await panel.locator('summary').press('Enter');
+          const wrongChoice = page.locator('[data-evidence="' + (evidence.correct + 1) % 3 + '"]');
+          await wrongChoice.press('Enter');
+          const firstLink = await page.locator('#evidence-source').getAttribute('href');
+          const correctChoice = page.locator('[data-evidence="' + evidence.correct + '"]');
+          await correctChoice.click();
+          assert.equal(await wrongChoice.getAttribute('aria-pressed'), 'false');
+          assert.equal(await correctChoice.getAttribute('aria-pressed'), 'true');
+          const actualLink = await page.locator('#evidence-source').getAttribute('href');
+          assert.notEqual(actualLink, firstLink);
+          assert.equal(actualLink, evidence.cards[evidence.correct].url);
+          const index = ['tr','en','he','az'].indexOf(locale);
+          assert.equal(await page.locator('#evidence-feedback').textContent(), evidence.feedback[index]);
+        }
         if (episode.id === 1) {
           for (const card of [2,0,1]) await page.click('[data-sequence="' + card + '"]');
           assert.equal(await page.locator('#sequence li').count(), 3);
+        }
+        if (episode.id === 2) {
+          const before = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
+          await page.click('[data-layer="sanctuary"]');
+          assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), before);
+        }
+        if (episode.id === 4) {
+          for (const card of [2,0,1]) await page.click('[data-sequence="' + card + '"]');
+          const dates = await page.locator('#sequence li').allTextContents();
+          assert.deepEqual(dates.map(item => item.match(/\d+(?:\/\d+)?/)[0]), ['539','516/515','407']);
         }
         if (episode.id === 5) {
           await page.click('[data-night="3"]');

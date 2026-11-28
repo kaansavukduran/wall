@@ -1,6 +1,6 @@
 id	donem	oyun_bolumu	kaynak	tur	baglam	url	durum
 S01	Çok katmanlı antik metin	1	Çıkış 12	Birincil metin	Pesah ve Çıkış anlatısı	https://www.sefaria.org/Exodus.12	Referans; edisyon seçilecek
-S02	Çok katmanlı antik metin	2	Birinci Krallar 6	Birincil metin	Birinci Tapınak edebî tasviri	https://www.sefaria.org/I_Kings.6	Referans; edisyon seçilecek
+S02	Çok katmanlı antik metin	2	Birinci Krallar 6–8	Birincil metin	Birinci Tapınak edebî tasviri ve adanma anlatısı	https://www.sefaria.org/I_Kings.6-8	Pasaj ve tasvir eşleşti; oyunda özgün özet
 S03	Çok katmanlı antik metin	3	Mezmurlar 137	Birincil metin	Babil ve sürgün hafızası	https://www.sefaria.org/Psalms.137	Referans; edisyon seçilecek
 S04	Pers dönemi anlatısı	4	Ezra 1–6	Birincil metin	Dönüş ve yeniden inşa	https://www.sefaria.org/Ezra.1	Referans; edisyon seçilecek
 S05	İkinci Tapınak dönemi	5	Birinci Makabiler 4	Birincil metin	Tapınağın yeniden adanması	https://www.sefaria.org/I_Maccabees.4	Referans; edisyon seçilecek
@@ -72,10 +72,10 @@ E02	Güncel	Yerelleştirme	W3C – Authoring HTML: Handling Right-to-left Script
 E03	Modern	24	ANU – Jewish Community of Baku	Müze kaydı	Bakü ve Kafkasya cemaatleri	https://dbs.anumuseum.org.il/skn/en/c6/e185085/Place/Baku	Kayıt eşleşti; yerel kaynak ve özgün pasaj seçilecek
 E04	Çağdaş	24	WJC – Azerbaijan	Cemaat profili	Dağ Yahudileri ve Azerbaycan toplulukları	https://www.worldjewishcongress.org/en/about/communities/AZ	Cemaat profili eşleşti; yerel kaynakla karşılaştırılacak
 E05	20. yüzyıl	24	YIVO – Refuseniks	Akademik ansiklopedi	Sovyet Yahudileri ve göç kısıtları	https://encyclopedia.yivo.org/article/93	Başlık eşleşti; vaka belgeleri seçilecek
-D01	MÖ 597	3	Babil kroniği BM 21946	Birincil metin adayı	597 Kudüs seferi; 587/586 ile ayrım	https://www.metmuseum.org/es/perspectives/cyrus-and-the-judean-diaspora	Met bağlamı eşleşti; tablet nesne kartı ve satır kontrolü açık
-D02	MÖ 6. yüzyıl	4	Met – Cyrus Cylinder	Müze kaydı	Pers imparatorluk bağlamı; Ezra buyruğuyla ayrım	https://www.metmuseum.org/exhibitions/listings/2013/cyrus-cylinder	Sergi kaydı eşleşti; edisyon ve görsel hak kontrol edilecek
+D01	MÖ 597	3	Babil kroniği BM 21946	Birincil belge	597 Kudüs seferi ve 587/586 yıkımı arasındaki ayrım	https://www.britishmuseum.org/collection/object/W_1896-0409-51	Envanter BM 21946; ABC 5 arka yüz 11–13
+D02	MÖ 6. yüzyıl	4	Met – Cyrus and the Judean Diaspora	Müze anlatısı	Pers imparatorluk bağlamı ve Ezra buyruğu arasındaki ayrım	https://www.metmuseum.org/perspectives/cyrus-and-the-judean-diaspora	Bağlam metni eşleşti; silindir görseli kullanılmıyor
 D03	MÖ 701	2,3	Sennacherib kraliyet yazıtları, RINAP 3/2	Akademik edisyon	Lakiş ve Asur kraliyet temsili	https://epub.ub.uni-muenchen.de/31824/1/Grayson_Novotny_RINAP_3_2.pdf	Edisyon eşleşti; pasaj ve rölyef envanteri seçilecek
-D04	MÖ 407 civarı	4	Berlin – Elephantine tapınak dilekçesi	Arkeolojik belge	Aramice yerel ibadet ve yeniden inşa talebi	https://search.smb.museum/object/obj-823546	Nesne kaydı eşleşti; çeviri ve görsel izinleri açık
+D04	MÖ 407	4	Berlin – Elephantine P.13495	Arkeolojik belge	Aramice yerel ibadet ve yeniden inşa talebi	https://search.smb.museum/object/obj-823546	25 Kasım MÖ 407 tarihi ve nesne kaydı eşleşti; oyunda özgün özet
 D05	MÖ 2. yüzyıl	5	Israel Museum – Heliodorus Stele	Müze kaydı	Helenistik idare ve dinî mekânlar	https://www.imj.org.il/en/exhibitions/heliodorus-stele	Sergi eşleşti; yazıt satırı seçilecek
 D06	İkinci Tapınak–Roma	7,10	IAA – Dead Sea Scrolls Discovery Sites	Arkeolojik katalog	Mağaralar ve metin grupları	https://www.deadseascrolls.org.il/learn-about-the-scrolls/discovery-sites	Katalog eşleşti; mektup ve yazma envanteri seçilecek
 D07	MS 115–117	9	Cambridge – Uprisings in the Jewish Diaspora	Akademik bölüm	Traianus döneminde diaspora ayaklanmaları	https://www.cambridge.org/core/books/abs/cambridge-history-of-judaism/uprisings-in-the-jewish-diaspora-116117/D60462905D529F30607BAFD7C22745FA	Özet eşleşti; birincil pasaj seçilecek
@@ -88,3 +88,11 @@ D13	Safed ve sonraki aktarım	18	Sefer Ets Hayim 1:1	Mistik metin	Luria/Vital, b
 D14	16. yüzyıl	18	Şulhan Aruh, Orah Hayim 472	Hukuk metni	Pesah gecesi düzeni	https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.472	Bölüm eşleşti; pasaj ve edisyon seçilecek
 D15	Antik metin ve sonraki alımlama	16	Hezekiel 1	Tanah metni	Vizyon ve Merkava alımlamasını ayırma	https://www.sefaria.org/Ezekiel.1	Referans; Heikhalot ve sonraki yorum eşleştirmesi açık
 D16	Negatif yaklaşık 1900–1920	Prolog,19,23	LOC – LC-DIG-matpc-14762	Arşiv fotoğrafı	Kotel önündeki dar alan ve kişiler	https://www.loc.gov/pictures/item/2019704965/	Katalog ve orta boy görsel eşleşti; yayın için bilinen kısıtlama yok
+D17	MÖ 1208 dolayları	1	UCL Digital Egypt – Merneptah Steli	Birincil yazıt	Yazıtta Kenan bağlamında İsrail adı	https://www.ucl.ac.uk/museums-static/digitalegypt/thebes/merenptah/stela.html	Yazıt kaydı ve çeviri eşleşti; oyunda özgün özet
+D18	MÖ 9. yüzyıl	2	Tel Dan Steli	Birincil yazıt	Bazalt parçalar, Aramice yazıt ve Davut hanedanı okuması	https://www.atiqot.org.il/en/objects/tel-dan-stele/	Nesne kimliği 371407-0 ve arşiv eşleşti
+D19	MÖ 7. yüzyıl başı	2	Taylor Prizması	Birincil belge	Sanherib yıllıklarında Yahuda seferi ve Hizkiya	https://www.britishmuseum.org/collection/object/W_1855-1003-1	Envanter ve 701 seferi bağlamı eşleşti
+S22	Yaklaşık MS 200 derlemesi	1	Mişna Pesahim 10:4–5	Birincil metin	Seder sofrasında sorular ve bayram yiyecekleri	https://www.sefaria.org/Mishnah_Pesachim.10.4-5	Pasaj eşleşti; oyunda özgün özet
+S23	Çok katmanlı antik metin	1	Çıkış 12:1–20	Birincil metin	Pesah anlatısı ve bayramın anılması	https://www.sefaria.org/Exodus.12.1-20	Pasaj eşleşti; oyunda özgün özet
+S24	Antik tarih anlatısı	3	İkinci Krallar 24–25	Birincil metin	Kudüs’ün alınması, sürgün ve sonraki yıkım	https://www.sefaria.org/II_Kings.24-25	Pasaj eşleşti; kronikle birlikte okunur
+S25	Pers dönemi anlatısı	4	Ezra 1:1–4	Birincil metin	Kyros buyruğu ve Kudüs’e dönüş anlatısı	https://www.sefaria.org/Ezra.1.1-4	Pasaj eşleşti; silindir ve Elephantine dilekçesinden ayrı
+S26	Pers dönemi anlatısı	4	Ezra 6:15–17	Birincil metin	Kudüs Tapınağı’nın I. Darius’un altıncı yılında tamamlanması	https://www.sefaria.org/Ezra.6.15-17	Pasaj eşleşti; yaklaşık MÖ 516/515

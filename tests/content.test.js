@@ -1,6 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { ancientLessons } from '../ancient-lessons.js';
+import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
 import { library, libraryLabels } from '../library.js';
 import { models, photo } from '../scenes.js';
@@ -55,10 +57,10 @@ test('rendered version follows VERSION and scene options localize', () => {
 });
 
 
-test('catalogue maps ranges and the prologue without conflating them', async () => {
-  const { parseCatalogue, belongsTo } = await import('../catalogue.js');
-  const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
-  assert.equal(entries.length, 89);
+const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
+
+test('catalogue maps ranges and the prologue without conflating them', () => {
+  assert.equal(entries.length, 97);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -66,4 +68,21 @@ test('catalogue maps ranges and the prologue without conflating them', async () 
   assert.ok(Array.from({length:24}, (_, index) => index + 1).every(id => entries.some(entry => belongsTo(entry, id))));
   assert.ok(belongsTo({chapters:'1–4,6'}, 3));
   assert.equal(belongsTo({chapters:'Prolog,1'}, 10), false);
+});
+
+test('ancient source exercises contain four versions of each card and matched catalogue entries', () => {
+  assert.deepEqual(Object.keys(ancientLessons), ['1','2','3','4']);
+  for (const [chapter, lesson] of Object.entries(ancientLessons)) {
+    assert.equal(lesson.cards.length, 3);
+    assert.ok(lesson.cards[lesson.correct]);
+    const translations = [lesson.prompt, lesson.feedback];
+    for (const card of lesson.cards) {
+      translations.push(card.title, card.date, card.description);
+      assert.ok(entries.some(entry => entry.url === card.url && belongsTo(entry, Number(chapter))));
+    }
+    for (const text of translations) {
+      assert.equal(text.length, languages.length);
+      assert.ok(text.every(translation => translation.trim()));
+    }
+  }
 });

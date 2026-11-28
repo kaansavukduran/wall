@@ -66,7 +66,7 @@ export async function makeWorld(canvas, reducedMotion) {
         for (let x = 183; x < 289; x += 24) rect(background, '#8f6f59', x, 60, 5, 24);
       }
     } else {
-      drawSetting(index, stone, mortar);
+      drawSetting(background, index, stone, mortar, layer);
     }
     if (layer === 'platform') rect(background, '#ed973f', wallStart, 85, 480 - wallStart, 4);
     if (layer === 'wall') rect(background, '#ed973f', wallStart, 89, 5, 110);
@@ -118,7 +118,23 @@ export async function makeWorld(canvas, reducedMotion) {
       rect(context, '#201b18', half - 1, 0, 2, height);
     }
   }
-  function drawSetting(index, stone, mortar) {
+  function drawSetting(background, index, stone, mortar, layer) {
+    if (index === 2) {
+      rect(background, mortar, 119, 91, 310, 107);
+      rect(background, stone, 112, 88, 328, 10);
+      rect(background, '#e1c395', 126, 82, 308, 6);
+      rect(background, '#634a3d', 127, 104, 291, 89);
+      rect(background, '#9c7556', 133, 108, 45, 82);
+      rect(background, '#9c7556', 188, 108, 126, 82);
+      rect(background, '#805d51', 323, 108, 90, 82);
+      for (const x of [134, 174, 315, 413]) {
+        rect(background, '#dcc193', x, 106, 5, 84);
+      }
+      for (const [zone, x, width] of [['porch',133,45], ['hall',188,126], ['sanctuary',323,90]]) {
+        rect(background, layer === zone ? '#ffe1a0' : stone, x, 190, width, 5);
+      }
+      return;
+    }
     if (index === 12) {
       for (let row = 0; row < 8; row++) {
         const edge = 152 - Math.min(row, 5) * 8;

@@ -39,6 +39,17 @@ canvas{display:block;inline-size:100%;height:auto;aspect-ratio:2;image-rendering
 h1,h2{line-height:1.2;text-wrap:balance;margin:.25em 0}
 .chapter,footer{color:var(--muted);font-size:.86rem}
 .chapter{margin:0}
+#evidence{margin-block-start:.65rem;border-block:1px solid var(--edge);padding-block:.25rem}
+#evidence summary{min-block-size:var(--hit);align-content:center;cursor:pointer;font-weight:650}
+#evidence summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+#evidence-question{margin-block:.35rem .75rem}
+#evidence-choices{display:grid;gap:.4rem}
+#evidence-choices button{text-align:start}
+#evidence-choices button[aria-pressed=true]{background:#47351e;border-color:var(--accent)}
+.evidence-reading p{margin-block:.6rem}
+.evidence-reading p:empty{margin:0}
+#evidence-date{color:var(--muted);font-size:.86rem}
+#evidence-feedback{font-weight:600}
 #choices{display:flex;flex-wrap:wrap;gap:.5rem}
 #choices button{flex:1 1 100%;text-align:start}
 #result{margin:.65rem 0;color:#ffe1a0}

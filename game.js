@@ -1,3 +1,4 @@
+import { ancientLessons } from './ancient-lessons.js';
 import { controllerHelp, mountController } from './controller.js';
 import { chapters, languages, plaza, ui } from './content.js';
 import { library, libraryLabels } from './library.js';
@@ -9,6 +10,12 @@ import { makeWorld } from './world.js';
 const episodes = [plaza, ...chapters];
 const key = 'wall.progress.v1';
 const find = id => document.getElementById(id);
+const evidenceLabels = {
+  tr: ['Kaynakları karşılaştır', 'Bu soruya yanıt veren kaynağı bulmak için diğer kartlara da bak.'],
+  en: ['Compare the sources', 'Check the other cards for the source that answers this question.'],
+  he: ['השוו בין המקורות', 'בדקו איזה מן הכרטיסים האחרים עונה על השאלה הזאת.'],
+  az: ['Mənbələri müqayisə et', 'Bu suala cavab verən mənbəni tapmaq üçün digər kartlara bax.'],
+};
 
 function read(keyName) {
   try { return localStorage.getItem(keyName); } catch { return null; }
@@ -48,6 +55,8 @@ export async function start(initialLanguage) {
   const selector = find('lang');
   const cataloguePanel = find('catalogue');
   const sequenceSurface = find('sequence');
+  const evidence = find('evidence');
+  const evidenceChoices = find('evidence-choices');
   const progress = readProgress();
   let language = initialLanguage;
   let active = 0;
@@ -55,6 +64,7 @@ export async function start(initialLanguage) {
   let direction = 0;
   let selectedLayer = '';
   let studyOption = null;
+  let evidenceCard = null;
   const sequenceSteps = [];
   let attempt = '';
   let sourceToken = 0;
@@ -128,6 +138,7 @@ export async function start(initialLanguage) {
     renderModel();
     renderStudy();
     renderSequence();
+    renderEvidence();
     if (focus) find('title').focus();
   }
 
@@ -137,12 +148,55 @@ export async function start(initialLanguage) {
     stop();
     selectedLayer = '';
     studyOption = null;
+    evidenceCard = null;
+    evidence.open = false;
     sequenceSteps.length = 0;
     attempt = '';
     letters.clear();
     if (updateHash) history.replaceState(null, '', index === 0 ? '#game' : '#chapter-' + episodeId(index));
     save();
     render(updateHash);
+  }
+
+  function renderEvidence() {
+    const chapter = episodes[active].id;
+    const lesson = ancientLessons[chapter];
+    evidence.hidden = !lesson;
+    if (!lesson) return;
+    const index = locale();
+    evidence.querySelector('summary').textContent = evidenceLabels[language][0];
+    find('evidence-question').textContent = lesson.prompt[index];
+    evidenceChoices.replaceChildren(...lesson.cards.map((_, position) => {
+      const number = (position + chapter) % lesson.cards.length;
+      const card = lesson.cards[number];
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = card.title[index];
+      button.dataset.evidence = String(number);
+      button.addEventListener('click', () => {
+        evidenceCard = number;
+        readEvidence(lesson, index);
+      });
+      return button;
+    }));
+    readEvidence(lesson, index);
+  }
+
+  function readEvidence(lesson, index) {
+    const card = lesson.cards[evidenceCard];
+    for (const button of evidenceChoices.children) {
+      button.setAttribute('aria-pressed', String(Number(button.dataset.evidence) === evidenceCard));
+    }
+    find('evidence-date').textContent = card?.date[index] ?? '';
+    find('evidence-detail').textContent = card?.description[index] ?? '';
+    find('evidence-feedback').textContent = !card ? ''
+      : evidenceCard === lesson.correct ? lesson.feedback[index] : evidenceLabels[language][1];
+    const source = find('evidence-source');
+    source.hidden = !card;
+    if (card) {
+      source.href = card.url;
+      source.textContent = ui[language][5];
+    }
   }
 
   function renderModel() {

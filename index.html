@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.4.2</small>
+  <small dir="ltr">v0.4.3</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -45,7 +45,23 @@
       <div id="models" hidden><p></p><div></div><output></output><button id="photo-button" type="button" hidden></button></div>
     </section>
     <section class="story">
-      <div><p id="chapter" class="chapter"></p><h1 id="title" tabindex="-1">WALL</h1><p id="intro"></p><p id="controller-hint" class="chapter" hidden></p></div>
+      <div>
+        <p id="chapter" class="chapter"></p>
+        <h1 id="title" tabindex="-1">WALL</h1>
+        <p id="intro"></p>
+        <p id="controller-hint" class="chapter" hidden></p>
+        <details id="evidence" hidden>
+          <summary></summary>
+          <p id="evidence-question"></p>
+          <div id="evidence-choices" role="group" aria-labelledby="evidence-question"></div>
+          <div class="evidence-reading" role="status" aria-atomic="true">
+            <p id="evidence-date"></p>
+            <p id="evidence-detail"></p>
+            <p id="evidence-feedback"></p>
+          </div>
+          <a id="evidence-source" target="_blank" rel="noopener noreferrer" hidden></a>
+        </details>
+      </div>
       <div class="actions">
         <div id="choices"></div>
         <p id="result" role="status" aria-live="polite"></p>
@@ -55,7 +71,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.4.2</span></footer>
+  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.4.3</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
