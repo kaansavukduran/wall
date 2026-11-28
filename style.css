@@ -231,7 +231,7 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .platform-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:.45rem;margin-block:.55rem}
 .platform-groups fieldset{min-inline-size:0;display:grid;align-content:start;gap:.35rem;margin:0;padding:.45rem;border:1px solid var(--edge)}
 .platform-groups legend{max-inline-size:100%;overflow-wrap:anywhere}
-.platform-groups button{min-block-size:max(48px,var(--hit));text-align:start;overflow-wrap:anywhere}
+.platform-groups button{min-block-size:max(48px,var(--hit));padding-inline:.4rem;text-align:start;overflow-wrap:anywhere}
 .platform-groups button[aria-pressed=true]{background:var(--selected-bg);border-color:var(--accent)}
 .platform-feedback{color:var(--accent)}
 .platform-feedback:empty{margin:0}

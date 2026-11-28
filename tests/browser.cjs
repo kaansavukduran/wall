@@ -268,9 +268,11 @@ async function main() {
           frames.push(await readDiagram());
           assert.equal(new Set(frames).size,4);
           assert.equal(await assembly.locator('fieldset').first().locator('button:disabled').count(),3);
+          assert.equal(await assembly.locator('.platform-groups').isHidden(),true);
           assert.match(await assembly.locator('a').getAttribute('href'),/id=25662$/);
           await assembly.locator('[data-platform-reset]').press('Enter');
           assert.equal(await readDiagram(),frames[0]);
+          assert.equal(await assembly.locator('.platform-groups').isVisible(),true);
           await assembly.locator('summary').press('Enter');
         }
         if (episode.id === 8) {

@@ -1,6 +1,6 @@
 const copy = {
   tr: {
-    task: 'Bir parça seç, sonra kesitteki yerine dokun veya düğmesini kullan.',
+    task: 'Bir parça seç. Çizime dokun veya yerini listeden seç.',
     parts: 'Parçalar', places: 'Kesitteki yerler',
     names: ['İstinat duvarı', 'Dolgu', 'Platform'],
     positions: ['Dış kenar', 'İç bölüm', 'Üst yüzey'],
@@ -11,7 +11,7 @@ const copy = {
       'Dolgu, duvarın arkasında yükseltilen alanı oluşturur.',
       'Platform, üzerinde yapıların durduğu düz yüzeyi oluşturur.',
     ],
-    done: 'Kesit tamamlandı. Duvar dolguyu tutar, Tapınak binası düz platformun üzerinde durur. Çizim parçaların görevini gösteren bir şemadır.',
+    done: 'Duvar dolguyu tutar. Tapınak düz platformun üstünde durur. Şema, parçaların görevini gösterir.',
   },
   en: {
     task: 'Choose a piece, then tap its place in the drawing or use the buttons.',
@@ -25,7 +25,7 @@ const copy = {
       'Fill makes up the raised area behind the wall.',
       'The platform provides the level surface for buildings.',
     ],
-    done: 'The section is complete. The wall retains the fill and the Temple building stands on the level platform. The drawing shows how the pieces work together.',
+    done: 'The wall retains the fill. The Temple stands on the level platform. The diagram shows how the parts work together.',
   },
   he: {
     task: 'בחרו חלק, ואז הקישו על מקומו באיור או השתמשו בכפתורים.',
@@ -39,10 +39,10 @@ const copy = {
       'המילוי יוצר את התשתית המוגבהת מאחורי הקיר.',
       'המשטח המוגבה יוצר משטח ישר שעליו עומדים מבנים.',
     ],
-    done: 'החתך הושלם. הקיר מחזיק את המילוי ובית המקדש עומד על המשטח המוגבה. האיור מראה כיצד החלקים פועלים יחד.',
+    done: 'הקיר מחזיק את המילוי. בית המקדש עומד על המשטח המוגבה. האיור מראה את תפקידיהם של החלקים.',
   },
   az: {
-    task: 'Bir hissə seç, sonra kəsikdəki yerinə toxun və ya düyməsini seç.',
+    task: 'Bir hissə seç. Şəklə toxun və ya yerini siyahıdan seç.',
     parts: 'Hissələr', places: 'Kəsikdəki yerlər',
     names: ['İstinad divarı', 'Dolğu', 'Platforma'],
     positions: ['Xarici kənar', 'İç hissə', 'Üst səth'],
@@ -53,7 +53,7 @@ const copy = {
       'Dolğu divarın arxasındakı yüksəldilmiş sahəni əmələ gətirir.',
       'Platforma tikililərin dayandığı düz səthi yaradır.',
     ],
-    done: 'Kəsik tamamlandı. Divar dolğunu saxlayır, Məbəd binası düz platformanın üzərində dayanır. Şəkil hissələrin birlikdə necə işlədiyini göstərir.',
+    done: 'Divar dolğunu saxlayır. Məbəd düz platformanın üstündə dayanır. Şəkil hissələrin rolunu göstərir.',
   },
 };
 
@@ -158,6 +158,8 @@ export function mountPlatformAssembly(panel, language, view) {
   });
 
   function update() {
+    const complete = view.placed.size === pieces.length;
+    groups.hidden = complete;
     for (const [button,index] of partButtons) {
       button.disabled = view.placed.has(index);
       button.textContent = labels.names[index];
@@ -169,7 +171,7 @@ export function mountPlatformAssembly(panel, language, view) {
       button.textContent = placed ? labels.positions[index] + ' · ' + labels.names[index] : labels.positions[index];
     });
     reset.disabled = view.placed.size === 0 && view.selected == null;
-    feedback.textContent = view.placed.size === pieces.length ? labels.done
+    feedback.textContent = complete ? labels.done
       : view.message === 'retry' ? labels.explanation[view.selected] + ' ' + labels.retry
       : view.message === 'placed' ? labels.explanation[view.lastPiece]
       : '';
