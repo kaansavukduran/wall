@@ -1,4 +1,3 @@
-import { ancientLessons } from './ancient-lessons.js';
 import { controllerHelp, mountController } from './controller.js';
 import { chapters, languages, plaza, ui } from './content.js';
 import { library, libraryLabels } from './library.js';
@@ -11,10 +10,10 @@ const episodes = [plaza, ...chapters];
 const key = 'wall.progress.v1';
 const find = id => document.getElementById(id);
 const evidenceLabels = {
-  tr: ['Kaynakları karşılaştır', 'Bu soruya yanıt veren kaynağı bulmak için diğer kartlara da bak.'],
-  en: ['Compare the sources', 'Check the other cards for the source that answers this question.'],
-  he: ['השוו בין המקורות', 'בדקו איזה מן הכרטיסים האחרים עונה על השאלה הזאת.'],
-  az: ['Mənbələri müqayisə et', 'Bu suala cavab verən mənbəni tapmaq üçün digər kartlara bax.'],
+  tr: ['Kaynakları karşılaştır', 'Bu soruya yanıt veren kaynağı bulmak için diğer kartlara da bak.', 'Kaynak kartları yükleniyor…', 'Kaynak kartları açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en: ['Compare the sources', 'Check the other cards for the source that answers this question.', 'Loading source cards…', 'The cards could not open. Reload the page and try again.'],
+  he: ['השוו בין המקורות', 'בדקו איזה מן הכרטיסים האחרים עונה על השאלה הזאת.', 'כרטיסי המקורות נטענים…', 'הכרטיסים לא נפתחו. רעננו את הדף ונסו שוב.'],
+  az: ['Mənbələri müqayisə et', 'Bu suala cavab verən mənbəni tapmaq üçün digər kartlara bax.', 'Mənbə kartları yüklənir…', 'Kartlar açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
 
 function read(keyName) {
@@ -68,6 +67,7 @@ export async function start(initialLanguage) {
   const sequenceSteps = [];
   let attempt = '';
   let sourceToken = 0;
+  let evidenceToken = 0;
   const letters = new Set();
 
   const episodeId = index => String(episodes[index].id ?? 'plaza');
@@ -158,14 +158,35 @@ export async function start(initialLanguage) {
     render(updateHash);
   }
 
-  function renderEvidence() {
+  evidence.addEventListener('toggle', () => {
+    if (evidence.open) renderEvidence();
+  });
+
+  async function renderEvidence() {
     const chapter = episodes[active].id;
-    const lesson = ancientLessons[chapter];
-    evidence.hidden = !lesson;
-    if (!lesson) return;
+    const request = ++evidenceToken;
+    evidence.hidden = !(chapter >= 1 && chapter <= 8);
+    if (evidence.hidden) return;
+    const labels = evidenceLabels[language];
+    evidence.querySelector('summary').textContent = labels[0];
+    if (!evidence.open) return;
     const index = locale();
-    evidence.querySelector('summary').textContent = evidenceLabels[language][0];
-    find('evidence-question').textContent = lesson.prompt[index];
+    const question = find('evidence-question');
+    question.textContent = labels[2];
+    evidenceChoices.replaceChildren();
+    readEvidence(null, index);
+    let lesson;
+    try {
+      const lessons = chapter <= 4
+        ? (await import('./ancient-lessons.js')).ancientLessons
+        : (await import('./second-temple-lessons.js')).secondTempleLessons;
+      lesson = lessons[chapter];
+    } catch {
+      if (request === evidenceToken) question.textContent = labels[3];
+      return;
+    }
+    if (request !== evidenceToken || !evidence.open) return;
+    question.textContent = lesson.prompt[index];
     evidenceChoices.replaceChildren(...lesson.cards.map((_, position) => {
       const number = (position + chapter) % lesson.cards.length;
       const card = lesson.cards[number];
@@ -183,7 +204,7 @@ export async function start(initialLanguage) {
   }
 
   function readEvidence(lesson, index) {
-    const card = lesson.cards[evidenceCard];
+    const card = lesson?.cards[evidenceCard];
     for (const button of evidenceChoices.children) {
       button.setAttribute('aria-pressed', String(Number(button.dataset.evidence) === evidenceCard));
     }

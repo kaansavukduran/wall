@@ -9,12 +9,18 @@ if (process.env.WALL_BROWSER) browserOptions.executablePath = process.env.WALL_B
 async function main() {
   const { chapters, plaza } = await import('../content.js');
   const { ancientLessons } = await import('../ancient-lessons.js');
+  const { secondTempleLessons } = await import('../second-temple-lessons.js');
+  const lessons = {...ancientLessons, ...secondTempleLessons};
   const browser = await chromium.launch(browserOptions);
   try {
     for (const [locale, width] of [['tr',1100],['en',320],['he',320],['az',740]]) {
       const page = await browser.newPage({ viewport:{ width, height:750 },locale,hasTouch:width === 320 });
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
+      const loadedLessons = new Set();
+      page.on('request', request => {
+        if (request.url().endsWith('-lessons.js')) loadedLessons.add(request.url().split('/').at(-1));
+      });
       await page.goto(target);
       await page.locator('#app').waitFor();
       await page.selectOption('#lang', locale);
@@ -70,10 +76,12 @@ async function main() {
       for (const episode of chapters) {
         await page.waitForURL('**/#chapter-' + episode.id);
         assert.equal(await page.locator('#chapter').textContent(), String(episode.id));
-        const evidence = ancientLessons[episode.id];
+        const evidence = lessons[episode.id];
         if (evidence) {
           const panel = page.locator('#evidence');
           assert.equal(await panel.getAttribute('open'), null);
+          const filename = episode.id <= 4 ? 'ancient-lessons.js' : 'second-temple-lessons.js';
+          if (episode.id === 1 || episode.id === 5) assert.equal(loadedLessons.has(filename), false);
           await panel.locator('summary').press('Enter');
           const wrongChoice = page.locator('[data-evidence="' + (evidence.correct + 1) % 3 + '"]');
           await wrongChoice.press('Enter');
@@ -87,6 +95,7 @@ async function main() {
           assert.equal(actualLink, evidence.cards[evidence.correct].url);
           const index = ['tr','en','he','az'].indexOf(locale);
           assert.equal(await page.locator('#evidence-feedback').textContent(), evidence.feedback[index]);
+          assert.ok(loadedLessons.has(filename));
         }
         if (episode.id === 1) {
           for (const card of [2,0,1]) await page.click('[data-sequence="' + card + '"]');
@@ -117,6 +126,15 @@ async function main() {
           await page.selectOption('#lang', locale === 'he' ? 'az' : 'he');
           assert.equal(await page.locator('#chapter').textContent(), '6');
           await page.selectOption('#lang', locale);
+        }
+        if (episode.id === 8) {
+          await page.click('[data-layer="before"]');
+          const intact = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
+          await page.click('[data-layer="after"]');
+          assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), intact);
+          for (const card of [1,2,0]) await page.click('[data-sequence="' + card + '"]');
+          const dates = await page.locator('#sequence li').allTextContents();
+          assert.deepEqual(dates.map(item => item.match(/\d+/)[0]), ['70','71','81']);
         }
         if (episode.id === 11) {
           await page.click('[data-sequence="0"]');

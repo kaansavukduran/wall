@@ -3,11 +3,11 @@ S01	Çok katmanlı antik metin	1	Çıkış 12	Birincil metin	Pesah ve Çıkış 
 S02	Çok katmanlı antik metin	2	Birinci Krallar 6–8	Birincil metin	Birinci Tapınak edebî tasviri ve adanma anlatısı	https://www.sefaria.org/I_Kings.6-8	Pasaj ve tasvir eşleşti; oyunda özgün özet
 S03	Çok katmanlı antik metin	3	Mezmurlar 137	Birincil metin	Babil ve sürgün hafızası	https://www.sefaria.org/Psalms.137	Referans; edisyon seçilecek
 S04	Pers dönemi anlatısı	4	Ezra 1–6	Birincil metin	Dönüş ve yeniden inşa	https://www.sefaria.org/Ezra.1	Referans; edisyon seçilecek
-S05	İkinci Tapınak dönemi	5	Birinci Makabiler 4	Birincil metin	Tapınağın yeniden adanması	https://www.sefaria.org/I_Maccabees.4	Referans; edisyon seçilecek
+S05	İkinci Tapınak dönemi	5	Birinci Makabiler 4:36–59	Birincil metin	Tapınağın yeniden adanması ve sekiz günlük yıllık kutlama	https://www.sefaria.org/I_Maccabees.4.36-59	Pasaj eşleşti; oyunda özgün özet
 S06	Yaklaşık MS 200 derlemesi	7,11	Mişna Middot	Birincil metin	Tapınak ölçüleri ve hatırlanan mimari	https://www.sefaria.org/Mishnah_Middot.1	Referans; edisyon seçilecek
 S07	Yaklaşık MS 200 derlemesi	1,11	Mişna Pesahim 10	Birincil metin	Seder ve anlatı	https://www.sefaria.org/Mishnah_Pesachim.10	Referans; edisyon seçilecek
 S08	Geç Antik Çağ	5,11	Bavli Şabat 21b	Birincil metin	Hanuka ve kandil anlatısı	https://www.sefaria.org/Shabbat.21b	İçerik eşleşti; edisyon seçilecek
-S09	Geç Antik Çağ	8,11	Bavli Gittin 55b–56b	Birincil metin	Yıkımı hatırlayan rabbanî anlatılar	https://www.sefaria.org/Gittin.55b	Referans; edisyon seçilecek
+S09	Geç Antik Çağ	8,11	Bavli Gittin 55b–56b	Birincil metin	Yıkımı hatırlayan rabbanî anlatılar	https://www.sefaria.org/Gittin.55b-56b	Pasaj eşleşti; oyunda özgün özet
 S10	Geç Antik Çağ	10,11	Yeruşalmi Taanit 4	Birincil metin	Yas, Betar ve felaket hafızası	https://www.sefaria.org/Jerusalem_Talmud_Taanit.4.1-58	Referans; bölüm numarası sürümde eşleştirilecek
 S11	Geç Antik Çağ	12	Bavli Şabat 33b	Birincil metin	Şimon ve Elazar mağara anlatısı	https://www.sefaria.org/Shabbat.33b	İçerik eşleşti; edisyon seçilecek
 S12	Geç Antik Çağ	Prolog,11	Bavli Berakhot 2a	Birincil metin	Şema ve okuma zamanı	https://www.sefaria.org/Berakhot.2a	Referans; edisyon seçilecek
@@ -96,3 +96,10 @@ S23	Çok katmanlı antik metin	1	Çıkış 12:1–20	Birincil metin	Pesah anlat�
 S24	Antik tarih anlatısı	3	İkinci Krallar 24–25	Birincil metin	Kudüs’ün alınması, sürgün ve sonraki yıkım	https://www.sefaria.org/II_Kings.24-25	Pasaj eşleşti; kronikle birlikte okunur
 S25	Pers dönemi anlatısı	4	Ezra 1:1–4	Birincil metin	Kyros buyruğu ve Kudüs’e dönüş anlatısı	https://www.sefaria.org/Ezra.1.1-4	Pasaj eşleşti; silindir ve Elephantine dilekçesinden ayrı
 S26	Pers dönemi anlatısı	4	Ezra 6:15–17	Birincil metin	Kudüs Tapınağı’nın I. Darius’un altıncı yılında tamamlanması	https://www.sefaria.org/Ezra.6.15-17	Pasaj eşleşti; yaklaşık MÖ 516/515
+S27	İkinci Tapınak dönemi	5	İkinci Makabiler 10:1–8	Birincil metin	Yeniden adanma ve Sukot’u andıran sekiz günlük kutlama	https://www.sefaria.org/II_Maccabees.10.1-8	Pasaj eşleşti; oyunda özgün özet
+S28	MS 1. yüzyıl	6	Josephus – Yahudilerin Eski Tarihi 15.11	Birincil tarih metni	Hirodes’in Tapınak projesi	https://penelope.uchicago.edu/josephus/ant-15.html	Kitap XV bölüm 11 eşleşti
+S29	Yaklaşık MS 200 derlemesi	6	Mişna Middot 2:1	Birincil metin	Tapınak Dağı ölçüleri ve daha geç rabbanî hafıza	https://www.sefaria.org/Mishnah_Middot.2.1	Pasaj eşleşti; oyunda özgün özet
+D20	MÖ 2. yüzyıl	7	İsrail Müzesi – Büyük Yeşaya Tomarı 1QIsaᵃ	Müze nesne kaydı	Kumran Mağarası 1’den Yeşaya kopyası	https://dss.collections.imj.org.il/isaiah	Dijital nesne kaydı; tıpkıbasım oyunda yer almıyor
+D21	MÖ 1. yüzyıl	7	İsrail Müzesi – Topluluk Kuralı 1QS	Müze nesne kaydı	Topluluğa kabul ve ortak yaşam düzeni	https://dss.collections.imj.org.il/community	Dijital nesne kaydı; tıpkıbasım oyunda yer almıyor
+D22	MÖ 1. yüzyıl	7	İsrail Müzesi – Habakkuk Yorumu 1QpHab	Müze nesne kaydı	Pesher türü ve peygamberlik metninin yorumlanması	https://dss.collections.imj.org.il/habakkuk	Dijital nesne kaydı; tıpkıbasım oyunda yer almıyor
+D23	MS 81 sonrası	8	Roma Colosseum Arkeoloji Parkı – Titus Takı	Birincil anıt	MS 71 zafer alayının sonraki Roma temsili	https://colosseo.it/en/marvels/arch-of-titus/	Kurum kaydı ve Domitian devri eşleşti

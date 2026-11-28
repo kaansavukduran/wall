@@ -17,6 +17,11 @@ export const sequences = [
     ['Elephantine dilekçesi yazıldı · MÖ 407','The Elephantine petition was written · 407 BCE','נכתבה הבקשה מיב · 407 לפנה״ס','Elefantin müraciəti yazıldı · e.ə. 407'],
     ['Kyros Babil’i aldı · MÖ 539','Cyrus took Babylon · 539 BCE','כורש כבש את בבל · 539 לפנה״ס','Kir Babili aldı · e.ə. 539'],
   ]),
+  make(8, ['Olay, zafer alayı ve anıt','The event, triumph and monument','האירוע, התהלוכה והאנדרטה','Hadisə, zəfər yürüşü və abidə'], [1,2,0], [
+    ['Titus Takı dikildi · MS 81’den sonra','The Arch of Titus was built · after 81 CE','שער טיטוס הוקם · אחרי 81 לספירה','Titus tağı tikildi · 81-ci ildən sonra'],
+    ['Roma ordusu Tapınağı yıktı · MS 70','The Roman army destroyed the Temple · 70 CE','הצבא הרומי החריב את בית המקדש · 70 לספירה','Roma ordusu Məbədi dağıtdı · 70-ci il'],
+    ['Roma’da zafer alayı düzenlendi · MS 71','A triumph was held in Rome · 71 CE','נערכה תהלוכת ניצחון ברומא · 71 לספירה','Romada zəfər yürüşü keçirildi · 71-ci il'],
+  ]),
   make(11, ['Bir sayfayı oluştur','Assemble a page','סדרו דף תלמוד','Səhifəni qur'], [1,0,2], [
     ['Gemara soruyu tartışır','Gemara discusses the question','הגמרא דנה בשאלה','Gemara sualı müzakirə edir'],
     ['Mişna soruyu ortaya koyar','Mishnah poses the question','המשנה מציגה את השאלה','Mişna sualı ortaya qoyur'],

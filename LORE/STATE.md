@@ -2,10 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified release: v0.4.2, 0cc5c2236a2a62b17a90d6470c7739ba7b42100d.
-Pages: live from gh-pages, deployment run 46107261815. Opened the archive photo comparison and changed the view in Cloud Chrome.
-Packages: v0.4.2 released web ZIP, standalone HTML, Windows x64 Setup and Portable, Linux x64 AppImage and Android preview APK. Run 46107733288 installed and exercised Windows and Android API 35. The Linux package was extracted and checked during packaging. Physical devices/controllers and stable Android signing are open. Previous Android preview signing certificates differ, so updates may require an uninstall and can lose local progress.
-Verification: Chromium completed the 25 checkpoints in every language, including narrow-screen touch, keyboard, RTL and simulated controller input. Local Chromium at 4× CPU slowdown gave cold-start medians of 358 ms and 350 ms (five repetitions, overlapping results) for v0.4.1 and v0.4.2.
-v0.4.3 (ef26e78) shipped chapter 1–4 source cards, a text-based First Temple section, and a date-order task separating the Jerusalem Temple and Elephantine petition. The UTF-8 standalone bundle was 429,465 bytes, down from 498,514 bytes for the same content with escaped Unicode. Live reload exposed stale game.js paired with new HTML.
-Candidate v0.4.4: release-specific runtime paths and preservation of previous Pages payloads. Four-language route, blocked stale asset URLs, and standalone Hebrew source catalogue passed locally. Added a Linux AppImage launch check to native smoke.
-Next: publish and verify v0.4.4, then expand chapters 5–8. Contrast Maccabees and Shabbat 21b, deepen the platform section and MS 70 layers, and build a writing-fragment comparison for chapter 7.
+Verified release: v0.4.4, 08980b5650b2c6f9e944e6f46f64700ff4201719.
+Pages: deployment run 46108476609. The cached browser session reloaded v0.4.4 and completed the Merneptah source card. Live manifest and previous resource URLs were checked. Release-specific runtime paths keep old HTML and assets compatible.
+Packages: v0.4.4 released web ZIP, standalone HTML, Windows x64 Setup and Portable, Linux x64 AppImage and Android preview APK (46108479258). v0.4.2 installed checks passed on Windows and Android API 35 (46107733288). v0.4.4 native smoke includes the new AppImage launch job. Physical devices/controllers and stable Android signing are open.
+Candidate v0.4.5: chapter 5–8 Hanukkah, Herod, Qumran, and 70 CE source-card lessons, a common architectural section for chapters 6 and 8, and a destruction/triumph/monument date exercise. The source decks now load when opened. Local Chromium initial JavaScript response bodies measured 151,684 bytes on v0.4.4 and 133,425 on v0.4.5 (uncompressed). The 25-checkpoint route passed in four languages. The standalone Hebrew Hanukkah lesson ran without network requests.
+Next: publish and verify v0.4.5. Chapters 9–12 are the next content block: the eastern Mediterranean revolts, Bar Kokhba, Mishnah and the two Talmuds, and the Shimon cave narrative.

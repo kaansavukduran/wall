@@ -39,10 +39,12 @@ export async function makeWorld(canvas, reducedMotion) {
       rect(background, clouds, (i * 71 + 12) % 480, 29 + (i * 19) % 55, 21 + i % 6 * 4, 3);
       rect(background, hills, i * 43, 86 + (i * 11) % 26, 60, 125);
     }
-    const cutaway = index === 6 || (index === 8 && layer === 'before');
-    const site = index === 0 || cutaway || [7, 8, 13, 14, 19, 21, 23, 24].includes(index);
-    const wallStart = cutaway ? 112 : 166;
-    if (site) {
+    const cutaway = index === 6 || index === 8;
+    const site = index === 0 || [13, 14, 19, 21, 23, 24].includes(index);
+    const wallStart = 166;
+    if (cutaway) {
+      drawPlatformSection(background, index === 6 || layer === 'before', layer);
+    } else if (site) {
       rect(background, mortar, wallStart, 86, 480 - wallStart, 118);
       for (let row = 0; row < 8; row++) {
         let left = wallStart - row % 2 * 17;
@@ -60,19 +62,8 @@ export async function makeWorld(canvas, reducedMotion) {
           if ((row + column * 2) % 9 === 0) rect(background, '#7c8264', x + 1, y + 10, 4, 2);
         }
       }
-      if (cutaway) {
-        rect(background, '#d9bba1', 173, 55, 116, 31);
-        rect(background, '#f6dbad', 163, 51, 135, 6);
-        for (let x = 183; x < 289; x += 24) rect(background, '#8f6f59', x, 60, 5, 24);
-      }
     } else {
       drawSetting(background, index, stone, mortar, layer);
-    }
-    if (layer === 'platform') rect(background, '#ed973f', wallStart, 85, 480 - wallStart, 4);
-    if (layer === 'wall') rect(background, '#ed973f', wallStart, 89, 5, 110);
-    if (layer === 'temple' && cutaway) rect(background, '#ed973f', 161, 49, 140, 3);
-    if (index === 8 && layer !== 'before') {
-      for (let i = 0; i < 8; i++) rect(background, i % 2 ? mortar : stone, 300 + i * 17, 69 + i % 3 * 5, 16, 15);
     }
     if (layer === 'quarter' || (index === 23 && layer !== 'plaza')) {
       for (let x = 197; x < 430; x += 57) {
@@ -88,11 +79,36 @@ export async function makeWorld(canvas, reducedMotion) {
       rect(background, i % 2 ? '#9f8270' : '#4d4140', x, y, 3 + i % 8, 1);
     }
     rect(background, '#b79b78', 0, 198, 480, 2);
-    if (site && index !== 8) {
+    if (site) {
       for (const x of [175, 239, 410]) {
         rect(background, '#695447', x, 194, 14, 7);
         rect(background, '#757a55', x + 1, 189, 12, 5);
         rect(background, '#596747', x + 5, 185, 7, 7);
+      }
+    }
+  }
+
+  function drawPlatformSection(context, intact, layer) {
+    rect(context, '#906f54', 155, 118, 325, 80);
+    for (let row = 0; row < 6; row++) {
+      const y = 124 + row * 12;
+      for (let x = 157 + row % 2 * 16; x < 480; x += 35) {
+        rect(context, '#a89172', x, y, 24, 3);
+        rect(context, '#745944', x + 7, y + 6, 14, 2);
+      }
+      rect(context, '#d8bc8b', 108 + row % 2 * 6, 119 + row * 13, 42 - row % 2 * 6, 11);
+    }
+    rect(context, '#725b49', 106, 114, 51, 5);
+    rect(context, layer === 'platform' ? '#ffe1a0' : '#d5ba8d', 106, 108, 374, 6);
+    if (layer === 'wall') rect(context, '#ffe1a0', 103, 117, 5, 81);
+    if (intact) {
+      rect(context, '#d1ac82', 259, 67, 128, 41);
+      rect(context, '#654d3e', 272, 71, 104, 34);
+      for (let x = 277; x <= 367; x += 30) rect(context, '#e0c594', x, 71, 7, 34);
+      rect(context, layer === 'temple' ? '#ffe1a0' : '#e0c594', 250, 61, 146, 7);
+    } else {
+      for (let x = 261; x <= 370; x += 26) {
+        rect(context, '#93765d', x, 101 - (x % 3), 15, 7 + (x % 3));
       }
     }
   }
@@ -165,6 +181,13 @@ export async function makeWorld(canvas, reducedMotion) {
     rect(background, '#59453f', 272, 184, 5, 15);
     rect(background, '#59453f', 370, 184, 5, 15);
     rect(background, '#eed8a6', 301, 169, 32, 5);
+    if (index === 7) {
+      for (const [x, width] of [[270,21],[307,25],[348,28]]) {
+        rect(background, '#e9c594', x, 165, width, 9);
+        rect(background, '#724b3f', x + 3, 168, width - 7, 1);
+        rect(background, '#724b3f', x + 5, 170, width - 9, 1);
+      }
+    }
   }
 
   function draw(frame) {
