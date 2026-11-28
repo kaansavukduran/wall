@@ -48,7 +48,7 @@ export const modernLessons = {
           "בריטניה מינתה את הוועדה הבינלאומית באישור מועצת חבר הלאומים. היא בדקה בעלות, תפילה וגישה לכותל ולשטח הסמוך. ועדת שו חקרה את האלימות של 1929.",
           "Britaniya bu beynəlxalq komissiyanı Millətlər Cəmiyyəti Şurasının razılığı ilə təyin etdi. Komissiya divarda və yanındakı ərazidə mülkiyyəti, ibadəti və girişi araşdırdı. Şou Komissiyası isə 1929-cu il zorakılığını araşdırdı."
         ],
-        "url": "https://www.palquest.org/en/node/21938"
+        "url": "https://unispal.un.org/pdfs/59A92104ED00DC468525625B00527FEA.pdf#page=25"
       },
       {
         "title": [
@@ -330,7 +330,7 @@ export const modernLessons = {
           "הוועדה קבעה שיחידת מיליציה פלנגיסטית/״הכוחות הלבנוניים״ ביצעה את הטבח בסברה ושתילה. היא ייחסה אחריות עקיפה לבכירים פוליטיים וצבאיים בישראל בשל אי־מניעת סכנה צפויה ואי־התערבות; אלה ממצאים נפרדים.",
           "Komissiya Sabra və Şatiladakı qətliamı Livan Falanjist/Livan Qüvvələri milis dəstəsinin törətdiyi qənaətinə gəldi. İsrailin yüksək siyasi və hərbi rəhbərliyinə qabaqcadan görülə bilən təhlükənin qarşısını almamaq və müdaxilə etməmək səbəbilə dolayı məsuliyyət aid etdi; bunlar ayrı nəticələrdir."
         ],
-        "url": "https://www.palquest.org/en/historictext/9664/kahan-commission-inquiry-report-events-refugee-camps-beirut"
+        "url": "https://syriaaccountability.org/content/images/wordpress/ISRAELMFA_Commission-Inquiry-Beirut_1983_EN.pdf#page=33"
       },
       {
         "title": [

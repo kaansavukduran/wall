@@ -19,7 +19,7 @@ export const tourFollowup = {
   photo:{
     choices:['quarter','wall','photo'],
     title:['1930 Duvar Komisyonu raporu','1930 Wall Commission report','דו״ח ועדת הכותל משנת 1930','1930-cu il Divar Komissiyasının hesabatı'],
-    url:'https://www.palquest.org/en/node/21938',
+    url:'https://unispal.un.org/pdfs/59A92104ED00DC468525625B00527FEA.pdf#page=25',
     prompt:[
       'Fotoğrafta dar geçitte ibadet edenleri görüyorum. Manda döneminde erişim ve mülkiyet hangi belgede ayrı ayrı ele alınıyor?',
       'I can see people praying in the narrow passage. Which document addresses access and ownership separately during the Mandate?',

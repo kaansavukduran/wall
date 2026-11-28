@@ -131,7 +131,7 @@ export const advancedReadings = [
       {title:'Sefaria · Song of Songs 2:2',url:'https://www.sefaria.org/Song_of_Songs.2.2',kind:'text'},
       {title:'Sefaria · Zohar, Introduction 1:1',url:'https://www.sefaria.org/Zohar%2C_Introduction.1.1',kind:'text'},
       {title:'Sefaria · Song of Songs 6:3',url:'https://www.sefaria.org/Song_of_Songs.6.3',kind:'text'},
-      {title:'Stanford University Press · The Zohar: Pritzker Edition, introduction',url:'https://www.sup.org/books/pages/4810/Front_Matter.pdf',kind:'research'},
+      {title:'Stanford University Press · The Zohar: Pritzker Edition, introduction',url:'https://supress.sites-pro.stanford.edu/sites/supress/files/media/file/4810_Front_Matter.pdf#page=9',kind:'research'},
     ],
     commentaries:roseCommentaries,
   },

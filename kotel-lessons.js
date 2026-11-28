@@ -16,7 +16,7 @@ export const kotelLessons = [
     ],
     sources: [
       { title: "Western Wall Heritage Foundation: Visitor Information", url: "https://thekotel.org/en/visitor.info/" },
-      { title: "1930 Western Wall Commission report · PalQuest", url: "https://www.palquest.org/en/node/21938" },
+      { title: "1930 Western Wall Commission report · UN archive", url: "https://unispal.un.org/pdfs/59A92104ED00DC468525625B00527FEA.pdf#page=25" },
       { title: "Discover Islamic Art: Wall of al-Buraq", url: "https://islamicart.museumwnf.org/database_item.php?id=monument%3BISL%3Bpa%3BMon01%3B26%3Ben" }
     ]
   },

@@ -189,7 +189,7 @@ export const medievalLessons = {
           'החיבור משתמש בשמעון בר יוחאי כדמות מספרת ומיוחס לו במסורת. המחקר עוקב אחר הופעתו ותפוצתו של קורפוס הזוהר בקסטיליה בסוף המאה ה־13 ובוחן את זיקתו למשה דה לאון ולכותבים נוספים.',
           'Əsər Şimon bar Yohaini rəvayətçi obrazı kimi işlədir və ənənədə ona aid edilir. Tarixi araşdırma Zohar külliyyatının XIII əsrin sonlarında Kastiliyada meydana çıxıb yayılmasını və Moşe de Leonla digər müəlliflərlə əlaqəsini öyrənir.'
         ],
-        url: 'https://www.sup.org/books/pages/4810/Front_Matter.pdf'
+        url: 'https://supress.sites-pro.stanford.edu/sites/supress/files/media/file/4810_Front_Matter.pdf#page=9'
       }
     ],
     feedback: [

@@ -1024,7 +1024,7 @@ async function main() {
       const secondSource = visitorExercise.locator('[data-followup-source="photo"]');
       if (width === 320) await secondSource.tap();
       else await secondSource.press('Enter');
-      assert.equal(await visitorExercise.locator('#tour-companion a').getAttribute('href'),'https://www.palquest.org/en/node/21938');
+      assert.equal(await visitorExercise.locator('#tour-companion a').getAttribute('href'),'https://unispal.un.org/pdfs/59A92104ED00DC468525625B00527FEA.pdf#page=25');
       assert.ok(await visitorExercise.locator('#tour-companion-title').evaluate(el=>el===document.activeElement));
       await page.locator('.tour-personal-note').scrollIntoViewIfNeeded();
       assert.ok(await page.locator('#tour-presentation .dialog-heading button').evaluate(button => {
@@ -1041,7 +1041,7 @@ async function main() {
       assert.equal(await page.locator('#tour-question').inputValue(), 'photo');
       assert.equal(await page.locator('#tour-present').isEnabled(), true);
       await page.locator('#tour-present').press('Enter');
-      assert.equal(await visitorExercise.locator('#tour-companion a').getAttribute('href'),'https://www.palquest.org/en/node/21938');
+      assert.equal(await visitorExercise.locator('#tour-companion a').getAttribute('href'),'https://unispal.un.org/pdfs/59A92104ED00DC468525625B00527FEA.pdf#page=25');
       assert.ok(await visitorExercise.locator('#tour-followup-choices').isHidden());
       await page.keyboard.press('Escape');
       await page.click('#library-button');

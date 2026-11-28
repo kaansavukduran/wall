@@ -198,7 +198,7 @@ export const models = [
       'Scholars trace the circulation of much of the corpus to late thirteenth-century Castile and the circle of Moses de León. The corpus has several textual layers.',
       'חוקרים קושרים את תפוצתו של חלק חשוב מן הקורפוס לקסטיליה בסוף המאה ה־13 ולחוגו של משה די ליאון. הקורפוס מורכב מכמה שכבות טקסטואליות.',
       'Tədqiqatçılar külliyyatın mühüm hissəsinin yayılmasını XIII əsrin sonlarında Kastiliya və Moşe de Leon çevrəsi ilə əlaqələndirirlər. Külliyyat bir neçə mətn qatından ibarətdir.',
-    ],'https://www.sup.org/books/pages/4810/Front_Matter.pdf'],
+    ],'https://supress.sites-pro.stanford.edu/sites/supress/files/media/file/4810_Front_Matter.pdf#page=9'],
     ['zohar-merton',['Merton nüshası','The Merton copy','עותק מרטון','Merton nüsxəsi'], [
       'Bu nüshanın kâğıdı 1499–1502 dönemine tarihlenir. Nüsha muhtemelen 16. yüzyılın başlarında veya ortalarında yazıldı. 111v yaprağındaki kâtip notunda Şabtai adı geçer. Çizimde kâtip notu ayrı renkle gösterilir. Nüshanın nerede yazıldığı kesin değildir.',
       'The paper was made between 1499 and 1502. The copy was likely written in the early to mid-sixteenth century. The scribe’s note on folio 111v names Shabtai. The drawing highlights the scribe’s note in a separate color. The place of copying is uncertain.',

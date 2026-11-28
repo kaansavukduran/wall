@@ -15,7 +15,7 @@ export const tour = [
     label:['Bir metin','A text','טקסט','Bir mətn'],
     options:[
       ['talmud',['Şimon’un mağara anlatısı','Shimon’s cave narrative','סיפור המערה של שמעון','Şimonun mağara rəvayəti'],'https://www.sefaria.org/Shabbat.33b'],
-      ['zohar',['Zohar’ın tarihsel dolaşımı','The Zohar’s historical circulation','תפוצתו ההיסטורית של הזוהר','Zoharın tarixi yayılması'],'https://www.sup.org/books/pages/4810/Front_Matter.pdf'],
+      ['zohar',['Zohar’ın tarihsel dolaşımı','The Zohar’s historical circulation','תפוצתו ההיסטורית של הזוהר','Zoharın tarixi yayılması'],'https://supress.sites-pro.stanford.edu/sites/supress/files/media/file/4810_Front_Matter.pdf#page=9'],
     ],
   },
   {
