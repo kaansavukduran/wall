@@ -34,27 +34,29 @@ screen, pattern = sys.argv[1:]
 nodes = list(ElementTree.parse(screen).iter("node"))
 
 def bounds(node):
-    return tuple(map(int, re.findall(r"[0-9]+", node.get("bounds", ""))))
+    return tuple(map(int, re.findall(r"-?[0-9]+", node.get("bounds", ""))))
 
 webview = next(node for node in nodes if node.get("class") == "android.webkit.WebView")
 left, top, right, bottom = bounds(webview)
 center = (left + right) // 2
-upper = top + (bottom - top) // 6
-lower = bottom - (bottom - top) // 6
+upper = top + (bottom - top) // 3
+lower = bottom - (bottom - top) // 3
+scroll_up = False
 for node in nodes:
-    if any(re.fullmatch(pattern, node.get(key, "")) for key in ("text", "content-desc")):
-        x1, y1, x2, y2 = bounds(node)
-        if x2 > x1 and y2 > y1:
-            x, y = (x1 + x2) // 2, (y1 + y2) // 2
-            if y > lower:
-                print("swipe", center, lower, upper)
-            elif y < upper:
-                print("swipe", center, upper, lower)
-            else:
-                print("tap", x, y, 0)
-            break
+    if not any(re.fullmatch(pattern, node.get(key, "")) for key in ("text", "content-desc")):
+        continue
+    x1, y1, x2, y2 = bounds(node)
+    if x2 <= x1 or y2 <= y1:
+        continue
+    visible_left, visible_top = max(left, x1), max(top, y1)
+    visible_right, visible_bottom = min(right, x2), min(bottom, y2)
+    if visible_right > visible_left and visible_bottom > visible_top:
+        print("tap", (visible_left + visible_right) // 2, (visible_top + visible_bottom) // 2, 0)
+        break
+    scroll_up = y2 <= top
 else:
-    print("swipe", center, lower, upper)
+    start, end = (upper, lower) if scroll_up else (lower, upper)
+    print("swipe", center, start, end)
 PY
     )
     read -r action x y end <<< "$point"
@@ -63,6 +65,7 @@ PY
       adb shell input tap "$x" "$y"
       if [[ -z "$after" ]]; then return 0; fi
     else
+      echo "Scroll to $label from $x,$y to $x,$end"
       adb shell input swipe "$x" "$y" "$x" "$end" 400
     fi
   done
