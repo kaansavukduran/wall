@@ -39,8 +39,8 @@ def bounds(node):
 webview = next(node for node in nodes if node.get("class") == "android.webkit.WebView")
 left, top, right, bottom = bounds(webview)
 center = (left + right) // 2
-upper = top + (bottom - top) // 3
-lower = bottom - (bottom - top) // 3
+upper = top + (bottom - top) // 6
+lower = bottom - (bottom - top) // 6
 scroll_up = False
 for node in nodes:
     if not any(re.fullmatch(pattern, node.get(key, "")) for key in ("text", "content-desc")):
