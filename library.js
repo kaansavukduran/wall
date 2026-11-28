@@ -78,3 +78,10 @@ export const kabbalahLabels = {
   he: ['סדנת קריאה בקבלה', 'הסדנה נטענת…', 'הסדנה לא נפתחה. רעננו את הדף ונסו שוב.'],
   az: ['Kabbala oxu emalatxanası', 'Emalatxana yüklənir…', 'Emalatxana açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
+
+export const visitLabels = {
+  tr: ['Batı Duvarı’nda ibadet ve ziyaret', 'Ziyaret atölyesi yükleniyor…', 'Atölye açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en: ['Prayer and visits at the Western Wall', 'Loading the visit workshop…', 'The workshop could not open. Reload the page and try again.'],
+  he: ['תפילה וביקור בכותל המערבי', 'סדנת הביקור נטענת…', 'הסדנה לא נפתחה. רעננו את הדף ונסו שוב.'],
+  az: ['Qərb Divarında dua və ziyarət', 'Ziyarət emalatxanası yüklənir…', 'Emalatxana açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
+};

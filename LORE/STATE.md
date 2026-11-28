@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified release: v0.5.1, cbe4b0a9ceb416510a83eb52e8b7fe8abb87d20d.
-Pages: run 46112493954. Opened the atlas and searched for Qırmızı Qəsəbə in the live game.
-Packages: v0.5.1 platform and web runs 46112496410 and 46112496386 attached six files. Linux AppImage, Windows Setup and Portable, and Android API 35 passed installed checks (46112778601). Physical devices/controllers and stable Android signing are open.
-Candidate v0.5.2: nine advanced Kabbalah source stops and five applications with saved explanations in four locales. A Turkish Rabash draft was exercised with external network blocked. Sources distinguish primary texts, later readings, catalogue entries, and institutional accounts. The catalogue has 207 entries. The workshop code and data are deferred until opening.
-Next: verify the workshop live and in desktop packages. Add the prologue's Kotel prayer and practice workshop, then develop the chronology and final exhibition.
+Verified release: v0.5.2, c24b96845f55a383d8d109e708c7216ec0150389.
+Pages: run 46113025172. Played the Rabash 1984 source exercise and opened the explanation draft from the live study room.
+Packages: v0.5.2 platform and web runs 46113027714 and 46113027716 attached six files. v0.5.1 installed checks (46112778601) passed. v0.5.2 smoke adds an installed desktop test of the Kabbalah workshop. Physical devices/controllers and stable Android signing are open.
+Candidate v0.5.3: Kotel visit and prayer workshop reachable from the prologue, the finale, and the study room. Ten inspectable topics, two scenario questions, and a 2 KB original object sprite sheet load only when opened. The catalogue has 222 entries. Verified four full campaign runs, 320px touch, 200% text, controller simulation, and the standalone workshop with external network blocked.
+Next: verify v0.5.3 live and installed. Deepen the 1665–1759 source chronology and the final exhibition.

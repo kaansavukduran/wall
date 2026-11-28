@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.5.2</small>
+  <small dir="ltr">v0.5.3</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -87,12 +87,13 @@
         <div id="choices"></div>
         <p id="result" role="status" aria-live="polite"></p>
         <button id="source" type="button"></button>
+        <button id="visit-button" type="button" hidden></button>
         <button id="next" class="primary" type="button" hidden></button>
         <div id="journal" hidden><p id="tour-prompt"></p><div id="tour-stops"></div><label for="journal-text"></label><textarea id="journal-text" dir="auto" rows="3" maxlength="2000"></textarea><p></p></div>
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.2</span></footer>
+  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.3</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -121,6 +122,7 @@
   <details id="calendar" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <details id="atlas" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <details id="kabbalah" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
+  <details id="visit" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <div id="library-readings" role="group"></div>
 </dialog>
 <template id="calendar-template">
@@ -144,6 +146,26 @@
     <select id="calendar-answer" aria-describedby="calendar-clue"></select>
     <button type="button"></button>
     <p role="status"></p>
+  </details>
+</template>
+<template id="visit-template">
+  <label for="visit-topic"></label><select id="visit-topic"></select>
+  <article class="visit-reading">
+    <h3></h3>
+    <div class="visit-object">
+      <canvas width="64" height="48" aria-hidden="true" hidden></canvas>
+      <p></p>
+    </div>
+    <p></p>
+    <details class="visit-sources"><summary></summary><ul></ul></details>
+  </article>
+  <details class="visit-exercise">
+    <summary></summary>
+    <label for="visit-scenario"></label><select id="visit-scenario"></select>
+    <p id="visit-question"></p>
+    <div class="visit-choices" role="group" aria-labelledby="visit-question"></div>
+    <p role="status"></p>
+    <a target="_blank" rel="noopener noreferrer" hidden></a>
   </details>
 </template>
 <template id="kabbalah-template">

@@ -12,6 +12,7 @@ import { chapters, languages, plaza, ui } from '../content.js';
 import { earlyModernLessons } from '../early-modern-lessons.js';
 import { gematriaValues, sefirot } from '../hebrew-labs.js';
 import { feynmanCases, kabbalahLessons } from '../kabbalah-lessons.js';
+import { kotelLessons, kotelScenarios } from '../kotel-lessons.js';
 import { library, libraryLabels } from '../library.js';
 import { medievalLessons } from '../medieval-lessons.js';
 import { modernLessons } from '../modern-lessons.js';
@@ -72,7 +73,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 207);
+  assert.equal(entries.length, 222);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -138,6 +139,30 @@ test('Kabbalah source stops and explanation cases have matched references and fo
     }
   }
   assert.deepEqual(kabbalahLessons.at(-1).sources.map(source => source.kind), ['self','metadata']);
+});
+
+test('Kotel visit observations and scenarios match their four-language sources', () => {
+  const urls = new Set(parseCatalogue(readFileSync('docs/SOURCES.tsv', 'utf8')).map(item => item.url));
+  assert.equal(kotelLessons.length, 10);
+  assert.equal(kotelScenarios.length, 2);
+  for (const lesson of kotelLessons) {
+    assert.ok(lesson.sources.every(link => urls.has(link.url)));
+    for (const values of [lesson.title, lesson.practice, lesson.history]) {
+      assert.equal(values.length, languages.length);
+      assert.ok(values.every(value => value.trim()));
+      assert.doesNotMatch(values[0], /\p{Script=Hebrew}/u);
+    }
+  }
+  for (const example of kotelScenarios) {
+    assert.ok(urls.has(example.source));
+    assert.ok(example.options[example.correct]);
+    assert.equal(example.options.length, example.feedback.length);
+    for (const values of [example.question,...example.options,...example.feedback]) {
+      assert.equal(values.length, languages.length);
+      assert.ok(values.every(value => value.trim()));
+      assert.doesNotMatch(values[0], /\p{Script=Hebrew}/u);
+    }
+  }
 });
 
 test('all 24 source exercises contain four versions of each card and matched catalogue entries', () => {

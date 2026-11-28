@@ -1,6 +1,6 @@
 import { controllerHelp, mountController } from './controller.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { atlasLabels, calendarLabels, kabbalahLabels, library, libraryLabels } from './library.js';
+import { atlasLabels, calendarLabels, kabbalahLabels, library, libraryLabels, visitLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, tour, tourPrompt, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -92,6 +92,7 @@ export async function start(initialLanguage) {
     ['atlas', atlasLabels, () => import('./atlas.js').then(module => module.mountAtlas)],
     ['kabbalah', kabbalahLabels, () => import('./kabbalah.js').then(({mountKabbalah}) =>
       (panel, current, index) => mountKabbalah(panel, current, index, {read,store}))],
+    ['visit', visitLabels, () => import('./kotel.js').then(module => module.mountKotel)],
   ].map(([id, translations, load]) => {
     const [summary, status, panel] = find(id).children;
     let loadedLanguage;
@@ -153,6 +154,9 @@ export async function start(initialLanguage) {
     selector.setAttribute('aria-label', labels[8]);
     find('episodes-button').textContent = labels[0];
     find('library-button').textContent = libraryLabels[language][0];
+    const visit = find('visit-button');
+    visit.textContent = visitLabels[language][0];
+    visit.hidden = active !== 0 && active !== episodes.length - 1;
     journal.querySelector('label').textContent = libraryLabels[language][3];
     journal.querySelector('p:last-child').textContent = libraryLabels[language][4];
     if (active === episodes.length - 1) renderTour();
@@ -696,6 +700,12 @@ export async function start(initialLanguage) {
   find('inspect').addEventListener('click', inspect);
   find('episodes-button').addEventListener('click', openChapters);
   find('library-button').addEventListener('click', openLibrary);
+  find('visit-button').addEventListener('click', () => {
+    openLibrary();
+    const visit = find('visit');
+    visit.open = true;
+    visit.querySelector('summary').focus();
+  });
   next.addEventListener('click', () => {
     const upcoming = firstIncomplete();
     go(upcoming < 0 ? 0 : upcoming);

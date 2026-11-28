@@ -29,10 +29,10 @@ B06	Çağdaş	24	Roles in the Ten	Kurum metni	Dostluk ve grup rolleri	https://ka
 B07	Çağdaş araştırma	24	Michael Laitman and his group Bnei Baruch	Araştırma kaydı	Kurum dışı tarih ve bağlam	https://cris.bgu.ac.il/en/publications/michael-laitman-and-his-group-bnei-baruch-2/	Bibliyografik kayıt; tam metin incelemesi bekliyor
 H01	Antik tarih	1–4	Posen Library ve Met	Araştırma	Çıkış kanıtı, krallık ve Pers dönemi	https://www.posenlibrary.com/sites/default/files/2025-03/Vol%201%20Intro.pdf	Önceki tarama; pasaj eşleştirmesi bekliyor
 H02	Roma	10	Cambridge History of Judaism	Araştırma	Hadrianus ve Bar Kohba nedenleri	https://www.cambridge.org/core/books/abs/cambridge-history-of-judaism/bar-kochba-revolt-132135/8CA3BF0CDB34F6379F9ECF38F7606109	Özet eşleşti; ileri okuma bekliyor
-H03	Çok dönemli	6,19	Wilson Kemeri kazısı	Arkeoloji	Batı Duvarı ve yapı evreleri	https://hadashot.iaa.org.il/Report_Detail_Eng.aspx?id=25662	Rapor eşleşti
+H03	Çok dönemli	6,19,Prolog,24	Wilson Kemeri kazısı	Arkeoloji	Batı Duvarı ve yapı evreleri	https://hadashot.iaa.org.il/Report_Detail_Eng.aspx?id=25662	Rapor eşleşti
 H04	1537–1541	19	Kudüs surları ve kapıları	Miras kaynağı	Kanûnî’nin şehir suru ve kitabeler	https://enjoyjerusalem.org/explore/paths-and-trails/path/76	Şehir suru eşleşti
 H05	Geç Osmanlı	19	Cemal Paşa ve meydan girişimi	Araştırma	Tasarı ve mahalleye muhtemel etkisi	https://doi.org/10.1080/00263206.2021.1895118	Makale özeti eşleşti
-H06	1930	21	Duvar Komisyonu raporu	Birincil belge	Mülkiyet, erişim ve ibadet koşulları	https://www.palquest.org/en/node/21938	Rapor eşleşti
+H06	1930	21,Prolog,24	Duvar Komisyonu raporu	Birincil belge	Mülkiyet, erişim ve ibadet koşulları	https://www.palquest.org/en/node/21938	Rapor eşleşti
 H07	1933–1945	22	USHMM Holokost Ansiklopedisi	Kurumsal tarih	Holokost tarih çerçevesi	https://encyclopedia.ushmm.org/content/en/article/introduction-to-the-holocaust	Kaynak eşleşti
 H08	Orta Çağ–1967	14,19,23	Open Jerusalem Mağribi Mahallesi	Arşiv	Mahalle planı ve fotoğraf adayları	https://archives.openjerusalem.org/index.php/mughrabi-quarter	Arşiv eşleşti; eser hakları bekliyor
 H09	20. yüzyıl	21–24	BM Filistin meselesi tarihi	Kurumsal tarih	Manda, 1948, 1967	https://www.un.org/unispal/history/	Önceki tarama; bölüm pasajı seçilecek
@@ -98,7 +98,7 @@ S25	Pers dönemi anlatısı	4	Ezra 1:1–4	Birincil metin	Kyros buyruğu ve Kud�
 S26	Pers dönemi anlatısı	4	Ezra 6:15–17	Birincil metin	Kudüs Tapınağı’nın I. Darius’un altıncı yılında tamamlanması	https://www.sefaria.org/Ezra.6.15-17	Pasaj eşleşti; yaklaşık MÖ 516/515
 S27	İkinci Tapınak dönemi	5	İkinci Makabiler 10:1–8	Birincil metin	Yeniden adanma ve Sukot’u andıran sekiz günlük kutlama	https://www.sefaria.org/II_Maccabees.10.1-8	Pasaj eşleşti; oyunda özgün özet
 S28	MS 1. yüzyıl	6	Josephus – Yahudilerin Eski Tarihi 15.11	Birincil tarih metni	Hirodes’in Tapınak projesi	https://penelope.uchicago.edu/josephus/ant-15.html	Kitap XV bölüm 11 eşleşti
-S29	Yaklaşık MS 200 derlemesi	6	Mişna Middot 2:1	Birincil metin	Tapınak Dağı ölçüleri ve daha geç rabbanî hafıza	https://www.sefaria.org/Mishnah_Middot.2.1	Pasaj eşleşti; oyunda özgün özet
+S29	Yaklaşık MS 200 derlemesi	6,Prolog,24	Mişna Middot 2:1	Birincil metin	Tapınak Dağı ölçüleri ve daha geç rabbanî hafıza	https://www.sefaria.org/Mishnah_Middot.2.1	Pasaj eşleşti; oyunda özgün özet
 D20	MÖ 2. yüzyıl	7	İsrail Müzesi – Büyük Yeşaya Tomarı 1QIsaᵃ	Müze nesne kaydı	Kumran Mağarası 1’den Yeşaya kopyası	https://dss.collections.imj.org.il/isaiah	Dijital nesne kaydı; tıpkıbasım oyunda yer almıyor
 D21	MÖ 1. yüzyıl	7	İsrail Müzesi – Topluluk Kuralı 1QS	Müze nesne kaydı	Topluluğa kabul ve ortak yaşam düzeni	https://dss.collections.imj.org.il/community	Dijital nesne kaydı; tıpkıbasım oyunda yer almıyor
 D22	MÖ 1. yüzyıl	7	İsrail Müzesi – Habakkuk Yorumu 1QpHab	Müze nesne kaydı	Pesher türü ve peygamberlik metninin yorumlanması	https://dss.collections.imj.org.il/habakkuk	Dijital nesne kaydı; tıpkıbasım oyunda yer almıyor
@@ -206,3 +206,18 @@ M17	Kabala okuma atölyesi	24	Sulam commentary publication context	Tarihsel öze
 M18	Kabala okuma atölyesi	24	Rabash, Purpose of Society – 1 (1984), Kabbalah Media	Kurum arşivindeki birincil metin	Rabaş, 1984: “Toplumun Amacı”	https://kabbalah.academy/en/library/sources/articles/834/	Atölye kaynağı ve özgün özet
 M19	Kabala okuma atölyesi	24	Bnei Baruch Kabbalah Academy: The Ten as a Requisite for Adhesion	Kurumsal öz tanım	Rabaş, 1984: “Toplumun Amacı”	https://kabbalah.academy/en/library/sources/articles/3454/	Atölye kaynağı ve özgün özet
 M20	Kabala okuma atölyesi	24	Bnei Baruch Kabbalah Academy: About	Kurumsal öz tanım	Michael Laitman ve Bnei Baruch	https://kabbalah.academy/en/about/	Atölye kaynağı ve özgün özet
+P01	Kotel ziyaret atölyesi	Prolog,24	Western Wall Heritage Foundation: Visitor Information	Kurumsal veya arkeolojik kayıt	Duvarın adları	https://thekotel.org/en/visitor.info/	Ziyaret atölyesi kaynağı ve özgün özet
+P02	Kotel ziyaret atölyesi	Prolog,24	Discover Islamic Art: Wall of al-Buraq	Kurumsal veya arkeolojik kayıt	Duvarın adları	https://islamicart.museumwnf.org/database_item.php?id=monument%3BISL%3Bpa%3BMon01%3B26%3Ben	Ziyaret atölyesi kaynağı ve özgün özet
+P03	Kotel ziyaret atölyesi	Prolog,24	Shulchan Arukh, Orach Chayim 94:1	Birincil metin	Saygıyla gözlemle	https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.94.1	Ziyaret atölyesi kaynağı ve özgün özet
+P04	Kotel ziyaret atölyesi	Prolog,24	Shulchan Arukh, Orach Chayim 113:1	Birincil metin	Saygıyla gözlemle	https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.113.1	Ziyaret atölyesi kaynağı ve özgün özet
+P05	Kotel ziyaret atölyesi	Prolog,24	Catechism of the Catholic Church, 2157	Birincil metin	Saygıyla gözlemle	https://www.vatican.va/content/catechism/en/part_three/section_two/chapter_one/article_2/iii_the_christian_name.html	Ziyaret atölyesi kaynağı ve özgün özet
+P06	Kotel ziyaret atölyesi	Prolog,24	Western Wall: Guidelines for Behavior	Kurumsal veya arkeolojik kayıt	Saygıyla gözlemle	https://thekotel.org/en/visitor_information/guidelines-for-behavior-at-the-western-wall/	Ziyaret atölyesi kaynağı ve özgün özet
+P07	Kotel ziyaret atölyesi	Prolog,24	Western Wall Heritage Foundation: Visitor Service	Kurumsal veya arkeolojik kayıt	Kişisel notlar	https://thekotel.org/en/visitor-service/	Ziyaret atölyesi kaynağı ve özgün özet
+P08	Kotel ziyaret atölyesi	Prolog,24	Deuteronomy 6:4–9	Birincil metin	Şema duası	https://www.sefaria.org/Deuteronomy.6.4-9	Ziyaret atölyesi kaynağı ve özgün özet
+P09	Kotel ziyaret atölyesi	Prolog,24	Numbers 15:37–41	Birincil metin	Şema duası	https://www.sefaria.org/Numbers.15.37-41	Ziyaret atölyesi kaynağı ve özgün özet
+P10	Kotel ziyaret atölyesi	Prolog,24	Mishnah Berakhot 4:3	Birincil metin	Amida duası	https://www.sefaria.org/Mishnah_Berakhot.4.3	Ziyaret atölyesi kaynağı ve özgün özet
+P11	Kotel ziyaret atölyesi	Prolog,24	Shulchan Arukh, Orach Chayim 95:1	Birincil metin	Amida duası	https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.95.1	Ziyaret atölyesi kaynağı ve özgün özet
+P12	Kotel ziyaret atölyesi	Prolog,24	Shulchan Arukh, Orach Chayim 8	Birincil metin	Tallit ve tsitsit	https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.8	Ziyaret atölyesi kaynağı ve özgün özet
+P13	Kotel ziyaret atölyesi	Prolog,24	Shulchan Arukh, Orach Chayim 25:1	Birincil metin	Tefillin	https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.25.1	Ziyaret atölyesi kaynağı ve özgün özet
+P14	Kotel ziyaret atölyesi	Prolog,24	Mishnah Megillah 4:3	Birincil metin	Siddur ve Tora okuması	https://www.sefaria.org/Mishnah_Megillah.4.3	Ziyaret atölyesi kaynağı ve özgün özet
+P15	Kotel ziyaret atölyesi	Prolog,24	Western Wall Heritage Foundation: Procedures	Kurumsal veya arkeolojik kayıt	Topluluklar ve gelenekler	https://thekotel.org/en/visitor_information/prayers-and-ceremonies-at-the-western-wall-plaza-procedures-2/	Ziyaret atölyesi kaynağı ve özgün özet

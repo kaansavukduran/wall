@@ -15,6 +15,7 @@ async function main() {
   const { earlyModernLessons } = await import('../early-modern-lessons.js');
   const { modernLessons } = await import('../modern-lessons.js');
   const { feynmanCases } = await import('../kabbalah-lessons.js');
+  const { kotelScenarios } = await import('../kotel-lessons.js');
   const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
   const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js', 'modern-lessons.js'];
   const browser = await chromium.launch(browserOptions);
@@ -39,6 +40,36 @@ async function main() {
       await page.locator('#catalogue li').first().waitFor();
       await page.keyboard.press('Escape');
       assert.equal(await page.locator('#source').evaluate(el => el === document.activeElement), true);
+      await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+      assert.equal(loadedLessons.has('kotel-lessons.js'), false);
+      const visitRequest = page.waitForResponse(response => response.url().endsWith('/kotel-lessons.js'));
+      if (width === 320) await page.tap('#visit-button');
+      else await page.click('#visit-button');
+      assert.ok((await visitRequest).ok());
+      await page.locator('.visit-object canvas').waitFor();
+      assert.ok(await page.locator('.visit-object canvas').evaluate(canvas => {
+        const {width,height} = canvas.getBoundingClientRect();
+        return Math.abs(width / height - 4/3) < .02;
+      }));
+      const initialObject = await page.locator('.visit-object canvas').evaluate(canvas => canvas.toDataURL());
+      await page.selectOption('#visit-topic', 'kotel-tefillin');
+      assert.notEqual(await page.locator('.visit-object canvas').evaluate(canvas => canvas.toDataURL()), initialObject);
+      await page.click('.visit-sources summary');
+      assert.match(await page.locator('.visit-sources a').first().getAttribute('href'), /Deuteronomy/);
+      await page.click('.visit-exercise summary');
+      for (const sample of kotelScenarios) {
+        await page.selectOption('#visit-scenario', sample.id);
+        const other = (sample.correct + 1) % sample.options.length;
+        await page.click('[data-visit-choice="' + other + '"]');
+        const index = ['tr','en','he','az'].indexOf(locale);
+        assert.equal(await page.locator('.visit-exercise [role="status"]').innerText(), sample.feedback[other][index]);
+        await page.click('[data-visit-choice="' + sample.correct + '"]');
+        assert.equal(await page.locator('.visit-exercise [role="status"]').innerText(), sample.feedback[sample.correct][index]);
+      }
+      await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+      assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
+      await page.keyboard.press('Escape');
+      assert.ok(await page.locator('#visit-button').evaluate(button => button === document.activeElement));
       await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
       const frameBefore = await page.locator('#world').evaluate(el => el.toDataURL());
       await page.keyboard.down('ArrowRight');
