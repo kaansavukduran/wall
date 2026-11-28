@@ -4,12 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#121a22">
 <title>WALL</title>
-<link rel="stylesheet" href="./runtime-0.4.6-ce87960eca53/style.css">
+<link rel="stylesheet" href="./runtime-0.4.7-6c9f92b5baf7/style.css">
 <body>
 <section id="boot" aria-label="Fragaria Interactive">
   <div class="boot-shell">
     <div class="boot-brand">
-      <img src="./runtime-0.4.6-ce87960eca53/assets/fragaria-strawberry.png" alt="" width="116" height="130">
+      <img src="./runtime-0.4.7-6c9f92b5baf7/assets/fragaria-strawberry.png" alt="" width="116" height="130">
       <h1>Fragaria<br>Interactive</h1>
     </div>
     <div class="boot-load">
@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.4.6</small>
+  <small dir="ltr">v0.4.7</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -43,6 +43,27 @@
       <div id="sequence" hidden><p></p><small></small><div></div><ol></ol><output aria-live="polite"></output><button id="sequence-reset" type="button"></button></div>
       <div id="workbench" hidden><p></p><div></div><output aria-live="polite"></output><small></small></div>
       <div id="models" hidden><p></p><div></div><output></output><button id="photo-button" type="button" hidden></button></div>
+      <p id="language-lab-message" role="status" hidden></p>
+      <div id="language-labs" hidden>
+        <details id="aleph-lab" name="hebrew-workbench">
+          <summary id="aleph-summary"></summary>
+          <p id="aleph-instructions"></p>
+          <div id="letter-grid" role="group" aria-labelledby="aleph-summary"></div>
+          <p class="lab-result" role="status" aria-atomic="true"><bdi id="aleph-word" lang="he" dir="rtl"></bdi> <bdi id="aleph-total" dir="ltr"></bdi></p>
+          <div class="lab-actions"><button id="undo-letter" type="button"></button><button id="clear-letters" type="button"></button></div>
+          <p id="aleph-meaning"></p>
+          <p id="aramaic-note"></p>
+          <a id="letter-values" href="https://www.jewishencyclopedia.com/articles/6571-gematria" target="_blank" rel="noopener noreferrer"></a>
+        </details>
+        <details id="sefirot-lab" name="hebrew-workbench">
+          <summary id="sefirot-summary"></summary>
+          <p id="sefirot-intro"></p>
+          <button id="count-daat" type="button"></button>
+          <div id="sefirot-grid" dir="ltr" role="group" aria-labelledby="sefirot-summary"></div>
+          <p class="lab-result" role="status" aria-atomic="true"><bdi id="sefirah-name" lang="he" dir="rtl"></bdi> <span id="sefirah-detail"></span></p>
+          <a id="sefirot-source" href="https://www.chabad.org/kabbalah/article_cdo/aid/380536/jewish/Two-Systems-of-Ten-Sefirot.htm" target="_blank" rel="noopener noreferrer"></a>
+        </details>
+      </div>
     </section>
     <section class="story">
       <div>
@@ -71,7 +92,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.4.6</span></footer>
+  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.4.7</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -79,7 +100,7 @@
   <h2 id="photo-title" tabindex="-1" autofocus></h2>
   <div class="photo-layout">
     <figure>
-      <img loading="lazy" src="./runtime-0.4.6-ce87960eca53/assets/matpc-14762.jpg" width="433" height="640" alt="">
+      <img loading="lazy" src="./runtime-0.4.7-6c9f92b5baf7/assets/matpc-14762.jpg" width="433" height="640" alt="">
       <figcaption></figcaption>
       <a id="photo-source" target="_blank" rel="noopener noreferrer"></a>
     </figure>
@@ -96,6 +117,6 @@
   <form method="dialog"><button></button></form>
 </dialog>
 <dialog id="library" aria-labelledby="library-title"><h2 id="library-title"></h2><div></div><form method="dialog"><button></button></form></dialog>
-<script type="module" src="./runtime-0.4.6-ce87960eca53/start.js"></script>
+<script type="module" src="./runtime-0.4.7-6c9f92b5baf7/start.js"></script>
 </body>
 </html>
