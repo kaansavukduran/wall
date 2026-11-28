@@ -232,6 +232,24 @@ async function main() {
           const before = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
           await page.click('[data-layer="sanctuary"]');
           assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), before);
+          const map = page.locator('#kingdom-map');
+          await map.locator('summary').press('Enter');
+          const north = map.locator('[data-kingdom-city="samaria"]');
+          const south = map.locator('[data-kingdom-city="jerusalem"]');
+          const frame = () => map.locator('canvas').evaluate(canvas=>canvas.toDataURL());
+          const unmarked = await frame();
+          await north.locator('[data-kingdom="judah"]').press('Enter');
+          assert.equal(await frame(),unmarked);
+          assert.ok(await north.locator('a').isHidden());
+          await north.locator('[data-kingdom="israel"]').press('Enter');
+          const matchedNorth = await frame();
+          assert.notEqual(matchedNorth,unmarked);
+          await south.locator('[data-kingdom="judah"]').press('Enter');
+          assert.notEqual(await frame(),matchedNorth);
+          assert.equal(await north.locator('a').getAttribute('href'),'https://www.sefaria.org/I_Kings.16.23-24');
+          assert.equal(await south.locator('a').getAttribute('href'),'https://www.sefaria.org/II_Kings.18.1-2');
+          await map.locator('summary').press('Enter');
+          assert.equal(await map.getAttribute('open'),null);
         }
         if ([1,3,4,7,12,14,16,18,20,21].includes(episode.id)) {
           const model = models.find(entry => entry.id === episode.id);

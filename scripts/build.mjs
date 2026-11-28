@@ -30,7 +30,7 @@ const files = [
   'word-methods.js', 'word-method-lessons.js',
   'ashlag-workbench.js', 'ashlag-lessons.js', 'baku-archive.js', 'baku-lessons.js',
   'transfer.js', 'transfer-early-lessons.js', 'transfer-middle-lessons.js', 'transfer-late-lessons.js',
-  'scenes.js', 'platform-assembly.js', 'catalogue.js', 'sequences.js', 'hebrew-labs.js', 'controller.js', 'tour.js', 'tour-evidence.js', 'tour-followup-lessons.js', 'assets',
+  'scenes.js', 'platform-assembly.js', 'kingdom-map-lessons.js', 'catalogue.js', 'sequences.js', 'hebrew-labs.js', 'controller.js', 'tour.js', 'tour-evidence.js', 'tour-followup-lessons.js', 'assets',
 ];
 const catalogue = 'docs/SOURCES.tsv';
 const contentFiles = files.filter(name => name.endsWith('-lessons.js') || name.startsWith('chapters-'));

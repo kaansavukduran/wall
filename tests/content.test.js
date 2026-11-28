@@ -43,6 +43,7 @@ import { methodCopy, wordMethods } from '../word-method-lessons.js';
 import { tour } from '../tour.js';
 import { tourEvidence } from '../tour-evidence.js';
 import { tourFollowup } from '../tour-followup-lessons.js';
+import { kingdomMap } from '../kingdom-map-lessons.js';
 import { transferLessons as earlyTransfers } from '../transfer-early-lessons.js';
 import { transferLessons as middleTransfers } from '../transfer-middle-lessons.js';
 import { transferLessons as lateTransfers } from '../transfer-late-lessons.js';
@@ -184,7 +185,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 439);
+  assert.equal(entries.length, 442);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -603,6 +604,22 @@ test('the visitor can ask about every exhibition stop and check another chapter 
       assert.match(values[2],/\p{Script=Hebrew}/u);
     }
   }
+});
+
+test('the kingdom map pairs the northern and southern cities with their text sources', () => {
+  assert.deepEqual(kingdomMap.cities.map(({id,kingdom})=>[id,kingdom]),[
+    ['samaria','israel'],['jerusalem','judah'],
+  ]);
+  assert.ok(kingdomMap.cities[0].point[1]<kingdomMap.cities[1].point[1]);
+  for (const city of kingdomMap.cities) {
+    assert.ok(entries.some(entry => entry.url === city.source && belongsTo(entry,2)),city.source);
+    for (const text of [city.name,city.text]) {
+      assert.equal(text.length,languages.length);
+      assert.ok(text.every(value=>value.trim()));
+      assert.match(text[2],/\p{Script=Hebrew}/u);
+    }
+  }
+  assert.ok(entries.some(entry => entry.url === kingdomMap.overview && belongsTo(entry,2)));
 });
 
 test('language workshop indexes original spellings and all four localized explanations', () => {

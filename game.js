@@ -81,6 +81,12 @@ const platformLabels = {
   he:['הרכבת החתך','החלקים נטענים…','טעינת החלקים נכשלה. סגרו ופתחו מחדש.'],
   az:['Memarlıq kəsiyini qur','Hissələr yüklənir…','Hissələr açılmadı. Bağla və yenidən aç.'],
 };
+const kingdomMapLabels = {
+  tr:['İki krallığı haritada bul','Harita açılıyor…','Harita açılamadı. Kapatıp yeniden aç.'],
+  en:['Find the two kingdoms on the map','Opening the map…','The map could not open. Close and reopen it.'],
+  he:['מצאו את שתי הממלכות במפה','המפה נטענת…','המפה לא נפתחה. סגרו אותה ופתחו שוב.'],
+  az:['İki krallığı xəritədə tap','Xəritə açılır…','Xəritə açılmadı. Bağla və yenidən aç.'],
+};
 const talmudLabels = {
   tr:['Talmud sayfasını aç','Sayfa yükleniyor…','Sayfa açılamadı. Kapatıp yeniden aç.'],
   en:['Open a Talmud page','Loading the page…','The page could not open. Close it and reopen it.'],
@@ -206,6 +212,7 @@ export async function start(initialLanguage) {
   const mandate = find('mandate-timeline');
   const press = find('press-timeline');
   const displacement = find('displacement');
+  const kingdomMap = find('kingdom-map');
   const platform = find('platform-assembly');
   const talmud = find('talmud-page');
   const geniza = find('geniza-desk');
@@ -231,6 +238,7 @@ export async function start(initialLanguage) {
   const mandateView = {};
   const pressView = {};
   const displacementView = {};
+  const kingdomAnswers = {};
   const circleView = {};
   const wordMethodView = {};
   const ashlagView = {};
@@ -386,6 +394,9 @@ export async function start(initialLanguage) {
   const refreshPlatform = connectDisclosure('platform-assembly', platformLabels, () =>
     import('./platform-assembly.js').then(({mountPlatformAssembly}) =>
       (panel, current) => mountPlatformAssembly(panel,current,platformView)));
+  const refreshKingdomMap = connectDisclosure('kingdom-map', kingdomMapLabels, () =>
+    import('./kingdom-map-lessons.js').then(({mountKingdomMap}) =>
+      (panel, current, index) => mountKingdomMap(panel,index,kingdomAnswers)));
   const refreshTalmud = connectDisclosure('talmud-page', talmudLabels, () =>
     import('./talmud-page.js').then(({mountTalmudPage}) =>
       (panel, current, index) => mountTalmudPage(panel,current,index,talmudView)));
@@ -538,6 +549,8 @@ export async function start(initialLanguage) {
     if (!press.hidden) refreshPress();
     displacement.hidden = episode.id !== 22;
     if (!displacement.hidden) refreshDisplacement();
+    kingdomMap.hidden = episode.id !== 2;
+    if (!kingdomMap.hidden) refreshKingdomMap();
     platform.hidden = episode.id !== 6;
     if (!platform.hidden) refreshPlatform();
     talmud.hidden = episode.id !== 11;
@@ -583,6 +596,7 @@ export async function start(initialLanguage) {
     mandate.open = false;
     press.open = false;
     displacement.open = false;
+    kingdomMap.open = false;
     talmud.open = false;
     transfer.open = false;
     labState.word.length = 0;
