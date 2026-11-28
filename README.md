@@ -10,7 +10,7 @@ For the static ZIP or a source checkout:
 
 1. Extract the web ZIP, or open this checkout in a terminal.
 2. Run `python3 -m http.server 8000` in the directory containing `index.html`.
-3. Open http://localhost:8000/. Select Türkçe, English, עברית or Azərbaycanca. Use the onscreen arrows or the keyboard. Inspect the scene, open a source and choose an answer to proceed. In the first eight chapters, try a new example after answering. Progress and your explanation drafts are saved in the browser.
+3. Open http://localhost:8000/. Select Türkçe, English, עברית or Azərbaycanca. Use the onscreen arrows or the keyboard. Inspect the scene, open a source and choose an answer to proceed. In the first sixteen chapters, try a new example after answering. Progress and your explanation drafts are saved in the browser.
 
 ## Build and verify
 

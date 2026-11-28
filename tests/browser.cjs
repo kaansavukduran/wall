@@ -18,7 +18,10 @@ async function main() {
   const { feynmanCases } = await import('../kabbalah-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
   const { dailyCases } = await import('../daily-life.js');
-  const { transferLessons } = await import('../transfer-early-lessons.js');
+  const { transferLessons:earlyTransfers } = await import('../transfer-early-lessons.js');
+  const { transferLessons:middleTransfers } = await import('../transfer-middle-lessons.js');
+  const transferLessons = [...earlyTransfers,...middleTransfers];
+  const transferDecks = ['transfer-early-lessons.js','transfer-middle-lessons.js'];
   const { languageLessons } = await import('../language-lessons.js');
   const { archiveCases } = await import('../diaspora-archive.js');
   const { diasporaRecords } = await import('../diaspora-lessons.js');
@@ -348,12 +351,14 @@ async function main() {
         await page.click('[data-choice="' + episode.correct + '"]');
         const transfer = transferLessons.find(item => item.chapter === episode.id);
         if (transfer) {
-          if (episode.id === 1) assert.equal(loadedLessons.has('transfer-early-lessons.js'), false);
+          const filename = transferDecks[Math.floor((episode.id - 1) / 8)];
+          if (episode.id % 8 === 1) assert.equal(loadedLessons.has(filename), false);
           const summary = page.locator('#transfer summary');
           if (width === 320) await summary.tap();
           else await summary.press('Enter');
           const correct = page.locator('[data-transfer-choice="' + transfer.correct + '"]');
           await correct.waitFor();
+          assert.ok(loadedLessons.has(filename));
           assert.equal(await page.locator('#transfer-scenario').textContent(), transfer.scenario[locale]);
           assert.deepEqual(await page.locator('#transfer-sources a').evaluateAll(links =>
             links.map(link => link.href)), transfer.sources.map(source => source.url));

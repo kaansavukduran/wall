@@ -27,7 +27,8 @@ import { models, photo } from '../scenes.js';
 import { secondTempleLessons } from '../second-temple-lessons.js';
 import { tour } from '../tour.js';
 import { tourEvidence } from '../tour-evidence.js';
-import { transferLessons } from '../transfer-early-lessons.js';
+import { transferLessons as earlyTransfers } from '../transfer-early-lessons.js';
+import { transferLessons as middleTransfers } from '../transfer-middle-lessons.js';
 
 test('every checkpoint has four equivalent locales and a valid source', () => {
   let previousId = 0;
@@ -93,7 +94,8 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
 });
 
 test('chapter transfer examples have distinct localized choices and exact catalogue links', () => {
-  assert.deepEqual(transferLessons.map(item => item.chapter), chapters.slice(0,8).map(episode => episode.id));
+  const transferLessons = [...earlyTransfers,...middleTransfers];
+  assert.deepEqual(transferLessons.map(item => item.chapter), chapters.slice(0,16).map(episode => episode.id));
   const urls = new Set(entries.map(entry => entry.url));
   for (const lesson of transferLessons) {
     assert.equal(lesson.choices.length, 3);
