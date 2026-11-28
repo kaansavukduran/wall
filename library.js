@@ -92,3 +92,10 @@ export const languageStudyLabels = {
   he: ['קריאה בעברית ובארמית', 'סדנת השפה נטענת…', 'הסדנה לא נפתחה. רעננו את הדף ונסו שוב.'],
   az: ['İvrit və arami dilində oxu', 'Dil emalatxanası yüklənir…', 'Emalatxana açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
+
+export const diasporaLabels = {
+  tr: ['Sürgün ve göç belgeleri', 'Belgeler yükleniyor…', 'Arşiv açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en: ['Expulsion and migration records', 'Loading the records…', 'The archive could not open. Reload the page and try again.'],
+  he: ['מסמכי גירוש והגירה', 'המסמכים נטענים…', 'הארכיון לא נפתח. רעננו את הדף ונסו שוב.'],
+  az: ['Sürgün və köç sənədləri', 'Sənədlər yüklənir…', 'Arxiv açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
+};

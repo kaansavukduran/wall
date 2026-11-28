@@ -1,6 +1,6 @@
 import { controllerHelp, mountController } from './controller.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { atlasLabels, calendarLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
+import { atlasLabels, calendarLabels, diasporaLabels, kabbalahLabels, languageStudyLabels, library, libraryLabels, visitLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -134,6 +134,7 @@ export async function start(initialLanguage) {
       (panel, current, index) => mountKabbalah(panel, current, index, {read,store}))],
     ['visit', visitLabels, () => import('./kotel.js').then(module => module.mountKotel)],
     ['language-study', languageStudyLabels, () => import('./language-study.js').then(module => module.mountLanguageStudy)],
+    ['diaspora-archive', diasporaLabels, () => import('./diaspora-archive.js').then(module => module.mountDiasporaArchive)],
   ].map(([id, labels, load]) => connectDisclosure(id, labels, load));
   const refreshTimeline = connectDisclosure('messianic-timeline', timelineLabels, () =>
     import('./messianic-timeline.js').then(module => module.mountMessianicTimeline));
@@ -173,6 +174,9 @@ export async function start(initialLanguage) {
     const visit = find('visit-button');
     visit.textContent = visitLabels[language][0];
     visit.hidden = active !== 0 && active !== episodes.length - 1;
+    const diaspora = find('diaspora-button');
+    diaspora.textContent = diasporaLabels[language][0];
+    diaspora.hidden = ![17,20,22,24].includes(episode.id);
     renderTour();
     find('inspect').textContent = labels[1];
     controls.querySelector('[data-move="-1"]').setAttribute('aria-label', labels[6]);
@@ -725,12 +729,14 @@ export async function start(initialLanguage) {
   find('inspect').addEventListener('click', inspect);
   find('episodes-button').addEventListener('click', openChapters);
   find('library-button').addEventListener('click', openLibrary);
-  find('visit-button').addEventListener('click', () => {
+  function openWorkshop(id) {
     openLibrary();
-    const visit = find('visit');
-    visit.open = true;
-    visit.querySelector('summary').focus();
-  });
+    const workshop = find(id);
+    workshop.open = true;
+    workshop.querySelector('summary').focus();
+  }
+  find('visit-button').addEventListener('click', () => openWorkshop('visit'));
+  find('diaspora-button').addEventListener('click', () => openWorkshop('diaspora-archive'));
   next.addEventListener('click', () => {
     const upcoming = firstIncomplete();
     go(upcoming < 0 ? 0 : upcoming);

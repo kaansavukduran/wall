@@ -18,6 +18,8 @@ async function main() {
   const { feynmanCases } = await import('../kabbalah-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
   const { languageLessons } = await import('../language-lessons.js');
+  const { archiveCases } = await import('../diaspora-archive.js');
+  const { diasporaRecords } = await import('../diaspora-lessons.js');
   const { models } = await import('../scenes.js');
   const { messianicLessons } = await import('../messianic-lessons.js');
   const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
@@ -274,6 +276,32 @@ async function main() {
           assert.match(await page.locator('#compare-history').textContent(), /1967/);
           assert.equal(await page.locator('#compare-history-source').getAttribute('href'), 'https://whc.unesco.org/document/8721');
           await page.locator('#photo form button').click();
+        }
+        if (episode.id === 17) {
+          assert.equal(loadedLessons.has('diaspora-lessons.js'),false);
+          const archiveRequest = page.waitForResponse(response => response.url().endsWith('/diaspora-lessons.js'));
+          await page.click('#diaspora-button');
+          assert.ok((await archiveRequest).ok());
+          await page.selectOption('#diaspora-record','alice-kindertransport-1939');
+          assert.match(await page.locator('.diaspora-reading a').getAttribute('href'), /oral-history/);
+          await page.click('.diaspora-exercise summary');
+          for (const sample of archiveCases) {
+            await page.selectOption('#diaspora-example',sample.id);
+            await page.click('[data-archive-answer="' + sample.others[0] + '"]');
+            const answer = diasporaRecords.find(record => record.id === sample.answer);
+            const feedback = page.locator('.diaspora-exercise [role="status"]');
+            assert.notEqual(await feedback.innerText(), answer.evidence[locale]);
+            await page.click('[data-archive-answer="' + sample.answer + '"]');
+            assert.equal(await feedback.innerText(), answer.evidence[locale]);
+            await page.click('.diaspora-review');
+            assert.equal(await page.locator('#diaspora-record').inputValue(), sample.answer);
+            assert.equal(await page.locator('.diaspora-date bdi').innerText(), answer.date[locale]);
+          }
+          await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+          assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
+          await page.keyboard.press('Escape');
+          assert.ok(await page.locator('#diaspora-button').evaluate(button => button === document.activeElement));
+          await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
         }
         if (episode.id === 20) {
           assert.equal(loadedLessons.has('messianic-lessons.js'), false);

@@ -53,7 +53,7 @@ h1,h2{line-height:1.2;text-wrap:balance;margin:.25em 0}
 #choices{display:flex;flex-wrap:wrap;gap:.5rem}
 #choices button{flex:1 1 100%;text-align:start}
 #result{margin:.65rem 0;color:#ffe1a0}
-#source,#next,#visit-button{margin-block-start:.3rem;margin-inline-end:.3rem}
+#source,#next,#visit-button,#diaspora-button{margin-block-start:.3rem;margin-inline-end:.3rem}
 footer{justify-content:space-between}
 dialog{inline-size:min(37rem,100% - 2rem);max-block-size:calc(100% - 2rem);overflow:auto;background:var(--paper);color:var(--ink);border:1px solid var(--edge);border-radius:.5rem;padding:1rem}
 dialog::backdrop{background:#090e14bb}
@@ -112,6 +112,13 @@ dialog a{overflow-wrap:anywhere}
 .language-choices button{text-align:start;overflow-wrap:anywhere}
 .language-choices button[aria-pressed=true]{background:#47351e;border-color:var(--accent)}
 .language-exercise [role=status]{color:var(--accent)}
+.diaspora-reading{padding:.65rem;background:#1b242c}
+.diaspora-reading :is(h3,p){margin-block:0 .5rem}
+.diaspora-date,.diaspora-source-type{color:var(--muted)}
+.diaspora-choices{display:grid;gap:.35rem}
+.diaspora-choices button{text-align:start;overflow-wrap:anywhere}
+.diaspora-choices button[aria-pressed=true]{background:#47351e;border-color:var(--accent)}
+.diaspora-exercise [role=status]{color:var(--accent)}
 #journal textarea,.kabbalah-transfer textarea{display:block;font:inherit;color:inherit;background:#171d24;border:1px solid var(--edge);border-radius:.35rem;padding:.55rem;inline-size:100%;resize:vertical}
 .kabbalah-reading{padding:.65rem;background:#1b242c}
 .kabbalah-reading :is(h3,p){margin-block:0 .5rem}
