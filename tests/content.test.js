@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { chapters, languages, plaza, ui } from '../content.js';
 import { library, libraryLabels } from '../library.js';
-import { models } from '../scenes.js';
+import { models, photo } from '../scenes.js';
 
 test('every checkpoint has four equivalent locales and a valid source', () => {
   let previousId = 0;
@@ -58,8 +58,10 @@ test('rendered version follows VERSION and scene options localize', () => {
 test('catalogue maps ranges and the prologue without conflating them', async () => {
   const { parseCatalogue, belongsTo } = await import('../catalogue.js');
   const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
-  assert.equal(entries.length, 88);
+  assert.equal(entries.length, 89);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
+  assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
+  assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => belongsTo(entry, 0)));
   assert.ok(Array.from({length:24}, (_, index) => index + 1).every(id => entries.some(entry => belongsTo(entry, id))));
   assert.ok(belongsTo({chapters:'1–4,6'}, 3));

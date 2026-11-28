@@ -5,12 +5,15 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  pages: read
 concurrency:
   group: wall-pages
   cancel-in-progress: false
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      build-type: ${{ steps.pages.outputs.build-type }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -18,11 +21,25 @@ jobs:
           node-version: '22'
       - run: node --test tests/content.test.js
       - run: node scripts/build.mjs
+      - name: Check the Pages publishing source
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          has_pages="$(gh api "repos/$GITHUB_REPOSITORY" --jq .has_pages)"
+          if [[ "$has_pages" == true ]]; then
+            build_type="$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type)"
+          else
+            build_type=disabled
+          fi
+          echo "build-type=$build_type" >> "$GITHUB_OUTPUT"
       - uses: actions/upload-pages-artifact@v3
+        if: steps.pages.outputs.build-type == 'workflow'
         with:
           path: site
   deploy:
     needs: build
+    if: needs.build.outputs.build-type == 'workflow'
     runs-on: ubuntu-latest
     permissions:
       pages: write

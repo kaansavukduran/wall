@@ -7,6 +7,7 @@ export async function makeWorld(canvas, reducedMotion) {
   scenery.width = canvas.width;
   scenery.height = canvas.height;
   const background = scenery.getContext('2d', { alpha: false });
+  let plazaViews;
   const palettes = [
     ['#809b9d','#adb2a4','#b3a37a','#735e4b','#ccb589','#665544'],
     ['#a6a991','#d6bc8a','#a9916d','#6a5548','#e8c89a','#755646'],
@@ -24,6 +25,12 @@ export async function makeWorld(canvas, reducedMotion) {
   }
   function scene(index, layer = '') {
     inspecting = false;
+    drawScenery(background, index, layer);
+    lastDraw = '';
+    draw(0);
+  }
+
+  function drawScenery(background, index, layer) {
     const variant = index === 0 ? 0 : Math.floor(index / 4) % palettes.length;
     const [sky, clouds, hills, mortar, stone, ground] = palettes[variant];
     rect(background, sky, 0, 0, 480, 240);
@@ -68,7 +75,7 @@ export async function makeWorld(canvas, reducedMotion) {
       for (let i = 0; i < 8; i++) rect(background, i % 2 ? mortar : stone, 300 + i * 17, 69 + i % 3 * 5, 16, 15);
     }
     if (layer === 'quarter' || (index === 23 && layer !== 'plaza')) {
-      for (let x = 224; x < 430; x += 57) {
+      for (let x = 197; x < 430; x += 57) {
         rect(background, '#70594d', x, 143, 41, 58);
         rect(background, '#e2bb89', x + 2, 146, 37, 53);
         rect(background, '#594e4b', x + 13, 171, 13, 28);
@@ -88,8 +95,28 @@ export async function makeWorld(canvas, reducedMotion) {
         rect(background, '#596747', x + 5, 185, 7, 7);
       }
     }
-    lastDraw = '';
-    draw(0);
+  }
+
+  function comparePlaza(canvas, view, rtl) {
+    if (!plazaViews) {
+      plazaViews = ['quarter', 'plaza'].map(layer => {
+        const image = document.createElement('canvas');
+        image.width = canvas.width;
+        image.height = canvas.height;
+        drawScenery(image.getContext('2d', { alpha:false }), 0, layer);
+        return image;
+      });
+    }
+    const context = canvas.getContext('2d', { alpha:false });
+    const {width, height} = canvas;
+    const [quarter, plaza] = plazaViews;
+    context.drawImage(view === 2 ? plaza : quarter, 0, 0);
+    if (view === 1) {
+      const half = width / 2;
+      const start = rtl ? 0 : half;
+      context.drawImage(plaza, start, 0, half, height, start, 0, half, height);
+      rect(context, '#201b18', half - 1, 0, 2, height);
+    }
   }
   function drawSetting(index, stone, mortar) {
     if (index === 12) {
@@ -145,6 +172,7 @@ export async function makeWorld(canvas, reducedMotion) {
   }
   return {
     scene,
+    comparePlaza,
     move(direction, distance) {
       facing = direction;
       const next = Math.max(16, Math.min(464, position + direction * distance));

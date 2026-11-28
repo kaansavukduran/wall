@@ -11,7 +11,7 @@ async function main() {
   const browser = await chromium.launch(browserOptions);
   try {
     for (const [locale, width] of [['tr',1100],['en',320],['he',320],['az',740]]) {
-      const page = await browser.newPage({ viewport:{ width, height:750 },locale });
+      const page = await browser.newPage({ viewport:{ width, height:750 },locale,hasTouch:width === 320 });
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
       await page.goto(target);
@@ -27,15 +27,39 @@ async function main() {
       await page.keyboard.press('Escape');
       assert.equal(await page.locator('#source').evaluate(el => el === document.activeElement), true);
       await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
-      const frameBefore = await page.locator('canvas').evaluate(el => el.toDataURL());
+      const frameBefore = await page.locator('#world').evaluate(el => el.toDataURL());
       await page.keyboard.down('ArrowRight');
       await page.waitForTimeout(180);
       await page.keyboard.up('ArrowRight');
-      assert.notEqual(await page.locator('canvas').evaluate(el => el.toDataURL()), frameBefore);
+      const walkedFrame = await page.locator('#world').evaluate(el => el.toDataURL());
+      assert.notEqual(walkedFrame, frameBefore);
       await page.click('#photo-button');
       await page.locator('#photo[open]').waitFor();
       await page.waitForFunction(() => document.querySelector('#photo img').naturalWidth > 0);
+      const comparison = page.locator('#compare-view');
+      const picture = page.locator('#compare-canvas');
+      assert.equal(await comparison.inputValue(), '1');
+      const paired = await picture.evaluate(canvas => canvas.toDataURL());
+      if (width === 320) {
+        assert.ok(await comparison.evaluate(input => input.getBoundingClientRect().bottom <= window.innerHeight));
+        await comparison.tap({position:{x:7,y:20}});
+        assert.notEqual(await comparison.inputValue(), '1');
+      }
+      await comparison.press('Home');
+      const old = await picture.evaluate(canvas => canvas.toDataURL());
+      const oldLabel = await comparison.getAttribute('aria-valuetext');
+      assert.notEqual(old, paired);
+      assert.ok(oldLabel);
+      await comparison.press('End');
+      assert.equal(await comparison.inputValue(), '2');
+      assert.notEqual(await picture.evaluate(canvas => canvas.toDataURL()), old);
+      assert.notEqual(await comparison.getAttribute('aria-valuetext'), oldLabel);
+      await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+      assert.equal(await page.locator('#photo').evaluate(panel => panel.scrollWidth > panel.clientWidth), false);
+      await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
       await page.keyboard.press('Escape');
+      assert.equal(await page.locator('#photo-button').evaluate(button => button === document.activeElement), true);
+      assert.equal(await page.locator('#world').evaluate(el => el.toDataURL()), walkedFrame);
       await page.click('[data-layer="quarter"]');
       assert.notEqual(await page.locator('#models output').textContent(), '');
       await page.click('[data-choice="0"]');
@@ -80,6 +104,13 @@ async function main() {
           await page.click('[data-study="3"]');
           assert.equal(await page.locator('#workbench output bdi').textContent(), 'עשייה');
         }
+        if (episode.id === 23) {
+          await page.click('#photo-button');
+          await page.locator('#compare-history').waitFor();
+          assert.match(await page.locator('#compare-history').textContent(), /1967/);
+          assert.equal(await page.locator('#compare-history-source').getAttribute('href'), 'https://whc.unesco.org/document/8721');
+          await page.locator('#photo form button').click();
+        }
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
         await page.click('[data-choice="' + episode.correct + '"]');
         if (episode.id !== 24) await page.click('#next');
@@ -120,6 +151,12 @@ async function main() {
     await press(13, () => document.activeElement.dataset.choice === '1');
     assert.equal(await padPage.evaluate(() => getComputedStyle(document.activeElement).outlineWidth), '3px');
     await press(0, () => !document.getElementById('next').hidden);
+    await padPage.click('#photo-button');
+    await press(13, () => document.activeElement.id === 'photo-source');
+    await press(13, () => document.activeElement.id === 'compare-view');
+    await press(14, () => document.getElementById('compare-view').value === '2');
+    await press(0, () => document.getElementById('compare-view').value === '0');
+    await press(1, () => !document.getElementById('photo').open);
     const oldFrame = await padPage.locator('#world').evaluate(canvas => canvas.toDataURL());
     await padPage.evaluate(() => { window.fixtureController.axes[0] = 1; });
     await padPage.waitForFunction(before => document.querySelector('#world').toDataURL() !== before, oldFrame);

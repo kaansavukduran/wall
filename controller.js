@@ -3,7 +3,8 @@ const buttons = [
   [9, 'library'], [12, 'previous'], [13, 'next'], [14, 'left'], [15, 'right'],
 ];
 const actions = new Set([...buttons.map(([, action]) => action), 'move-left', 'move-right']);
-const controls = 'button:enabled, select:enabled, summary, a[href]';
+const range = 'input[type="range"]:enabled';
+const controls = `button:enabled, select:enabled, ${range}, summary, a[href]`;
 
 function available(root) {
   return [...root.querySelectorAll(controls)].filter(element =>
@@ -43,13 +44,21 @@ export function mountController(game) {
 
   function run(action) {
     const dialog = document.querySelector('dialog[open]');
-    if (['previous','next','left','right'].includes(action)) {
+    const active = document.activeElement;
+    if ((action === 'left' || action === 'right') && active.matches(range)) {
+      const rtl = getComputedStyle(active).direction === 'rtl';
+      active.stepUp((action === 'right') !== rtl ? 1 : -1);
+      active.dispatchEvent(new Event('input', {bubbles:true}));
+    } else if (['previous','next','left','right'].includes(action)) {
       focus(action);
     } else if (action === 'activate') {
-      const active = document.activeElement;
       if (active.matches('select:enabled')) {
         active.selectedIndex = (active.selectedIndex + 1) % active.options.length;
         active.dispatchEvent(new Event('change', {bubbles:true}));
+      } else if (active.matches(range)) {
+        if (active.value === active.max) active.value = active.min;
+        else active.stepUp();
+        active.dispatchEvent(new Event('input', {bubbles:true}));
       } else if (active.matches(controls) && (!dialog || dialog.contains(active))) {
         active.click();
       } else {

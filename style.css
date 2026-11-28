@@ -70,9 +70,19 @@ dialog a{overflow-wrap:anywhere}
 #workbench small{color:var(--muted)}
 
 #photo-button{justify-self:start}
-#photo figure{margin:1rem 0}
-#photo img{display:block;max-inline-size:100%;block-size:auto;max-block-size:55vh;object-fit:contain;margin-inline:auto}
-#photo figcaption{margin-block-start:.6rem}
+#photo{inline-size:min(58rem,100% - 2rem)}
+.photo-layout{display:grid;gap:1rem;margin-block-start:.75rem}
+.photo-layout>*{min-inline-size:0}
+#photo figure{margin:0;display:grid;gap:.6rem;justify-items:start}
+#photo img{display:block;max-inline-size:100%;block-size:auto;max-block-size:28vh;object-fit:contain}
+.photo-comparison{display:grid;gap:.45rem;align-content:start}
+.photo-comparison label{font-weight:650}
+#compare-view{accent-color:var(--accent);inline-size:100%;min-block-size:var(--hit);margin:0;cursor:pointer}
+#compare-view:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.compare-endpoints{display:flex;justify-content:space-between;gap:.5rem;color:var(--muted);font-size:.86rem}
+.photo-comparison p{margin:0}
+#compare-history{border-block-start:1px solid var(--edge);padding-block-start:.6rem;margin-block-start:.3rem}
+@media(min-width:45rem){.photo-layout{grid-template-columns:minmax(0,2fr) minmax(0,3fr)}#photo img{max-block-size:45vh}}
 
 #sequence{display:grid;gap:.45rem;padding:.65rem;background:#1b242c}
 #sequence p,#sequence ol{margin:0}
@@ -91,4 +101,4 @@ dialog a{overflow-wrap:anywhere}
 .lamps{display:inline-flex;gap:.35rem;max-inline-size:100%;flex-wrap:wrap;vertical-align:middle}
 .lamps i{inline-size:.35rem;block-size:.7rem;background:#d6b98e;box-shadow:0 -.25rem #ef9a4a}
 
-html[data-controller-input] :is(button,select,summary,a):focus{outline:3px solid var(--accent);outline-offset:3px}
+html[data-controller-input] :is(button,select,summary,a,input[type="range"]):focus{outline:3px solid var(--accent);outline-offset:3px}

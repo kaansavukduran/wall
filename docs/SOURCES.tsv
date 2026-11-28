@@ -36,6 +36,7 @@ H06	1930	21	Duvar Komisyonu raporu	Birincil belge	Mülkiyet, erişim ve ibadet k
 H07	1933–1945	22	USHMM Holokost Ansiklopedisi	Kurumsal tarih	Holokost tarih çerçevesi	https://encyclopedia.ushmm.org/content/en/article/introduction-to-the-holocaust	Kaynak eşleşti
 H08	Orta Çağ–1967	14,19,23	Open Jerusalem Mağribi Mahallesi	Arşiv	Mahalle planı ve fotoğraf adayları	https://archives.openjerusalem.org/index.php/mughrabi-quarter	Arşiv eşleşti; eser hakları bekliyor
 H09	20. yüzyıl	21–24	BM Filistin meselesi tarihi	Kurumsal tarih	Manda, 1948, 1967	https://www.un.org/unispal/history/	Önceki tarama; bölüm pasajı seçilecek
+H10	1967 ve 2007	23	UNESCO Kudüs Eski Şehir teknik heyet raporu	Kurumsal rapor	Mağribi Mahallesi’nin yıkımı ve duvar meydanı	https://whc.unesco.org/document/8721	Raporun tarihsel arka plan bölümü eşleşti
 T01	Güncel	Arşiv	Sefaria Versions API	Teknik belge	Edisyon, çeviri, kaynak ve lisans alanları	https://developers.sefaria.org/reference/get-versions	Belge eşleşti
 T02	Güncel	Arşiv	Sefaria telif ve veri kullanımı	Teknik belge	Yeniden kullanım koşulları	https://developers.sefaria.org/docs/usage-of-our-name-and-logo	Belge eşleşti
 C01	İkinci Tapınak	5–10	Posen Library – Jewish Identity and Sectarianism	Araştırma rehberi	Antik gruplar ve kaynak karşılaştırması	https://www.posenlibrary.com/guide/jewish-identity-and-sectarianism	Başlık eşleşti; pasajlar seçilecek
@@ -86,4 +87,4 @@ D12	MS 1. yüzyıl	8	Josephus – Yahudi Savaşı 6.4–5	Birincil metin	Roma y�
 D13	Safed ve sonraki aktarım	18	Sefer Ets Hayim 1:1	Mistik metin	Luria/Vital, başlangıç pasajı	https://www.sefaria.org/Sefer_Etz_Chaim.1.1	Pasaj bağlantısı eşleşti; metin sürümü ve öğretim alıntısı seçilecek
 D14	16. yüzyıl	18	Şulhan Aruh, Orah Hayim 472	Hukuk metni	Pesah gecesi düzeni	https://www.sefaria.org/Shulchan_Arukh%2C_Orach_Chayim.472	Bölüm eşleşti; pasaj ve edisyon seçilecek
 D15	Antik metin ve sonraki alımlama	16	Hezekiel 1	Tanah metni	Vizyon ve Merkava alımlamasını ayırma	https://www.sefaria.org/Ezekiel.1	Referans; Heikhalot ve sonraki yorum eşleştirmesi açık
-D16	Negatif yaklaşık 1900–1920	Prolog,19	LOC – LC-DIG-matpc-14762	Arşiv fotoğrafı	Kotel önündeki dar alan ve kişiler	https://www.loc.gov/pictures/item/2019704965/	Katalog ve orta boy görsel eşleşti; yayın için bilinen kısıtlama yok
+D16	Negatif yaklaşık 1900–1920	Prolog,19,23	LOC – LC-DIG-matpc-14762	Arşiv fotoğrafı	Kotel önündeki dar alan ve kişiler	https://www.loc.gov/pictures/item/2019704965/	Katalog ve orta boy görsel eşleşti; yayın için bilinen kısıtlama yok

@@ -4,7 +4,7 @@ A four-language 2D pixel-art learning game about the Western Wall, Jewish histor
 
 ## Play locally
 
-Open `WALL-v0.4.1-Offline.html` from [the release](https://github.com/kaansavukduran/wall/releases/tag/v0.4.1) directly in a browser that permits downloaded HTML files. The game and its catalogue are bundled; following external source links still requires an internet connection.
+Open the standalone HTML file from [GitHub Releases](https://github.com/kaansavukduran/wall/releases) directly in a browser that permits downloaded HTML files. The game and its catalogue are bundled; following external source links still requires an internet connection.
 
 For the static ZIP or a source checkout:
 
@@ -25,4 +25,4 @@ A standard controller uses the left stick to walk, the D-pad to navigate, A to s
 
 See [GitHub Releases](https://github.com/kaansavukduran/wall/releases) for the web ZIP, Windows x64 setup and portable executables, Linux x64 AppImage, and Android preview APK. Windows previews are unsigned. Android preview certificates can differ between versions, which prevents in-place updates between those APKs. Removing an installed version can erase its local progress. Native source and packaging are under `desktop/` and `android/`.
 
-Pages target: https://kaansavukduran.github.io/wall/
+[Play WALL on GitHub Pages](https://kaansavukduran.github.io/wall/). This repository publishes from `gh-pages`. To publish a tested release, push it to `main` and run `bash scripts/publish-pages.sh` from that clean checkout. Verify the live version in `build.json` and play the changed scene from the published site.
