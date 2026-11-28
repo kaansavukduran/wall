@@ -16,7 +16,7 @@ const files = [
   'chapters-early.js', 'chapters-modern.js', 'ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js',
   'early-modern-lessons.js', 'modern-lessons.js', 'messianic-timeline.js', 'messianic-lessons.js',
   'library.js', 'calendar.js', 'calendar-lessons.js', 'atlas.js', 'atlas-lessons.js',
-  'kabbalah.js', 'kabbalah-lessons.js', 'kotel.js', 'kotel-lessons.js',
+  'kabbalah.js', 'kabbalah-lessons.js', 'kabbalah-advanced-lessons.js', 'kotel.js', 'kotel-lessons.js',
   'language-study.js', 'language-lessons.js', 'diaspora-archive.js', 'diaspora-lessons.js',
   'daily-life.js', 'daily-lessons.js', 'object-sprite.js',
   'transfer.js', 'transfer-early-lessons.js', 'transfer-middle-lessons.js', 'transfer-late-lessons.js',

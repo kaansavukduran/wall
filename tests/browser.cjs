@@ -16,6 +16,7 @@ async function main() {
   const { earlyModernLessons } = await import('../early-modern-lessons.js');
   const { modernLessons } = await import('../modern-lessons.js');
   const { feynmanCases } = await import('../kabbalah-lessons.js');
+  const { comparisonCases } = await import('../kabbalah-advanced-lessons.js');
   const { kotelScenarios } = await import('../kotel-lessons.js');
   const { dailyCases } = await import('../daily-life.js');
   const { transferLessons:earlyTransfers } = await import('../transfer-early-lessons.js');
@@ -467,13 +468,16 @@ async function main() {
       await page.selectOption('#atlas-entry', 'mizrahim');
       assert.equal(await page.locator('.atlas-figure').isVisible(), false);
       assert.equal(loadedLessons.has('kabbalah-lessons.js'), false);
+      assert.equal(loadedLessons.has('kabbalah-advanced-lessons.js'), false);
       const workshopRequest = page.waitForResponse(response => response.url().endsWith('/kabbalah-lessons.js'));
       await page.click('#kabbalah summary');
       assert.ok((await workshopRequest).ok());
       await page.locator('#kabbalah-lesson').waitFor();
-      assert.equal(await page.locator('#kabbalah-lesson option').count(), 9);
+      assert.equal(await page.locator('#kabbalah-lesson option').count(), 15);
+      assert.equal(await page.locator('#kabbalah-lesson optgroup').count(), 2);
+      assert.ok(loadedLessons.has('kabbalah-advanced-lessons.js'));
       await page.click('.kabbalah-exercise summary');
-      for (const sample of feynmanCases) {
+      for (const sample of [...feynmanCases,...comparisonCases]) {
         await page.selectOption('#kabbalah-lesson', sample.lessonId);
         await page.click('[data-case-choice="' + (sample.correct + 1) % sample.choices.length + '"]');
         assert.equal(await page.locator('#kabbalah-draft').isVisible(), false);
@@ -488,6 +492,16 @@ async function main() {
       assert.match(await page.locator('.kabbalah-sources a').last().getAttribute('href'), /cris.bgu.ac.il/);
       await page.selectOption('#kabbalah-lesson', 'rabash-purpose-of-society');
       assert.equal(await page.locator('#kabbalah-draft').inputValue(), 'WALL rabash-group-application');
+      await page.selectOption('#kabbalah-lesson', 'nefesh-hachaim-gate3');
+      await page.keyboard.press('Escape');
+      await page.selectOption('#lang', locale === 'he' ? 'tr' : 'he');
+      await page.click('#library-button');
+      await page.locator('.kabbalah-reading h3').waitFor();
+      assert.equal(await page.locator('#kabbalah-lesson').inputValue(), 'nefesh-hachaim-gate3');
+      assert.equal(await page.locator('#kabbalah-draft').inputValue(), 'WALL tzimtzum-tanya-nefesh');
+      await page.keyboard.press('Escape');
+      await page.selectOption('#lang', locale);
+      await page.click('#library-button');
       assert.equal(loadedLessons.has('language-lessons.js'), false);
       const languageRequest = page.waitForResponse(response => response.url().endsWith('/language-lessons.js'));
       await page.click('#language-study summary');

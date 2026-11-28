@@ -53,7 +53,7 @@ try {
     await evaluate("document.querySelector('#library-button').click(); document.querySelector('#kabbalah summary').click()");
     let loaded = false;
     while (!loaded && Date.now() < deadline) {
-      loaded = await evaluate("document.querySelector('#kabbalah-lesson')?.options.length === 9");
+      loaded = await evaluate("Boolean(document.querySelector('#kabbalah-lesson option[value=rabash-purpose-of-society]'))");
       if (!loaded) await wait(250);
     }
     assert.ok(loaded, 'The packaged Kabbalah workshop did not load');

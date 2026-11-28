@@ -16,6 +16,7 @@ import { diasporaRecords } from '../diaspora-lessons.js';
 import { earlyModernLessons } from '../early-modern-lessons.js';
 import { gematriaValues, sefirot } from '../hebrew-labs.js';
 import { feynmanCases, kabbalahLessons } from '../kabbalah-lessons.js';
+import { advancedReadings, comparisonCases } from '../kabbalah-advanced-lessons.js';
 import { kotelLessons, kotelScenarios } from '../kotel-lessons.js';
 import { languageLessons } from '../language-lessons.js';
 import { library, libraryLabels } from '../library.js';
@@ -84,7 +85,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 267);
+  assert.equal(entries.length, 276);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -151,17 +152,24 @@ test('Kabbalah source stops and explanation cases have matched references and fo
   const urls = new Set(parseCatalogue(readFileSync('docs/SOURCES.tsv', 'utf8')).map(item => item.url));
   assert.equal(kabbalahLessons.length, 9);
   assert.equal(feynmanCases.length, 5);
-  const ids = new Set(kabbalahLessons.map(lesson => lesson.id));
-  assert.equal(ids.size, kabbalahLessons.length);
-  for (const lesson of kabbalahLessons) {
+  assert.equal(advancedReadings.length, 6);
+  assert.equal(comparisonCases.length, 3);
+  const readings = [...kabbalahLessons,...advancedReadings];
+  const cases = [...feynmanCases,...comparisonCases];
+  const ids = new Set(readings.map(lesson => lesson.id));
+  assert.equal(ids.size, readings.length);
+  assert.equal(new Set(cases.map(sample => sample.lessonId)).size, cases.length);
+  for (const lesson of readings) {
     for (const field of ['title','period','genre','study','limit']) {
       assert.equal(lesson[field].length, languages.length);
       assert.ok(lesson[field].every(value => value.trim()));
+      assert.match(lesson[field][2], /\p{Script=Hebrew}/u);
+      assert.doesNotMatch(lesson[field][0], /\p{Script=Hebrew}/u);
     }
     assert.ok(lesson.sources.length >= 2);
     for (const source of lesson.sources) assert.ok(urls.has(source.url), source.url);
   }
-  for (const sample of feynmanCases) {
+  for (const sample of cases) {
     assert.ok(ids.has(sample.lessonId));
     assert.ok(sample.choices[sample.correct]);
     for (const values of [sample.question, sample.feedback, sample.transfer, ...sample.choices]) {

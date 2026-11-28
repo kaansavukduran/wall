@@ -89,6 +89,7 @@ export async function start(initialLanguage) {
   const labRoot = find('language-labs');
   const labs = labRoot.querySelectorAll('details');
   const labState = {word:[], sefirah:0, daat:false};
+  const kabbalahView = {lesson:null,sourcesOpen:false,exerciseOpen:false,solved:new Set()};
   const progress = readProgress();
   let language = initialLanguage;
   let active = 0;
@@ -149,7 +150,7 @@ export async function start(initialLanguage) {
     ['calendar', calendarLabels, () => import('./calendar.js').then(module => module.mountCalendar)],
     ['atlas', atlasLabels, () => import('./atlas.js').then(module => module.mountAtlas)],
     ['kabbalah', kabbalahLabels, () => import('./kabbalah.js').then(({mountKabbalah}) =>
-      (panel, current, index) => mountKabbalah(panel, current, index, {read,store}))],
+      (panel, current, index) => mountKabbalah(panel, current, index, {read,store}, kabbalahView))],
     ['visit', visitLabels, () => import('./kotel.js').then(module => module.mountKotel)],
     ['language-study', languageStudyLabels, () => import('./language-study.js').then(module => module.mountLanguageStudy)],
     ['diaspora-archive', diasporaLabels, () => import('./diaspora-archive.js').then(module => module.mountDiasporaArchive)],
