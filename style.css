@@ -239,9 +239,10 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .timeline-reading ul,.timeline-order{padding-inline-start:1.4rem}
 .timeline-source-kind{color:var(--muted)}
 
-#models{display:grid;gap:.45rem;padding:.65rem;background:var(--panel-bg)}
+#models{display:grid;grid-template-columns:minmax(0,1fr);gap:.45rem;padding:.65rem;background:var(--panel-bg)}
 #models p{margin:0;font-weight:650}
 #models div{display:flex;flex-wrap:wrap;gap:.4rem}
+#models button{max-inline-size:100%;overflow-wrap:anywhere}
 #models button[aria-pressed=true]{background:var(--selected-bg);border-color:var(--accent)}
 #models output{display:block;color:var(--muted)}
 

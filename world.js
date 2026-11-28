@@ -298,10 +298,52 @@ export async function makeWorld(canvas, reducedMotion) {
       return;
     }
     if (index === 12) {
-      for (let row = 0; row < 8; row++) {
-        const edge = 152 - Math.min(row, 5) * 8;
-        rect(background, mortar, edge, 80 + row * 16, 480 - edge, 17);
-        rect(background, '#32303a', edge + 56, 89 + row * 16, 480 - edge - 56, 13);
+      if (layer === 'meron-visit') {
+        for (const [x,y,w] of [[132,108,110],[221,86,135],[336,122,144]]) {
+          rect(background, '#888681', x, y, w, 198 - y);
+          rect(background, '#a29b87', x, y, w, 5);
+        }
+        rect(background, '#b39676', 249, 95, 125, 79);
+        rect(background, '#d9be94', 241, 88, 140, 9);
+        rect(background, '#d1b58e', 247, 101, 131, 8);
+        rect(background, '#6d6c63', 293, 122, 37, 52);
+        rect(background, '#647478', 298, 114, 27, 8);
+        for (let step = 0; step < 5; step++) {
+          rect(background, '#d5b38c', 235 - step * 8, 174 + step * 4, 150 + step * 8, 2);
+        }
+        for (const [x,y] of [[209,172],[349,175],[365,176]]) {
+          rect(background, '#4c4543', x - 1, y - 9, 11, 11);
+          rect(background, '#aa988a', x, y - 15, 8, 6);
+          rect(background, '#dac7a5', x - 2, y - 16, 10, 2);
+        }
+      } else {
+        for (let row = 0; row < 8; row++) {
+          const edge = 152 - Math.min(row, 5) * 8;
+          rect(background, mortar, edge, 80 + row * 16, 480 - edge, 17);
+          rect(background, '#32303a', edge + 56, 89 + row * 16, 480 - edge - 56, 13);
+        }
+        if (layer === 'peqi-in-survey') {
+          for (const [x,y,width] of [[190,102,99],[184,108,114],[173,115,142],[169,123,155]]) {
+            for (let dot = 0; dot < width; dot += 11) rect(background, '#d4ac73', x + dot, y, 5, 1);
+          }
+          rect(background, '#776054', 303, 154, 109, 30);
+          rect(background, '#b49a79', 305, 151, 106, 8);
+          for (const [x,y] of [[313,147],[338,142],[365,147],[389,144]]) {
+            rect(background, '#69493e', x, y, 12, 8);
+            rect(background, '#c37d5a', x + 3, y + 1, 10, 5);
+          }
+        } else {
+          rect(background, '#715142', 177, 127, 9, 68);
+          rect(background, '#726649', 156, 117, 51, 13);
+          rect(background, '#8e8253', 164, 110, 38, 8);
+          rect(background, '#527c85', 261, 177, 50, 15);
+          rect(background, '#7fa4a0', 269, 178, 30, 2);
+          rect(background, '#ecd0a1', 281, 166, 4, 12);
+          if (layer === 'cave-story') {
+            rect(background, '#d5bd7d', 156, 118, 51, 2);
+            rect(background, '#a3c6bd', 262, 188, 46, 2);
+          }
+        }
       }
       return;
     }
@@ -329,6 +371,42 @@ export async function makeWorld(canvas, reducedMotion) {
       }
       rect(background, '#453638', 398, 139, 13, 12);
       rect(background, '#a5724e', 401, 140, 6, 4);
+      return;
+    }
+    if (index === 16) {
+      rect(background, '#4b3744', 131, 64, 349, 133);
+      rect(background, '#766052', 137, 70, 343, 125);
+      rect(background, '#3f3740', 158, 85, 89, 61);
+      rect(background, '#9f846b', 162, 89, 81, 54);
+      rect(background, '#45343c', 162, 124, 82, 19);
+      rect(background, '#a97d56', 179, 172, 272, 21);
+      rect(background, '#c1925e', 174, 168, 280, 7);
+
+      const manuscript = layer === 'zohar-merton';
+      const castile = layer === 'zohar-castile';
+      rect(background, '#51373a', 252, 102, 161, 70);
+      for (const x of [257,335]) {
+        rect(background, manuscript ? '#d5a878' : '#e2c78d', x, 104, 74, 62);
+        rect(background, '#a38063', x, 104, 74, 2);
+        for (let row = 0; row < 7; row++) {
+          const width = 54 - (row * (castile ? 13 : 8) + x) % 17;
+          rect(background, '#7c5747', x + 63 - width, 112 + row * 6, width, 2);
+        }
+      }
+      if (castile) {
+        for (const [x,y] of [[172,105],[181,98],[197,109],[215,102]]) {
+          rect(background, '#d0ac79', x, y, 14, 16);
+        }
+        rect(background, '#e8d6a1', 183, 149, 45, 15);
+        rect(background, '#956c52', 188, 155, 36, 2);
+        rect(background, '#956c52', 191, 158, 29, 2);
+      } else if (manuscript) {
+        rect(background, '#f2d07e', 263, 149, 63, 14);
+        rect(background, '#83573b', 270, 155, 49, 3);
+      } else if (layer === 'zohar-voice') {
+        rect(background, '#deae67', 339, 111, 62, 12);
+        rect(background, '#9c523f', 345, 115, 51, 3);
+      }
       return;
     }
     if (index === 17) {

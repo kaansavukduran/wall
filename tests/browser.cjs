@@ -166,7 +166,7 @@ async function main() {
           await page.click('[data-layer="sanctuary"]');
           assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), before);
         }
-        if ([1,3,4].includes(episode.id)) {
+        if ([1,3,4,12,16].includes(episode.id)) {
           const model = models.find(entry => entry.id === episode.id);
           let previous = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
           for (const [layer, , readings, source] of model.options) {
@@ -325,6 +325,13 @@ async function main() {
           }
         }
         if (episode.id === 16) {
+          for (const card of [2,0,1]) await page.click('[data-sequence="' + card + '"]');
+          assert.equal(await page.locator('#sequence li').count(),3);
+          if (width === 320) {
+            await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+            assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+            await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+          }
           await page.click('[data-study="0"]');
           await page.click('[data-study="1"]');
           assert.equal(await page.locator('#workbench output').textContent(), '8 + 10 = 18');

@@ -76,6 +76,26 @@ export const models = [
     ['ritual',['Sukot simgeleri','Sukkot symbols','סמלי סוכות','Sukkot rəmzləri'],
       ['Bazı büyük gümüş sikkelerin öbür yüzünde, Sukot’la ilişkili lulav ve etrog görünür. Lulav, hurma dalının da yer aldığı bir bitki demetidir. Etrog, bir turunçgil meyvesidir.','Some large silver coins show a lulav and etrog on the other side. For Sukkot, a palm branch is held with other plants, alongside the citron.','על צדו השני של חלק ממטבעות הכסף הגדולים נראים לולב ואתרוג. בחג הסוכות נוטלים את הלולב עם צמחים נוספים, ואת האתרוג לצדם.','Bəzi iri gümüş sikkələrin digər üzündə Sukkotla bağlı lulav və etroq görünür. Lulav xurma budağı ilə başqa bitkilərin dəstəsidir. Etroq sitrus meyvəsidir.']],
   ]),
+  scene(12, ['Celile’de mağara ve ziyaret','Cave and pilgrimage in Galilee','מערה ועלייה לרגל בגליל','Cəlilədə mağara və ziyarət'], [
+    ['cave-story',['Şabat 33b anlatısı','The story in Shabbat 33b','הסיפור בשבת לג ע״ב','Şabbat 33b rəvayəti'], [
+      'Anlatıda Şimon bar Yohai ve oğlu Elazar mağaraya sığınır. Bir keçiboynuzu ağacı ve su onları besler. İlk çıkıştan sonra geri dönerler. Talmud bu mağaranın adresini vermez. Çizim anlatıyı canlandırır.',
+      'In the story, Shimon bar Yohai and his son Elazar shelter in a cave. A carob tree and a spring sustain them. They return after their first departure. The Talmud gives no address for the cave. This drawing illustrates the story.',
+      'בסיפור רבי שמעון בר יוחאי ובנו אלעזר מסתתרים במערה. עץ חרוב ומעיין מקיימים אותם. אחרי היציאה הראשונה הם חוזרים למערה. בתלמוד אין כתובת למערה. האיור ממחיש את הסיפור.',
+      'Rəvayətdə Şimon bar Yohay və oğlu Elazar mağaraya sığınırlar. Keçibuynuzu ağacı və bulaq onların yaşamasına kömək edir. İlk çıxışdan sonra geri qayıdırlar. Talmud mağaranın ünvanını göstərmir. Şəkil rəvayəti canlandırır.',
+    ],'https://www.sefaria.org/Shabbat.33b'],
+    ['peqi-in-survey',['Peqi’in mağara araştırması','Peqi’in cave survey','מחקר המערה בפקיעין','Peqiin mağara araşdırması'], [
+      'Peqi’in’de yerel gelenek bir mağarayı Şimon’la ilişkilendirir. 2025 araştırması bazı çanak çömlek parçalarının antik dönemden kalmış olabileceğini bildirir. Bu buluntular mağaranın belirli bir kişi tarafından kullanıldığını göstermiyor. Kesit temsilidir.',
+      'A local tradition associates a cave at Peqi’in with Shimon. A 2025 survey reports potsherds that may date to antiquity. Those finds cannot identify an individual who used the cave. The section is schematic.',
+      'מסורת מקומית קושרת מערה בפקיעין לרבי שמעון. מחקר מ־2025 מדווח על חרסים שייתכן שהם מן העת העתיקה. הממצאים אינם מזהים אדם מסוים שהשתמש במערה. החתך סכמטי.',
+      'Peqiində yerli ənənə bir mağaranı Şimonla bağlayır. 2025-ci il araşdırması bəzi saxsı qırıqlarının qədim dövrə aid ola biləcəyini bildirir. Tapıntılar mağaradan istifadə etmiş konkret şəxsi müəyyənləşdirmir. Kəsik şərtidir.',
+    ],'https://doi.org/10.26351/IHD/14-1/4'],
+    ['meron-visit',['Meron’da Lag BaOmer','Lag BaOmer at Meron','ל״ג בעומר במירון','Meronda Laq BaOmer'], [
+      'Meron, Peqi’in’den ayrı bir yerdir. Ziyaretçiler burada Şimon bar Yohai’ye atfedilen mezarı Lag BaOmer’de ziyaret eder. Bu anmanın yazılı tanıklıkları arasında 16. yüzyıl Safed çevresi yer alır.',
+      'Meron is a separate site from Peqi’in. Pilgrims visit the tomb traditionally associated with Shimon bar Yohai on Lag BaOmer. Written evidence for the observance includes records from the sixteenth-century Safed circle.',
+      'מירון הוא אתר נפרד מפקיעין. בל״ג בעומר עולים לקבר המיוחס במסורת לרבי שמעון בר יוחאי. בין העדויות הכתובות למנהג יש תיעוד מחוגי צפת במאה השש־עשרה.',
+      'Meron Peqiindən ayrı yerdir. Laq BaOmerdə zəvvarlar ənənədə Şimon bar Yohaya aid edilən qəbri ziyarət edirlər. Ayin haqqında yazılı qeydlər arasında XVI əsr Safed çevrəsinə aid sənədlər var.',
+    ],'https://schechter.edu/a-historical-treatise-on-the-lag-bomer-celebration-at-mt-meron/'],
+  ]),
   scene(13, ['Bugünkü kutsal alandan üç yapı','Three structures at the site today','שלושה מבנים באתר כיום','Bugünkü müqəddəs məkanda üç tikili'], [
     ['dome-rock',['Kubbetü’s-Sahra','Dome of the Rock','כיפת הסלע','Qübbət əs-Səxra'],
       ['Sekizgen yapı ve kubbe, platformun üzerinde durur. Mozaik yazıt yapının Emevi dönemi tarihine tanıklık eder.','The octagonal building and its dome stand on the platform. A mosaic inscription attests to its Umayyad date.','המבנה המתומן והכיפה עומדים על המתחם. כתובת פסיפס מעידה על זמנו האומיי.','Səkkizguşəli tikili və qübbə platformanın üstündədir. Mozaika kitabəsi onun Əməvilər dövrünə aid olduğunu göstərir.']],
@@ -83,6 +103,26 @@ export const models = [
       ['Güneydeki cemaat namazı yapısıdır. Mescid-i Aksa adı, kullanıma göre bu yapıyı ya da daha geniş kutsal alanı ifade edebilir.','This is the congregational prayer hall to the south. In different usage, al-Aqsa can name this building or the wider sanctuary.','זהו אולם התפילה בדרום. השם אל־אקצא יכול לציין את המבנה או את המתחם המקודש הרחב יותר.','Bu, cənubdakı camaat namazı binasıdır. Əl-Əqsa adı işlənmə yerindən asılı olaraq binanı və ya daha geniş müqəddəs ərazini bildirə bilər.']],
     ['western-wall',['Batı Duvarı','Western Wall','הכותל המערבי','Qərb Divarı'],
       ['Platformun batı kenarındaki istinat yapısının görünen bölümüdür. Meydana bakan alt seviyededir.','This visible section of the platform’s western retaining wall faces the plaza at a lower level.','חלק זה של קיר התמך המערבי פונה לרחבה במפלס נמוך יותר.','Platformanın qərb istinad divarının görünən bu hissəsi aşağı səviyyədə meydanla üzbəüzdür.']],
+  ]),
+  scene(16, ['Zohar’ın yolculuğu','The Zohar across time','הזוהר לאורך הדורות','Zoharın zamanla yolçuluğu'], [
+    ['zohar-voice',['Anlatıdaki ses','The voice in the story','הקול בסיפור','Rəvayətdəki səs'], [
+      'Zohar, Tevrat’ı yorumlayan ve mistik sahneler anlatan metinlerden oluşur. Şimon bar Yohai metnin öne çıkan öğretmenidir ve geleneksel yazarlık atfının merkezindedir.',
+      'The Zohar brings together interpretations of the Torah and mystical stories. Shimon bar Yohai is a leading teacher in its pages and the figure to whom tradition attributes authorship.',
+      'הזוהר מאגד פירושים לתורה וסיפורים מיסטיים. רבי שמעון בר יוחאי הוא מורה מרכזי בספר, והמסורת מייחסת לו את חיבורו.',
+      'Zohar Tövratı şərh edən və mistik səhnələri danışan mətnləri birləşdirir. Şimon bar Yohay əsərin əsas müəllimlərindən biridir və ənənə müəllifliyi ona aid edir.',
+    ],'https://www.sefaria.org/Zohar'],
+    ['zohar-castile',['13. yüzyılda Kastilya','Castile in the 13th century','קסטיליה במאה ה־13','XIII əsrdə Kastiliya'], [
+      'Araştırmacılar külliyatın önemli bir bölümünün dolaşıma girmesini 13. yüzyıl sonu Kastilya’sı ve Moşe de Leon çevresiyle ilişkilendirir. Külliyat farklı metinlerden ve katmanlardan oluşur.',
+      'Scholars trace the circulation of much of the corpus to late thirteenth-century Castile and the circle of Moses de León. The corpus has several textual layers.',
+      'חוקרים קושרים את תפוצתו של חלק חשוב מן הקורפוס לקסטיליה בסוף המאה ה־13 ולחוגו של משה די ליאון. הקורפוס מורכב מכמה שכבות טקסטואליות.',
+      'Tədqiqatçılar külliyyatın mühüm hissəsinin yayılmasını XIII əsrin sonlarında Kastiliya və Moşe de Leon çevrəsi ilə əlaqələndirirlər. Külliyyat bir neçə mətn qatından ibarətdir.',
+    ],'https://www.sup.org/books/pages/4810/Front_Matter.pdf'],
+    ['zohar-merton',['Merton nüshası','The Merton copy','עותק מרטון','Merton nüsxəsi'], [
+      'Bu nüshanın kâğıdı 1499–1502 dönemine tarihlenir. Nüsha muhtemelen 16. yüzyılın başlarında veya ortalarında yazıldı. 111v yaprağındaki kâtip notunda Şabtai adı geçer. Çizimde kâtip notu ayrı renkle gösterilir. Nüshanın nerede yazıldığı kesin değildir.',
+      'The paper was made between 1499 and 1502. The copy was likely written in the early to mid-sixteenth century. The scribe’s note on folio 111v names Shabtai. The drawing highlights the scribe’s note in a separate color. The place of copying is uncertain.',
+      'הנייר יוצר בין 1499 ל־1502. ההעתקה נעשתה כנראה בראשית עד אמצע המאה ה־16. בקולופון בדף 111 ע״ב מופיע השם שבתאי. האיור מדגיש את הערת הסופר בצבע אחר. מקום ההעתקה אינו ודאי.',
+      'Kağız 1499–1502-ci illərə aiddir. Nüsxə ehtimalən XVI əsrin əvvəli və ya ortalarında köçürülüb. 111v vərəqindəki katib qeydində Şabtay adı keçir. Şəkildə katib qeydi fərqli rənglə göstərilir. Köçürülmə yeri dəqiq bilinmir.',
+    ],'https://www.merton.ox.ac.uk/news/merton-zohar-manuscript-digitised'],
   ]),
   scene(17, ['1492 sonrasında üç güzergâh','Three routes after 1492','שלושה נתיבי הגירה אחרי 1492','1492-dən sonra üç marşrut'], [
     ['portugal',['Portekiz','Portugal','פורטוגל','Portuqaliya'],

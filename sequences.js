@@ -39,7 +39,7 @@ export const sequences = [
   ]),
   make(16, ['Zohar’ın zamanlarını ayır','Separate the Zohar’s dates','הבחינו בין זמני הזוהר','Zoharın tarixlərini ayır'], [2,0,1], [
     ['Zohar’ın tarihsel dolaşımı, Kastilya','Historical circulation in Castile','תפוצת הזוהר בקסטיליה','Kastiliyada Zoharın tarixi yayılması'],
-    ['Modern edisyon ve inceleme','Modern edition and study','מהדורה ומחקר מודרניים','Müasir nəşr və araşdırma'],
+    ['Merton nüshasının yazımı · muhtemelen 16. yüzyıl','Copying the Merton manuscript · likely 16th century','העתקת עותק מרטון · כנראה במאה ה־16','Merton nüsxəsinin köçürülməsi · ehtimalən XVI əsr'],
     ['Şimon’un anlatı ortamı','Shimon’s narrative setting','זמן העלילה של שמעון','Şimonun rəvayət dövrü'],
   ]),
   make(18, ['Luria’nın öğretisinde üç aşama','Three stages in Luria’s teaching','שלושה שלבים בתורת האר״י','Lurianın təlimində üç mərhələ'], [1,2,0], [

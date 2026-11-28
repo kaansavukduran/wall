@@ -3,6 +3,10 @@ import { setTimeout as wait } from 'node:timers/promises';
 
 const port = Number(process.argv[2]);
 assert.ok(Number.isInteger(port) && port > 0);
+const mode = process.argv[3] ?? 'clean';
+const expected = process.argv[4];
+assert.ok(['clean','advance','resume'].includes(mode));
+
 const deadline = Date.now() + 60_000;
 let page;
 
@@ -46,7 +50,19 @@ try {
     ready = await evaluate("Boolean(document.querySelector('#app:not([hidden]) [data-choice]'))");
     if (!ready) await wait(250);
   }
-  assert.ok(ready, 'The packaged browser did not reach the first scene');
+  assert.ok(ready, 'The packaged browser did not reach a playable scene');
+  if (expected) {
+    assert.equal(await evaluate('document.querySelector("footer > span:last-child").textContent'),expected);
+  }
+  const hasSavedChapter = await evaluate("document.querySelector('#chapter').textContent === '1'");
+  if (mode === 'resume') {
+    assert.ok(hasSavedChapter, 'Chapter 1 was not restored after installing the new build');
+    await evaluate("document.querySelector('#episodes-button').click(); document.querySelector('#chapters ol li:first-child button').click()");
+    assert.equal(await evaluate("!document.querySelector('#next').hidden"),true,
+      'The completed prologue was not retained after installing the new build');
+    console.log('The new native build restored chapter 1 and the completed prologue from the earlier release.');
+  }
+
   assert.equal(await evaluate("document.querySelector('[data-choice=\"1\"]').click(); !document.querySelector('#next').hidden"), true);
   console.log('Native package reached and completed the prologue.');
   if (await evaluate("Boolean(document.querySelector('#kabbalah'))")) {
@@ -82,6 +98,12 @@ try {
     assert.ok(JSON.parse(backup.values['wall.progress.v1']).completed.includes('plaza'));
     console.log('Native package exported its completed prologue through Settings.');
   }
+  if (mode === 'advance') {
+    await evaluate("document.querySelector('dialog[open]')?.close(); document.querySelector('#next').click()");
+    assert.equal(await evaluate("document.querySelector('#chapter').textContent"),'1');
+    console.log('The earlier native build saved chapter 1 from normal play.');
+  }
+  await evaluate("setTimeout(() => window.close(), 100)");
 } finally {
   socket.close();
 }
