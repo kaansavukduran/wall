@@ -655,6 +655,10 @@ export async function start(initialLanguage) {
     }
   }
 
+  function drawMarketMeasure() {
+    world.scene(7, 'market-measure-' + sequenceSteps.length);
+  }
+
   function renderModel() {
     const id = episodes[active].id ?? 0;
     const surface = find('models');
@@ -676,8 +680,8 @@ export async function start(initialLanguage) {
       reference.hidden = !activeOption?.[3];
       if (activeOption?.[3]) reference.href = activeOption[3];
       for (const button of controls.children) button.setAttribute('aria-pressed', String(button.dataset.layer === selectedLayer));
-      const view = selectedLayer === 'market-measure' ? 'market-measure-' + sequenceSteps.length : selectedLayer;
-      world.scene(id, view);
+      if (selectedLayer === 'market-measure') drawMarketMeasure();
+      else world.scene(id, selectedLayer);
     }
 
     reference.textContent = ui[language][5];
@@ -836,8 +840,11 @@ export async function start(initialLanguage) {
           attempt = 'wrong';
         }
         if (sample.id === 7) {
-          selectedLayer = 'market-measure';
-          renderModel();
+          if (selectedLayer === 'market-measure') drawMarketMeasure();
+          else {
+            selectedLayer = 'market-measure';
+            renderModel();
+          }
         }
         renderSequence();
         (buttons.querySelector('button:enabled') ?? reset).focus();
@@ -849,7 +856,7 @@ export async function start(initialLanguage) {
   find('sequence-reset').addEventListener('click', () => {
     sequenceSteps.length = 0;
     attempt = '';
-    if (selectedLayer === 'market-measure') renderModel();
+    if (selectedLayer === 'market-measure') drawMarketMeasure();
     renderSequence();
     sequenceSurface.querySelector('div button').focus();
   });

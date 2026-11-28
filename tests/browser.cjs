@@ -252,6 +252,7 @@ async function main() {
           const frame = () => page.locator('#world').evaluate(canvas => canvas.toDataURL());
           const market = page.locator('[data-layer="market-measure"]');
           await market.press('Enter');
+          const selectedMarket = await market.elementHandle();
           const initial = await frame();
           const step = id => page.locator('[data-sequence="' + id + '"]');
           await step(0).press('Enter');
@@ -261,6 +262,7 @@ async function main() {
           for (const id of [1,2,0]) {
             await step(id).press('Enter');
             frames.add(await frame());
+            assert.ok(await selectedMarket.evaluate(button => button.isConnected && button.getAttribute('aria-pressed') === 'true'));
           }
           assert.equal(frames.size,4);
           assert.equal(await page.locator('#sequence li').count(),3);
