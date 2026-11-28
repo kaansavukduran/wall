@@ -4,12 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#121a22">
 <title>WALL</title>
-<link rel="stylesheet" href="./runtime-0.5.3-8db4975c2783/style.css">
+<link rel="stylesheet" href="./runtime-0.5.4-e19a734f0f3a/style.css">
 <body>
 <section id="boot" aria-label="Fragaria Interactive">
   <div class="boot-shell">
     <div class="boot-brand">
-      <img src="./runtime-0.5.3-8db4975c2783/assets/fragaria-strawberry.png" alt="" width="116" height="130">
+      <img src="./runtime-0.5.4-e19a734f0f3a/assets/fragaria-strawberry.png" alt="" width="116" height="130">
       <h1>Fragaria<br>Interactive</h1>
     </div>
     <div class="boot-load">
@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.5.3</small>
+  <small dir="ltr">v0.5.4</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -43,6 +43,7 @@
       <div id="sequence" hidden><p></p><small></small><div></div><ol></ol><output aria-live="polite"></output><button id="sequence-reset" type="button"></button></div>
       <div id="workbench" hidden><p></p><div></div><output aria-live="polite"></output><small></small></div>
       <div id="models" hidden><p></p><div></div><output></output><button id="photo-button" type="button" hidden></button></div>
+      <details id="messianic-timeline" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <p id="language-lab-message" role="status" hidden></p>
       <div id="language-labs" hidden>
         <details id="aleph-lab" name="hebrew-workbench">
@@ -93,7 +94,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.3</span></footer>
+  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.4</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -101,7 +102,7 @@
   <h2 id="photo-title" tabindex="-1" autofocus></h2>
   <div class="photo-layout">
     <figure>
-      <img loading="lazy" src="./runtime-0.5.3-8db4975c2783/assets/matpc-14762.jpg" width="433" height="640" alt="">
+      <img loading="lazy" src="./runtime-0.5.4-e19a734f0f3a/assets/matpc-14762.jpg" width="433" height="640" alt="">
       <figcaption></figcaption>
       <a id="photo-source" target="_blank" rel="noopener noreferrer"></a>
     </figure>
@@ -147,6 +148,16 @@
     <button type="button"></button>
     <p role="status"></p>
   </details>
+</template>
+<template id="messianic-template">
+  <p id="timeline-instruction"></p>
+  <div class="timeline-choices" role="group" aria-labelledby="timeline-instruction"></div>
+  <ol class="timeline-order"></ol>
+  <p class="timeline-status" role="status"></p>
+  <button class="timeline-reset" type="button" disabled></button>
+  <article class="timeline-reading" hidden>
+    <h3></h3><p class="timeline-source-kind"></p><p></p><p></p><ul></ul>
+  </article>
 </template>
 <template id="visit-template">
   <label for="visit-topic"></label><select id="visit-topic"></select>
@@ -205,6 +216,6 @@
     <a target="_blank" rel="noopener noreferrer" dir="auto"></a>
   </article>
 </template>
-<script type="module" src="./runtime-0.5.3-8db4975c2783/start.js"></script>
+<script type="module" src="./runtime-0.5.4-e19a734f0f3a/start.js"></script>
 </body>
 </html>
