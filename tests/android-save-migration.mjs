@@ -71,6 +71,7 @@ async function exportOldSave() {
     await settings(ui);
     await ui.fill('#theme','contrast','change');
     await ui.fill('#text-scale','125','input');
+    await ui.evaluate(`document.querySelector('#text-scale').dispatchEvent(new Event('change',{bubbles:true}))`);
     await ui.click('#save-export');
     const saved=await ui.evaluate('document.querySelector("#save-output").value');
     const data=JSON.parse(saved);
