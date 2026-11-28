@@ -1392,7 +1392,9 @@ async function main() {
     const libraryButton = chapterResources.locator('#library-button');
     const languageCard = chapterResources.locator('#language-card');
     const atlasSearch = chapterResources.locator('#atlas-search');
+    await resourcesShortcut.waitFor();
     await libraryButton.press('Enter');
+    await chapterResources.locator('#library[open]').waitFor();
     await chapterResources.locator('#language-study summary').press('Enter');
     await languageCard.selectOption('lang-malka');
     await chapterResources.locator('#atlas summary').press('Enter');
