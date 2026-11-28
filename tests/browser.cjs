@@ -47,6 +47,7 @@ async function main() {
   const transferLessons = [...earlyTransfers,...middleTransfers,...lateTransfers];
   const transferDecks = ['transfer-early-lessons.js','transfer-middle-lessons.js','transfer-late-lessons.js'];
   const { languageLessons } = await import('../language-lessons.js');
+  const { shabbatStudy } = await import('../calendar-lessons.js');
   const { archiveCases } = await import('../diaspora-archive.js');
   const { diasporaRecords } = await import('../diaspora-lessons.js');
   const { models } = await import('../scenes.js');
@@ -788,13 +789,35 @@ async function main() {
       await page.selectOption('#calendar-custom', 'diaspora');
       assert.match(await page.locator('[data-event="simchat-torah"]').innerText(), /^23/);
       assert.equal(await page.locator('[data-event="simchat-torah"]').getAttribute('aria-pressed'), 'true');
+      assert.equal(await page.locator('.shabbat-study').isVisible(), false);
+      await page.selectOption('#calendar-period', '0');
+      const shabbat = page.locator('.shabbat-study');
+      const shabbatIndex = ['tr','en','he','az'].indexOf(locale);
+      await shabbat.locator(':scope > summary').press('Enter');
+      assert.equal(await shabbat.locator(':scope > p').first().locator('a').getAttribute('href'),shabbatStudy.text.url);
+      for (const [index, place] of shabbatStudy.places.entries()) {
+        const card = shabbat.locator('details').nth(index);
+        assert.equal(await card.locator('summary').innerText(),place.title[shabbatIndex]);
+        if (width === 320) await card.locator('summary').tap();
+        else await card.locator('summary').press('Space');
+        assert.equal(await card.locator('p').innerText(),place.practice[shabbatIndex]);
+        assert.equal(await card.locator('a').getAttribute('href'),place.source.url);
+      }
+      await shabbat.locator('[data-shabbat-place="binghamton"]').press('Enter');
+      assert.equal(await shabbat.locator('[role="status"]').innerText(),shabbatStudy.retry[shabbatIndex]);
+      await shabbat.locator('[data-shabbat-place="nava-tehila"]').press('Enter');
+      assert.equal(await shabbat.locator('[role="status"]').innerText(),shabbatStudy.feedback[shabbatIndex]);
+      await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+      assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
+      await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
       await page.selectOption('#calendar-period', '12');
       await page.locator('[data-event="purim"]').waitFor();
+      assert.equal(await shabbat.isVisible(), false);
       await page.selectOption('#calendar-year', 'leap');
       assert.equal(await page.locator('[data-event="purim"]').count(), 0);
       await page.selectOption('#calendar-period', '13');
       await page.click('[data-event="purim"]');
-      assert.match(await page.locator('.calendar-reading a').getAttribute('href'), /Esther/);
+      assert.match(await page.locator('.calendar-sources a').getAttribute('href'), /Esther/);
       await page.selectOption('#calendar-period', '8');
       await page.locator('[data-event="sigd"]').waitFor();
       await page.click('.calendar-practice summary');
@@ -811,8 +834,8 @@ async function main() {
       const mimouna = page.locator('[data-event="mimouna"]');
       await mimouna.press('Enter');
       assert.match(await mimouna.textContent(),/22/);
-      assert.match(await page.locator('.calendar-reading a').first().getAttribute('href'),/recf5zztixexjse0q$/);
-      assert.match(await page.locator('.calendar-reading a').last().getAttribute('href'),/seder-mimounah/);
+      assert.match(await page.locator('.calendar-sources a').first().getAttribute('href'),/recf5zztixexjse0q$/);
+      assert.match(await page.locator('.calendar-sources a').last().getAttribute('href'),/seder-mimounah/);
       await page.selectOption('#calendar-custom','diaspora');
       assert.match(await mimouna.textContent(),/23/);
       assert.equal(await mimouna.getAttribute('aria-pressed'),'true');

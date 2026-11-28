@@ -1,4 +1,4 @@
-import { calendarEvents } from './calendar-lessons.js';
+import { calendarEvents, shabbatStudy } from './calendar-lessons.js';
 
 const months = {
   tr: ['Her hafta','Nisan','İyar','Sivan','Tamuz','Av','Elul','Tişri','Heşvan','Kislev','Tevet','Şevat','Adar','Adar II'],
@@ -49,6 +49,47 @@ const copy = {
 const periodOrder = [0,-1,7,8,9,10,11,12,13,1,2,3,4,5,6];
 const practiceEvents = ['pesach','chanukah','rosh-hashanah','mimouna'];
 
+function sourceLink({url, title}) {
+  const link = document.createElement('a');
+  link.textContent = title;
+  link.href = url;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.dir = 'auto';
+  return link;
+}
+
+function prepareShabbat(panel, locale) {
+  const [title, introduction, cards, prompt, answers, status] = panel.children;
+  title.textContent = shabbatStudy.heading[locale];
+  introduction.textContent = shabbatStudy.introduction[locale];
+  introduction.append(' ', sourceLink(shabbatStudy.text));
+  for (const place of shabbatStudy.places) {
+    const card = document.createElement('details');
+    const summary = document.createElement('summary');
+    const practice = document.createElement('p');
+    summary.textContent = place.title[locale];
+    practice.textContent = place.practice[locale];
+    card.append(summary, practice, sourceLink(place.source));
+    cards.append(card);
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.dataset.shabbatPlace = place.id;
+    button.textContent = place.title[locale];
+    button.setAttribute('aria-pressed', 'false');
+    button.addEventListener('click', () => {
+      for (const sibling of answers.children) {
+        sibling.setAttribute('aria-pressed', String(sibling === button));
+      }
+      const result = place.id === shabbatStudy.answer ? shabbatStudy.feedback : shabbatStudy.retry;
+      status.textContent = result[locale];
+    });
+    answers.append(button);
+  }
+  prompt.textContent = shabbatStudy.question[locale];
+}
+
 export function mountCalendar(panel, language, locale, view) {
   const fragment = document.getElementById('calendar-template').content.cloneNode(true);
   const labels = copy[language];
@@ -59,7 +100,7 @@ export function mountCalendar(panel, language, locale, view) {
   const custom = fragment.querySelector('#calendar-custom');
   const dates = fragment.querySelector('.calendar-days');
   const reading = fragment.querySelector('.calendar-reading');
-  const [name, practice, history, links] = reading.children;
+  const [name, practice, history, links, shabbat] = reading.children;
   const answer = fragment.querySelector('#calendar-answer');
   const exercise = fragment.querySelector('.calendar-practice');
   const clue = exercise.querySelector('#calendar-clue');
@@ -83,15 +124,10 @@ export function mountCalendar(panel, language, locale, view) {
     history.textContent = event.history[locale];
     links.replaceChildren(...[event.source,event.context,event.schedule].filter(Boolean).map(source => {
       const item = document.createElement('li');
-      const link = document.createElement('a');
-      link.textContent = source.title;
-      link.href = source.url;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      link.dir = 'auto';
-      item.append(link);
+      item.append(sourceLink(source));
       return item;
     }));
+    shabbat.hidden = event.id !== 'shabbat';
     reading.hidden = false;
   }
 
@@ -183,6 +219,7 @@ export function mountCalendar(panel, language, locale, view) {
       status.textContent = labels.retry;
     }
   });
+  prepareShabbat(shabbat, locale);
   updatePeriods();
   showExample();
   panel.replaceChildren(fragment);

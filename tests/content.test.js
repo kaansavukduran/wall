@@ -10,7 +10,7 @@ import { accountabilityCases, accountabilityRecords } from '../accountability-le
 import { ancientLessons } from '../ancient-lessons.js';
 import { atlasEntries } from '../atlas-lessons.js';
 import { bakuCopy, bakuStops } from '../baku-lessons.js';
-import { calendarEvents } from '../calendar-lessons.js';
+import { calendarEvents, shabbatStudy } from '../calendar-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
 import { cultureCases, cultureRecords } from '../culture-lessons.js';
@@ -180,7 +180,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 415);
+  assert.equal(entries.length, 420);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -369,6 +369,16 @@ test('festival calendar dates and four localized readings use indexed sources', 
   for (const source of [mimouna.source,mimouna.context,mimouna.schedule]) {
     assert.ok(entries.some(item => item.url === source.url && belongsTo(item,24)));
   }
+  const {places, text, answer, heading, introduction, question, retry, feedback} = shabbatStudy;
+  assert.equal(places.length, 4);
+  assert.equal(new Set(places.map(place => place.id)).size, places.length);
+  assert.ok(places.some(place => place.id === answer));
+  for (const values of [heading,introduction,question,retry,feedback,...places.flatMap(place => [place.title,place.practice])]) {
+    assert.equal(values.length, languages.length);
+    assert.ok(values.every(value => value.trim()));
+    assert.match(values[2], /\p{Script=Hebrew}/u);
+  }
+  for (const source of [text,...places.map(place => place.source)]) assert.ok(urls.has(source.url), source.url);
 });
 
 test('community atlas has separate categories with four-language indexed readings', () => {

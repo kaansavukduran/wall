@@ -1,5 +1,101 @@
 // Hebrew calendar uses Nisan=1 and Tishrei=7; ritual dates begin at local sunset.
 // Local observance can vary by community. Diaspora notes describe common traditional practice.
+export const shabbatStudy = {
+  heading:['Bir Şabat, dört cemaat','One Shabbat, four communities','שבת אחת, ארבע קהילות','Bir Şabbat, dörd icma'],
+  introduction:[
+    'Dört cemaati ziyaret et ve Cuma akşamını nasıl karşıladıklarına bak. Babil Talmudu’nda Rabbi Hanina Şabat’ı bir kraliçe gibi, Rabbi Yanay ise bir gelin gibi karşılar. Örnekler cemaatlerin yayımladığı belgelere dayanır.',
+    'Visit four communities and see how they welcome Shabbat on Friday evening. In the Babylonian Talmud, Rabbi Hanina welcomes Shabbat as a queen and Rabbi Yannai as a bride. The examples come from records published by the communities.',
+    'בקרו בארבע קהילות וראו איך הן מקבלות את השבת בערב שישי. בתלמוד הבבלי רבי חנינא מקבל את השבת כמלכה ורבי ינאי ככלה. הדוגמאות מבוססות על מסמכים שפרסמו הקהילות.',
+    'Dörd icmaya baş çək və cümə axşamı Şabbatı necə qarşıladıqlarına bax. Babil Talmudunda Rabbi Hanina Şabbatı kraliça kimi, Rabbi Yanay isə gəlin kimi qarşılayır. Nümunələr icmaların yayımladığı sənədlərə əsaslanır.',
+  ],
+  places:[
+    {
+      id:'binghamton',
+      title:[
+        'Binghamton · Chabad öğrenci merkezi',
+        'Binghamton · Chabad student center',
+        'בינגהמטון · מרכז חב״ד לסטודנטים',
+        'Binqhemton · Xabad tələbə mərkəzi',
+      ],
+      practice:[
+        '2025 sonbaharından bir öğrenci merkezi duyurusunda Cuma akşamı üç adım var. Önce merkez salonunda mumlar yakılıyor. Ardından Şabat’ı karşılama duası ve ev yemeği usulünde ortak sofra geliyor.',
+        'A student center bulletin from autumn 2025 sets out three parts of Friday evening. Candle lighting in the center’s hall comes first, followed by the service welcoming Shabbat and a shared home-cooked dinner.',
+        'הודעה ממרכז הסטודנטים מסתיו 2025 מונה שלושה חלקים לערב שישי. תחילה מדליקים נרות באולם המרכז. אחר כך מתפללים קבלת שבת ומתכנסים לארוחה ביתית משותפת.',
+        'Tələbə mərkəzinin 2025-ci ilin payızına aid elanında cümə axşamı üç mərhələ göstərilir. Əvvəl mərkəzin zalında şamlar yandırılır. Ardınca Şabbatın qarşılanması duası və ev üsulu ilə hazırlanmış ortaq şam yeməyi gəlir.',
+      ],
+      source:{title:'Chabad of Binghamton · Shabbat bulletin, October 2025',url:'https://www.chabadofbinghamton.com/templates/viewemail_cdo/aid/7085356'},
+    },
+    {
+      id:'bevis-marks',
+      title:[
+        'Londra · Bevis Marks Sefarad cemaati',
+        'London · Bevis Marks Sephardi congregation',
+        'לונדון · קהילת הספרדים בוויס מרקס',
+        'London · Bevis Marks Sefarad icması',
+      ],
+      practice:[
+        'İspanyol ve Portekiz kökenli Bevis Marks cemaati, Cuma akşamı ibadetin ardından ortak kiduş buluşması duyuruyor. Kiduş, Şabat’ın kutsallığını anan duadır ve genellikle şarap ya da üzüm suyu üzerine okunur. Burada buluşmada hafif yiyecekler, sohbet, Tora’dan sözler ve ezgiler de yer alıyor.',
+        'The Spanish and Portuguese congregation at Bevis Marks describes a gathering for kiddush after Friday evening services. Kiddush marks the holiness of Shabbat and is usually recited over wine or grape juice. Here the gathering also includes refreshments, conversation, Torah thoughts and songs.',
+        'קהילת יוצאי ספרד ופורטוגל בבוויס מרקס מתארת מפגש קידוש אחרי תפילת ליל שבת. הקידוש מציין את קדושת השבת ונהוג לומר אותו על יין או מיץ ענבים. במפגש הזה יש גם כיבוד, שיחה, דברי תורה ושירים.',
+        'Bevis Marksın İspaniya və Portuqaliya mənşəli icması cümə axşamı ibadətindən sonra ortaq kiduş məclisi elan edir. Kiduş Şabbatın müqəddəsliyini yada salan duadır və adətən şərab və ya üzüm şirəsi üzərində oxunur. Burada yüngül yemək, söhbət, Tövratdan fikirlər və nəğmələr də var.',
+      ],
+      source:{title:'S&P Sephardi Community · Shabbat at Bevis Marks',url:'https://www.sephardi.org.uk/bevis-marks/shabbat-at-bevis-marks/'},
+    },
+    {
+      id:'nava-tehila',
+      title:[
+        'Kudüs · Nava Tehila',
+        'Jerusalem · Nava Tehila',
+        'ירושלים · נאוה תהילה',
+        'Qüds · Nava Tehila',
+      ],
+      practice:[
+        'Nava Tehila, Cuma akşamı Şabat’ı karşılama dualarını cemaat içinde bestelenen ezgilerle söyler. Burada dua metni ile onun söylendiği melodi iki ayrı kaynaktan gelebilir.',
+        'Nava Tehila sings the Friday evening prayers welcoming Shabbat to melodies composed within the community. A prayer’s words and the melody used to sing them can come from different sources.',
+        'נאוה תהילה שרה את תפילות קבלת שבת בלחנים שחוברו בתוך הקהילה. מילות התפילה והלחן שבו שרים אותן יכולים לבוא ממקורות שונים.',
+        'Nava Tehila cümə axşamı Şabbatın qarşılanması dualarını icma daxilində bəstələnmiş melodiyalarla oxuyur. Duanın sözləri və ona qoşulan melodiya ayrı mənbələrdən gələ bilər.',
+      ],
+      source:{title:'Nava Tehila · About the community and its music',url:'https://www.navatehila.org/t-en/%D7%9E%D7%91%D7%95%D7%90-%D7%95%D7%A8%D7%A7%D7%A2'},
+    },
+    {
+      id:'cbst',
+      title:[
+        'New York · Beit Simchat Torah',
+        'New York · Congregation Beit Simchat Torah',
+        'ניו יורק · קהילת בית שמחת תורה',
+        'Nyu-York · Beit Simçat Tora icması',
+      ],
+      practice:[
+        'Beit Simchat Torah, Cuma akşamı Şabat’ı karşılama ibadetini geleneksel dua düzeni, ilerici değerler, düşünme ve müzikle birleştirdiğini anlatıyor. İbadeti hahamlar, müzik ekibi ve cemaatten dua yöneticileri üstlenebiliyor.',
+        'Beit Simchat Torah describes its Friday evening Shabbat welcome as combining traditional liturgy, progressive values, reflection and music. Rabbis, the music team and lay prayer leaders can lead the service.',
+        'בית שמחת תורה מתארת את קבלת השבת שלה כשילוב של נוסח תפילה מסורתי, ערכים פרוגרסיביים, התבוננות ומוזיקה. רבנים, אנשי צוות המוזיקה וחברי קהילה שמובילים תפילה משתתפים בהובלת התפילה.',
+        'Beit Simçat Tora cümə axşamı Şabbatın qarşılanması ibadətində ənənəvi dua qaydasını, proqressiv dəyərləri, düşüncəni və musiqini birləşdirdiyini bildirir. İbadətə ravvinlər, musiqi heyəti və icmanın dua rəhbərləri başçılıq edə bilirlər.',
+      ],
+      source:{title:'Congregation Beit Simchat Torah · Shabbat',url:'https://cbst.org/shabbat-holidays/shabbat/'},
+    },
+  ],
+  text:{title:'Babylonian Talmud, Shabbat 119a:2 · Sefaria',url:'https://www.sefaria.org/Shabbat.119a.2'},
+  question:[
+    'Bir arkadaşın, “Cemaat üyelerinin bestelediği ezgiyle dua ettik” diyor. Bu pratiği belgeleyen kaynak hangisi?',
+    'A friend says, “We sang a prayer to a melody composed by members of the community.” Which source documents that practice?',
+    'חבר מספר: ״שרנו תפילה בלחן שחיברו חברי הקהילה״. איזה מקור מתעד את המנהג הזה?',
+    'Dostun deyir: «Duanı icma üzvlərinin bəstələdiyi melodiya ilə oxuduq». Bunu hansı mənbə sənədləşdirir?',
+  ],
+  retry:[
+    'Kaynaklara dön ve ezginin kim tarafından bestelendiğine bak.',
+    'Return to the sources and look for who composed the melody.',
+    'חזרו למקורות ובדקו מי חיבר את הלחן.',
+    'Mənbələrə qayıt və melodiyanı kimin bəstələdiyinə bax.',
+  ],
+  answer:'nava-tehila',
+  feedback:[
+    'Nava Tehila, cemaat içinde yazılan ezgilerle dua ettiğini anlatır. Şimdi bir arkadaşına anlatır gibi düşün: Dört akşamda ortak kalan eylem ne? Yerel bir ayrıntı söyleyebilir misin?',
+    'Nava Tehila describes singing prayers to tunes written within the community. Now explain it as you would to a friend. What action do the four evenings share? What is one local detail?',
+    'נאוה תהילה מספרת על שירת תפילות בלחנים שנכתבו בתוך הקהילה. עכשיו הסבירו כאילו אתם מספרים לחבר. מה משותף לארבעת הערבים? איזה פרט מקומי תוכלו לציין?',
+    'Nava Tehila duaları icma daxilində bəstələnmiş melodiyalarla oxuduğunu bildirir. İndi dostuna danışırmış kimi düşün. Dörd axşamın ortaq cəhəti nədir? Bir yerli detal deyə bilərsənmi?',
+  ],
+};
+
 export const calendarEvents = [
   {
     id:'shabbat', month:null, day:null,
