@@ -6,6 +6,9 @@ const sites = {
   RU:[48.29,42.06,['Derbent','Derbent','דרבנט','Dərbənd']],
   TR:[28.98,41.01,['İstanbul','Istanbul','איסטנבול','İstanbul']],
   GR:[20.85,39.67,['Yanya','Ioannina','יואנינה','Yanina']],
+  qumran:[35.46,31.74,['Kumran','Qumran','קומראן','Qumran']],
+  gerizim:[35.27,32.20,['Gerizim Dağı','Mount Gerizim','הר גריזים','Gerizim dağı']],
+  volozhin:[26.52,54.09,['Volojin','Volozhin','וולוז׳ין','Volojin']],
   IL:[35.22,31.78,['Kudüs','Jerusalem','ירושלים','Qüds']],
   ET:[37.47,12.61,['Gondar','Gondar','גונדר','Qondar']],
   IN:[76.27,9.93,['Koçin','Kochi','קוצ׳ין','Koçin']],
@@ -28,28 +31,28 @@ const sites = {
 const copy = {
   tr: {
     intro:'Bir şehri, dili ya da dinî akımı ara. Aynı kişi hem bir cemaat mirasına hem bir ibadet geleneğine bağlı olabilir.',
-    types:['Tümü','Bölge ve dil cemaatleri','Dinî akımlar ve gelenekler'],
+    types:['Tümü','Bölge ve dil cemaatleri','Dinî akımlar ve gelenekler','Antik gruplar ve gelenekler'],
     category:'Kayıt türü', search:'Atlastaki ad, yer veya dil', entry:'Okuyacağın kayıt',
     empty:'Eşleşme yok. Başka bir ad veya yer dene.', count:n => n + ' kayıt',
     stops:'Haritadaki örnek duraklar',
   },
   en: {
     intro:'Find a city, language, or religious movement. One person can share a community heritage and follow a religious tradition.',
-    types:['All','Regional and language communities','Religious movements and traditions'],
+    types:['All','Regional and language communities','Religious movements and traditions','Ancient groups and traditions'],
     category:'Type of entry', search:'Name, place or language', entry:'Entry to read',
     empty:'No matches. Try another name or place.', count:n => n + ' entries',
     stops:'Example places on the map',
   },
   he: {
     intro:'חפשו עיר, שפה או זרם דתי. לאדם אחד יכולות להיות גם מורשת קהילתית וגם מסורת דתית.',
-    types:['הכול','קהילות לפי אזור ושפה','זרמים ומסורות דתיות'],
+    types:['הכול','קהילות לפי אזור ושפה','זרמים ומסורות דתיות','קבוצות ומסורות מן העת העתיקה'],
     category:'סוג הרשומה', search:'שם, מקום או שפה', entry:'רשומה לקריאה',
     empty:'לא נמצאו תוצאות. נסו שם או מקום אחר.', count:n => n + ' רשומות',
     stops:'דוגמאות למקומות במפה',
   },
   az: {
     intro:'Şəhər, dil və ya dini cərəyan axtar. Eyni şəxs həm icma irsini daşıya, həm də dini ənənəyə bağlı ola bilər.',
-    types:['Hamısı','Bölgə və dil icmaları','Dini cərəyanlar və ənənələr'],
+    types:['Hamısı','Bölgə və dil icmaları','Dini cərəyanlar və ənənələr','Qədim qruplar və ənənələr'],
     category:'Qeyd növü', search:'Ad, yer və ya dil', entry:'Oxumaq üçün qeyd',
     empty:'Uyğun qeyd yoxdur. Başqa ad və ya yer yaz.', count:n => n + ' qeyd',
     stops:'Xəritədəki nümunə məkanlar',
@@ -61,7 +64,7 @@ function normalize(text) {
     .replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 }
 
-export function mountAtlas(panel, language, locale) {
+export function mountAtlas(panel, language, locale, view) {
   const fragment = document.getElementById('atlas-template').content.cloneNode(true);
   const labels = copy[language];
   const category = fragment.querySelector('#atlas-category');
@@ -71,7 +74,9 @@ export function mountAtlas(panel, language, locale) {
   const figure = reading.querySelector('figure');
   const map = figure.querySelector('.atlas-map');
   const image = map.querySelector('img');
-  const [title, , history, detail, source] = reading.children;
+  const [title, , history, detail, sources] = reading.children;
+  const source = sources.querySelector("#atlas-source");
+  const context = sources.querySelector("#atlas-context");
   const status = fragment.querySelector('.atlas-status');
   const list = new Intl.ListFormat(language);
   const numbers = new Intl.NumberFormat(language);
@@ -88,11 +93,19 @@ export function mountAtlas(panel, language, locale) {
     reading.hidden = !selected;
     if (!selected) return;
     const {entry, places} = selected;
+    view.record = entry.id;
     title.textContent = entry.name[language];
     history.textContent = entry.history[language];
     detail.textContent = entry.detail[language];
     source.textContent = entry.source.title;
     source.href = entry.source.url;
+    context.parentElement.hidden = !entry.context;
+    if (entry.context) {
+      context.textContent = entry.context.title;
+      context.href = entry.context.url;
+    } else {
+      context.removeAttribute('href');
+    }
     figure.hidden = places.length === 0;
     if (!places.length) return;
     if (!image.hasAttribute('src')) image.src = mapImage.href;
@@ -109,11 +122,12 @@ export function mountAtlas(panel, language, locale) {
 
   function filter() {
     const terms = normalize(search.value).split(/\s+/).filter(Boolean);
-    const selected = select.value;
+    view.category = category.value;
+    view.search = search.value;
     const results = entries.filter(({entry, words}) =>
       (category.value === 'all' || entry.category === category.value) && terms.every(term => words.includes(term)));
     select.replaceChildren(...results.map(({entry}) => new Option(entry.name[language], entry.id)));
-    if (results.some(({entry}) => entry.id === selected)) select.value = selected;
+    if (results.some(({entry}) => entry.id === view.record)) select.value = view.record;
     select.disabled = !results.length;
     status.textContent = results.length ? labels.count(numbers.format(results.length)) : labels.empty;
     showEntry();
@@ -123,7 +137,9 @@ export function mountAtlas(panel, language, locale) {
   fragment.querySelector('[for="atlas-category"]').textContent = labels.category;
   fragment.querySelector('[for="atlas-search"]').textContent = labels.search;
   fragment.querySelector('[for="atlas-entry"]').textContent = labels.entry;
-  category.replaceChildren(...['all','communities','movements'].map((value, index) => new Option(labels.types[index], value)));
+  category.replaceChildren(...['all','communities','movements','ancient'].map((value, index) => new Option(labels.types[index], value)));
+  category.value = view.category;
+  search.value = view.search;
   category.addEventListener('change', filter);
   search.addEventListener('input', filter);
   select.addEventListener('change', showEntry);

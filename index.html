@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.7.5</small>
+  <small dir="ltr">v0.7.6</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -119,7 +119,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.7.5</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.7.6</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -448,7 +448,10 @@
     </figure>
     <p></p>
     <p></p>
-    <a target="_blank" rel="noopener noreferrer" dir="auto"></a>
+    <ul class="atlas-sources">
+      <li><a id="atlas-source" target="_blank" rel="noopener noreferrer" dir="auto"></a></li>
+      <li hidden><a id="atlas-context" target="_blank" rel="noopener noreferrer" dir="auto"></a></li>
+    </ul>
   </article>
 </template>
 <script type="module" src="./start.js"></script>

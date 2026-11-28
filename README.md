@@ -2,7 +2,7 @@
 
 WALL is a four-language 2D pixel-art game about the Western Wall, Jewish history, texts and thought. Follow 24 chronological chapters, compare evidence and build a three-source exhibition. The study room includes the Jewish calendar, communities, everyday life, diasporas, Hebrew and Aramaic, and Kabbalah.
 
-Activities include the Geniza letters, a turnable Talmud folio, the 1930 commission map, Safed’s three reading tables, and an interactive model of Yehuda Ashlag’s four phases, screen and returning light.
+The atlas covers ancient groups, regional communities and later movements. Activities include the Geniza letters, a turnable Talmud folio, the 1930 commission map, Safed’s three reading tables, and an interactive model of Yehuda Ashlag’s four phases, screen and returning light.
 
 ## Play locally
 

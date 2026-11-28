@@ -109,6 +109,7 @@ export async function start(initialLanguage) {
   const labs = labRoot.querySelectorAll('details');
   const labState = {word:[], sefirah:0, daat:false};
   const kabbalahView = {lesson:null,sourcesOpen:false,exerciseOpen:false,solved:new Set()};
+  const atlasView = {category:'all',search:'',record:null};
   const cultureView = {record:null};
   const accountabilityView = {record:null};
   const genizaView = {};
@@ -180,7 +181,8 @@ export async function start(initialLanguage) {
   }
   const workshops = [
     ['calendar', calendarLabels, () => import('./calendar.js').then(module => module.mountCalendar)],
-    ['atlas', atlasLabels, () => import('./atlas.js').then(module => module.mountAtlas)],
+    ['atlas', atlasLabels, () => import('./atlas.js').then(({mountAtlas}) =>
+      (panel, current, index) => mountAtlas(panel, current, index, atlasView))],
     ['kabbalah', kabbalahLabels, () => import('./kabbalah.js').then(({mountKabbalah}) =>
       (panel, current, index) => mountKabbalah(panel, current, index, {read,store}, kabbalahView))],
     ['visit', visitLabels, () => import('./kotel.js').then(module => module.mountKotel)],

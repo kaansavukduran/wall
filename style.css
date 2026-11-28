@@ -133,6 +133,8 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .atlas-reading{padding:.65rem;background:var(--panel-bg)}
 .atlas-reading h3{margin-block:0 .55rem}
 .atlas-reading p{margin-block:.6rem}
+.atlas-sources{margin-block:.65rem 0;padding-inline-start:1.25em}
+.atlas-sources li+li{margin-block-start:.3rem}
 .atlas-figure{margin:.25rem 0;color:var(--muted);font-size:.9em}
 .atlas-map{position:relative;overflow:hidden;border:1px solid var(--edge)}
 .atlas-map img{display:block;inline-size:100%;block-size:auto;image-rendering:pixelated}

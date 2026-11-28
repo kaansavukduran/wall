@@ -1,4 +1,4 @@
-// Atlas categories separate historical/geographic communities from religious movements.
+// Atlas categories distinguish communities, religious movements, and groups with ancient roots.
 // Region codes indicate historical centers, not exclusive membership or present-day limits.
 export const atlasEntries = [
   {
@@ -133,5 +133,53 @@ export const atlasEntries = [
     history:{tr:'Hümanist Yahudilik, haham Sherwin Wine’ın 1960’larda ABD’de başlattığı modern bir harekettir; Yahudi kültürü ve topluluğunu doğaüstü inançtan bağımsız yorumlar.',en:'Humanistic Judaism is a modern movement begun by Rabbi Sherwin Wine in the United States in the 1960s; it interprets Jewish culture and community independently of supernatural belief.',he:'היהדות ההומניסטית היא תנועה מודרנית שהקים הרב שרווין ויין בארצות הברית בשנות ה־1960; היא מפרשת תרבות וקהילה יהודיות בלי תלות באמונה על־טבעית.',az:'Humanist yəhudilik ravvin Sherwin Wine tərəfindən 1960-cı illərdə ABŞ-da yaradılmış müasir hərəkatdır; yəhudi mədəniyyəti və icmasını fövqəltəbii inancdan asılı olmadan şərh edir.'},
     detail:{tr:'Törenler, bayramlar, tarih ve etik yaşamı içerebilir. Bir hareketin kendi açıklaması olarak sunulmalı; Yahudi kimliğini yalnızca dindarlıkla tanımlamaz.',en:'Its practice can include ceremonies, holidays, history, and ethical life. Present this as the movement’s own account; Jewish identity is not defined only by religious observance.',he:'העשייה יכולה לכלול טקסים, חגים, היסטוריה וחיים אתיים. יש להציג זאת כתיאור העצמי של התנועה; זהות יהודית אינה מוגדרת רק באמצעות שמירת מצוות.',az:'Praktikaya mərasimlər, bayramlar, tarix və etik həyat daxil ola bilər. Bunu hərəkatın öz izahı kimi təqdim etmək lazımdır; yəhudi kimliyi yalnız dini ayinlərlə müəyyən edilmir.'},
     source:{title:'Society for Humanistic Judaism: What Is Humanistic Judaism?',url:'https://shj.org/meaning-learning/what-is-humanistic-judaism/'}
-  }
+  },
+  {
+    id:"pharisees", category:"ancient", regions:["IL"],
+    name:{tr:"Ferisiler",en:"Pharisees",he:"פרושים",az:"Fəriseylər"},
+    history:{tr:"MÖ 2. yüzyıl ile MS 1. yüzyıl arasında Yahudiye’de etkinlerdi. Josephus, yazılı yasanın yanında ataların aktardığı geleneklere de uyduklarını yazar.",en:"They were active in Judea from the second century BCE to the first century CE. Josephus says they followed ancestral traditions alongside the written law.",he:"הפרושים פעלו ביהודה מהמאה השנייה לפנה״ס עד המאה הראשונה לספירה. יוסף בן מתתיהו מספר שקיימו גם מסורות אבות לצד החוק הכתוב.",az:"E.ə. II əsrdən eramızın I əsrinə qədər Yəhudeyada fəal idilər. İosif Flavi yazır ki, yazılı qanunla yanaşı ata-baba ənənələrinə də əməl edirdilər."},
+    detail:{tr:"Bu geleneklerin bir bölümü sonraki haham Yahudiliğini etkiledi. Josephus, Tapınak yıkıldıktan sonra önceki kuşakları anlatır.",en:"Some of these traditions influenced later rabbinic Judaism. Josephus wrote about earlier generations after the Temple fell.",he:"חלק מהמסורות האלה השפיעו על היהדות הרבנית. יוסף כתב על דורות קודמים אחרי חורבן המקדש.",az:"Bu ənənələrin bir qismi sonrakı ravvin yəhudiliyinə təsir göstərdi. İosif Məbəd dağıldıqdan sonra əvvəlki nəsillər haqqında yazırdı."},
+    source:{title:"Josephus · Antiquities 13.297–298",url:"https://penelope.uchicago.edu/Josephus/ant-13.html"},
+    context:{title:"Library of Congress · The World of the Scrolls",url:"https://www.loc.gov/exhibits/scrolls/bib.html"}
+  },
+  {
+    id:"sadducees", category:"ancient", regions:["IL"],
+    name:{tr:"Sadukiler",en:"Sadducees",he:"צדוקים",az:"Sadukeylər"},
+    history:{tr:"İkinci Tapınak döneminde Kudüs’te etkili bir gruptu. Josephus, taraftarlarının az sayıda olduğunu ve yüksek konumdaki insanlardan destek gördüğünü aktarır.",en:"They were an influential group in Second Temple Jerusalem. Josephus says they were few and drew support from people of high standing.",he:"הצדוקים היו קבוצה משפיעה בירושלים בימי הבית השני. לפי יוסף בן מתתיהו הם היו מעטים וזכו לתמיכת בעלי מעמד גבוה.",az:"İkinci Məbəd dövründə Qüdsdə nüfuzlu qrup idilər. İosif Flavi onların azsaylı olduğunu və yüksək mövqeli şəxslərdən dəstək aldıqlarını yazır."},
+    detail:{tr:"Josephus, ölümden sonraki yaşam konusunda Ferisilerle ayrıldıklarını yazar. Tek bir rahibin görevi ya da toplumsal konumu, hangi gruba bağlı olduğunu göstermez.",en:"Josephus describes disagreements with the Pharisees over life after death. A priest’s office or social rank alone tells us little about his allegiance.",he:"יוסף מתאר מחלוקת עם הפרושים על החיים אחרי המוות. תפקידו או מעמדו של כוהן לבדם אינם מלמדים לאיזו קבוצה השתייך.",az:"İosif onların axirət barədə fəriseylərlə fikir ayrılığını təsvir edir. Kahinin vəzifəsi və ya ictimai mövqeyi onun hansı qrupa bağlı olduğunu göstərmir."},
+    source:{title:"Josephus · Antiquities 18.16–17",url:"https://penelope.uchicago.edu/josephus/ant-18.html"},
+    context:{title:"Cambridge History of Judaism · The Sadducees",url:"https://www.cambridge.org/core/books/abs/cambridge-history-of-judaism/sadducees-their-history-and-doctrines/7E9A58EBB40C3153D777BC6B20A1AF9D"}
+  },
+  {
+    id:"essenes-qumran-debate", category:"ancient", regions:["qumran"],
+    name:{tr:"Esseniler ve Kumran sorusu",en:"Essenes and the Qumran question",he:"איסיים ושאלת קומראן",az:"Essenlər və Qumran məsələsi"},
+    history:{tr:"MS 1. yüzyılda Josephus, Esseniler arasında ortak yaşam ve mal paylaşımı uygulamalarını anlatır. Kumran yakınındaki mağaralardan çıkan Cemaat Kuralı da topluluk yaşamını düzenler.",en:"In the first century CE, Josephus describes communal life and shared property among the Essenes. The Community Rule, found near Qumran, also regulates life in a community.",he:"במאה הראשונה לספירה יוסף בן מתתיהו מתאר אצל האיסיים חיים ורכוש משותפים. סרך היחד, שנמצא ליד קומראן, מסדיר גם הוא חיי קהילה.",az:"Eramızın I əsrində İosif Flavi essenlərin birgə yaşayışını və ortaq əmlakını təsvir edir. Qumran yaxınlığında tapılan İcma Qaydası da icma həyatını tənzimləyir."},
+    detail:{tr:"Bu benzerlik, Kumran ile Esseniler arasında bağ kurmanın bir nedenidir. Araştırmacılar, yerleşimin kimliği ve farklı yazmaların kimlerce kullanıldığı konusunda ayrılır.",en:"These parallels are one reason scholars link Qumran with the Essenes. They disagree about the settlement’s identity and who used the different scrolls.",he:"הדמיון הוא אחת הסיבות לקשר שמציעים חוקרים בין קומראן לאיסיים. יש מחלוקת על זהות תושבי היישוב ועל משתמשי המגילות השונות.",az:"Bu oxşarlıq tədqiqatçıların Qumranla essenlər arasında əlaqə qurmasının bir səbəbidir. Yaşayış yerinin kimə məxsus olması və ayrı-ayrı əlyazmalardan kimin istifadə etməsi mübahisəlidir."},
+    source:{title:"Israel Museum · The Community Rule",url:"https://dss.collections.imj.org.il/community"},
+    context:{title:"Israel Antiquities Authority · The Scrolls and Qumran",url:"https://www.deadseascrolls.org.il/learn-about-the-scrolls/introduction"}
+  },
+  {
+    id:"samaritans-israelite-tradition", category:"ancient", regions:["gerizim"],
+    name:{tr:"Samaritanlar",en:"Israelite Samaritans",he:"שומרונים",az:"Samaritanlar"},
+    history:{tr:"Samaritanlar kendilerini İsrailoğulları geleneğinin bir topluluğu olarak tanımlar. Kendi Tevrat metinlerini aktarırlar ve Gerizim Dağı’nı kutsal merkez sayarlar.",en:"Samaritans identify themselves as an Israelite community. They transmit their own text of the Pentateuch and regard Mount Gerizim as their holy center.",he:"השומרונים מגדירים את עצמם כקהילה מבני ישראל. הם מוסרים נוסח משלהם של התורה ורואים בהר גריזים את מרכזם הקדוש.",az:"Samaritanlar özlərini İsrail oğulları ənənəsinə bağlı icma kimi tanıdırlar. Tövratın öz mətnini qoruyub ötürür və Gerizim dağını müqəddəs mərkəz sayırlar."},
+    detail:{tr:"Manchester’daki 1211 tarihli nüsha, Tevrat’ın Samaritan yazısıyla kopyalanmasını belgeler. Topluluğun daha eski tarihi için Gerizim yazıtları ve arkeolojisi ayrı kanıtlar sunar.",en:"The Manchester manuscript from 1211 documents the copying of the Pentateuch in Samaritan script. Inscriptions and archaeology from Gerizim offer different evidence for the community’s earlier history.",he:"כתב היד ממנצ׳סטר משנת 1211 מתעד העתקה של התורה בכתב שומרוני. כתובות וממצאים מהר גריזים מספקים ראיות אחרות לתולדות הקהילה הקדומות.",az:"Mançesterdə qorunan 1211-ci il nüsxəsi Tövratın Samaritan yazısı ilə köçürülməsini sənədləşdirir. Gerizim yazıları və arxeoloji tapıntılar icmanın daha qədim tarixi üçün ayrıca dəlillər verir."},
+    source:{title:"University of Manchester · Samaritan Pentateuch MS 1",url:"https://www.digitalcollections.manchester.ac.uk/view/MS-SAMARITAN-00001/1"},
+    context:{title:"Cambridge History of Judaism · The Samaritans",url:"https://www.cambridge.org/core/books/abs/cambridge-history-of-judaism/samaritans/DABD75626391C4709E0019C104153AE1"}
+  },
+  {
+    id:"mitnagdim-lithuanian-learning", category:"movements", regions:["LT","volozhin"],
+    name:{tr:"Mitnagdim ve Litvanya yeşivaları",en:"Mitnagdim and Lithuanian yeshivas",he:"מתנגדים וישיבות ליטאיות",az:"Mitnagdim və Litva yeşivaları"},
+    history:{tr:"1772’de Vilna Gaonu’nun da imzaladığı mektup, bazı önderlerin Hasidizme itirazını kayda geçirir. Haham Hayim, sonraki kuşakta Volojin’de bir ileri öğrenim okulu kurdu.",en:"A 1772 letter also signed by the Vilna Gaon records some communal leaders’ opposition to Hasidism. In the next generation Rabbi Hayyim founded a school for advanced study in Volozhin.",he:"מכתב משנת 1772, שעליו חתום גם הגאון מווילנה, מתעד את התנגדותם של כמה מנהיגי קהילות לחסידות. בדור הבא הקים רבי חיים ישיבה בוולוז׳ין.",az:"Vilna Qaonunun da imzaladığı 1772-ci il məktubu bəzi icma rəhbərlərinin hasidizmə etirazını sənədləşdirir. Sonrakı nəsildə ravvin Hayim Volojində ali dini təhsil məktəbi qurdu."},
+    detail:{tr:"Mektup bir tartışmanın içinden konuşur. Yeşiva, özellikle Talmud çalışmasıyla öğrenim kurumu olarak gelişti. Litvanya Yahudilerinin tutumları farklıydı.",en:"The letter speaks from inside a dispute. The yeshiva developed as a school especially for Talmud study. Lithuanian Jews held a range of views.",he:"המכתב נכתב מתוך מחלוקת. הישיבה התפתחה כמוסד ללימוד, במיוחד ללימוד תלמוד. ליהודי ליטא היו עמדות מגוונות.",az:"Məktub mübahisənin içindən gələn mövqeni göstərir. Yeşiva xüsusən Talmud tədris edən məktəb kimi inkişaf etdi. Litva yəhudilərinin mövqeləri müxtəlif idi."},
+    source:{title:"Posen Library · Epistle against the Hasidim (1772)",url:"https://www.posenlibrary.com/entry/epistle-against-hasidim"},
+    context:{title:"YIVO Encyclopedia · Misnagdim",url:"https://encyclopedia.yivo.org/article/183"}
+  },
+  {
+    id:"musar-salanter", category:"movements", regions:["LT"],
+    name:{tr:"Musar hareketi ve Yisrael Salanter",en:"Musar movement and Yisrael Salanter",he:"תנועת המוסר וישראל סלנטר",az:"Musar hərəkatı və İsrael Salanter"},
+    history:{tr:"19. yüzyılda Litvanya’da Yisrael Salanter, insanların okudukları ahlak ilkelerini davranışa dönüştürmeleri için düzenli çalışma önerdi. 1857’de Musar Mektubu’nu yayımladı.",en:"In nineteenth-century Lithuania, Yisrael Salanter advocated regular study to help people put ethical principles into practice. He published his Musar Epistle in 1857.",he:"בליטא של המאה ה־19 עודד ישראל סלנטר לימוד קבוע כדי להפוך עקרונות מוסריים למעשים. ב־1857 פרסם את איגרת המוסר.",az:"XIX əsrdə Litvada İsrael Salanter əxlaq prinsiplərini davranışa çevirmək üçün nizamlı öyrənmə təklif etdi. Musar məktubunu 1857-ci ildə nəşr etdirdi."},
+    detail:{tr:"Önerilerinden biri kısa bir ahlak pasajını sesli ve tekrar tekrar okumaktı. Bu çalışma biçimini sonraki yeşivalar farklı şekillerde benimsedi.",en:"One method was to repeat a short ethical passage aloud. Later yeshivas adopted this study practice in different ways.",he:"אחת מדרכי הלימוד הייתה לחזור בקול על קטע מוסרי קצר. ישיבות מאוחרות אימצו את השיטה בדרכים שונות.",az:"Üsullardan biri qısa bir əxlaq parçasını ucadan təkrar oxumaq idi. Sonrakı yeşivalar bu çalışma üsulunu müxtəlif formalarda qəbul etdilər."},
+    source:{title:"Sefaria · Yisrael Salanter, Ohr Yisrael 30",url:"https://www.sefaria.org/Ohr_Yisrael.30"},
+    context:{title:"YIVO Encyclopedia · Yisrael Salanter",url:"https://encyclopedia.yivo.org/article/1487"}
+  },
 ];

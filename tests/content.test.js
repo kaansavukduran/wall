@@ -145,7 +145,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 337);
+  assert.equal(entries.length, 347);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -333,12 +333,14 @@ test('festival calendar dates and four localized readings use indexed sources', 
 
 test('community atlas has separate categories with four-language indexed readings', () => {
   const urls = new Set(parseCatalogue(readFileSync('docs/SOURCES.tsv', 'utf8')).map(item => item.url));
-  assert.equal(atlasEntries.length, 19);
+  assert.equal(atlasEntries.length, 25);
   assert.equal(new Set(atlasEntries.map(entry => entry.id)).size, atlasEntries.length);
   assert.equal(atlasEntries.filter(entry => entry.category === 'communities').length, 9);
-  assert.equal(atlasEntries.filter(entry => entry.category === 'movements').length, 10);
+  assert.equal(atlasEntries.filter(entry => entry.category === 'movements').length, 12);
+  assert.equal(atlasEntries.filter(entry => entry.category === 'ancient').length, 4);
   for (const entry of atlasEntries) {
     assert.ok(urls.has(entry.source.url), entry.source.url);
+    if (entry.context) assert.ok(urls.has(entry.context.url), entry.context.url);
     for (const language of languages) {
       for (const field of ['name','history','detail']) assert.ok(entry[field][language].trim());
     }
