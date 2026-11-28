@@ -1,5 +1,5 @@
 export const messianicLessons = {
-  displayOrder:[2,4,1,3,0],
+  displayOrder:[3,5,2,1,4,0],
   cards: [
     {
       id: "messianic-nathan-letter",
@@ -38,8 +38,44 @@ export const messianicLessons = {
       }
     },
     {
+      id: "messianic-hamburg-letters",
+      date: ["1666 başları", "Early 1666", "תחילת 1666", "1666-cı ilin əvvəli"],
+      sourceClass: [
+        "1691–1719 arasında yazılmış aile anıları",
+        "Family memoir written between 1691 and 1719",
+        "זיכרונות משפחתיים שנכתבו בין 1691 ל־1719",
+        "1691–1719-cu illərdə yazılmış ailə xatirələri"
+      ],
+      title: [
+        "Mektuplar haberi Hamburg’a taşıyor",
+        "Letters carry the news to Hamburg",
+        "מכתבים מביאים את הבשורה להמבורג",
+        "Məktublar xəbəri Hamburqa çatdırır"
+      ],
+      placeActor: [
+        "Glikl von Hameln, Hamburg’a ulaşan mektupların yarattığı heyecanı yıllar sonra Yidişçe anlattı. Tarihçi Joshua Teplitsky, haberlerin yaklaşık Şubat 1666’da özellikle İzmir’den, ayrıca Osmanlı Filistin’i ve Mısır’dan geldiğini belirtir. Glikl’e göre mektuplar Sefarad sinagogunda sesli okunur, Aşkenazlar da haberi duymak için gelirdi.",
+        "Writing in Yiddish years later, Glikl von Hameln recalled the excitement stirred by letters arriving in Hamburg. Historian Joshua Teplitsky places the news around February 1666 and traces it especially to Izmir, as well as to Ottoman Palestine and Egypt. Glikl recalled the letters being read aloud at the Sephardic synagogue, where Ashkenazim also came to hear the news.",
+        "גליקל מהמלן תיארה ביידיש, שנים לאחר מכן, את ההתרגשות שעוררו המכתבים שהגיעו להמבורג. ההיסטוריון ג׳ושוע טפליצקי מתארך את הבשורות לסביבות פברואר 1666 ומצביע על איזמיר כמקור מרכזי, לצד ארץ ישראל העות׳מאנית ומצרים. גליקל נזכרה שהמכתבים הוקראו בבית הכנסת הספרדי, ושגם אשכנזים הגיעו לשמוע את הבשורות.",
+        "Glikl von Hameln Hamburqa gələn məktubların doğurduğu həyəcanı illər sonra yidiş dilində xatırladı. Tarixçi Coşua Teplitski xəbərləri təxminən 1666-cı ilin fevralına aid edir. Məktublar əsasən İzmirdən, həmçinin Osmanlı Fələstini və Misirdən gəlirdi. Gliklin xatirələrinə görə məktublar Sefarad sinaqoqunda ucadan oxunur, Aşkenazlar da xəbəri eşitmək üçün oraya gəlirdilər."
+      ],
+      explanation: [
+        "Glikl’in anıları Hamburg’da haberin nasıl karşılandığına ışık tutar. Halevi’nin Kasım mektubu ise Sevi’nin din değiştirmesinden sonraki ayrı bir belgedir. Selanik’in sonraki cemaat tarihini ayrı karttan izle.",
+        "Glikl’s account shows how the news was received in Hamburg. Halevi’s November letter is a separate document from after Sevi’s conversion. See the separate card for Salonica’s later community history.",
+        "זיכרונותיה של גליקל מלמדים כיצד התקבלה הבשורה בהמבורג. מכתבו של הלוי מנובמבר הוא מסמך נפרד, שנכתב לאחר התאסלמותו של צבי. בכרטיס אחר אפשר לקרוא על התפתחות הקהילות בסלוניקי בשנים שלאחר מכן.",
+        "Gliklin xatirələri xəbərin Hamburqda necə qarşılandığını göstərir. Halevin noyabr məktubu isə Sevinin din dəyişməsindən sonra yazılmış ayrı sənəddir. Salonikinin sonrakı icma tarixi ilə ayrıca kartda tanış ol."
+      ],
+      source: {
+        title: "Glikl von Hameln, Memoirs 1691–1719, Book III (Key Documents of German-Jewish History)",
+        url: "https://keydocuments.net/source/jgo%3Asource-165"
+      },
+      relatedSource: {
+        title: "Joshua Teplitsky, Messianic Hope in Hamburg, 1666 (Key Documents of German-Jewish History)",
+        url: "https://keydocuments.net/article/teplitsky-glikl"
+      }
+    },
+    {
       id: "messianic-conversion-report",
-      date: ["1666", "1666", "1666", "1666"],
+      date: ["Eylül–Kasım 1666", "September–November 1666", "ספטמבר–נובמבר 1666", "Sentyabr–noyabr 1666"],
       sourceClass: [
         "Dönem raporu ve sonraki araştırma",
       "Contemporary report and later scholarship",
@@ -53,10 +89,10 @@ export const messianicLessons = {
         "Sabatay Sevinin Ədirnədə din dəyişməsi"
       ],
       placeActor: [
-        "Sabatay Sevi, Osmanlı saray kentlerinden Edirne'deydi (Adrianople). Dönemin raporlarından biri, Rav Yusif Halevi'nin Rav Yaakov Sasportas'a Kasım 1666'da yazdığı mektuptur.",
-      "Sabbatai Sevi was in Edirne (Adrianople), an Ottoman court city. A contemporary report is Rabbi Joseph Halevi’s letter to Rabbi Jacob Sasportas, written in November 1666.",
-        "שבתאי צבי היה באדירנה (אדריאנופול), עיר החצר העות׳מאנית. דיווח בן הזמן הוא מכתב הרב יוסף הלוי לר׳ יעקב ששפורטש, שנכתב בנובמבר 1666.",
-        "Sabatay Sevi Osmanlı saray şəhəri Ədirnədə (Adrianopol) idi. Dövrün məlumatlarından biri ravvin Yusif Halevin ravvin Yaakov Sasportasa 1666-cı ilin noyabrında yazdığı məktubdur."
+        "Sabatay Sevi, Osmanlı saray kentlerinden Edirne'deydi (Adrianople). Dönemin raporlarından biri, Livornolu Rav Yusif Halevi’nin Hamburg’daki Rav Yaakov Sasportas’a Kasım 1666’da yazdığı mektuptur.",
+      "Sabbatai Sevi was in Edirne (Adrianople), an Ottoman court city. A contemporary report is the letter Rabbi Joseph Halevi of Livorno wrote to Rabbi Jacob Sasportas in Hamburg in November 1666.",
+        "שבתאי צבי היה באדירנה (אדריאנופול), עיר החצר העות׳מאנית. דיווח בן הזמן הוא מכתב שכתב הרב יוסף הלוי מליבורנו לרב יעקב ששפורטש בהמבורג בנובמבר 1666.",
+        "Sabatay Sevi Osmanlı saray şəhəri Ədirnədə (Adrianopol) idi. Dövrün məlumatlarından biri Livornolu ravvin Yusif Halevin Hamburqdakı ravvin Yaakov Sasportasa 1666-cı ilin noyabrında yazdığı məktubdur."
       ],
       explanation: [
         "1666'da İslam'a geçişi birden fazla kaynakta kayıtlıdır. Yusif Halevi'nin mektubu olaya yakın tarihli bir Yahudi anlatımıdır; sonraki araştırmalar bunu Osmanlı ve Avrupa kayıtlarıyla karşılaştırır. Tek bir rapor, bütün takipçilerin neye inandığını göstermez.",
@@ -188,16 +224,17 @@ export const messianicLessons = {
     ],
     correctOrder: [
       "messianic-nathan-letter",
+      "messianic-hamburg-letters",
       "messianic-conversion-report",
       "messianic-salonica-community",
       "messianic-hasidism-distinction",
       "messianic-frank-lwow"
     ],
     feedback: [
-      "Kronoloji: Natan'ın 1665 tarihli mektubu; Sevi'nin 1666'da din değiştirmesi; 1720’ye dek Osmanlı toplulukları, 1740’lardan itibaren Hasid çevreleri, 1759 Lvov tartışması.",
-      "Chronology: Nathan’s letter in 1665; Sevi’s conversion in 1666; Ottoman communities through 1720, Hasidic circles from the 1740s, and the Lwów disputation in 1759.",
-      "סדר כרונולוגי: מכתב נתן ב־1665; המרת שבתאי ב־1666; קהילות עות׳מאניות עד 1720, חוגים חסידיים משנות ה־1740 והוויכוח בלבוב ב־1759.",
-      "Xronologiya: Natanın 1665-ci il məktubu; Sevinin 1666-cı ildə din dəyişməsi; 1720-ci ilədək Osmanlı icmaları, 1740-cı illərdən Hasid çevrələri və 1759-cu il Lvov mübahisəsi."
+      "En erken önerilen tarih Natan’ın mektubu için 1665 sonbaharı. Hamburg’daki mektuplar 1666 başlarına, Sevi’nin din değiştirmesi ve Halevi’nin mektubu aynı yılın sonraki aylarına ait. Selanik’in sonraki cemaatleri, 1740’lardan itibaren Hasid çevreleri ve 1759 Lvov tartışması ayrı duraklar.",
+      "The earliest proposed date for Nathan’s letter is autumn 1665. Letters reached Hamburg in early 1666, with Sevi’s conversion and Halevi’s letter later that year. Salonica’s later communities, Hasidic circles from the 1740s, and the 1759 Lwów disputation are separate stops.",
+      "התאריך המוקדם המוצע למכתב נתן הוא סתיו 1665. המכתבים הגיעו להמבורג בתחילת 1666. התאסלמות צבי ומכתבו של הלוי התרחשו בהמשך אותה שנה. קהילות סלוניקי המאוחרות, חוגי החסידים משנות ה־1740 והוויכוח בלבוב ב־1759 הם תחנות נפרדות.",
+      "Natanın məktubu üçün irəli sürülən ən erkən tarix 1665-ci ilin payızıdır. Hamburqa məktublar 1666-cı ilin əvvəlində çatdı. Sevinin din dəyişməsi və Halevin məktubu həmin ilin sonrakı aylarına aiddir. Salonikinin sonrakı icmaları, 1740-cı illərdən görünən Hasid çevrələri və 1759-cu il Lvov mübahisəsi ayrı dayanacaqlardır."
     ]
   }
 };

@@ -50,6 +50,7 @@ export const cultureRecords = [
     sources:[
       {"title": ["Hamburg Key Documents: Glikl von Hameln anıları, 1691–1719 (seçki)", "Hamburg Key Documents: Glikl von Hameln, Memoirs 1691–1719 (excerpt)", "Hamburg Key Documents: זיכרונות גליקל מהמלן, 1691–1719 (קטע)", "Hamburg Key Documents: Glikl von Hameln xatirələri, 1691–1719 (parça)"], "url": "https://keydocuments.net/source/jgo%3Asource-165", "kind": "birincil kaynak çevirisi"},
       {"title": ["Posen Library: Glikl anıları giriş yazısı", "Posen Library: Introduction to Glikl’s memoir", "ספריית פוזן: מבוא לזיכרונות גליקל", "Posen Library: Gliklin xatirələrinə giriş"], "url": "https://www.posenlibrary.com/entry/introduction-glikl-hamelns-memoir", "kind": "akademik bağlam"},
+      {"title": ["Joshua Teplitsky: 1666’da Hamburg’da mesih beklentisi", "Joshua Teplitsky: Messianic Hope in Hamburg, 1666", "ג׳ושוע טפליצקי: תקווה משיחית בהמבורג, 1666", "Coşua Teplitski: 1666-cı ildə Hamburqda məsih ümidi"], "url": "https://keydocuments.net/article/teplitsky-glikl", "kind": "akademik kaynak incelemesi"},
     ],
   },
   {
@@ -127,6 +128,17 @@ export const cultureCases = [
     ],
     correct:0,
     feedback:["Doğru: NLI ve Free Library kayıtları Latin/Romen harfli 1553 baskısını doğrular.", "Correct: NLI and Free Library records identify the 1553 print as using Roman/Latin letters.", "נכון: רשומות הספרייה הלאומית וספריית פילדלפיה מזהות את הדפוס משנת 1553 ככתוב באותיות לטיניות.", "Doğrudur: NLI və Free Library qeydləri 1553 nəşrinin latın/roman hərfləri ilə olduğunu təsdiqləyir."],
+  },
+  {
+    recordId:"glikl-memoir",
+    question:["Glikl’in aile anılarından 1666 hakkında ne öğrenebilirsin?", "What can Glikl’s family memoir tell you about 1666?", "מה אפשר ללמוד מזיכרונותיה של גליקל על שנת 1666?", "Gliklin ailə xatirələrindən 1666-cı il haqqında nə öyrənə bilərsən?"],
+    choices:[
+      ["Selanik’teki ilk mektubun teslim edildiği günü.", "The day the first letter was delivered in Salonica.", "באיזה יום נמסר המכתב הראשון בסלוניקי.", "Salonikidə ilk məktubun çatdırıldığı günü."],
+      ["Halevi’nin Kasım mektubunu Şubat’ta kimin okuduğunu.", "Who read Halevi’s November letter in February.", "מי קרא בפברואר את המכתב שכתב הלוי בנובמבר.", "Halevin noyabr məktubunu fevralda kimin oxuduğunu."],
+      ["Glikl’in Hamburg’daki heyecanı yıllar sonra nasıl hatırladığını.", "How Glikl remembered Hamburg’s excitement years later.", "איך גליקל זכרה כעבור שנים את ההתרגשות בהמבורג.", "Gliklin Hamburqdakı həyəcanı illər sonra necə xatırladığını."],
+    ],
+    correct:2,
+    feedback:["Glikl, Hamburg’da yaşananları ailesi için yıllar sonra yazdı. Şubat civarındaki haberler ile Halevi’nin Kasım mektubu 1666’nın ayrı durakları.", "Glikl wrote for her family years after the events in Hamburg. The news around February and Halevi’s November letter are separate moments in 1666.", "גליקל תיארה למשפחתה את המאורעות בהמבורג שנים לאחר שהתרחשו. הבשורות מסביבות פברואר ומכתבו של הלוי מנובמבר שייכים לרגעים שונים בשנת 1666.", "Glikl Hamburqdakı hadisələri illər sonra ailəsi üçün yazdı. Fevral ətrafında gələn xəbərlər və Halevin noyabr məktubu 1666-cı ilin ayrı anlarına aiddir."],
   },
   {
     recordId:"regina-jonas",

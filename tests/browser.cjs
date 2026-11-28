@@ -494,8 +494,16 @@ async function main() {
           assert.match(await page.locator('.timeline-reading a').first().getAttribute('href'), /yivo/);
           for (const id of messianicLessons.activity.correctOrder) {
             await page.click('[data-timeline-card="' + id + '"]');
+            if (id === 'messianic-hamburg-letters') {
+              const reading = page.locator('#messianic-timeline .timeline-reading');
+              assert.match(await reading.locator('.timeline-source-kind').textContent(), /1691/);
+              assert.deepEqual(await reading.locator('a').evaluateAll(links => links.map(link => link.href)), [
+                'https://keydocuments.net/source/jgo%3Asource-165',
+                'https://keydocuments.net/article/teplitsky-glikl',
+              ]);
+            }
           }
-          assert.equal(await page.locator('.timeline-order li').count(), 5);
+          assert.equal(await page.locator('.timeline-order li').count(), 6);
           const textIndex = ['tr','en','he','az'].indexOf(locale);
           assert.equal(await page.locator('.timeline-status').innerText(), messianicLessons.activity.feedback[textIndex]);
           await page.click('.timeline-reset');

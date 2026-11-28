@@ -180,7 +180,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 424);
+  assert.equal(entries.length, 425);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -306,7 +306,7 @@ test('diaspora objects and exhibition labels have four locales and linked record
     'kaifeng-stele','ferrara-bible','tsenerene-print','glikl-memoir',
     'baldones-census','regina-jonas','maimunah-song','juhuri-recording',
   ]);
-  assert.equal(cultureCases.length, 3);
+  assert.equal(cultureCases.length, 4);
   for (const record of cultureRecords) {
     assert.ok(chapters.some(chapter => chapter.id === record.chapter));
     for (const field of ['title','era','object','context','limit']) {
@@ -495,10 +495,10 @@ test('Kotel visit observations and scenarios match their four-language sources',
   }
 });
 
-test('the chapter 20 timeline orders five distinct sources with four equivalent locales', () => {
+test('the chapter 20 timeline orders six distinct sources with four equivalent locales', () => {
   const urls = new Set(parseCatalogue(readFileSync('docs/SOURCES.tsv', 'utf8')).map(item => item.url));
   const {cards,activity} = messianicLessons;
-  assert.equal(cards.length, 5);
+  assert.equal(cards.length, 6);
   assert.deepEqual(new Set(cards.map(card => card.id)), new Set(activity.correctOrder));
   assert.equal(activity.correctOrder.length, cards.length);
   for (const card of cards) {
