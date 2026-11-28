@@ -37,6 +37,7 @@ async function main() {
   const { diasporaRecords } = await import('../diaspora-lessons.js');
   const { models } = await import('../scenes.js');
   const { messianicLessons } = await import('../messianic-lessons.js');
+  const { pressLessons } = await import('../press-lessons.js');
   const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
   const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js', 'modern-lessons.js'];
   const browser = await playwright[engine].launch(browserOptions);
@@ -482,6 +483,40 @@ async function main() {
           const firstNote = await page.locator('#models output').textContent();
           await page.click('[data-layer="nakba"]');
           assert.notEqual(await page.locator('#models output').textContent(), firstNote);
+        }
+        if (episode.id === 22) {
+          const localIndex = ['tr','en','he','az'].indexOf(locale);
+          assert.equal(loadedLessons.has('press-lessons.js'),false);
+          const pressRequest = page.waitForResponse(response => response.url().endsWith('/press-lessons.js'));
+          const press = page.locator('#press-timeline');
+          await press.locator('summary').press('Enter');
+          assert.ok((await pressRequest).ok());
+          const order = press.locator('.timeline-order li');
+          const card = id => press.locator('[data-timeline-card="' + id + '"]');
+          await card('press-bund-autonomy').press('Enter');
+          assert.equal(await order.count(),0);
+          assert.match(await press.locator('.timeline-reading a').first().getAttribute('href'),/our-demands$/);
+          for (const [index, record] of pressLessons.cards.entries()) {
+            if (width === 320) await card(record.id).tap();
+            else await card(record.id).press('Enter');
+            assert.equal(await order.count(),index+1);
+            assert.equal(await press.locator('.timeline-reading a').first().getAttribute('href'),record.source.url);
+            if (index === 2) {
+              await page.selectOption('#lang',locale === 'he' ? 'az' : 'he');
+              await order.nth(index).waitFor();
+              assert.equal(await card(record.id).isDisabled(),true);
+              await page.selectOption('#lang',locale);
+              await order.nth(index).waitFor();
+              assert.equal(await order.nth(index).textContent(),record.date[localIndex] + ' · ' + record.title[localIndex]);
+            }
+          }
+          assert.equal(await press.locator('.timeline-status').textContent(),pressLessons.activity.feedback[localIndex]);
+          await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+          assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
+          await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
+          await press.locator('.timeline-reset').press('Enter');
+          assert.equal(await order.count(),0);
+          await press.locator('summary').press('Enter');
         }
         if (episode.id === 24) {
           assert.equal(loadedLessons.has('ashlag-lessons.js'),false);

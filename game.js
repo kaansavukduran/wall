@@ -22,6 +22,12 @@ const timelineLabels = {
   he:['סדרו את המקורות מ־1665 עד 1759','המסמכים נטענים…','המסמכים לא נפתחו. רעננו את הדף ונסו שוב.'],
   az:['1665–1759-cu illərin mənbələrini sırala','Sənədlər yüklənir…','Sənədlər açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
+const pressLabels = {
+  tr:['Aydınlanma, Siyonizm ve Bund','Belgeler yükleniyor…','Belgeler açılamadı. Kapatıp yeniden aç.'],
+  en:['Enlightenment, Zionism and the Bund','Loading the documents…','The documents could not open. Close and reopen the panel.'],
+  he:['השכלה, ציונות והבונד','המסמכים נטענים…','המסמכים לא נפתחו. סגרו את החלונית ופתחו שוב.'],
+  az:['Maarifçilik, sionizm və Bund','Sənədlər yüklənir…','Sənədlər açılmadı. Bölməni bağlayıb yenidən aç.'],
+};
 const tourLoadLabels = {
   tr:['Ziyaretçiye sergini anlat','Sergi yükleniyor…','Sergi açılamadı. Sayfayı yenileyip tekrar dene.'],
   en:['Tell a visitor your story','Loading your exhibition…','The exhibition could not open. Reload the page and try again.'],
@@ -99,6 +105,7 @@ export async function start(initialLanguage) {
   const sequenceSurface = find('sequence');
   const evidence = find('evidence');
   const timeline = find('messianic-timeline');
+  const press = find('press-timeline');
   const talmud = find('talmud-page');
   const geniza = find('geniza-desk');
   const circle = find('study-circle');
@@ -114,6 +121,8 @@ export async function start(initialLanguage) {
   const cultureView = {record:null};
   const accountabilityView = {record:null};
   const genizaView = {};
+  const messianicView = {};
+  const pressView = {};
   const circleView = {};
   const wordMethodView = {};
   const ashlagView = {};
@@ -196,8 +205,18 @@ export async function start(initialLanguage) {
     ['accountability-archive', accountabilityLabels, () => import('./accountability-archive.js').then(({mountAccountabilityArchive}) =>
       (panel, current, index) => mountAccountabilityArchive(panel, current, index, accountabilityView))],
   ].map(([id, labels, load]) => connectDisclosure(id, labels, load));
-  const refreshTimeline = connectDisclosure('messianic-timeline', timelineLabels, () =>
-    import('./messianic-timeline.js').then(module => module.mountMessianicTimeline));
+  const refreshTimeline = connectDisclosure('messianic-timeline', timelineLabels, async () => {
+    const [{mountSourceTimeline},{messianicLessons}] = await Promise.all([
+      import('./source-timeline.js'),import('./messianic-lessons.js'),
+    ]);
+    return (panel, current, index) => mountSourceTimeline(panel,current,index,messianicLessons,messianicView);
+  });
+  const refreshPress = connectDisclosure('press-timeline', pressLabels, async () => {
+    const [{mountSourceTimeline},{pressLessons}] = await Promise.all([
+      import('./source-timeline.js'),import('./press-lessons.js'),
+    ]);
+    return (panel, current, index) => mountSourceTimeline(panel,current,index,pressLessons,pressView);
+  });
   const refreshTalmud = connectDisclosure('talmud-page', talmudLabels, () =>
     import('./talmud-page.js').then(({mountTalmudPage}) =>
       (panel, current, index) => mountTalmudPage(panel,current,index,talmudView)));
@@ -306,6 +325,8 @@ export async function start(initialLanguage) {
     renderSequence();
     timeline.hidden = episode.id !== 20;
     if (!timeline.hidden) refreshTimeline();
+    press.hidden = episode.id !== 22;
+    if (!press.hidden) refreshPress();
     talmud.hidden = episode.id !== 11;
     if (!talmud.hidden) refreshTalmud();
     geniza.hidden = episode.id !== 15;
@@ -330,6 +351,7 @@ export async function start(initialLanguage) {
     evidenceCard = null;
     evidence.open = false;
     timeline.open = false;
+    press.open = false;
     talmud.open = false;
     transfer.open = false;
     labState.word.length = 0;

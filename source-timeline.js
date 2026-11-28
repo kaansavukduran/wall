@@ -1,21 +1,21 @@
-import { messianicLessons } from './messianic-lessons.js';
-
 const copy = {
   tr:['Daha erken tarihli bir kart var. İlk kalan tarihi ara.','Sırayı temizle'],
   en:['One remaining card starts earlier. Look for the earliest date.','Clear the order'],
   he:['יש כרטיס נוסף שמתחיל מוקדם יותר. חפשו את התאריך המוקדם ביותר שנותר.','ניקוי הסדר'],
   az:['Qalan kartlardan biri daha əvvələ aiddir. Ən erkən tarixi tap.','Sıranı təmizlə'],
 };
-const displayOrder = [2,4,1,3,0];
-
-export function mountMessianicTimeline(panel, language, locale) {
-  const fragment = document.getElementById('messianic-template').content.cloneNode(true);
+export function mountSourceTimeline(panel, language, locale, lessons, view) {
+  const fragment = document.getElementById('source-timeline-template').content.cloneNode(true);
   const [instruction, choices, order, status, reset, reading] = fragment.children;
   const [title, kind, detail, explanation, links] = reading.children;
-  const {cards, activity} = messianicLessons;
-  let placed = 0;
+  const {cards, activity, displayOrder} = lessons;
+  const byId = new Map(cards.map(card => [card.id,card]));
+  view.placed ??= 0;
+  instruction.id = panel.parentElement.id + '-instruction';
+  choices.setAttribute('aria-labelledby',instruction.id);
 
   function showCard(card) {
+    view.card = card.id;
     title.textContent = card.title[locale];
     kind.textContent = card.date[locale] + ' · ' + card.sourceClass[locale];
     detail.textContent = card.placeActor[locale];
@@ -34,21 +34,28 @@ export function mountMessianicTimeline(panel, language, locale) {
     reading.hidden = false;
   }
 
-  function tryCard(card, button) {
-    showCard(card);
-    if (card.id !== activity.correctOrder[placed]) {
-      status.textContent = copy[language][0];
-      reset.disabled = false;
-      return;
-    }
+  function appendCard(card) {
     const entry = document.createElement('li');
     entry.textContent = card.date[locale] + ' · ' + card.title[locale];
     order.append(entry);
-    button.disabled = true;
-    reset.disabled = false;
-    placed++;
-    status.textContent = placed === cards.length ? activity.feedback[locale] : '';
-    (choices.querySelector('button:enabled') ?? reset).focus();
+  }
+
+  function updateStatus() {
+    status.textContent = view.placed === cards.length ? activity.feedback[locale]
+      : view.retry ? copy[language][0] : '';
+    reset.disabled = !view.card;
+  }
+
+  function tryCard(card, button) {
+    showCard(card);
+    view.retry = card.id !== activity.correctOrder[view.placed];
+    if (!view.retry) {
+      appendCard(card);
+      button.disabled = true;
+      view.placed++;
+      (choices.querySelector('button:enabled') ?? reset).focus();
+    }
+    updateStatus();
   }
 
   instruction.textContent = activity.instruction[locale];
@@ -59,6 +66,7 @@ export function mountMessianicTimeline(panel, language, locale) {
     button.type = 'button';
     button.dataset.timelineCard = card.id;
     button.textContent = card.title[locale];
+    button.disabled = activity.correctOrder.indexOf(card.id) < view.placed;
     const date = document.createElement('small');
     date.textContent = card.date[locale];
     button.append(date);
@@ -66,13 +74,17 @@ export function mountMessianicTimeline(panel, language, locale) {
     return button;
   }));
   reset.addEventListener('click', () => {
-    placed = 0;
+    view.placed = 0;
+    view.card = null;
+    view.retry = false;
     order.replaceChildren();
-    status.textContent = '';
     reading.hidden = true;
     for (const button of choices.children) button.disabled = false;
     choices.firstElementChild.focus();
-    reset.disabled = true;
+    updateStatus();
   });
+  for (const id of activity.correctOrder.slice(0,view.placed)) appendCard(byId.get(id));
+  if (view.card) showCard(byId.get(view.card));
+  updateStatus();
   panel.replaceChildren(fragment);
 }

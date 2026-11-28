@@ -30,6 +30,7 @@ import { languageLessons } from '../language-lessons.js';
 import { library, libraryLabels } from '../library.js';
 import { medievalLessons } from '../medieval-lessons.js';
 import { messianicLessons } from '../messianic-lessons.js';
+import { pressLessons } from '../press-lessons.js';
 import { modernLessons } from '../modern-lessons.js';
 import { romanLessons } from '../roman-lessons.js';
 import { models, photo } from '../scenes.js';
@@ -146,7 +147,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 373);
+  assert.equal(entries.length, 383);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -447,6 +448,25 @@ test('the chapter 20 timeline orders five distinct sources with four equivalent 
     }
   }
   assert.equal(activity.correctOrder.at(-1), 'messianic-frank-lwow');
+});
+
+test('press timeline dates proposals, congress decisions and the Bund’s program separately', () => {
+  const {cards,displayOrder,activity} = pressLessons;
+  assert.deepEqual(cards.map(card => card.id),activity.correctOrder);
+  assert.deepEqual([...displayOrder].sort((left,right) => left-right),[0,1,2,3,4,5]);
+  for (const card of cards) {
+    for (const source of [card.source,card.relatedSource].filter(Boolean)) {
+      assert.ok(entries.some(item => item.url === source.url && belongsTo(item,22)), source.url);
+    }
+    for (const field of ['date','sourceClass','title','placeActor','explanation']) {
+      assert.equal(card[field].length,languages.length);
+      assert.ok(card[field].every(text => text.trim()));
+    }
+  }
+  for (const field of ['instruction','feedback']) {
+    assert.equal(activity[field].length,languages.length);
+    assert.ok(activity[field].every(text => text.trim()));
+  }
 });
 
 test('all six exhibition sources have a supported claim and open question in the right locale', () => {

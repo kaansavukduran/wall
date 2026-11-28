@@ -1,4 +1,5 @@
 export const messianicLessons = {
+  displayOrder:[2,4,1,3,0],
   cards: [
     {
       id: "messianic-nathan-letter",
