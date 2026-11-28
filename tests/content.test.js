@@ -11,7 +11,7 @@ import { ancientLessons } from '../ancient-lessons.js';
 import { atlasEntries } from '../atlas-lessons.js';
 import { bakuCopy, bakuStops } from '../baku-lessons.js';
 import { letterSources } from '../bar-kosiba-letter.js';
-import { reservoirSource } from '../reservoir.js';
+import { reservoirSources } from '../reservoir.js';
 import { calendarEvents, shabbatStudy } from '../calendar-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
@@ -193,7 +193,7 @@ test('browser and desktop versions follow VERSION and scene options localize', (
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 466);
+  assert.equal(entries.length, 467);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -212,10 +212,12 @@ test('the Bar Kosiba letter activity links four source types with four-language 
   }
 });
 
-test('the reservoir exercise links the excavation record for the two phases', () => {
-  const record = entries.find(entry => entry.id === 'H16F');
-  assert.equal(record.url,reservoirSource);
-  assert.ok(belongsTo(record,19));
+test('the reservoir exercise links the preliminary and radiocarbon reports separately', () => {
+  for (const [index,id] of ['H16F','H16G'].entries()) {
+    const record = entries.find(entry => entry.id === id);
+    assert.equal(record.url,reservoirSources[index]);
+    assert.ok(belongsTo(record,19));
+  }
 });
 
 test('the late Mandate exercise orders the strike, commission and policy with chapter sources', () => {

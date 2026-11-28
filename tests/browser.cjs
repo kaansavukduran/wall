@@ -680,12 +680,13 @@ async function main() {
             assert.ok(await hasIntrinsicCanvasRatio(basin));
             const earlier = await frame();
             const earlierCaption = await reservoir.locator('figcaption').textContent();
+            assert.match(earlierCaption,/1305–1340/);
             assert.equal(await question.isHidden(),true);
             if (width === 320) await phase(1).tap();
             else await phase(1).press('Enter');
             const later = await frame();
             assert.notEqual(later,earlier);
-            assert.notEqual(await reservoir.locator('figcaption').textContent(),earlierCaption);
+            assert.match(await reservoir.locator('figcaption').textContent(),/1330–1400/);
             await question.locator('button').last().press('Enter');
             const wrong = await question.getByRole('status').textContent();
             await question.locator('button').first().press('Enter');
@@ -701,7 +702,8 @@ async function main() {
             assert.equal(await question.locator('button').first().getAttribute('aria-pressed'),'true');
             await page.selectOption('#lang',locale);
             await question.locator('button').first().waitFor();
-            assert.match(await reservoir.locator('a').getAttribute('href'),/id=25662$/);
+            assert.match(await reservoir.locator('a').first().getAttribute('href'),/id=25662$/);
+            assert.match(await reservoir.locator('a').last().getAttribute('href'),/0233307$/);
             assert.equal(await progress(),saved);
             if (width === 320) {
               assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
