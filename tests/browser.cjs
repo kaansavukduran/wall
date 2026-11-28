@@ -50,6 +50,10 @@ async function main() {
       assert.equal(await page.locator('html').getAttribute('dir'), locale === 'he' ? 'rtl' : 'ltr');
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
+      await page.click('#settings-button');
+      assert.equal(await page.locator('#settings').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth),false);
+      await page.keyboard.press('Escape');
+      assert.equal(await page.locator('#settings-button').evaluate(el => el === document.activeElement),true);
       await page.click('#source');
       await page.locator('#reader[open]').waitFor();
       await page.click('#catalogue summary');
@@ -239,9 +243,14 @@ async function main() {
           assert.ok(loadedLessons.has('talmud-lessons.js'));
           if (width === 320) {
             await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
-            assert.ok(await page.evaluate(() =>
-              document.getElementById('era').getBoundingClientRect().bottom
-                <= document.getElementById('world').getBoundingClientRect().top));
+            const separation = await page.evaluate(() => {
+              const era = document.getElementById('era');
+              const world = document.getElementById('world');
+              return {position:getComputedStyle(era).position,
+                gap:world.getBoundingClientRect().top - era.getBoundingClientRect().bottom};
+            });
+            assert.equal(separation.position,'static');
+            assert.ok(separation.gap >= -1, 'The era label overlaps the scenery by ' + -separation.gap + 'px');
             assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth),false);
             await page.evaluate(() => { document.documentElement.style.fontSize = ''; });
           }
@@ -671,6 +680,48 @@ async function main() {
     assert.equal(await padPage.locator('#library[open]').count(), 0);
     await padPage.close();
     console.log('Gamepad browser mapping and native event path (simulated): PASS');
+
+    const source = await browser.newPage({locale:'he',viewport:{width:320,height:700},hasTouch:true});
+    await source.goto(target);
+    await source.locator('#app').waitFor();
+    await source.selectOption('#lang','he');
+    await source.click('[data-choice="' + plaza.correct + '"]');
+    await source.click('#next');
+    await source.click('[data-choice="' + chapters[0].correct + '"]');
+    await source.tap('#transfer summary');
+    await source.tap('[data-transfer-choice="' + transferLessons[0].correct + '"]');
+    await source.fill('#transfer-draft','בדיקת שמירה');
+    await source.click('#next');
+    await source.tap('#settings-button');
+    await source.tap('#save-transfer summary');
+    await source.tap('#save-export');
+    const saved = await source.locator('#save-output').inputValue();
+    assert.ok(saved.includes('בדיקת שמירה'));
+    await source.close();
+
+    const restore = await browser.newPage({locale:'tr',viewport:{width:320,height:700},hasTouch:true});
+    await restore.goto(target);
+    await restore.locator('#app').waitFor();
+    await restore.tap('#settings-button');
+    await restore.tap('#save-transfer summary');
+    await restore.fill('#save-input','not a WALL save');
+    await restore.tap('#save-review');
+    assert.equal(await restore.locator('#save-confirm').isHidden(),true);
+    await restore.fill('#save-input',saved);
+    await restore.tap('#save-review');
+    await restore.locator('#save-confirm').waitFor();
+    await restore.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+    assert.equal(await restore.locator('#settings').evaluate(d => d.scrollWidth > d.clientWidth),false);
+    await restore.tap('#save-confirm');
+    await restore.locator('#restore-notice').waitFor();
+    assert.equal(await restore.locator('#chapter').textContent(),'2');
+    assert.equal(await restore.locator('html').getAttribute('dir'),'rtl');
+    await restore.click('#episodes-button');
+    await restore.locator('#chapters button').nth(1).click();
+    await restore.tap('#transfer summary');
+    assert.equal(await restore.locator('#transfer-draft').inputValue(),'בדיקת שמירה');
+    await restore.close();
+    console.log('Export, invalid-save rejection, restore into a separate profile and Hebrew draft: PASS');
 
     const recovery = await browser.newPage();
     await recovery.route('**/visitor.png', route => route.abort());

@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing WALL tag
+        description: Existing WALL tag or exact candidate commit
         type: string
         required: true
 permissions:
@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: refs/tags/${{ inputs.tag }}
+          ref: ${{ inputs.tag }}
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

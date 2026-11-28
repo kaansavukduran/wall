@@ -11,6 +11,7 @@ import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
 import { cultureCases, cultureRecords } from '../culture-lessons.js';
 import { pageFeedback, pageNote, talmudCards } from '../talmud-lessons.js';
+import { exportSave, mergeSave, parseSave, progressKey, saveSummary } from '../save-data.js';
 import { dailyCards } from '../daily-lessons.js';
 import { dailyCases } from '../daily-life.js';
 import { archiveCases } from '../diaspora-archive.js';
@@ -57,6 +58,47 @@ test('every checkpoint has four equivalent locales and a valid source', () => {
 
 test('campaign covers all 24 planned IDs in order', () => {
   assert.deepEqual(chapters.map(episode => episode.id), Array.from({length:24}, (_, index) => index + 1));
+});
+
+test('portable saves merge valid progress without replacing local drafts or touching unrelated storage', () => {
+  function mockStorage(initial, reject) {
+    const values = new Map(Object.entries(initial));
+    return {
+      get length() { return values.size; },
+      key(index) { return [...values.keys()][index]; },
+      getItem(key) { return values.get(key) ?? null; },
+      setItem(key, value) {
+        if (key === reject) throw new Error('Test storage limit');
+        values.set(key,value);
+      },
+      removeItem(key) { values.delete(key); },
+    };
+  }
+  const draft = 'wall.transfer.1.draft';
+  const importedProgress = JSON.stringify({active:'2',completed:['plaza','1']});
+  const source = mockStorage({
+    [progressKey]:importedProgress, [draft]:'עברית • Türkçe', 'wall.journal':'Açıq sual',
+    'wall.language':'he', 'unrelated.preferences':'private', 'wall.unknown-scope':'ignored',
+  });
+  const encoded = exportSave(source);
+  assert.doesNotMatch(encoded,/unrelated|unknown-scope/);
+  const incoming = parseSave(encoded);
+  assert.deepEqual(saveSummary(incoming),{chapters:1,drafts:2});
+  const existingProgress = JSON.stringify({active:'3',completed:['plaza','2']});
+  const destination = mockStorage({[progressKey]:existingProgress,[draft]:'Existing note','wall.language':'az'});
+  mergeSave(destination,encoded);
+  assert.deepEqual(JSON.parse(destination.getItem(progressKey)),{active:'3',completed:['plaza','1','2']});
+  assert.equal(destination.getItem(draft),'Existing note');
+  assert.equal(destination.getItem('wall.language'),'az');
+  assert.equal(destination.getItem('wall.journal'),'Açıq sual');
+  assert.throws(() => parseSave('{"format":"WALL save","version":1,"values":{"__proto__":"bad"}}'),/Save data/);
+  assert.throws(() => parseSave(encoded.replace('"version":1','"version":2')),/Save version/);
+  assert.throws(() => parseSave(encoded.replace('wall.transfer.1.draft','wall.transfer.25.draft')),/Save data/);
+  const unavailable = mockStorage({[progressKey]:existingProgress},'wall.journal');
+  assert.throws(() => mergeSave(unavailable,encoded),/Test storage limit/);
+  assert.equal(unavailable.getItem(progressKey),existingProgress);
+  assert.equal(unavailable.getItem(draft),null);
+  assert.equal(unavailable.length,1);
 });
 
 test('study-room readings point to chapters and have four complete translations', () => {

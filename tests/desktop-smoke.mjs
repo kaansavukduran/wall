@@ -67,6 +67,21 @@ try {
     })()`), true);
     console.log('Native package loaded and completed a source exercise in the workshop.');
   }
+  if (await evaluate("Boolean(document.querySelector('#settings-button'))")) {
+    await evaluate("document.querySelector('#library[open]')?.close(); document.querySelector('#settings-button').click(); document.querySelector('#save-transfer summary').click()");
+    const saveDeadline = Date.now() + 10_000;
+    let loaded = false;
+    while (!loaded && Date.now() < saveDeadline) {
+      loaded = await evaluate("Boolean(document.querySelector('#save-export'))");
+      if (!loaded) await wait(250);
+    }
+    assert.ok(loaded, 'The packaged save tools did not load');
+    const value = await evaluate("document.querySelector('#save-export').click(); document.querySelector('#save-output').value");
+    const backup = JSON.parse(value);
+    assert.equal(backup.version,1);
+    assert.ok(JSON.parse(backup.values['wall.progress.v1']).completed.includes('plaza'));
+    console.log('Native package exported its completed prologue through Settings.');
+  }
 } finally {
   socket.close();
 }

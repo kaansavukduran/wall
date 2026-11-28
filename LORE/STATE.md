@@ -2,8 +2,8 @@
 
 Repository: kaansavukduran/wall
 Ref: main
-Verified release: v0.6.4, a46da3c3e66cf31c3f38b7edada5843dbed5f174.
-Pages: run 46119517001. Opened Sara Raḥmani’s Juhuri life story and its cited archive record in the live game.
-Packages: v0.6.4 web and platform runs 46119554773 and 46119554872 attached six files. Chromium, Firefox and WebKit passed (46119556822). The v0.6.3 installed checks passed (46118918060). The integration receives HTTP 403 from Actions secrets; APK uses preview signing. Physical devices and controllers are open.
-Candidate v0.6.5: interactive Berakhot 2a teaching folio, six readings, and two orientations of the binding-side exercise. The Vilna scan and Bomberg history are linked separately. The 16,750-byte initial implementation is lazy-loaded from E11. The era label sits outside the scenery on narrow screens. 21 unit tests and four Chromium campaigns passed, including 320 CSS px and 200% text. Offline Hebrew folio flip and labeling passed. Pages source API confirmed gh-pages root, and PLAN now matches that configuration.
-Next: verify v0.6.5 live and installed. Add cross-platform save export and safe merge before preview APK users change installations.
+Live release: v0.6.5, a7925946f2f019ddb7b1df2792b6e2e91f5bc99f.
+Pages: run 46120002045. Turned the Talmud folio and solved the reversed reading positions in the live game.
+Packages: v0.6.5 web and platform runs 46120045295 and 46120045320 attached six files. Native checks passed (46120365541). Hosted browsers failed the new narrow-screen era-label separation assertion (46120046884), although local Chromium passed. v0.6.4 installed checks passed (46119971982). The integration receives HTTP 403 from Actions secrets; APK uses preview signing. Physical devices and controllers are open.
+Candidate v0.6.6: local-only versioned save export and merge with known data validation, existing draft preservation and rollback on a failed write. The era label uses normal flow at all sizes. All 22 unit tests and four local Chromium campaigns passed. Local stand-alone HTML passed with networking blocked, simulated clipboard failure and two isolated profiles. Verify the candidate with Chromium, Firefox and WebKit before Pages and Release.
+Next: publish v0.6.6 after the hosted matrix passes, then add accessible reading preferences.

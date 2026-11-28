@@ -44,6 +44,13 @@ const talmudLabels = {
   he:['פתחו דף תלמוד','הדף נטען…','הדף לא נפתח. סגרו אותו ופתחו שוב.'],
   az:['Talmud səhifəsini aç','Səhifə yüklənir…','Səhifə açılmadı. Bağlayıb yenidən aç.'],
 };
+const settingsLabels = {
+  tr:{title:'Ayarlar',backup:['Kayıt taşı','Kayıt araçları yükleniyor…','Araçlar açılamadı. Kapatıp yeniden aç.'],restored:'Kayıtlar birleştirildi.'},
+  en:{title:'Settings',backup:['Transfer a save','Loading save tools…','The tools could not open. Close and reopen.'],restored:'The saves were merged.'},
+  he:{title:'הגדרות',backup:['העברת שמירה','כלי השמירה נטענים…','הכלים לא נפתחו. סגרו ופתחו שוב.'],restored:'השמירות מוזגו.'},
+  az:{title:'Ayarlar',backup:['Yaddaşı köçür','Yaddaş alətləri yüklənir…','Alətlər açılmadı. Bağlayıb yenidən aç.'],restored:'Yaddaşlar birləşdirildi.'},
+};
+const saveLabels = Object.fromEntries(Object.entries(settingsLabels).map(([lang,labels]) => [lang,labels.backup]));
 const lessonDecks = [
   () => import('./ancient-lessons.js').then(module => module.ancientLessons),
   () => import('./second-temple-lessons.js').then(module => module.secondTempleLessons),
@@ -82,6 +89,7 @@ export async function start(initialLanguage) {
   const reader = find('reader');
   const chooser = find('chapters');
   const studyRoom = find('library');
+  const settings = find('settings');
   const photoPanel = find('photo');
   const comparison = find('compare-view');
   const journal = find('journal');
@@ -114,6 +122,12 @@ export async function start(initialLanguage) {
   let labToken = 0;
   let tourLanguage;
   const letters = new Set();
+  const restored = history.state?.wallRestored === true;
+  if (restored) {
+    const state = { ...history.state };
+    delete state.wallRestored;
+    history.replaceState(state,'');
+  }
 
   const episodeId = index => String(episodes[index].id ?? 'plaza');
   const firstIncomplete = () => episodes.findIndex((_, index) => !progress.completed.has(episodeId(index)));
@@ -172,6 +186,8 @@ export async function start(initialLanguage) {
   const refreshTalmud = connectDisclosure('talmud-page', talmudLabels, () =>
     import('./talmud-page.js').then(({mountTalmudPage}) =>
       (panel, current, index) => mountTalmudPage(panel,current,index,talmudView)));
+  const refreshSave = connectDisclosure('save-transfer', saveLabels, () =>
+    import('./portable-save.js').then(module => module.mountPortableSave));
   const refreshTransfer = connectDisclosure('transfer', transferLabels, async chapter => {
     const [{mountTransfer},{transferLessons}] = await Promise.all([
       import('./transfer.js'), transferDecks[Math.floor((chapter - 1) / 8)](),
@@ -219,6 +235,7 @@ export async function start(initialLanguage) {
     selector.setAttribute('aria-label', labels[8]);
     find('episodes-button').textContent = labels[0];
     find('library-button').textContent = libraryLabels[language][0];
+    find('settings-button').textContent = settingsLabels[language].title;
     find('download').textContent = transferLabels[language][3];
     const visit = find('visit-button');
     visit.textContent = visitLabels[language][0];
@@ -235,6 +252,9 @@ export async function start(initialLanguage) {
     find('chapter').textContent = active === 0 ? labels[9] : String(episode.id);
     find('title').textContent = text[0];
     find('intro').textContent = text[1];
+    const restoreNotice = find('restore-notice');
+    restoreNotice.hidden = !restored;
+    if (restored) restoreNotice.textContent = settingsLabels[language].restored;
     find('controller-hint').textContent = controllerHelp[language];
     const rotation = (episode.id ?? 0) % 3;
     const order = [rotation, (rotation + 1) % 3, (rotation + 2) % 3];
@@ -783,6 +803,12 @@ export async function start(initialLanguage) {
   find('inspect').addEventListener('click', inspect);
   find('episodes-button').addEventListener('click', openChapters);
   find('library-button').addEventListener('click', openLibrary);
+  find('settings-button').addEventListener('click', () => {
+    find('settings-title').textContent = settingsLabels[language].title;
+    settings.querySelector('form button').textContent = ui[language][4];
+    refreshSave();
+    settings.showModal();
+  });
   function openWorkshop(id) {
     openLibrary();
     const workshop = find(id);
