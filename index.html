@@ -4,12 +4,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#121a22">
 <title>WALL</title>
-<link rel="stylesheet" href="./runtime-0.8.32-16c0408e0109/style.css">
+<link rel="stylesheet" href="./runtime-0.8.33-93895de8aa6c/style.css">
 <body>
 <section id="boot" aria-label="Fragaria Interactive">
   <div class="boot-shell">
     <div class="boot-brand">
-      <img src="./runtime-0.8.32-16c0408e0109/assets/fragaria-strawberry.png" alt="" width="116" height="130">
+      <img src="./runtime-0.8.33-93895de8aa6c/assets/fragaria-strawberry.png" alt="" width="116" height="130">
       <h1>Fragaria<br>Interactive</h1>
     </div>
     <div class="boot-load">
@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.8.32</small>
+  <small dir="ltr">v0.8.33</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -54,6 +54,7 @@
       <div id="sequence" hidden><p></p><small></small><div></div><ol></ol><output aria-live="polite"></output><button id="sequence-reset" type="button"></button></div>
       <div id="workbench" hidden><p></p><div></div><output aria-live="polite"></output><small></small></div>
       <div id="models" hidden><p></p><div></div><output></output><a id="model-reference" target="_blank" rel="noopener noreferrer" hidden></a></div>
+      <details id="kingdom-map" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="platform-assembly" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="talmud-page" hidden><summary></summary><p role="status" hidden></p><div></div></details>
       <details id="ashlag-workbench" name="chapter-24-workshop" hidden><summary></summary><p role="status" hidden></p><div></div></details>
@@ -137,7 +138,7 @@
     </section>
     </div>
   </main>
-  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.32</span></footer>
+  <footer><span>Fragaria Interactive</span><a id="download" href="https://github.com/kaansavukduran/wall/releases" target="_blank" rel="noopener noreferrer"></a><span dir="ltr">v0.8.33</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -176,7 +177,7 @@
   <h2 id="photo-title" tabindex="-1" autofocus></h2>
   <div class="photo-layout">
     <figure>
-      <img loading="lazy" src="./runtime-0.8.32-16c0408e0109/assets/matpc-14762.jpg" width="433" height="640" alt="">
+      <img loading="lazy" src="./runtime-0.8.33-93895de8aa6c/assets/matpc-14762.jpg" width="433" height="640" alt="">
       <figcaption></figcaption>
       <a id="photo-source" target="_blank" rel="noopener noreferrer"></a>
     </figure>
@@ -420,6 +421,12 @@
   <div class="lab-actions"><button type="button" data-platform-reset></button><a href="https://hadashot.iaa.org.il/Report_Detail_Eng.aspx?id=25662" target="_blank" rel="noopener noreferrer"></a></div>
 </template>
 
+<template id="kingdom-map-template">
+  <p></p>
+  <figure><canvas width="192" height="128" aria-hidden="true"></canvas><figcaption></figcaption></figure>
+  <div class="kingdom-questions"></div>
+  <a target="_blank" rel="noopener noreferrer"></a>
+</template>
 <template id="source-timeline-template">
   <p></p>
   <div class="timeline-choices" role="group"></div>
@@ -551,6 +558,6 @@
     </section>
   </article>
 </template>
-<script type="module" src="./runtime-0.8.32-16c0408e0109/start.js"></script>
+<script type="module" src="./runtime-0.8.33-93895de8aa6c/start.js"></script>
 </body>
 </html>
