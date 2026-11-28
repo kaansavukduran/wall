@@ -50,8 +50,17 @@ function snapshot(storage) {
   return values;
 }
 
-export function exportSave(storage) {
-  const values = snapshot(storage);
+export function exportSave(storage, pending) {
+  let values;
+  try {
+    values = snapshot(storage);
+  } catch (error) {
+    if (!pending?.size) throw error;
+    values = Object.create(null);
+  }
+  for (const [key,value] of pending ?? []) {
+    if (validValue(key,value)) values[key] = value;
+  }
   const encoded = JSON.stringify({format,version:saveSchemaVersion,values});
   if (encoded.length > maxSaveLength || Object.keys(values).length > 100) throw new Error('Save size');
   return encoded;

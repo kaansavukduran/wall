@@ -39,7 +39,7 @@ const copy = {
   },
 };
 
-export function mountPortableSave(panel, language) {
+export function mountPortableSave(panel, language, pending, retryPending) {
   const fragment = document.getElementById('save-template').content.cloneNode(true);
   const [outgoing, incoming, status] = fragment.children;
   const [exportButton, out, privacy] = outgoing.children;
@@ -59,7 +59,9 @@ export function mountPortableSave(panel, language) {
 
   exportButton.addEventListener('click', () => {
     try {
-      outText.value = exportSave(localStorage);
+      let storage;
+      try { storage = localStorage; } catch { /* Export the open session if storage is blocked. */ }
+      outText.value = exportSave(storage,pending);
       out.hidden = false;
       privacy.hidden = false;
       status.textContent = '';
@@ -98,6 +100,10 @@ export function mountPortableSave(panel, language) {
   });
   confirm.addEventListener('click', () => {
     if (!approvedText || approvedText !== inText.value) return;
+    if (pending.size && !retryPending()) {
+      status.textContent = labels.failed;
+      return;
+    }
     try {
       mergeSave(localStorage,approvedText);
     } catch {

@@ -14,6 +14,8 @@ export async function makeWorld(canvas, reducedMotion) {
     ['#6a8190','#8b9c93','#99887f','#68554e','#c8a786','#54474a'],
     ['#776983','#a399a1','#a68f8c','#705b65','#d9b6a1','#685667'],
   ];
+  const leftEdge = 16;
+  const rightEdge = 464;
   let position = 80;
   let facing = 1;
   let lastDraw = '';
@@ -690,11 +692,13 @@ export async function makeWorld(canvas, reducedMotion) {
     comparePlaza,
     move(direction, distance) {
       facing = direction;
-      const next = Math.max(16, Math.min(464, position + direction * distance));
+      const next = Math.max(leftEdge, Math.min(rightEdge, position + direction * distance));
       const traveled = Math.abs(next - position);
       position = next;
       walked += traveled;
-      draw(reducedMotion.matches || traveled === 0 ? 0 : Math.floor(walked / 6) % 4);
+      const canContinue = next !== (direction < 0 ? leftEdge : rightEdge);
+      draw(reducedMotion.matches || !canContinue ? 0 : Math.floor(walked / 6) % 4);
+      return canContinue;
     },
     idle() { draw(0); },
     inspect() { inspecting = true; draw(0); },

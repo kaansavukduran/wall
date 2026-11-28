@@ -64,6 +64,28 @@ const settingsLabels = {
   az:{title:'Ayarlar',backup:['Yaddaşı köçür','Yaddaş alətləri yüklənir…','Alətlər açılmadı. Bağlayıb yenidən aç.'],restored:'Yaddaşlar birləşdirildi.'},
 };
 const saveLabels = Object.fromEntries(Object.entries(settingsLabels).map(([lang,labels]) => [lang,labels.backup]));
+const storageCopy = {
+  tr:[
+    'Bazı değişiklikler kaydedilemedi. Çıkmadan önce Ayarlar’dan kayıt metnini kopyalayabilirsin.',
+    'Değişiklikler yalnızca bu oturumda duruyor. Tekrar kaydetmeyi dene veya kayıt metnini kopyala.',
+    'Tekrar kaydet', 'Oturumdaki değişiklikler kaydedildi.',
+  ],
+  en:[
+    'Some changes could not be saved. Before closing, you can copy your save text in Settings.',
+    'Your changes are only in this session. Try saving again or copy your save text.',
+    'Try saving again', 'Your session changes were saved.',
+  ],
+  he:[
+    'חלק מהשינויים לא נשמרו. לפני הסגירה אפשר להעתיק את טקסט השמירה בהגדרות.',
+    'השינויים זמינים רק בהפעלה הנוכחית. נסו לשמור שוב או העתיקו את טקסט השמירה.',
+    'נסו לשמור שוב', 'השינויים מההפעלה הנוכחית נשמרו.',
+  ],
+  az:[
+    'Bəzi dəyişikliklər saxlanmadı. Bağlamazdan əvvəl Ayarlardan yaddaş mətnini köçürə bilərsən.',
+    'Dəyişikliklər yalnız bu sessiyadadır. Yenidən saxlamağa çalış və ya yaddaş mətnini köçür.',
+    'Yenidən saxla', 'Sessiyadakı dəyişikliklər saxlandı.',
+  ],
+};
 const lessonDecks = [
   () => import('./ancient-lessons.js').then(module => module.ancientLessons),
   () => import('./second-temple-lessons.js').then(module => module.secondTempleLessons),
@@ -73,15 +95,11 @@ const lessonDecks = [
   () => import('./modern-lessons.js').then(module => module.modernLessons),
 ];
 
-function read(keyName) {
+function readStored(keyName) {
   try { return localStorage.getItem(keyName); } catch { return null; }
 }
 
-function store(keyName, value) {
-  try { localStorage.setItem(keyName, value); } catch { /* The session stays playable. */ }
-}
-
-function readProgress() {
+function readProgress(read) {
   try {
     const value = JSON.parse(read(key) ?? '{}');
     const ids = ['plaza', ...chapters.map(episode => String(episode.id))];
@@ -93,6 +111,43 @@ function readProgress() {
 }
 
 export async function start(initialLanguage) {
+  let language = initialLanguage;
+  const pending = new Map();
+  const storageNotice = find('storage-notice');
+  const settingsStorage = find('settings-storage');
+  const retryStorage = find('retry-storage');
+  const read = keyName => pending.get(keyName) ?? readStored(keyName);
+
+  function showStorageStatus(recovered = false) {
+    const [warning, settingsWarning, retryTitle, saved] = storageCopy[language];
+    const mainText = pending.size ? warning : '';
+    const modalText = pending.size ? settingsWarning : recovered ? saved : '';
+    if (storageNotice.textContent !== mainText) storageNotice.textContent = mainText;
+    if (settingsStorage.textContent !== modalText) settingsStorage.textContent = modalText;
+    retryStorage.textContent = retryTitle;
+    retryStorage.hidden = pending.size === 0;
+  }
+
+  function store(keyName, value) {
+    const hadPending = pending.size > 0;
+    try {
+      localStorage.setItem(keyName,value);
+      pending.delete(keyName);
+    } catch {
+      pending.set(keyName,value);
+    }
+    if (hadPending !== (pending.size > 0)) showStorageStatus();
+  }
+
+  function retryPending() {
+    for (const [keyName,value] of [...pending]) store(keyName,value);
+    showStorageStatus(pending.size === 0);
+    return pending.size === 0;
+  }
+
+  retryStorage.addEventListener('click', () => {
+    if (retryPending()) find('settings-close').focus();
+  });
   const appearance = connectAppearance(find('appearance'),read,store);
   const world = await makeWorld(find('world'), appearance.reducedMotion);
   const controls = find('controls');
@@ -137,8 +192,7 @@ export async function start(initialLanguage) {
   const ashlagView = {};
   const bakuView = {};
   const talmudView = {reading:null,side:0,position:0,answers:[['','',''],['','','']]};
-  const progress = readProgress();
-  let language = initialLanguage;
+  const progress = readProgress(read);
   let active = 0;
   let movement = null;
   let direction = 0;
@@ -249,7 +303,8 @@ export async function start(initialLanguage) {
     import('./baku-archive.js').then(({mountBakuArchive}) =>
       (panel, current, index) => mountBakuArchive(panel,index,bakuView)));
   const refreshSave = connectDisclosure('save-transfer', saveLabels, () =>
-    import('./portable-save.js').then(module => module.mountPortableSave));
+    import('./portable-save.js').then(({mountPortableSave}) =>
+      (panel, current) => mountPortableSave(panel, current, pending, retryPending)));
   const refreshTransfer = connectDisclosure('transfer', transferLabels, async chapter => {
     const [{mountTransfer},{transferLessons}] = await Promise.all([
       import('./transfer.js'), transferDecks[Math.floor((chapter - 1) / 8)](),
@@ -293,6 +348,7 @@ export async function start(initialLanguage) {
     const completed = progress.completed.has(episodeId(active));
     document.documentElement.lang = language;
     document.documentElement.dir = language === 'he' ? 'rtl' : 'ltr';
+    showStorageStatus();
     selector.value = language;
     selector.setAttribute('aria-label', labels[8]);
     find('episodes-button').textContent = labels[0];
@@ -794,13 +850,12 @@ export async function start(initialLanguage) {
     if (direction === value) return;
     stop();
     direction = value;
-    world.move(value, 2);
+    if (!world.move(value, 2)) return;
     let previous = performance.now();
     function animate(now) {
       const elapsed = Math.min(34, Math.max(0, now - previous));
       previous = now;
-      world.move(value, elapsed * .063);
-      movement = requestAnimationFrame(animate);
+      movement = world.move(value, elapsed * .063) ? requestAnimationFrame(animate) : null;
     }
     movement = requestAnimationFrame(animate);
   }

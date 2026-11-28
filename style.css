@@ -45,7 +45,7 @@ button:disabled{opacity:.52;cursor:default}
 #boot[data-failed] .segments,#boot[data-failed] .boot-load span{display:none}
 @media(orientation:portrait){.boot-shell{gap:clamp(20px,5vh,50px)}#boot img{block-size:132px}}
 @media(max-height:450px) and (min-width:550px){.boot-shell{flex-direction:row;justify-content:center;gap:32px}.boot-brand{gap:4px}#boot img{block-size:92px;inline-size:76px}.boot-load{inline-size:min(46vw,380px)}}
-.top,main,footer{inline-size:min(69rem,100% - 2rem);margin-inline:auto}
+.top,main,footer,#storage-notice{inline-size:min(69rem,100% - 2rem);margin-inline:auto}
 .top,footer{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;padding-block:.8rem}
 .top .mark{font:700 2rem Pixelify,system-ui;text-decoration:none;margin-inline-end:auto;color:var(--ink);letter-spacing:.08em}
 .stage{position:relative;border:1px solid var(--edge);background:var(--stage-bg);min-inline-size:0}
@@ -112,6 +112,8 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 #save-exported button{margin-block-start:.45rem}
 #restore-notice,#save-status{color:var(--accent)}
 #save-status:empty{margin:0}
+.storage-warning:empty{margin-block:0}
+.storage-warning:not(:empty){border-inline-start:3px solid var(--accent);padding-inline-start:.65rem;overflow-wrap:anywhere}
 #appearance{min-inline-size:0;margin:.65rem 0;padding:.65rem;border:1px solid var(--edge)}
 #appearance legend{max-inline-size:100%;overflow-wrap:anywhere;font-weight:650}
 #appearance select{display:block;inline-size:100%;min-inline-size:0;margin:.2rem 0 .65rem;overflow:hidden;text-overflow:ellipsis}

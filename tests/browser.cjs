@@ -1030,6 +1030,38 @@ async function main() {
       await page.close();
       console.log(locale, width, '25 checkpoints, workshops and saved evidence exhibition: PASS');
     }
+    const edge = await browser.newPage();
+    await edge.addInitScript(() => {
+      const frame = window.requestAnimationFrame.bind(window);
+      const probe = {x:null,frames:0};
+      window.edgeProbe = probe;
+      window.requestAnimationFrame = callback => frame(now => {
+        probe.frames++;
+        callback(now);
+      });
+      const translate = CanvasRenderingContext2D.prototype.translate;
+      CanvasRenderingContext2D.prototype.translate = function(x,y) {
+        if (this.canvas.id === 'world') probe.x = x;
+        return translate.call(this,x,y);
+      };
+      probe.afterPaint = () => new Promise(resolve => frame(() => frame(resolve)));
+    });
+    await edge.goto(target);
+    await edge.locator('#app').waitFor();
+    await edge.keyboard.down('ArrowLeft');
+    await edge.waitForFunction(() => window.edgeProbe.x === 16);
+    await edge.evaluate(() => window.edgeProbe.afterPaint());
+    const restingFrames = await edge.evaluate(() => window.edgeProbe.frames);
+    await edge.keyboard.down('ArrowLeft');
+    await edge.evaluate(() => window.edgeProbe.afterPaint());
+    assert.equal(await edge.evaluate(() => window.edgeProbe.frames), restingFrames);
+    await edge.keyboard.up('ArrowLeft');
+    await edge.keyboard.down('ArrowRight');
+    await edge.waitForFunction(() => window.edgeProbe.x > 16);
+    await edge.keyboard.up('ArrowRight');
+    await edge.close();
+    console.log('Holding movement at the scenery boundary stops scheduling frames: PASS');
+
     const padPage = await browser.newPage({ locale:'he' });
     await padPage.addInitScript(() => {
       const pad = {
@@ -1125,6 +1157,53 @@ async function main() {
     assert.equal(await restore.locator('#transfer-draft').inputValue(),'בדיקת שמירה');
     await restore.close();
     console.log('Export, invalid-save rejection, restore into a separate profile and Hebrew draft: PASS');
+
+    const blocked = await browser.newPage({locale:'en',viewport:{width:320,height:700},hasTouch:true});
+    await blocked.addInitScript(() => {
+      const write = Storage.prototype.setItem;
+      Storage.prototype.setItem = function(key,value) {
+        if (window.blockSaveWrites) throw new DOMException('Storage quota','QuotaExceededError');
+        return write.call(this,key,value);
+      };
+    });
+    await blocked.goto(target);
+    await blocked.locator('#app').waitFor();
+    await blocked.evaluate(() => { window.blockSaveWrites = true; });
+    await blocked.tap('[data-choice="' + plaza.correct + '"]');
+    const notice = blocked.locator('#storage-notice');
+    assert.match(await notice.textContent(), /Some changes could not be saved/);
+    await blocked.tap('#next');
+    await blocked.tap('[data-choice="' + chapters[0].correct + '"]');
+    await blocked.tap('#transfer summary');
+    await blocked.tap('[data-transfer-choice="' + transferLessons[0].correct + '"]');
+    await blocked.fill('#transfer-draft','בדיקת התאוששות');
+    await blocked.selectOption('#lang','he');
+    assert.match(await notice.textContent(), /לא נשמרו/);
+    await blocked.tap('#settings-button');
+    await blocked.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
+    assert.equal(await blocked.locator('#settings').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth),false);
+    await blocked.tap('#retry-storage');
+    assert.match(await blocked.locator('#settings-storage').textContent(), /רק בהפעלה הנוכחית/);
+    await blocked.tap('#save-transfer summary');
+    await blocked.tap('#save-export');
+    const pending = JSON.parse(await blocked.locator('#save-output').inputValue()).values;
+    assert.deepEqual(JSON.parse(pending['wall.progress.v1']),{active:'1',completed:['plaza','1']});
+    assert.equal(pending['wall.language'],'he');
+    assert.equal(pending['wall.transfer.1.draft'],'בדיקת התאוששות');
+    assert.deepEqual(await blocked.evaluate(() => JSON.parse(localStorage.getItem('wall.progress.v1'))),{active:'plaza',completed:[]});
+    await blocked.evaluate(() => { window.blockSaveWrites = false; });
+    await blocked.tap('#retry-storage');
+    assert.equal(await notice.textContent(),'');
+    assert.equal(await blocked.locator('#retry-storage').isHidden(),true);
+    assert.equal(await blocked.locator('#settings-close').evaluate(button => button === document.activeElement),true);
+    await blocked.reload();
+    await blocked.locator('#app').waitFor();
+    assert.equal(await blocked.locator('html').getAttribute('lang'),'he');
+    assert.equal(await blocked.locator('#chapter').textContent(),'1');
+    await blocked.tap('#transfer summary');
+    assert.equal(await blocked.locator('#transfer-draft').inputValue(),'בדיקת התאוששות');
+    await blocked.close();
+    console.log('Storage failure warning, session save export and retry with preserved progress: PASS');
 
     const reading = await browser.newPage({locale:'az',viewport:{width:320,height:700},hasTouch:true,colorScheme:'dark'});
     await reading.goto(target);

@@ -111,6 +111,10 @@ test('portable saves merge valid progress without replacing local drafts or touc
   assert.equal(unavailable.getItem(progressKey),existingProgress);
   assert.equal(unavailable.getItem(draft),null);
   assert.equal(unavailable.length,1);
+
+  const pending = new Map([[draft,'Current session draft'],['wall.unknown-scope','ignored']]);
+  assert.equal(parseSave(exportSave(source,pending))[draft],'Current session draft');
+  assert.deepEqual(parseSave(exportSave(null,pending)),{[draft]:'Current session draft'});
 });
 
 test('reading preferences reject invalid themes, sizes and motion options', () => {

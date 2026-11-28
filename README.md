@@ -31,6 +31,8 @@ See [GitHub Releases](https://github.com/kaansavukduran/wall/releases) for the w
 
 In versions that include **Settings → Transfer a save**, create save text and keep a copy before changing installations. Paste it into the new copy of WALL, review the chapter and draft counts, and select **Merge saves**. Chapter progress is combined and existing drafts on the destination are kept. The transfer works offline. When an older preview lacks this screen, its save remains in that installation.
 
+If the browser refuses a write, WALL keeps the changes in the open session and shows a warning. Before closing the game, copy the save text from Settings or select **Try saving again** once storage is available.
+
 **Settings → Appearance and motion** offers dark, light, system and high-contrast palettes, an 80–200% scale and reduced animation. Each preference is saved separately and can travel in a save from this version.
 
 This repository publishes Pages from `gh-pages`. To publish a tested release, push it to `main` and run `bash scripts/publish-pages.sh` from that clean checkout. Check the published `build.json` for the version, commit, four locales, save schema and plan, content, catalogue and engine fingerprints. The single-file HTML includes the same build record.
