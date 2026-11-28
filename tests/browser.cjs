@@ -917,7 +917,8 @@ async function main() {
       }
       await page.selectOption('#kabbalah-lesson', 'laitman-bnei-baruch');
       await page.click('.kabbalah-sources summary');
-      assert.equal(await page.locator('.kabbalah-sources li').count(), 2);
+      assert.equal(await page.locator('.kabbalah-sources li').count(), 3);
+      assert.equal(await page.locator('.kabbalah-sources a').nth(1).getAttribute('href'), 'https://www.academia.edu/18676960');
       assert.match(await page.locator('.kabbalah-sources a').last().getAttribute('href'), /cris.bgu.ac.il/);
       await page.selectOption('#kabbalah-lesson', 'prayer-intention-cleaving');
       assert.equal(await page.locator('.kabbalah-sources li').count(), 5);

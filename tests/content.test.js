@@ -171,7 +171,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 408);
+  assert.equal(entries.length, 409);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -408,7 +408,7 @@ test('Baku archive distinguishes building, writing and photograph evidence in fo
 test('Kabbalah source stops and explanation cases have matched references and four languages', () => {
   const urls = new Set(parseCatalogue(readFileSync('docs/SOURCES.tsv', 'utf8')).map(item => item.url));
   assert.equal(kabbalahLessons.length, 9);
-  assert.equal(feynmanCases.length, 5);
+  assert.equal(feynmanCases.length, 6);
   assert.equal(advancedReadings.length, 11);
   assert.equal(comparisonCases.length, 8);
   const readings = [...kabbalahLessons,...advancedReadings];
@@ -434,7 +434,10 @@ test('Kabbalah source stops and explanation cases have matched references and fo
       assert.ok(values.every(value => value.trim()));
     }
   }
-  assert.deepEqual(kabbalahLessons.at(-1).sources.map(source => source.kind), ['self','metadata']);
+  const community = kabbalahLessons.find(lesson => lesson.id === 'laitman-bnei-baruch');
+  assert.deepEqual(community.sources.map(source => source.kind), ['self','research','metadata']);
+  assert.equal(entries.find(entry => entry.id === 'B07A').url, community.sources[1].url);
+  assert.ok(community.period.every(value => /1984.*1991/.test(value)));
 });
 
 test('Kotel visit observations and scenarios match their four-language sources', () => {

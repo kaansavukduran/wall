@@ -108,18 +108,60 @@ export const kabbalahLessons = [
   {
     id:'laitman-bnei-baruch',
     title:['Michael Laitman ve Bnei Baruch','Michael Laitman and Bnei Baruch','מיכאל לייטמן ובני ברוך','Michael Laitman və Bnei Baruch'],
-    period:['Çağdaş; Bnei Baruch eğitim kurumu 1990’lardan itibaren uluslararası çevrimiçi dersler yayımlıyor.','Contemporary; Bnei Baruch has distributed international online lessons since the 1990s.','עכשווי; בני ברוך מפיצה שיעורים מקוונים לקהל בינלאומי מאז שנות ה־1990.','Müasir dövr; Bnei Baruch 1990-cı illərdən beynəlxalq onlayn dərslər yayımlayır.'],
+    period:[
+      'Din tarihçisi Jonatan Meir’e göre Laitman 1984’te Rusça bir Kabala kitabı yayımladı. 1991’de, öğretmeni Baruh Aşlag’ın ölümünden sonra Bnei Baruch grubunu kurdu. Daha sonra İbranice ve İngilizce yayınlar ve çok dilli sitelerle daha geniş bir kitleye ulaştı.',
+      'Historian of religion Jonatan Meir dates Laitman’s Russian-language Kabbalah book to 1984. Laitman founded Bnei Baruch in 1991 after the death of his teacher, Baruch Ashlag. Later, Hebrew and English publications and multilingual websites reached a wider audience.',
+      'לפי חוקר הדת יונתן מאיר, ב־1984 פרסם לייטמן ספר קבלה ברוסית. ב־1991, לאחר מות מורו ברוך אשלג, ייסד את קבוצת בני ברוך. בהמשך פנה לקהל רחב יותר באמצעות פרסומים בעברית ובאנגלית ואתרים רב־לשוניים.',
+      'Din tarixçisi Jonatan Meirin yazdığına görə, Laitman 1984-cü ildə rus dilində Kabbala kitabı nəşr etdi. 1991-ci ildə müəllimi Barux Aşlağın ölümündən sonra Bnei Baruch qrupunu yaratdı. Sonralar ivrit və ingilis dillərində nəşrlər və çoxdilli saytlar vasitəsilə daha geniş auditoriyaya çatdı.',
+    ],
     genre:['Kurumun kendi tanımı: Baal HaSulam, Rabaş, Zohar ve ARI metinlerini temel alan çevrimiçi eğitim ağı. Akademik çalışmalar grubu ayrı bir çağdaş dini hareket olarak inceler.','Institutional self-description: an online educational network drawing on Baal HaSulam, Rabash, the Zohar, and the ARI. Academic scholarship studies the group as a distinct contemporary religious movement.','ההגדרה העצמית של הארגון: רשת לימוד מקוונת הנשענת על כתבי בעל הסולם, רב״ש, הזוהר והאר״י. מחקר אקדמי בוחן את הקבוצה כתנועה דתית עכשווית נפרדת.','Qurumun öz təsviri: Baal HaSulam, Rabaş, Zohar və ARI mətnlərinə əsaslanan onlayn təhsil şəbəkəsi. Akademik araşdırmalar qrupu ayrıca müasir dini hərəkat kimi öyrənir.'],
-    study:['Kurumun kendi anlatısı öğreti ve uygulamayı tanıtır; Jonatan Meir’in 2015 tarihli akademik makalesi hareketin Kabalayı “bilim” olarak sunma yöntemini ve örgütsel bağlamını inceler. Biri diğerinin yerine geçmez.','The organization’s account introduces its teaching and practice; Jonatan Meir’s 2015 academic article examines the movement’s presentation of Kabbalah as “science” and its organizational context. Neither source replaces the other.','תיאור הארגון מציג את הלימוד והתרגול שלו; מאמרו האקדמי של יונתן מאיר מ־2015 בוחן כיצד התנועה מציגה את הקבלה כ״מדע״ ואת הקשרה הארגוני. אף מקור אינו מחליף את האחר.','Təşkilatın öz izahı təlim və praktikanı təqdim edir; Jonatan Meirin 2015-ci il akademik məqaləsi hərəkatın Kabbalanı “elm” kimi təqdim etməsini və təşkilati kontekstini araşdırır. Mənbələr bir-birini əvəz etmir.'],
-    limit:['Laitman’ın öğreti hakkındaki açıklamalarını tarafsız tarihsel olgu gibi yazma; kurumsal görüşü “Bnei Baruch’a göre” diye atfet ve akademik bağlamı ayrı işaretle.','Do not write Laitman’s claims about the teaching as neutral historical fact; attribute institutional claims as “according to Bnei Baruch” and label academic context separately.','אין לכתוב את טענות לייטמן על התורה כעובדות היסטוריות ניטרליות; יש לייחס את הטענות ל״בני ברוך״ ולסמן בנפרד את ההקשר האקדמי.','Laitmanın təlim barədə fikirlərini neytral tarixi fakt kimi yazma; institusional iddiaları “Bnei Baruchun fikrincə” kimi göstər və akademik konteksti ayır.' ],
+    study:[
+      'Kurumun kendi anlatısı öğretiyi ve uygulamayı tanıtır. Meir’in 2015 makalesi hareketin Kabalayı “bilim” olarak nasıl sunduğunu ve öğretinin nasıl yayıldığını inceler.',
+      'The organization’s account introduces its teaching and practice. Meir’s 2015 article studies how the movement presented Kabbalah as “science” and spread its teaching.',
+      'תיאור הארגון מציג את הלימוד והתרגול שלו. מאמרו של מאיר מ־2015 בוחן כיצד התנועה הציגה את הקבלה כ״מדע״ והפיצה את תורתה.',
+      'Təşkilat öz təlimini və praktikasını təqdim edir. Meirin 2015-ci il məqaləsi hərəkatın Kabbalanı “elm” kimi necə təqdim etdiyini və öz təlimini necə yaydığını araşdırır.',
+    ],
+    limit:[
+      'Tarih çizgisi için Meir’in 2015 Rusça makalesinin 193. sayfasına bak. Dergi bu metni Meir’in 2007 İbranice çalışmasından bir seçki olarak yayımladı. Makalenin İngilizce özeti üniversite kaydında da okunabilir.',
+      'For the timeline, see page 193 of Meir’s 2015 Russian-language article. The journal published it as an excerpt from his 2007 study in Hebrew. The university record also provides the English abstract.',
+      'לציר הזמן, עיינו בעמ׳ 193 במאמרו של מאיר ברוסית מ־2015. כתב העת פרסם אותו כקטע מתוך מחקרו בעברית מ־2007. אפשר לקרוא את התקציר באנגלית גם ברשומה של האוניברסיטה.',
+      'Xronologiya üçün Meirin 2015-ci ildə rus dilində çap olunmuş məqaləsinin 193-cü səhifəsinə bax. Jurnal bu mətni onun 2007-ci ildə ivrit dilində nəşr edilmiş araşdırmasından bir parça kimi dərc edib. İngiliscə xülasəni universitetin qeydində də oxumaq olar.',
+    ],
     sources:[
       {title:'Bnei Baruch Kabbalah Academy: About',url:'https://kabbalah.academy/en/about/',kind:'self'},
-      {title:'Meir, “Michael Laitman and his group Bnei Baruch” (2015), Ben-Gurion University metadata',url:'https://cris.bgu.ac.il/en/publications/michael-laitman-and-his-group-bnei-baruch-2/',kind:'metadata'}
+      {title:'Jonatan Meir · Michael Laitman and His Group “Bnei Baruch” (2015), pp. 192–223',url:'https://www.academia.edu/18676960',kind:'research'},
+      {title:'Ben-Gurion University · Michael Laitman and His Group “Bnei Baruch” (2015)',url:'https://cris.bgu.ac.il/en/publications/michael-laitman-and-his-group-bnei-baruch-2/',kind:'metadata'},
     ]
   }
 ];
 
 export const feynmanCases = [
+  {
+    id:'laitman-source-context', lessonId:'laitman-bnei-baruch',
+    question:[
+      'Bir sergi metninde grubun bugünkü derslerini ve Laitman’ın 1984’teki kitabını anlatıyorsun. Hangi kaynakları kullanırsın?',
+      'You’re writing an exhibit label about the group’s courses today and Laitman’s 1984 book. Which sources do you use?',
+      'אתם כותבים תווית לתערוכה על שיעורי הקבוצה כיום ועל ספרו של לייטמן מ־1984. באילו מקורות תשתמשו?',
+      'Sərgi mətnində qrupun bugünkü dərslərindən və Laitmanın 1984-cü il kitabından bəhs edirsən. Hansı mənbələrdən istifadə edərsən?',
+    ],
+    choices:[
+      ['Akademinin güncel tanıtımını her iki bilgi için kullanırım.', 'I use the academy’s current About page for both claims.', 'אסתמך על עמוד האודות העדכני של האקדמיה לשתי הטענות.', 'Hər iki məlumat üçün akademiyanın indiki tanıtım səhifəsindən istifadə edərəm.'],
+      ['Bugünkü eğitim için akademinin tanıtımını, 1984 kitabı için Meir’in makalesini kullanırım.', 'I use the academy’s About page for its courses and Meir’s article for the 1984 book.', 'אשתמש בעמוד האודות של האקדמיה לתיאור השיעורים, ובמאמר של מאיר לספר מ־1984.', 'Bugünkü dərslər üçün akademiyanın tanıtımından, 1984-cü il kitabı üçün Meirin məqaləsindən istifadə edərəm.'],
+      ['Bugünkü dersleri 2015 makalesinden, 1984 kitabını üniversite kaydındaki İngilizce özetten anlatırım.', 'I use the 2015 article to describe courses today, and the English abstract in the university record for the 1984 book.', 'אתאר את השיעורים כיום לפי המאמר מ־2015, ואת הספר מ־1984 לפי התקציר באנגלית ברשומת האוניברסיטה.', 'Bugünkü dərsləri 2015-ci il məqaləsindən, 1984-cü il kitabını isə universitet qeydindəki ingiliscə xülasədən təsvir edərəm.'],
+    ], correct:1,
+    feedback:[
+      'Akademinin sayfası derslerini bugün nasıl tanıttığını gösterir. Meir’in 193. sayfası Laitman’ın daha erken Rusça yayını hakkında bilgi verir. Sergi metninde iki kaynağın da adını yaz.',
+      'The academy’s page shows how it describes its courses today. Page 193 of Meir’s article dates Laitman’s earlier Russian-language publication. Credit both sources on your label.',
+      'עמוד האקדמיה מראה איך היא מתארת את שיעוריה כיום. עמ׳ 193 במאמרו של מאיר מתארך את פרסומו המוקדם של לייטמן ברוסית. ציינו את שני המקורות בתווית.',
+      'Akademiyanın səhifəsi öz dərslərini bu gün necə təqdim etdiyini göstərir. Meirin məqaləsinin 193-cü səhifəsi Laitmanın rus dilindəki əvvəlki nəşrinin tarixini göstərir. Sərgi mətnində hər iki mənbənin adını yaz.',
+    ],
+    transfer:[
+      'Başka bir cemaat için hangi bilgiyi kendi sitesinde, hangi bilgiyi tarih araştırmasında arardın? İki örnek yaz.',
+      'For another community, which fact would you look up on its own site and which would you look for in historical research? Give two examples.',
+      'לגבי קהילה אחרת, איזו עובדה תחפשו באתר שלה ואיזו במחקר היסטורי? תנו שתי דוגמאות.',
+      'Başqa bir icma barədə hansı məlumatı onun öz saytında, hansını tarix araşdırmasında axtarardın? İki nümunə yaz.',
+    ]
+  },
   {
     id:'early-text-genre', lessonId:'mystical-texts-before-kabbalah',
     question:['Sefer Yetsira’daki 10 sefirot ile sonraki Lurianic sefirot kavramlarını anlatırken en dikkatli açıklama hangisi?','Which is the most careful explanation when comparing Sefer Yetzirah’s ten sefirot with later Lurianic sefirot?','מהו ההסבר הזהיר ביותר בהשוואה בין עשר הספירות בספר יצירה לבין הספירות בקבלה הלוריאנית המאוחרת?','Sefer Yetsiradakı on sefirotu sonrakı Lurian sefirotları ilə müqayisə edərkən ən ehtiyatlı izah hansıdır?'],
