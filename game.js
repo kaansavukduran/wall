@@ -106,10 +106,10 @@ const firstFruitsLabels = {
   az:['İlk məhsul səbəti','Səhnə yüklənir…','Səhnə açıla bilmədi. Yenidən açmağa çalış.'],
 };
 const barKosibaLabels = {
-  tr:['Bar Kosiba’nın mektubu','Mektup açılıyor…','Mektup açılamadı. Kapatıp yeniden aç.'],
-  en:['Bar Kosiba’s letter','Opening the letter…','The letter could not open. Close and reopen it.'],
-  he:['האיגרת של בר כוסבה','האיגרת נטענת…','האיגרת לא נפתחה. סגרו אותה ופתחו שוב.'],
-  az:['Bar Kosibanın məktubu','Məktub açılır…','Məktub açıla bilmədi. Bağla və yenidən aç.'],
+  tr:['Bar Kosiba’nın mektubu','Mektup açılıyor…','Mektup açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en:['Bar Kosiba’s letter','Opening the letter…','The letter could not open. Reload the page and try again.'],
+  he:['האיגרת של בר כוסבה','האיגרת נטענת…','האיגרת לא נפתחה. רעננו את הדף ונסו שוב.'],
+  az:['Bar Kosibanın məktubu','Məktub açılır…','Məktub açıla bilmədi. Səhifəni yeniləyib yenidən cəhd et.'],
 };
 const kingdomMapLabels = {
   tr:['İki krallığı haritada bul','Harita açılıyor…','Harita açılamadı. Kapatıp yeniden aç.'],
