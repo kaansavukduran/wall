@@ -5,6 +5,7 @@ S03	Çok katmanlı antik metin	3	Mezmurlar 137	Birincil metin	Babil ve sürgün 
 S04	Pers dönemi anlatısı	4	Ezra 1–6	Birincil metin	Dönüş ve yeniden inşa	https://www.sefaria.org/Ezra.1	Referans; edisyon seçilecek
 S05	İkinci Tapınak dönemi	5	Birinci Makabiler 4:36–59	Birincil metin	Tapınağın yeniden adanması ve sekiz günlük yıllık kutlama	https://www.sefaria.org/I_Maccabees.4.36-59	Pasaj eşleşti; oyunda özgün özet
 S06	Yaklaşık MS 200 derlemesi	7,11	Mişna Middot	Birincil metin	Tapınak ölçüleri ve hatırlanan mimari	https://www.sefaria.org/Mishnah_Middot.1	Referans; edisyon seçilecek
+S06A	Yaklaşık MS 200 derlemesi, İkinci Tapınak dönemi pratiği anlatısı	7	Mişna Bikkurim 3:2–4	Birincil metin	İlk ürünlerle yolculuk, Kudüs’te karşılama ve Tapınak avlusu	https://www.sefaria.org/Mishnah_Bikkurim.3.2-4	Sefaria pasaj kimliği doğrulandı; rotanın sırası oyunda özgün şema
 S07	Yaklaşık MS 200 derlemesi	1,11	Mişna Pesahim 10	Birincil metin	Seder ve anlatı	https://www.sefaria.org/Mishnah_Pesachim.10	Referans; edisyon seçilecek
 S08	Geç Antik Çağ	5,11	Bavli Şabat 21b	Birincil metin	Hanuka ve kandil anlatısı	https://www.sefaria.org/Shabbat.21b	İçerik eşleşti; edisyon seçilecek
 S09	Geç Antik Çağ	8,11	Bavli Gittin 55b–56b	Birincil metin	Yıkımı hatırlayan rabbanî anlatılar	https://www.sefaria.org/Gittin.55b-56b	Pasaj eşleşti; oyunda özgün özet
@@ -102,6 +103,8 @@ S27	İkinci Tapınak dönemi	5	İkinci Makabiler 10:1–8	Birincil metin	Yeniden
 S28	MS 1. yüzyıl	6	Josephus – Yahudilerin Eski Tarihi 15.11	Birincil tarih metni	Hirodes’in Tapınak projesi	https://penelope.uchicago.edu/josephus/ant-15.html	Kitap XV bölüm 11 eşleşti
 S29	Yaklaşık MS 200 derlemesi	6,Prolog,24	Mişna Middot 2:1	Birincil metin	Tapınak Dağı ölçüleri ve daha geç rabbanî hafıza	https://www.sefaria.org/Mishnah_Middot.2.1	Pasaj eşleşti; oyunda özgün özet
 D20	MÖ 2. yüzyıl	7	İsrail Müzesi – Büyük Yeşaya Tomarı 1QIsaᵃ	Müze nesne kaydı	Kumran Mağarası 1’den Yeşaya kopyası	https://dss.collections.imj.org.il/isaiah	Dijital nesne kaydı; tıpkıbasım oyunda yer almıyor
+D20A	MÖ 2. yüzyıl nüshası	7	İsrail Müzesi – Büyük Yeşaya Tomarı sergi dosyası, giriş	Müze sergi belgesi	Yeşaya’nın 66 bölümü ve yaklaşık MÖ 125 tarihlemesi	https://www.imj.org.il/sites/default/files/IMJ%20Great%20Isaiah%20Scroll%20Exhibition.pdf	Müze dosyası eşleşti; çizim ve oyun metni özgün
+D20B	MÖ 2. yüzyıl nüshası; Nisan 2026 araştırma notu	7	İsrail Müzesi – Conserving the Great Isaiah Scroll	Müze araştırma notu	Üretim yerinin belirsizliği ve tarihleme yöntemleri	https://www.imj.org.il/en/node/6594533	Müze araştırma notu eşleşti; oyunda özgün özet
 D21	MÖ 1. yüzyıl	7	İsrail Müzesi – Topluluk Kuralı 1QS	Müze nesne kaydı	Topluluğa kabul ve ortak yaşam düzeni	https://dss.collections.imj.org.il/community	Dijital nesne kaydı; tıpkıbasım oyunda yer almıyor
 D22	MÖ 1. yüzyıl	7	İsrail Müzesi – Habakkuk Yorumu 1QpHab	Müze nesne kaydı	Pesher türü ve peygamberlik metninin yorumlanması	https://dss.collections.imj.org.il/habakkuk	Dijital nesne kaydı; tıpkıbasım oyunda yer almıyor
 D23	MS 81 sonrası	8	Roma Colosseum Arkeoloji Parkı – Titus Takı	Birincil anıt	MS 71 zafer alayının sonraki Roma temsili	https://colosseo.it/en/marvels/arch-of-titus/	Kurum kaydı ve Domitian devri eşleşti

@@ -56,13 +56,31 @@ export const models = [
     ['temple',['Tapınak','Temple','בית המקדש','Məbəd'],
       ['Kutsal bina bu alanın üzerinde bulunuyordu.','The sacred building stood on this raised area.','המבנה הקדוש עמד על המשטח הזה.','Müqəddəs bina bu yüksəldilmiş sahədə yerləşirdi.']],
   ]),
-  scene(7, ['Kumran’da kâtip masası','A scribe’s desk at Qumran','שולחן כתיבה בקומראן','Qumranda katib masası'], [
+  scene(7, ['İlk ürünlerin yolculuğu ve Kumran tomarları','The first-fruits procession and the Qumran scrolls','מסע הביכורים ומגילות קומראן','İlk məhsulun səfəri və Qumran tumarları'], [
+    ['pilgrim-gathering',['Toplanma','Gathering','התכנסות','Toplaşma'], [
+      'Mişna Bikkurim 3:2, ilk ürünleri getirenlerin yola çıkmadan önce bir kentte toplandığını anlatır. Mişna yaklaşık MS 200’de derlendi. Çizim metinde anlatılan yolculuk sırasını gösterir.',
+      'Mishnah Bikkurim 3:2 says people bringing their first fruits gathered in a town before setting out. The Mishnah was compiled around 200 CE. The drawing follows the stages described in the text.',
+      'משנה ביכורים ג׳:ב׳ מתארת כיצד מביאי הביכורים התכנסו בעיר לפני שיצאו לדרך. המשנה נערכה בסביבות שנת 200 לספירה. האיור עוקב אחר שלבי המסע המתוארים בטקסט.',
+      'Mişna Bikkurim 3:2-də ilk məhsulu gətirənlərin yola çıxmazdan əvvəl bir şəhərdə toplaşdığı deyilir. Mişna təqribən eramızın 200-cü ilində tərtib olunub. Şəkil mətndə təsvir edilən səfərin mərhələlərini göstərir.',
+    ],'https://www.sefaria.org/Mishnah_Bikkurim.3.2-4'],
+    ['pilgrim-arrival',['Kudüs’e varış','Arrival in Jerusalem','הגעה לירושלים','Yerusəlimə çatma'], [
+      'Mişna Bikkurim 3:3 yakın yerlerden taze incir ve üzüm, uzak yerlerden kuru incir ve kuru üzüm getirildiğini anlatır. Kudüs’te zanaatkârlar gelenleri karşılar. Sepetteki yiyeceğin yol boyunca nasıl dayanacağını düşün.',
+      'Mishnah Bikkurim 3:3 describes fresh figs and grapes from nearby and dried figs and raisins from farther away. Jerusalem’s artisans greet the arrivals. Think about how the fruit in the basket would keep on the journey.',
+      'משנה ביכורים ג׳:ג׳ מספרת שהקרובים הביאו תאנים וענבים טריים והרחוקים הביאו תאנים מיובשות וצימוקים. בעלי המלאכה בירושלים קיבלו את פני הבאים. חשבו איך הפירות שבסל נשמרו בדרך.',
+      'Mişna Bikkurim 3:3-də yaxın yerlərdən təzə əncir və üzüm, uzaq yerlərdən isə quru əncir və kişmiş gətirildiyi bildirilir. Yerusəlim sənətkarları gələnləri qarşılayır. Səbətdəki meyvələrin yolda necə qaldığını düşün.',
+    ],'https://www.sefaria.org/Mishnah_Bikkurim.3.2-4'],
+    ['pilgrim-court',['Tapınak avlusu','Temple court','עזרת המקדש','Məbədin həyəti'], [
+      'Mişna Bikkurim 3:4’te hacılar Tapınak Dağı’na ulaşır ve sepet avluya taşınır. Sepet sunulacak ilk ürünleri taşır. Kâtibin tomarı ise okunacak veya aktarılacak bir metni taşır. İki işi çizimde karşılaştır.',
+      'In Mishnah Bikkurim 3:4, the pilgrims reach the Temple Mount and the basket is carried into the court. The basket holds an offering. A scribe’s scroll carries a text for reading or transmission. Compare the two activities.',
+      'במשנה ביכורים ג׳:ד׳ עולי הרגל מגיעים להר הבית והסל נישא אל העזרה. הסל מכיל את הביכורים שמביאים כמנחה. מגילת הסופר נושאת טקסט לקריאה או למסירה. השוו בין שתי הפעולות.',
+      'Mişna Bikkurim 3:4-də zəvvarlar Məbəd dağına çatır və səbət həyətə aparılır. Səbətdə təqdim olunacaq ilk məhsul, katibin tumarında isə oxunan və ya ötürülən mətn var. Şəkildə iki işi müqayisə et.',
+    ],'https://www.sefaria.org/Mishnah_Bikkurim.3.2-4'],
     ['scroll-isaiah',['Yeşaya nüshası · 1QIsaᵃ','Isaiah copy · 1QIsaᵃ','עותק ישעיהו · 1QIsaᵃ','Yeşaya nüsxəsi · 1QIsaᵃ'], [
-      'Uzun tomarın sütunlarını aç. Büyük Yeşaya Tomarı, Yeşaya kitabının neredeyse tamamını korur. Bu bir kutsal metin nüshasıdır. Çizim tomarın biçimini temsil eder.',
-      'Unroll the long scroll. The Great Isaiah Scroll preserves nearly the whole book of Isaiah. It is a copy of scripture. The drawing illustrates the format.',
-      'פרשו את המגילה הארוכה. מגילת ישעיהו הגדולה משמרת כמעט את כל ספר ישעיהו. זהו עותק של טקסט מקראי. האיור ממחיש את צורת המגילה.',
-      'Uzun tumarı aç. Böyük Yeşaya tumarı Yeşaya kitabının demək olar hamısını qoruyur. Bu, müqəddəs mətnin nüsxəsidir. Şəkil tumarın formasını təsvir edir.',
-    ],'https://dss.collections.imj.org.il/isaiah'],
+      'Uzun tomarın sütunlarını aç. Kumran yakınında bulunan Büyük Yeşaya Tomarı MÖ 2. yüzyıla tarihlenir ve kitabın 66 bölümünü içerir. Masa, bir metnin nasıl kopyalanabileceğini gösteren temsili çizimdir. Nüshanın nerede kopyalandığı kesin bilinmiyor.',
+      'Unroll the long scroll. Found near Qumran, the Great Isaiah Scroll dates to the second century BCE and contains all 66 chapters. The desk illustrates how a text could be copied. The place where this copy was made is uncertain.',
+      'פרשו את המגילה הארוכה. מגילת ישעיהו הגדולה נמצאה ליד קומראן, מתוארכת למאה השנייה לפנה״ס וכוללת את כל 66 פרקי הספר. השולחן ממחיש כיצד אפשר היה להעתיק טקסט. מקום כתיבת העותק אינו ידוע בוודאות.',
+      'Uzun tumarı aç. Qumran yaxınlığında tapılmış Böyük Yeşaya tumarı e.ə. II əsrə aiddir və kitabın 66 fəslinin hamısını ehtiva edir. Masa mətnin necə köçürülə biləcəyini göstərir. Bu nüsxənin harada köçürüldüyü dəqiq bilinmir.',
+    ],'https://www.imj.org.il/sites/default/files/IMJ%20Great%20Isaiah%20Scroll%20Exhibition.pdf'],
     ['scroll-rule',['Topluluk Kuralı · 1QS','Community Rule · 1QS','סרך היחד · 1QS','İcma qaydası · 1QS'], [
       'Topluluğa kabul ve birlikte yaşama kurallarını gösteren tomarı aç. Metin, Yahad denen grubun nasıl düzenlenmesi gerektiğini anlatır. Yahad ile Essenilerin ilişkisi araştırma konusudur.',
       'Open the scroll containing rules about joining and living together. It lays out how a group called the Yahad should be organized. The relationship between the Yahad and the Essenes remains a research question.',
