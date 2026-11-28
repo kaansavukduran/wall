@@ -272,6 +272,27 @@ export const modernLessons = {
           "Təhlükəsizlik Şurası 1967-ci il müharibəsindən sonra Yaxın Şərqdə sülh prinsiplərini, o cümlədən münaqişədə işğal olunmuş ərazilərdən İsrail qüvvələrinin çıxmasını əks etdirən qətnamə qəbul etdi. Bu, söküntü planı və ya evlər üzrə köçürülmə qeydi deyil."
         ],
         "url": "https://digitallibrary.un.org/record/90717"
+      },
+      {
+        "title": [
+          "Mağribi Mahallesi’nden bir sakinin ifadesi",
+          "Testimony from a Mughrabi Quarter resident",
+          "עדות של תושב משכונת המוגרבים",
+          "Məğaribə məhəlləsinin bir sakininin ifadəsi"
+        ],
+        "date": [
+          "1967 ve 1976 olayları · 10 Temmuz 1979 tarihli özet, Ek II, 77–80. paragraflar",
+          "Events in 1967 and 1976 · summary published 10 July 1979, Annex II, paragraphs 77–80",
+          "אירועים ב־1967 וב־1976 · סיכום שפורסם ב־10 ביולי 1979, נספח ב׳, סעיפים 77–80",
+          "1967 və 1976-cı il hadisələri · 10 iyul 1979-cu ildə dərc olunan xülasə, II əlavə, 77–80-ci bəndlər"
+        ],
+        "description": [
+          "BM komisyonu raporunun Ek II’sinde yayımlanan özette bir mahalle sakini, 1967’de evleri yıkılanların eşyalarını alamadığını ve kendisinin 1967 ile 1976’da iki kez evinden çıkarıldığını anlatır. Özette tanığın adı verilmez.",
+          "In the testimony summary published in Annex II of the UN commission’s report, a resident says that people whose homes were demolished in 1967 could not take their belongings. The resident describes being expelled from home twice, in 1967 and 1976. The summary leaves the witness unnamed.",
+          "בסיכום העדות שפורסם בנספח ב׳ לדוח ועדת האו״ם, תושב השכונה מספר שמי שבתיהם נהרסו ב־1967 לא יכלו לקחת את חפציהם. הוא מספר שגורש מביתו פעמיים, ב־1967 וב־1976. שם העד אינו מופיע בסיכום.",
+          "BMT komissiyasının hesabatının II əlavəsində dərc olunan xülasədə bir məhəllə sakini 1967-ci ildə evləri sökülənlərin əşyalarını götürə bilmədiyini bildirir. O, 1967 və 1976-cı illərdə iki dəfə evindən çıxarıldığını deyir. Xülasədə şahidin adı göstərilmir."
+        ],
+        "url": "https://digitallibrary.un.org/nanna/record/3606/files/S_13450_Add-1-EN.pdf?registerDownload=1&version=1&withMetadata=0&withWatermark=0"
       }
     ],
     "feedback": [
