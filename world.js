@@ -151,6 +151,42 @@ export async function makeWorld(canvas, reducedMotion) {
       }
       return;
     }
+    if (index === 9) {
+      rect(background, '#624a3d', 106, 53, 331, 133);
+      rect(background, '#436776', 111, 58, 321, 123);
+      rect(background, '#9b8865', 111, 130, 321, 51);
+      rect(background, '#9b8865', 113, 118, 97, 15);
+      rect(background, '#9b8865', 284, 122, 51, 12);
+      rect(background, '#9b8865', 343, 113, 87, 19);
+      rect(background, '#9b8865', 355, 84, 29, 7);
+      rect(background, '#9b8865', 380, 82, 11, 5);
+      rect(background, '#9b8865', 411, 58, 21, 31);
+      for (const [place, x, y] of [['cyrene',179,120], ['egypt',298,125], ['cyprus',371,87]]) {
+        if (layer === place) rect(background, '#222832', x - 8, y - 8, 16, 16);
+        rect(background, layer === place ? '#ffe1a0' : '#ecaa6d', x - 4, y - 4, 8, 8);
+      }
+      return;
+    }
+    if (index === 10) {
+      rect(background, mortar, 160, 115, 285, 83);
+      rect(background, '#7f6762', 165, 120, 275, 72);
+      for (let row = -37; row <= 37; row++) {
+        const edge = Math.floor(Math.sqrt(37 ** 2 - row ** 2));
+        rect(background, row < 0 ? '#b2afa3' : '#8b887e', 299 - edge, 129 + row, edge * 2 + 1, 1);
+      }
+      if (layer === 'ritual') {
+        for (let offset = 0; offset < 3; offset++) {
+          rect(background, '#454744', 286 + offset * 3, 113 + offset * 2, 2, 31 - offset * 2);
+        }
+        rect(background, '#454744', 304, 130, 8, 10);
+        rect(background, '#454744', 306, 128, 4, 14);
+      } else {
+        rect(background, '#454744', 277, 113, 44, 4);
+        rect(background, '#454744', 279, 143, 40, 4);
+        for (let x = 280; x <= 315; x += 11) rect(background, '#454744', x, 118, 3, 24);
+      }
+      return;
+    }
     if (index === 12) {
       for (let row = 0; row < 8; row++) {
         const edge = 152 - Math.min(row, 5) * 8;
@@ -159,14 +195,14 @@ export async function makeWorld(canvas, reducedMotion) {
       }
       return;
     }
-    if ([3,4,9,10,17,22].includes(index)) {
+    if ([3,4,17,22].includes(index)) {
       for (let i = 0; i < 9; i++) {
         const x = 125 + i * 42;
         rect(background, mortar, x, 114 - i % 3 * 9, 36, 88);
         rect(background, stone, x + 2, 119 - i % 3 * 9, 32, 80);
         rect(background, '#453944', x + 14, 158, 10, 43);
       }
-      if (index === 9 || index === 17) rect(background, '#58757e', 0, 150, 120, 49);
+      if (index === 17) rect(background, '#58757e', 0, 150, 120, 49);
       return;
     }
     rect(background, mortar, 145, 86, 335, 112);

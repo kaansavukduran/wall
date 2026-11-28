@@ -15,6 +15,11 @@ const evidenceLabels = {
   he: ['השוו בין המקורות', 'בדקו איזה מן הכרטיסים האחרים עונה על השאלה הזאת.', 'כרטיסי המקורות נטענים…', 'הכרטיסים לא נפתחו. רעננו את הדף ונסו שוב.'],
   az: ['Mənbələri müqayisə et', 'Bu suala cavab verən mənbəni tapmaq üçün digər kartlara bax.', 'Mənbə kartları yüklənir…', 'Kartlar açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
+const lessonDecks = [
+  () => import('./ancient-lessons.js').then(module => module.ancientLessons),
+  () => import('./second-temple-lessons.js').then(module => module.secondTempleLessons),
+  () => import('./roman-lessons.js').then(module => module.romanLessons),
+];
 
 function read(keyName) {
   try { return localStorage.getItem(keyName); } catch { return null; }
@@ -165,8 +170,9 @@ export async function start(initialLanguage) {
   async function renderEvidence() {
     const chapter = episodes[active].id;
     const request = ++evidenceToken;
-    evidence.hidden = !(chapter >= 1 && chapter <= 8);
-    if (evidence.hidden) return;
+    const load = lessonDecks[Math.floor((chapter - 1) / 4)];
+    evidence.hidden = !load;
+    if (!load) return;
     const labels = evidenceLabels[language];
     evidence.querySelector('summary').textContent = labels[0];
     if (!evidence.open) return;
@@ -177,10 +183,7 @@ export async function start(initialLanguage) {
     readEvidence(null, index);
     let lesson;
     try {
-      const lessons = chapter <= 4
-        ? (await import('./ancient-lessons.js')).ancientLessons
-        : (await import('./second-temple-lessons.js')).secondTempleLessons;
-      lesson = lessons[chapter];
+      lesson = (await load())[chapter];
     } catch {
       if (request === evidenceToken) question.textContent = labels[3];
       return;

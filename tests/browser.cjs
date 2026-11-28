@@ -10,7 +10,9 @@ async function main() {
   const { chapters, plaza } = await import('../content.js');
   const { ancientLessons } = await import('../ancient-lessons.js');
   const { secondTempleLessons } = await import('../second-temple-lessons.js');
-  const lessons = {...ancientLessons, ...secondTempleLessons};
+  const { romanLessons } = await import('../roman-lessons.js');
+  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons};
+  const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js'];
   const browser = await chromium.launch(browserOptions);
   try {
     for (const [locale, width] of [['tr',1100],['en',320],['he',320],['az',740]]) {
@@ -80,8 +82,8 @@ async function main() {
         if (evidence) {
           const panel = page.locator('#evidence');
           assert.equal(await panel.getAttribute('open'), null);
-          const filename = episode.id <= 4 ? 'ancient-lessons.js' : 'second-temple-lessons.js';
-          if (episode.id === 1 || episode.id === 5) assert.equal(loadedLessons.has(filename), false);
+          const filename = decks[Math.floor((episode.id - 1) / 4)];
+          if (episode.id % 4 === 1) assert.equal(loadedLessons.has(filename), false);
           await panel.locator('summary').press('Enter');
           const wrongChoice = page.locator('[data-evidence="' + (evidence.correct + 1) % 3 + '"]');
           await wrongChoice.press('Enter');
@@ -136,10 +138,20 @@ async function main() {
           const dates = await page.locator('#sequence li').allTextContents();
           assert.deepEqual(dates.map(item => item.match(/\d+/)[0]), ['70','71','81']);
         }
+        if (episode.id === 9 || episode.id === 10) {
+          const sceneBefore = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
+          await page.click(episode.id === 9 ? '[data-layer="cyprus"]' : '[data-layer="ritual"]');
+          assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), sceneBefore);
+          assert.notEqual(await page.locator('#models output').textContent(), '');
+        }
         if (episode.id === 11) {
           await page.click('[data-sequence="0"]');
           assert.equal(await page.locator('#sequence li').count(), 0);
           for (const id of [1,0,2]) await page.click('[data-sequence="' + id + '"]');
+          assert.equal(await page.locator('#sequence li').count(), 3);
+        }
+        if (episode.id === 12) {
+          for (const card of [1,2,0]) await page.click('[data-sequence="' + card + '"]');
           assert.equal(await page.locator('#sequence li').count(), 3);
         }
         if (episode.id === 16) {

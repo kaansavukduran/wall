@@ -27,6 +27,11 @@ export const sequences = [
     ['Mişna soruyu ortaya koyar','Mishnah poses the question','המשנה מציגה את השאלה','Mişna sualı ortaya qoyur'],
     ['Daha sonra bir yorumcu sayfayı açıklar','A later commentator explains the page','מפרש מאוחר מסביר את הדף','Sonrakı şərhçi səhifəni izah edir'],
   ]),
+  make(12, ['Mağara anlatısında üç an','Three moments in the cave story','שלושה רגעים בסיפור המערה','Mağara rəvayətində üç an'], [1,2,0], [
+    ['İkinci çıkışta Şabat için mersin taşıyan birini görürler','After leaving again, they see a man carrying myrtle for Shabbat','ביציאה השנייה הם רואים אדם הנושא הדסים לשבת','İkinci çıxışda Şabbat üçün mərsin daşıyan bir adam görürlər'],
+    ['Şimon ve Elazar mağaraya sığınır','Shimon and Elazar take shelter in the cave','שמעון ואלעזר מסתתרים במערה','Şimon və Elazar mağaraya sığınırlar'],
+    ['İlk çıkıştan sonra mağaraya geri dönerler','After their first departure, they return to the cave','לאחר היציאה הראשונה הם חוזרים למערה','İlk çıxışdan sonra mağaraya qayıdırlar'],
+  ]),
   make(16, ['Zohar’ın zamanlarını ayır','Separate the Zohar’s dates','הבחינו בין זמני הזוהר','Zoharın tarixlərini ayır'], [2,0,1], [
     ['Zohar’ın tarihsel dolaşımı, Kastilya','Historical circulation in Castile','תפוצת הזוהר בקסטיליה','Kastiliyada Zoharın tarixi yayılması'],
     ['Modern edisyon ve inceleme','Modern edition and study','מהדורה ומחקר מודרניים','Müasir nəşr və araşdırma'],

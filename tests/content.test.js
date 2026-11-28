@@ -8,6 +8,7 @@ import { ancientLessons } from '../ancient-lessons.js';
 import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
 import { library, libraryLabels } from '../library.js';
+import { romanLessons } from '../roman-lessons.js';
 import { models, photo } from '../scenes.js';
 import { secondTempleLessons } from '../second-temple-lessons.js';
 
@@ -64,7 +65,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 104);
+  assert.equal(entries.length, 113);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -75,8 +76,8 @@ test('catalogue maps ranges and the prologue without conflating them', () => {
 });
 
 test('ancient source exercises contain four versions of each card and matched catalogue entries', () => {
-  const lessons = {...ancientLessons, ...secondTempleLessons};
-  assert.deepEqual(Object.keys(lessons), ['1','2','3','4','5','6','7','8']);
+  const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons};
+  assert.deepEqual(Object.keys(lessons), Array.from({length:12}, (_, index) => String(index + 1)));
   for (const [chapter, lesson] of Object.entries(lessons)) {
     assert.equal(lesson.cards.length, 3);
     assert.ok(lesson.cards[lesson.correct]);

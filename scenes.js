@@ -29,6 +29,20 @@ export const models = [
     ['after',['Yıkımdan sonra','After the destruction','אחרי החורבן','Dağıntıdan sonra'],
       ['Üst yapı ortadan kalktı. Çevre duvarlarının bazı kısımları kaldı.','The upper building was destroyed. Parts of the retaining walls survived.','המבנה העליון נחרב. חלקים מן הקירות התומכים נותרו.','Yuxarıdakı bina dağıdıldı. İstinad divarlarının müəyyən hissələri qaldı.']],
   ]),
+  scene(9, ['Doğu Akdeniz’de üç bölge','Three regions of the eastern Mediterranean','שלושה אזורים במזרח הים התיכון','Şərqi Aralıq dənizində üç bölgə'], [
+    ['cyrene',['Kyrene','Cyrene','קירנה','Kirena'],
+      ['Kyrene, bugünkü Libya’nın doğusundaydı. Roma kaynakları bölgedeki ayaklanmayı anlatır.','Cyrene lay in what is now eastern Libya. Roman sources recount a revolt in the region.','קירנה שכנה במזרח לוב של היום. מקורות רומיים מתארים התקוממות באזור.','Kirena bugünkü Liviyanın şərqində idi. Roma mənbələri bölgədəki üsyandan danışır.']],
+    ['egypt',['Mısır','Egypt','מצרים','Misir'],
+      ['Mısır’dan kalan papirüsler çatışmanın bir kısmını belgeler. İskenderiye’nin dışındaki yerleşimler de etkilendi.','Papyri from Egypt document parts of the conflict. Settlements beyond Alexandria were affected.','פפירוסים ממצרים מתעדים חלק מן העימות. גם יישובים מחוץ לאלכסנדריה נפגעו.','Misirdən qalan papiruslar qarşıdurmanın bir hissəsini sənədləşdirir. İsgəndəriyyədən kənar məskənlər də təsirləndi.']],
+    ['cyprus',['Kıbrıs','Cyprus','קפריסין','Kipr'],
+      ['Cassius Dio, Kıbrıs’ı çatışmanın bir başka bölgesi olarak anar. Adada yaşananları Roma bakış açısından aktarır.','Cassius Dio names Cyprus as another area of conflict. His history provides a Roman account of the island.','קסיוס דיו מזכיר את קפריסין כאזור עימות נוסף. חיבורו מציג תיאור רומי של מה שאירע באי.','Kassius Dio Kipri qarşıdurmanın başqa bölgəsi kimi qeyd edir. Onun əsəri adada baş verənləri Roma baxışından təqdim edir.']],
+  ]),
+  scene(10, ['Bir isyan sikkesinin iki yüzü','Two sides of a revolt coin','שני צדדים של מטבע מרד','Üsyan sikkəsinin iki üzü'], [
+    ['facade',['Yapı imgesi','Building image','דימוי מבנה','Tikili təsviri'],
+      ['Bu çizim, bazı sikkelerde Tapınak cephesi olarak yorumlanan yapıyı sadeleştirir. Sikke yapının ölçülerini kaydetmez.','This drawing simplifies the structure interpreted as a Temple façade on some coins. The coin does not record its measurements.','הציור מפשט את המבנה המתפרש כחזית המקדש על מטבעות מסוימים. המטבע אינו מתעד את מידות המבנה.','Bu təsvir bəzi sikkələrdə Məbədin ön üzü kimi şərh olunan tikilini sadələşdirir. Sikkədə tikilinin ölçüləri göstərilmir.']],
+    ['ritual',['Sukot simgeleri','Sukkot symbols','סמלי סוכות','Sukkot rəmzləri'],
+      ['Bazı büyük gümüş sikkelerin öbür yüzünde, Sukot’la ilişkili lulav ve etrog görünür. Lulav, hurma dalının da yer aldığı bir bitki demetidir. Etrog, bir turunçgil meyvesidir.','Some large silver coins show a lulav and etrog on the other side. For Sukkot, a palm branch is held with other plants, alongside the citron.','על צדו השני של חלק ממטבעות הכסף הגדולים נראים לולב ואתרוג. בחג הסוכות נוטלים את הלולב עם צמחים נוספים, ואת האתרוג לצדם.','Bəzi iri gümüş sikkələrin digər üzündə Sukkotla bağlı lulav və etroq görünür. Lulav xurma budağı ilə başqa bitkilərin dəstəsidir. Etroq sitrus meyvəsidir.']],
+  ]),
   scene(23, ['Mahalle ve meydan','Neighborhood and plaza','שכונה ורחבה','Məhəllə və meydan'], [
     ['quarter',['Mağribi Mahallesi','Maghrebi Quarter','שכונת המוגרבים','Məğrib məhəlləsi'],
       ['Temsili çizimde evlerin ve geçidin duvara yakınlığına bak.','Look at the homes and passage near the wall in this schematic.','שימו לב לבתים ולמעבר שליד הכותל בתרשים.','Şərti təsvirdə evlərin və keçidin divara yaxınlığına bax.']],
