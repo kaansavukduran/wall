@@ -6,6 +6,10 @@ on:
         description: Existing WALL tag or exact candidate commit
         type: string
         required: true
+      live:
+        description: Play the exact published build on GitHub Pages
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -25,7 +29,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Run the game as a static site
+      - name: Run the game in a browser
+        env:
+          WALL_TEST_LIVE: ${{ inputs.live }}
         run: |
           set -euo pipefail
           tools="$RUNNER_TEMP/wall-browser-tools"
@@ -33,6 +39,13 @@ jobs:
           export NODE_PATH="$tools/node_modules"
           "$tools/node_modules/.bin/playwright" install --with-deps "$WALL_BROWSER_ENGINE"
           node --test tests/content.test.js
+          if [[ "$WALL_TEST_LIVE" == true ]]; then
+            address="https://${GITHUB_REPOSITORY_OWNER,,}.github.io/${GITHUB_REPOSITORY#*/}/"
+            commit="$(git rev-parse HEAD)"
+            curl -fsS "${address}build.json" | jq -e --arg commit "$commit" 'select(.commit == $commit)'
+            node tests/browser.cjs "$address"
+            exit
+          fi
           site="$RUNNER_TEMP/wall-browser-site"
           mkdir "$site"
           GITHUB_SHA="$(git rev-parse HEAD)" node scripts/build.mjs "$site/wall"
