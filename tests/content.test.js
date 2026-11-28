@@ -11,6 +11,7 @@ import { belongsTo, parseCatalogue } from '../catalogue.js';
 import { chapters, languages, plaza, ui } from '../content.js';
 import { earlyModernLessons } from '../early-modern-lessons.js';
 import { gematriaValues, sefirot } from '../hebrew-labs.js';
+import { feynmanCases, kabbalahLessons } from '../kabbalah-lessons.js';
 import { library, libraryLabels } from '../library.js';
 import { medievalLessons } from '../medieval-lessons.js';
 import { modernLessons } from '../modern-lessons.js';
@@ -71,7 +72,7 @@ test('rendered version follows VERSION and scene options localize', () => {
 const entries = parseCatalogue(readFileSync(new URL('../docs/SOURCES.tsv', import.meta.url), 'utf8'));
 
 test('catalogue maps ranges and the prologue without conflating them', () => {
-  assert.equal(entries.length, 187);
+  assert.equal(entries.length, 207);
   assert.equal(new Set(entries.map(entry => entry.id)).size, entries.length);
   assert.ok(entries.some(entry => entry.url === photo.url && belongsTo(entry, 0) && belongsTo(entry, 23)));
   assert.ok(entries.some(entry => entry.url === photo.historyUrl && belongsTo(entry, 23)));
@@ -112,6 +113,31 @@ test('community atlas has separate categories with four-language indexed reading
     }
   }
   assert.equal(atlasEntries.find(entry => entry.id === 'mizrahim').regions, undefined);
+});
+
+test('Kabbalah source stops and explanation cases have matched references and four languages', () => {
+  const urls = new Set(parseCatalogue(readFileSync('docs/SOURCES.tsv', 'utf8')).map(item => item.url));
+  assert.equal(kabbalahLessons.length, 9);
+  assert.equal(feynmanCases.length, 5);
+  const ids = new Set(kabbalahLessons.map(lesson => lesson.id));
+  assert.equal(ids.size, kabbalahLessons.length);
+  for (const lesson of kabbalahLessons) {
+    for (const field of ['title','period','genre','study','limit']) {
+      assert.equal(lesson[field].length, languages.length);
+      assert.ok(lesson[field].every(value => value.trim()));
+    }
+    assert.ok(lesson.sources.length >= 2);
+    for (const source of lesson.sources) assert.ok(urls.has(source.url), source.url);
+  }
+  for (const sample of feynmanCases) {
+    assert.ok(ids.has(sample.lessonId));
+    assert.ok(sample.choices[sample.correct]);
+    for (const values of [sample.question, sample.feedback, sample.transfer, ...sample.choices]) {
+      assert.equal(values.length, languages.length);
+      assert.ok(values.every(value => value.trim()));
+    }
+  }
+  assert.deepEqual(kabbalahLessons.at(-1).sources.map(source => source.kind), ['self','metadata']);
 });
 
 test('all 24 source exercises contain four versions of each card and matched catalogue entries', () => {

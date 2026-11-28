@@ -71,3 +71,10 @@ export const atlasLabels = {
   he: ['אטלס קהילות', 'האטלס נטען…', 'האטלס לא נפתח. רעננו את הדף ונסו שוב.'],
   az: ['İcmalar atlası', 'Atlas yüklənir…', 'Atlas açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
 };
+
+export const kabbalahLabels = {
+  tr: ['Kabala okuma atölyesi', 'Atölye yükleniyor…', 'Atölye açılamadı. Sayfayı yenileyip tekrar dene.'],
+  en: ['Kabbalah reading workshop', 'Loading the workshop…', 'The workshop could not open. Reload the page and try again.'],
+  he: ['סדנת קריאה בקבלה', 'הסדנה נטענת…', 'הסדנה לא נפתחה. רעננו את הדף ונסו שוב.'],
+  az: ['Kabbala oxu emalatxanası', 'Emalatxana yüklənir…', 'Emalatxana açılmadı. Səhifəni yeniləyib yenidən cəhd et.'],
+};

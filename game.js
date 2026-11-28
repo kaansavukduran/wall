@@ -1,6 +1,6 @@
 import { controllerHelp, mountController } from './controller.js';
 import { chapters, languages, plaza, ui } from './content.js';
-import { atlasLabels, calendarLabels, library, libraryLabels } from './library.js';
+import { atlasLabels, calendarLabels, kabbalahLabels, library, libraryLabels } from './library.js';
 import { alphabetNotes, lights, models, photo, studyNames, tour, tourPrompt, worldNote, worlds } from './scenes.js';
 import { belongsTo, catalogue, catalogueLabels } from './catalogue.js';
 import { sequenceLabels, sequences } from './sequences.js';
@@ -90,6 +90,8 @@ export async function start(initialLanguage) {
   const workshops = [
     ['calendar', calendarLabels, () => import('./calendar.js').then(module => module.mountCalendar)],
     ['atlas', atlasLabels, () => import('./atlas.js').then(module => module.mountAtlas)],
+    ['kabbalah', kabbalahLabels, () => import('./kabbalah.js').then(({mountKabbalah}) =>
+      (panel, current, index) => mountKabbalah(panel, current, index, {read,store}))],
   ].map(([id, translations, load]) => {
     const [summary, status, panel] = find(id).children;
     let loadedLanguage;

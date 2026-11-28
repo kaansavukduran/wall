@@ -14,6 +14,7 @@ async function main() {
   const { medievalLessons } = await import('../medieval-lessons.js');
   const { earlyModernLessons } = await import('../early-modern-lessons.js');
   const { modernLessons } = await import('../modern-lessons.js');
+  const { feynmanCases } = await import('../kabbalah-lessons.js');
   const lessons = {...ancientLessons, ...secondTempleLessons, ...romanLessons, ...medievalLessons, ...earlyModernLessons, ...modernLessons};
   const decks = ['ancient-lessons.js', 'second-temple-lessons.js', 'roman-lessons.js', 'medieval-lessons.js', 'early-modern-lessons.js', 'modern-lessons.js'];
   const browser = await chromium.launch(browserOptions);
@@ -304,15 +305,44 @@ async function main() {
       await page.selectOption('#atlas-category', 'communities');
       await page.selectOption('#atlas-entry', 'mizrahim');
       assert.equal(await page.locator('.atlas-figure').isVisible(), false);
+      assert.equal(loadedLessons.has('kabbalah-lessons.js'), false);
+      const workshopRequest = page.waitForResponse(response => response.url().endsWith('/kabbalah-lessons.js'));
+      await page.click('#kabbalah summary');
+      assert.ok((await workshopRequest).ok());
+      await page.locator('#kabbalah-lesson').waitFor();
+      assert.equal(await page.locator('#kabbalah-lesson option').count(), 9);
+      await page.click('.kabbalah-exercise summary');
+      for (const sample of feynmanCases) {
+        await page.selectOption('#kabbalah-lesson', sample.lessonId);
+        await page.click('[data-case-choice="' + (sample.correct + 1) % sample.choices.length + '"]');
+        assert.equal(await page.locator('#kabbalah-draft').isVisible(), false);
+        await page.click('[data-case-choice="' + sample.correct + '"]');
+        const text = sample.feedback[['tr','en','he','az'].indexOf(locale)];
+        assert.equal(await page.locator('.kabbalah-feedback').innerText(), text);
+        await page.fill('#kabbalah-draft', 'WALL ' + sample.id);
+      }
+      await page.selectOption('#kabbalah-lesson', 'laitman-bnei-baruch');
+      await page.click('.kabbalah-sources summary');
+      assert.equal(await page.locator('.kabbalah-sources li').count(), 2);
+      assert.match(await page.locator('.kabbalah-sources a').last().getAttribute('href'), /cris.bgu.ac.il/);
+      await page.selectOption('#kabbalah-lesson', 'rabash-purpose-of-society');
+      assert.equal(await page.locator('#kabbalah-draft').inputValue(), 'WALL rabash-group-application');
       await page.evaluate(() => { document.documentElement.style.fontSize = '200%'; });
       assert.equal(await page.locator('#library').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth), false);
       await page.keyboard.press('Escape');
       assert.ok(await page.locator('#library-button').evaluate(button => button === document.activeElement));
+      await page.reload();
+      await page.click('#library-button');
+      await page.click('#kabbalah summary');
+      await page.selectOption('#kabbalah-lesson', 'rabash-purpose-of-society');
+      await page.click('.kabbalah-exercise summary');
+      assert.equal(await page.locator('#kabbalah-draft').inputValue(), 'WALL rabash-group-application');
+      await page.keyboard.press('Escape');
       await page.click('#next');
       await page.waitForURL('**/#game');
       assert.deepEqual(errors, []);
       await page.close();
-      console.log(locale, width, '25 checkpoints, sources, movement, save, study room, festival calendar and atlas: PASS');
+      console.log(locale, width, '25 checkpoints, sources, movement, save, calendar, atlas and Kabbalah workshop: PASS');
     }
     const padPage = await browser.newPage({ locale:'he' });
     await padPage.addInitScript(() => {

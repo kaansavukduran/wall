@@ -19,7 +19,7 @@
       <button id="retry" hidden>Yeniden dene</button>
     </div>
   </div>
-  <small dir="ltr">v0.5.1</small>
+  <small dir="ltr">v0.5.2</small>
 </section>
 <div id="app" hidden>
   <header class="top">
@@ -92,7 +92,7 @@
       </div>
     </section>
   </main>
-  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.1</span></footer>
+  <footer><span>Fragaria Interactive</span><span dir="ltr">v0.5.2</span></footer>
 </div>
 <dialog id="reader" aria-labelledby="reader-title"><h2 id="reader-title"></h2><p></p><a target="_blank" rel="noopener noreferrer"></a><details id="catalogue"><summary></summary><p role="status"></p><ul></ul></details><form method="dialog"><button></button></form></dialog>
 <dialog id="chapters" aria-labelledby="chapters-title"><h2 id="chapters-title"></h2><ol></ol><form method="dialog"><button></button></form></dialog>
@@ -117,9 +117,10 @@
   <form method="dialog"><button></button></form>
 </dialog>
 <dialog id="library" aria-labelledby="library-title">
-  <header><h2 id="library-title"></h2><form method="dialog"><button></button></form></header>
+  <div class="library-heading"><h2 id="library-title"></h2><form method="dialog"><button></button></form></div>
   <details id="calendar" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <details id="atlas" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
+  <details id="kabbalah" name="study-workshop"><summary></summary><p role="status" hidden></p><div></div></details>
   <div id="library-readings" role="group"></div>
 </dialog>
 <template id="calendar-template">
@@ -143,6 +144,24 @@
     <select id="calendar-answer" aria-describedby="calendar-clue"></select>
     <button type="button"></button>
     <p role="status"></p>
+  </details>
+</template>
+<template id="kabbalah-template">
+  <label for="kabbalah-lesson"></label><select id="kabbalah-lesson"></select>
+  <article class="kabbalah-reading">
+    <h3></h3><p class="kabbalah-period"></p><p class="kabbalah-genre"></p><p class="kabbalah-study"></p>
+    <details class="kabbalah-sources"><summary></summary><p></p><ul></ul></details>
+  </article>
+  <details class="kabbalah-exercise">
+    <summary></summary>
+    <p id="kabbalah-question"></p>
+    <div class="kabbalah-choices" role="group" aria-labelledby="kabbalah-question"></div>
+    <p class="kabbalah-feedback" role="status"></p>
+    <div class="kabbalah-transfer" hidden>
+      <label for="kabbalah-draft"></label>
+      <textarea id="kabbalah-draft" dir="auto" maxlength="1200" rows="3" aria-describedby="kabbalah-note-help"></textarea>
+      <p id="kabbalah-note-help"></p>
+    </div>
   </details>
 </template>
 <template id="atlas-template">

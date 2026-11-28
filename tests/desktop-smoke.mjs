@@ -49,6 +49,24 @@ try {
   assert.ok(ready, 'The packaged browser did not reach the first scene');
   assert.equal(await evaluate("document.querySelector('[data-choice=\"1\"]').click(); !document.querySelector('#next').hidden"), true);
   console.log('Native package reached and completed the prologue.');
+  if (await evaluate("Boolean(document.querySelector('#kabbalah'))")) {
+    await evaluate("document.querySelector('#library-button').click(); document.querySelector('#kabbalah summary').click()");
+    let loaded = false;
+    while (!loaded && Date.now() < deadline) {
+      loaded = await evaluate("document.querySelector('#kabbalah-lesson')?.options.length === 9");
+      if (!loaded) await wait(250);
+    }
+    assert.ok(loaded, 'The packaged Kabbalah workshop did not load');
+    assert.equal(await evaluate(`(() => {
+      const select = document.querySelector('#kabbalah-lesson');
+      select.value = 'rabash-purpose-of-society';
+      select.dispatchEvent(new Event('change'));
+      document.querySelector('.kabbalah-exercise summary').click();
+      document.querySelector('[data-case-choice="0"]').click();
+      return !document.querySelector('.kabbalah-transfer').hidden;
+    })()`), true);
+    console.log('Native package loaded and completed a source exercise in the workshop.');
+  }
 } finally {
   socket.close();
 }
