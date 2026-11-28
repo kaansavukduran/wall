@@ -84,6 +84,21 @@ async function main() {
     assert.deepEqual(ritual.errors,[]);
     await ritual.page.close();
 
+    const wall = await openOffline(browser,'#chapter-8',() => {
+      localStorage.setItem('wall.progress.v1',JSON.stringify({
+        active:'8',completed:['plaza','1','2','3','4','5','6','7','8'],
+      }));
+    });
+    const comparison = wall.page.locator('#wall-transfer');
+    await comparison.locator(':scope > summary').tap();
+    await comparison.locator('img').waitFor();
+    await wall.page.waitForFunction(() => document.querySelector('#wall-transfer img').naturalWidth === 960);
+    await comparison.locator('[data-wall-region="1"]').tap();
+    assert.equal(await comparison.locator('.wall-transfer-mark').isVisible(),true);
+    assert.deepEqual(wall.requests,[]);
+    assert.deepEqual(wall.errors,[]);
+    await wall.page.close();
+
     const archive = await openOffline(browser,'#chapter-24',() => {
       localStorage.setItem('wall.progress.v1',JSON.stringify({
         active:'24',

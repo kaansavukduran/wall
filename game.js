@@ -81,6 +81,12 @@ const platformLabels = {
   he:['הרכבת החתך','החלקים נטענים…','טעינת החלקים נכשלה. סגרו ופתחו מחדש.'],
   az:['Memarlıq kəsiyini qur','Hissələr yüklənir…','Hissələr açılmadı. Bağla və yenidən aç.'],
 };
+const wallTransferLabels = {
+  tr:['Fotoğrafta istinat duvarını bul','Fotoğraf görevi yükleniyor…','Görev açılamadı. Yeniden açmayı dene.'],
+  en:['Find the retaining wall in a photograph','Loading the photo activity…','The activity could not open. Try opening it again.'],
+  he:['מצאו את קיר התמך בתצלום','משימת התצלום נטענת…','המשימה לא נפתחה. נסו לפתוח אותה שוב.'],
+  az:['Fotoda istinad divarını tap','Foto tapşırığı yüklənir…','Tapşırıq açıla bilmədi. Yenidən açmağa çalış.'],
+};
 const quarterMapLabels = {
   tr:['Eski mahallede üç yer','Harita yükleniyor…','Harita açılamadı. Yeniden açmayı dene.'],
   en:['Three places in the old quarter','Loading the map…','The map could not open. Try opening it again.'],
@@ -228,6 +234,7 @@ export async function start(initialLanguage) {
   const platform = find('platform-assembly');
   const firstFruits = find('first-fruits');
   const quarterMap = find('quarter-map');
+  const wallTransfer = find('wall-transfer');
   const talmud = find('talmud-page');
   const geniza = find('geniza-desk');
   const circle = find('study-circle');
@@ -250,6 +257,7 @@ export async function start(initialLanguage) {
   const genizaView = {};
   const firstFruitsView = {};
   const quarterMapView = {};
+  const wallTransferView = {};
   const messianicView = {};
   const mandateView = {};
   const pressView = {};
@@ -416,6 +424,9 @@ export async function start(initialLanguage) {
   const refreshQuarterMap = connectDisclosure('quarter-map', quarterMapLabels, () =>
     import('./quarter-map-lessons.js').then(({mountQuarterMap}) =>
       (panel, current, index) => mountQuarterMap(panel,index,quarterMapView)));
+  const refreshWallTransfer = connectDisclosure('wall-transfer', wallTransferLabels, () =>
+    import('./wall-transfer-lessons.js').then(({mountWallTransfer}) =>
+      (panel, current) => mountWallTransfer(panel,current,wallTransferView)));
   const refreshKingdomMap = connectDisclosure('kingdom-map', kingdomMapLabels, () =>
     import('./kingdom-map-lessons.js').then(({mountKingdomMap}) =>
       (panel, current, index) => mountKingdomMap(panel,index,kingdomAnswers)));
@@ -452,6 +463,8 @@ export async function start(initialLanguage) {
     const chapter = episodes[active].id;
     transfer.hidden = !completed || !transferDecks[Math.floor((chapter - 1) / 8)];
     refreshTransfer();
+    wallTransfer.hidden = chapter !== 8 || !completed;
+    if (!wallTransfer.hidden) refreshWallTransfer();
   }
 
   function choose(selected) {

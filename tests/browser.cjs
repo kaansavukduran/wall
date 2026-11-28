@@ -389,6 +389,7 @@ async function main() {
           await assembly.locator('summary').press('Enter');
         }
         if (episode.id === 8) {
+          assert.equal(await page.locator('#wall-transfer').isHidden(),true);
           await page.click('[data-layer="before"]');
           const intact = await page.locator('#world').evaluate(canvas => canvas.toDataURL());
           await page.click('[data-layer="after"]');
@@ -929,6 +930,23 @@ async function main() {
         }
         assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth), false);
         await page.click('[data-choice="' + episode.correct + '"]');
+        if (episode.id === 8) {
+          const photo = page.locator('#wall-transfer');
+          await photo.locator(':scope > summary').press('Enter');
+          const image = photo.locator('img');
+          await image.scrollIntoViewIfNeeded();
+          await page.waitForFunction(() => document.querySelector('#wall-transfer img').naturalWidth === 960);
+          const marker = photo.locator('.wall-transfer-mark');
+          await photo.locator('[data-wall-region="0"]').press('Enter');
+          assert.equal(await marker.isHidden(),true);
+          const wall = photo.locator('[data-wall-region="1"]');
+          if (width === 320) await wall.tap();
+          else await wall.press('Enter');
+          assert.equal(await marker.isVisible(),true);
+          assert.equal(await wall.getAttribute('aria-pressed'),'true');
+          assert.equal(await photo.locator('a').nth(1).getAttribute('href'),'https://creativecommons.org/licenses/by-sa/4.0/');
+          await photo.locator(':scope > summary').press('Enter');
+        }
         const transfer = transferLessons.find(item => item.chapter === episode.id);
         if (transfer) {
           const filename = transferDecks[Math.floor((episode.id - 1) / 8)];
