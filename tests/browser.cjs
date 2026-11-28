@@ -553,6 +553,11 @@ async function main() {
           assert.equal(await correctPlace.getAttribute('aria-pressed'),'true');
           assert.notEqual(await comparisonCanvas.evaluate(canvas => canvas.toDataURL()),unmarked);
           assert.ok((await passage.locator('[role="status"]').textContent()).trim());
+          if (width === 320) {
+            await page.evaluate(() => {document.documentElement.style.fontSize = '200%';});
+            assert.equal(await page.locator('#photo').evaluate(dialog => dialog.scrollWidth > dialog.clientWidth),false);
+            await page.evaluate(() => {document.documentElement.style.fontSize = '';});
+          }
           await page.locator('#photo form button').click();
         }
         if (episode.id === 17) {

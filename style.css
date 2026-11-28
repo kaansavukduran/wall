@@ -311,7 +311,7 @@ html[data-reduced-motion] *{scroll-behavior:auto!important}
 .photo-layout>*{min-inline-size:0}
 #photo figure{margin:0;display:grid;gap:.6rem;justify-items:start}
 #photo img{display:block;max-inline-size:100%;block-size:auto;max-block-size:28vh;object-fit:contain}
-.photo-comparison{display:grid;gap:.45rem;align-content:start}
+.photo-comparison{display:grid;grid-template-columns:minmax(0,1fr);gap:.45rem;align-content:start;overflow-wrap:anywhere}
 .photo-comparison label{font-weight:650}
 #compare-view{accent-color:var(--accent);inline-size:100%;min-block-size:var(--hit);margin:0;cursor:pointer}
 #compare-view:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
