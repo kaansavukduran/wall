@@ -15,6 +15,12 @@ async function enterCampaign(page, input = 'click') {
   await page.locator('#campaign').waitFor();
 }
 
+function visitorFootprint(page) {
+  // Read the sprite's shadow row to compare position across browser profiles.
+  return page.locator('#world').evaluate(canvas =>
+    Array.from(canvas.getContext('2d').getImageData(0,209,canvas.width,1).data));
+}
+
 async function main() {
   const { chapters, languages, plaza, ui } = await import('../content.js');
   const { ancientLessons } = await import('../ancient-lessons.js');
@@ -1180,7 +1186,7 @@ async function main() {
     await source.fill('#transfer-draft','בדיקת שמירה');
     await source.click('#next');
     await source.locator('[data-move="-1"]').press('Enter');
-    const exportedFrame = await source.locator('#world').evaluate(canvas => canvas.toDataURL());
+    const exportedFootprint = await visitorFootprint(source);
     await source.tap('#settings-button');
     await source.tap('#save-transfer summary');
     await source.tap('#save-export');
@@ -1204,7 +1210,7 @@ async function main() {
     await restore.tap('#save-confirm');
     await restore.locator('#restore-notice').waitFor();
     assert.equal(await restore.locator('#chapter').textContent(),'2');
-    assert.equal(await restore.locator('#world').evaluate(canvas => canvas.toDataURL()),exportedFrame);
+    assert.deepEqual(await visitorFootprint(restore),exportedFootprint);
     assert.equal(await restore.locator('html').getAttribute('dir'),'rtl');
     await restore.click('#episodes-button');
     await restore.locator('#chapters button').nth(1).click();
@@ -1291,12 +1297,20 @@ async function main() {
     await olderTab.click('#episodes-button');
     await olderTab.locator('#chapters ol li').nth(1).getByRole('button').click();
     assert.deepEqual((await savedCampaign(olderTab)).placement,placement);
-    assert.equal(await olderTab.locator('#world').evaluate(canvas => canvas.toDataURL()),
-      await firstTab.locator('#world').evaluate(canvas => canvas.toDataURL()));
+    assert.deepEqual(await visitorFootprint(olderTab),await visitorFootprint(firstTab));
     await firstTab.bringToFront();
     await firstTab.locator('[data-move="1"]').press('Enter');
     await olderTab.click('[data-choice="' + chapters[0].correct + '"]');
     assert.deepEqual((await savedCampaign(olderTab)).placement,[92,1]);
+    await olderTab.click('#next');
+    assert.deepEqual((await savedCampaign(olderTab)).placement,[92,1]);
+    const nextPlacement = await visitorFootprint(olderTab);
+    await olderTab.reload();
+    await olderTab.locator('#campaign').waitFor();
+    assert.equal(await olderTab.locator('#chapter').textContent(),'2');
+    assert.deepEqual(await visitorFootprint(olderTab),nextPlacement);
+    await olderTab.click('#episodes-button');
+    await olderTab.locator('#chapters ol li').nth(1).getByRole('button').click();
     await olderTab.click('#episodes-button');
     const waitingTab = await shared.newPage();
     await waitingTab.goto(target);

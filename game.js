@@ -233,10 +233,8 @@ export async function start(initialLanguage) {
     return placement[0] === lastPlacement[0] && placement[1] === lastPlacement[1];
   }
 
-  function save(placement = world.placement(), latest) {
-    const id = episodeId(active);
-    const sharedPlacement = latest?.active === id && placementUnchanged(placement) ? latest.placement : undefined;
-    store(progressKey,encodeCampaign(id,completed,sharedPlacement ?? placement));
+  function save(placement = world.placement()) {
+    store(progressKey,encodeCampaign(episodeId(active),completed,placement));
     lastPlacement = placement;
   }
 
@@ -251,6 +249,12 @@ export async function start(initialLanguage) {
     const latest = readCampaign(readStored,pending);
     for (const id of latest.completed) completed.add(id);
     return latest;
+  }
+
+  function restoreSharedPlacement(latest, index) {
+    if (latest.active !== episodeId(index) || !latest.placement || placementUnchanged(latest.placement)) return false;
+    world.restorePlacement(latest.placement);
+    return true;
   }
 
   function resumeIndex(last = synchronizeProgress().active) {
@@ -371,6 +375,7 @@ export async function start(initialLanguage) {
       return;
     }
     const latest = synchronizeProgress();
+    if (placementUnchanged(world.placement()) && restoreSharedPlacement(latest,active)) world.idle();
     const id = episodeId(active);
     if (!completed.has(id)) {
       completed.add(id);
@@ -381,7 +386,7 @@ export async function start(initialLanguage) {
     next.textContent = firstIncomplete() < 0 ? ui[language][13] : ui[language][3];
     offerTransfer(true);
     renderTour();
-    save(world.placement(),latest);
+    save();
   }
 
   function renderLanguage() {
@@ -477,7 +482,7 @@ export async function start(initialLanguage) {
     const entering = campaign.hidden;
     const moved = !placementUnchanged(world.placement());
     stop();
-    if (!moved && latest.active === episodeId(index) && latest.placement) world.restorePlacement(latest.placement);
+    if (!moved) restoreSharedPlacement(latest,index);
     if (entering) {
       arrival.hidden = true;
       campaign.hidden = false;
