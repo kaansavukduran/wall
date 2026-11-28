@@ -159,7 +159,7 @@ export function mountPlatformAssembly(panel, language, view) {
 
   function update() {
     const complete = view.placed.size === pieces.length;
-    groups.hidden = complete;
+    task.hidden = groups.hidden = complete;
     for (const [button,index] of partButtons) {
       button.disabled = view.placed.has(index);
       button.textContent = labels.names[index];

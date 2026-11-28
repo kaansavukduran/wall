@@ -596,7 +596,7 @@ test('language workshop indexes original spellings and all four localized explan
 });
 
 test('inspectable scenes link localized objects or views to chapter sources', () => {
-  for (const id of [1,3,4,7,12,14,16,18,20,21]) {
+  for (const id of [1,3,4,7,12,14,16,18,19,20,21]) {
     const model = models.find(entry => entry.id === id);
     assert.equal(model.options.length, [20,21].includes(id) ? 4 : 3);
     assert.equal(new Set(model.options.map(([key]) => key)).size, model.options.length);

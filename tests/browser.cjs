@@ -479,7 +479,18 @@ async function main() {
           await page.click(episode.id === 17 ? '[data-layer="north-africa"]' : '[data-layer="city-walls"]');
           assert.notEqual(await page.locator('#world').evaluate(canvas => canvas.toDataURL()), initial);
           if (episode.id === 19) {
-            await page.click('[data-layer="kotel-courses"]');
+            const model = models.find(entry => entry.id === episode.id);
+            const views = new Set();
+            for (const [key,,copy,source] of model.options) {
+              const layer = page.locator('[data-layer="' + key + '"]');
+              if (width === 320) await layer.tap();
+              else await layer.press('Enter');
+              assert.equal(await layer.getAttribute('aria-pressed'),'true');
+              assert.equal(await page.locator('#models output').textContent(),copy[['tr','en','he','az'].indexOf(locale)]);
+              assert.equal(await page.locator('#model-reference').getAttribute('href'),source);
+              views.add(await page.locator('#world').evaluate(canvas => canvas.toDataURL()));
+            }
+            assert.equal(views.size,3);
             const awning = page.locator('[data-evidence="3"]');
             if (width === 320) await awning.tap();
             else await awning.press('Enter');

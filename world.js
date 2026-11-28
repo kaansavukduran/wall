@@ -90,7 +90,7 @@ export async function makeWorld(canvas, reducedMotion) {
     if (index === 19 && layer === 'kotel-courses') {
       rect(background, '#ffe1a0', 168, 128, 312, 2);
     }
-    if (layer === 'quarter' || (index === 23 && layer !== 'plaza')) {
+    if (layer === 'quarter' || layer === 'mughrabi-quarter' || (index === 23 && layer !== 'plaza')) {
       for (let x = 197; x < 430; x += 57) {
         rect(background, '#70594d', x, 143, 41, 58);
         rect(background, '#e2bb89', x + 2, 146, 37, 53);
